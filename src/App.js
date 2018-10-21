@@ -1,28 +1,40 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Description from './components/Description';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import deepOrange from '@material-ui/core/colors/deepOrange';
+import NavBar from './components/NavBar';
+import Features from './components/Features';
+import Footbar from './components/Footbar'
+
+const theme = createMuiTheme({
+	palette: {
+		primary: deepOrange,
+		secondary: {
+			main: '#F4511E',
+			light: '#FF8A65',
+			dark: '#D84315',
+		},
+	},
+	status: {
+		danger: 'orange',
+	},
+});
+console.log(theme);
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<MuiThemeProvider theme={theme}>
+				<div className="App">
+					<NavBar />
+					<Description />
+					<Features />
+					<Footbar />
+				</div>
+			</MuiThemeProvider>
+		);
+	}
 }
 
 export default App;
