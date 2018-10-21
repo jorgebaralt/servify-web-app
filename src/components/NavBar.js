@@ -22,9 +22,9 @@ function navBar() {
 						Servify
 					</Typography>
 					<div>
-						<Button color="inherit"></Button>
+						{/* <Button color="inherit"></Button>
 						<Button color="inherit">Features</Button>
-						<Button color="inherit">Contact us</Button>
+						<Button color="inherit">Contact us</Button> */}
 					</div>
 				</Toolbar>
 			</AppBar>

@@ -3,11 +3,12 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Logo from '../assets/logoBorderOrange.png';
 import Button from '@material-ui/core/Button';
+import ScrollAnimation from 'react-animate-on-scroll';
 
 function Description(props) {
 	return (
 		<div>
-			<Paper style={{ paddingTop: 150, paddingBottom: 150 }}>
+			<Paper style={{ paddingTop: '13%', paddingBottom: '13%' }}>
 				<img src={Logo} style={{ height: 140, width: 100 }} alt={'logo'} />
 				<Typography
 					variant="h1"
@@ -16,7 +17,7 @@ function Description(props) {
 				>
 					Solve your house problems with <span>Servify</span>
 				</Typography>
-				<Typography component="p" style={{ fontSize: 28 , marginTop: 15 }}>
+				<Typography component="p" style={{ fontSize: 28, marginTop: 15 }}>
 					Easiest way to find a service in your local area.
 				</Typography>
 				<div style={{ marginTop: 20 }}>
@@ -41,6 +42,15 @@ function Description(props) {
 					>
 						Post a service
 					</Button>
+					<Typography component="p" style={{ fontSize: 20, marginTop: 15 }}>
+						Available in Android and iOS
+					</Typography>
+					<ScrollAnimation animateIn="fadeIn">
+						<i className="material-icons" style={{ fontSize: 60, color: '#ff5722' }}>
+							keyboard_arrow_down
+					</i>
+					</ScrollAnimation>
+					
 				</div>
 			</Paper>
 		</div>
