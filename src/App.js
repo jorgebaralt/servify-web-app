@@ -6,7 +6,7 @@ class App extends Component {
     return (
       <div>
         <div style={{ margin: '25px auto', fontSize: '100px', fontWeight: '700', textAlign: 'center' }}>Servify</div>
-        <LoadingDots width={'35vw'}/>
+        <LoadingDots width={'5vw'}/>
       </div>
     );
   }
