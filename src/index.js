@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import { Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -10,7 +8,9 @@ import * as serviceWorker from './serviceWorker';
 // react router dom
 import { BrowserRouter } from 'react-router-dom';
 
-// sagas
+// redux sagas
+import { Provider } from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
 import mobileReducer from './store/reducers/mobile';
 import * as sagas from './store/sagas/';
 

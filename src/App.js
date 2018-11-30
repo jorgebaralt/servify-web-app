@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import LoadingDots from './components/LoadingDots/LoadingDots'
+
+// react-router-dom
+import { withRouter } from 'react-router-dom';
 
 // redux-sagas
 import { connect } from 'react-redux';
-import { mobileCreator } from './store/actions/mobile';
+import { mobileCreator } from './store/actions';
 
 class App extends Component {
 
   componentDidMount() {
     this.props.onIsMobile();
+    // TODO fetch popular categories global
+    // TODO last viewed services --> landing
+    // TODO fetch new services near you --> landing
+    // TODO popular near services --> landing
   }
 
   render() {
