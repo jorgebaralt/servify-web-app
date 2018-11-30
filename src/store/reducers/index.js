@@ -1,3 +1,8 @@
 import mobileReducer from './mobile';
+import { combineReducers } from 'redux'
 
-export { mobileReducer };
+const rootReducer = combineReducers({
+	mobileReducer
+});
+
+export default rootReducer
