@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import LoadingDots from './components/LoadingDots/LoadingDots'
+import LoadingDots from './components/LoadingDots/LoadingDots';
+import TypingDots from './components/TypingDots/TypingDots';
 
 // react-router-dom
 import { withRouter } from 'react-router-dom';
@@ -23,6 +24,7 @@ class App extends Component {
       <div>
         <div style={{ margin: '25px auto', fontSize: '100px', fontWeight: '700', textAlign: 'center' }}>Servify</div>
         <LoadingDots width={'5vw'}/>
+        <TypingDots />
       </div>
     );
   }
