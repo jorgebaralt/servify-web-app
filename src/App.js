@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import LoadingDots from './components/LoadingDots/LoadingDots'
 
+// redux-sagas
+import { connect } from 'react-redux';
+import { mobileCreator } from './store/actions/mobile';
+
 class App extends Component {
+
+  componentDidMount() {
+    this.props.onIsMobile();
+  }
+
   render() {
     return (
       <div>
@@ -12,4 +22,16 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isMobile: state.mobileReducer.isMobile
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onIsMobile: () => dispatch(mobileCreator.isMobileInit())
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
