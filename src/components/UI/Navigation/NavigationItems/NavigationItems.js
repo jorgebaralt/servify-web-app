@@ -13,7 +13,7 @@ const nagivationItems = (props) => {
                 <img src={servifyLogo} alt='' />
             </div>
             <div className={classes.Spacing}></div>
-            <NavigationItem {...props} link='/host'>Become a host</NavigationItem>
+            <NavigationItem {...props} link='/post/info'>Post a service</NavigationItem>
             <NavigationItem {...props} link='/help'>Help</NavigationItem>
             <NavigationItem {...props} link='/signup'>Sign up</NavigationItem>
             <NavigationItem {...props} link='/login'>Sign in</NavigationItem>

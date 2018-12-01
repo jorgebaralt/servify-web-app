@@ -45,3 +45,16 @@
     background-color: #dc3545;
     border-color: #dc3545;
 }
+
+.Primary {
+    color: #FF7043;
+    background-color: transparent;
+    background-image: none;
+    border-color: #FF7043;
+}
+
+.Primary:not([disabled]):hover {
+    color: #fff;
+    background-color: #FF7043;
+    border-color: #FF7043;
+}

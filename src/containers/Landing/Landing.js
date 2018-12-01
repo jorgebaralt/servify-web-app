@@ -77,7 +77,7 @@ class Landing extends Component {
                                     </div>
                                 </div>
                                 <br />
-                                <Button style={{float: 'right'}} type={'success'}>Search</Button>
+                                <Button style={{float: 'right'}} type={'primary'}>Search</Button>
                             </div>
                             <a style={{textDecoration: 'none'}} href='/'>
                                 <div className={classes.MakeMoneyContainer}>
@@ -93,6 +93,7 @@ class Landing extends Component {
                     </div>
                 </div>
                 {/* Page Content */}
+                {/* TODO: Show a new search-bar, Fixed top  */}
                 <div style={{height: '100vh'}}>
                     <h1>Page Content</h1>
                 </div>

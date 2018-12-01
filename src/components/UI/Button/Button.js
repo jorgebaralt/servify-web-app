@@ -13,6 +13,9 @@ const button = (props) => {
     if (props.type === 'danger') {
         buttonClass.push(classes.Danger);
     }
+    if (props.type === 'primary') {
+        buttonClass.push(classes.Primary)
+    }
     return (
         <button
             style={props.style}
