@@ -8,7 +8,7 @@ const rightArrow = (props) => {
             x="0px" 
             y="0px" 
             viewBox="0 0 129 129" 
-            enable-background="new 0 0 129 129"
+            enableBackground="new 0 0 129 129"
             width={props.width ? props.width : "10px"} 
             height={props.height ? props.height : "10px"} 
             fill={props.fill ? props.fill : "#FFF"} >

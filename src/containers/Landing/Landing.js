@@ -80,8 +80,8 @@ class Landing extends Component {
                                 <Button style={{float: 'right'}} type={'success'}>Search</Button>
                             </div>
                             <a style={{textDecoration: 'none'}} href='/'>
-                                <div class={classes.MakeMoneyContainer}>
-                                    <span class={classes.MakeMoney}>
+                                <div className={classes.MakeMoneyContainer}>
+                                    <span className={classes.MakeMoney}>
                                         <Tools name="tools" />
                                         <span>Make money hosting your services on Servify</span>
                                         <RightArrow name="right-arrow" />
