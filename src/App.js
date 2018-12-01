@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import LoadingDots from './components/LoadingDots/LoadingDots';
-import TypingDots from './components/TypingDots/TypingDots';
-
 // react-router-dom
 import { withRouter } from 'react-router-dom';
-
 // redux-sagas
 import { connect } from 'react-redux';
 import { mobileCreator } from './store/actions';
+// JSX
+import Layout from './hoc/Layout/Layout';
+import Landing from './containers/Landing/Landing';
 
 class App extends Component {
 
@@ -21,11 +20,9 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <div style={{ margin: '25px auto', fontSize: '100px', fontWeight: '700', textAlign: 'center' }}>Servify</div>
-        <LoadingDots width={'5vw'}/>
-        <TypingDots />
-      </div>
+      <Layout>
+        <Landing />
+      </Layout>
     );
   }
 }

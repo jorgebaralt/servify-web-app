@@ -1,5 +1,5 @@
 import React from 'react';
-import loading from '../../assets/svg/loading.svg';
+import loading from '../../../assets/svg/loading.svg';
 import classes from './LoadingDots.module.css';
 
 const LoadingDots = ( props ) => {

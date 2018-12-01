@@ -403,3 +403,5 @@ const categories = [
 		color: ['#607D8B', '#78909C'],
 	},
 ];
+
+export default categories;

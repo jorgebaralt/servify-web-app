@@ -5,3 +5,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Common */
+
+[type="text"], [type="password"], [type="search"], [type="email"], [type="url"], [type="number"], [type="tel"], textarea, select, .input-prefix, .input-suffix {
+  display: block;
+  padding: 8px 10px;
+  width: 100%;
+}
+
+[type="text"], [type="password"], [type="search"], [type="email"], [type="url"], [type="number"], [type="tel"], textarea, select, input[type="radio"], input[type="checkbox"] {
+  -webkit-transition: border-color 0.2s;
+  -o-transition: border-color 0.2s;
+  -moz-transition: border-color 0.2s;
+  transition: border-color 0.2s;
+}
+
+[type="text"], [type="password"], [type="search"], [type="email"], [type="url"], [type="number"], [type="tel"], textarea, select, input[type="radio"], input[type="checkbox"], .input-prefix, .input-suffix {
+  border: 1px solid #aaa;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background-color: #fff;
+  color: #484848;
+}

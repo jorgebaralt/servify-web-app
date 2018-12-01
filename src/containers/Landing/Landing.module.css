@@ -1,0 +1,138 @@
+.Header {
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.HeaderContent {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.SearchBox {
+    background: rgba(255,255,255,.95);
+    color: #484848;
+    border-radius: 4px;
+    padding: 32px;
+    padding-bottom: 62px;
+    margin-right: 100px;
+    width: 350px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+}
+
+.SearchBox h1 {
+    color: inherit;
+    margin: 0px;
+    padding: 0px;
+}
+
+.SearchBox small {
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1px;
+    color: #484848;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.InputWrapper {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #EBEBEB;
+    border-top-color: rgb(205, 205, 205);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-right-color: rgb(205, 205, 205);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-color: rgb(205, 205, 205);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: rgb(205, 205, 205);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-out;
+}
+
+.InputContainer {
+    width: 100%;
+}
+
+.Label {
+    margin: 0px;
+    padding: 0px;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.Input {
+    width: 100%;
+    background-color: transparent;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    text-overflow: ellipsis;
+    font-size: 17px;
+}
+
+.InputWrapper:focus-within, 
+.InputWrapper:hover{
+    border: 1px solid #1fa6c8;
+}
+
+.Input:focus {
+    outline: none;
+}
+
+.MakeMoneyContainer {
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    width: 414px;
+    margin-top: 12px;
+}
+
+.MakeMoney {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 17px;
+}
+
+.MakeMoney span {
+    margin: 0 5px 0 0px;
+}
+
+.Background {
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    transition: transform .3s ease-out;
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}

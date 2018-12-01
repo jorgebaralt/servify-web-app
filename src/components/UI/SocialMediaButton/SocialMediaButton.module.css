@@ -1,0 +1,35 @@
+.SocialMediaButton {
+    display: inline-flex;    
+    user-select: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    padding: 5px;
+    margin: 5px;
+    box-sizing: border-box;
+    border: 2px solid #333;
+    background: linear-gradient(-45deg, rgb(96, 220, 251), rgba(255, 255, 255,0.8), rgba(255, 255, 255,0.8), rgb(148, 74, 219));
+	background-size: 400% 400%;
+    animation: gradient-background 2.5s ease infinite;
+    transition: all 0.15s ease-out;
+    cursor: pointer;
+}
+
+@keyframes gradient-background {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+.SocialMediaButton:hover,
+.SocialMediaButton:focus  {
+    transform: scale(1.1);
+}

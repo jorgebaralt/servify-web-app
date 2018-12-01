@@ -1,5 +1,5 @@
 import React from 'react';
-import typing from '../../assets/svg/typing.svg';
+import typing from '../../../assets/svg/typing.svg';
 import classes from './TypingDots.module.css';
 
 const TypingDots = ( props ) => {

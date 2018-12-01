@@ -1,0 +1,52 @@
+.NavbarLogo img {
+    width: 52px;
+    display: flex;
+}
+
+.Spacing {
+    flex-grow: 1;
+}
+
+.NavigationItems {
+    user-select: none;
+    margin: 16px 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+@media (min-width: 500px) {
+    .NavigationItems {
+        width: 100vw;
+        margin: 0;
+        flex-flow: row;
+    }
+    .NavbarSpacing {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .NavbarLogo {
+        position: absolute;
+        display: flex;
+        width: 100%;
+        height: 100px;
+        flex-grow: 0;
+        left: 0;
+        bottom: 10%;
+        align-items: center;
+        justify-content: center;
+    }
+    .NavbarLogo img {
+        width: 90px;
+        display: flex;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

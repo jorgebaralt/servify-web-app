@@ -1,0 +1,47 @@
+.Button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    width: 100px;
+    font-weight: bold;
+    user-select: none;
+    border: 1px solid transparent;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: background-color .1s ease-in-out, border-color .15s ease-in-out,box-shadow .15s ease-in-out, opacity 0.15s;
+}
+
+.Button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.Success {
+    color: #28a745;
+    background-color: transparent;
+    background-image: none;
+    border-color: #28a745;
+}
+
+.Success:not([disabled]):hover {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.Danger {
+    color: #dc3545;
+    background-color: transparent;
+    background-image: none;
+    border-color: #dc3545;
+}
+
+.Danger:not([disabled]):hover {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}

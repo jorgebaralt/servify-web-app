@@ -1,0 +1,60 @@
+.MoreInfo{
+    display: inline-block;
+    margin: auto;
+	width: 70px;
+	height: 70px;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+	transition: all .3s ease-out;
+}
+
+.noHover {
+    pointer-events: none;
+}
+
+.MoreInfo:hover{
+    backface-visibility: hidden;
+    transform: scale(1.05) rotate(3deg);
+}
+
+.MoreInfo .CircleTop{
+	transition: all .3s ease-out;
+	position: absolute;
+	margin: 20px;
+	width: 70px;
+	height: 70px;
+	top:-50px;
+	left: -20px;
+	z-index:-1;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+.MoreInfo:hover .CircleTop{
+	background-color: rgba(255, 140, 0, 0.4);
+	top:-20px;
+	left: -20px;
+}
+
+.MoreInfo .CircleBottom{
+	transition: all .3s ease-out;
+	position: absolute;
+	margin: 20px;
+	width: 70px;
+	height: 70px;
+	top: 50px;
+	left: -20px;
+	z-index:-1;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+	
+}
+
+.MoreInfo:hover .CircleBottom{
+	background-color: rgba(255, 140, 0, 0.4);
+	top:-20px;
+	left: -20px;
+}
