@@ -4,9 +4,8 @@ import categories from '../../shared/categories';
 import classes from './Landing.module.css';
 // Images
 import placeholderHeader from '../../assets/images/placeholder-header.jpg'
-// SVGs
-import Tools from '../../components/SVG/Tools';
-import RightArrow from '../../components/SVG/RightArrow';
+// SVG
+import SVG from '../../components/SVG/SVG';
 // JSX
 import HeaderImage from '../../components/UI/HeaderImage/HeaderImage';
 import Button from '../../components/UI/Button/Button';
@@ -14,14 +13,21 @@ import Button from '../../components/UI/Button/Button';
 class Landing extends Component {
 
     render() {
-        let categoryTitles = [];
-        categories.forEach( category => {
-            categoryTitles.push(category.title)
+        // Array that holds the JSX option elements containing the category titles for a datalist
+        const categoriesDatalist = categories.map( (category, index) => {
+            return <option value={category.title} key={index} />
         });
-        const categoriesTitles = categoryTitles.map( (category, index) => {
-            return <option value={category} key={index} />
+        // Array that holds the JSX list elements containing the category titles for an unordered list
+        const categoriesList = categories.map( (category) => {
+            return (
+                <li className={classes.Category} key={category.title}>
+                    <a href="/">
+                        {/* Category.icon pointer protection */}
+                        {category.icon ? <category.icon/> : null}{category.title}&nbsp;<SVG svg='right-arrow' />
+                    </a>
+                </li>
+            );
         });
-
         return (
             <>
                 {/* Header */}
@@ -71,7 +77,7 @@ class Landing extends Component {
                                                 name="categories-query"
                                                 placeholder="Category" />
                                             <datalist id="categories-list">
-                                                {categoriesTitles}
+                                                {categoriesDatalist}
                                             </datalist>
                                         </label>
                                     </div>
@@ -82,20 +88,33 @@ class Landing extends Component {
                             <a style={{textDecoration: 'none'}} href='/'>
                                 <div className={classes.MakeMoneyContainer}>
                                     <span className={classes.MakeMoney}>
-                                        <Tools name="tools" />
+                                        <SVG svg="tools" />
                                         <span>Make money hosting your services on Servify</span>
-                                        <RightArrow name="right-arrow" />
+                                        <SVG svg="right-arrow" />
                                     </span>&nbsp;
                                 </div>
                             </a>
                         </div>
-                        <h1 style={{fontSize: '100px'}}>Servify</h1>
+                        {/* TODO Get custom logo */}
+                        <h1>Servify</h1>
                     </div>
                 </div>
+                {/* Banner */}
+                <section className={classes.Banner}>
+                    <div>
+                        <div className={classes.BannerPoint}><SVG height='36' svg='checkmark' />&nbsp;<strong>FREE</strong>&nbsp;Service Hosting</div>
+                        <div className={classes.BannerPoint}><SVG height='36' svg='checkmark' />&nbsp;<strong>The Best</strong>&nbsp;Service Provider</div>
+                        <div className={classes.BannerArrow}>&nbsp;</div>
+                    </div>
+                </section>
                 {/* Page Content */}
                 {/* TODO: Show a new search-bar, Fixed top  */}
-                <div style={{height: '100vh'}}>
-                    <h1>Page Content</h1>
+                <div className={classes.Container}>
+                    <h1>Top Categories</h1>
+                    <hr/>
+                    <ul className={classes.Categories}>
+                        {categoriesList}
+                    </ul>
                 </div>
             </>
         );

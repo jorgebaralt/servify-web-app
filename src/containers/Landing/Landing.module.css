@@ -1,3 +1,14 @@
+.Background {
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    transition: transform .3s ease-out;
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
 .Header {
     margin: 0;
     padding: 0;
@@ -17,6 +28,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.HeaderContent h1:last-child {
+    text-shadow: 3px 3px 5px #333;
+    user-select: none;
+    font-size: 100px;
+    color: #FFF;
 }
 
 .SearchBox {
@@ -124,15 +142,126 @@
 
 .MakeMoney span {
     margin: 0 5px 0 0px;
+    text-shadow: 3px 3px 5px #333;
 }
 
-.Background {
-    margin: 0;
-    padding: 0;
-    z-index: 1;
-    transition: transform .3s ease-out;
-    list-style: none;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
+.Banner {
+    user-select: none;
+    position: relative;
+    background: rgb(72, 72, 72);
+    padding: 2.5px 0;
+    margin-bottom: 30px;
 }
+
+.Banner div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.BannerPoint {
+    margin-right: 25px;
+    margin-left: 25px;
+    font-size: 17px;
+    color: #fff;
+    display: inline-block;
+    line-height: 10px;
+}
+
+.BannerArrow {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid rgb(72, 72, 72);
+    position: absolute;
+    left: 48%;
+    bottom: -20px;
+    z-index: 1;
+}
+
+.BannerArrow:after,
+.BannerArrow:before {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 12.5px;
+    height: 12.5px;
+    border-left: 1px solid #FFF;
+    position: absolute;
+    top: -25px;
+}
+
+.BannerArrow:after {
+    transform:rotate(-45deg);
+}
+
+.BannerArrow:before {
+    transform:rotate(225deg);
+}
+
+.Container {
+    margin: 0 auto;
+    background-color: transparent;
+    padding-left: 24px;
+    padding-right: 24px;
+    max-width: 1080px;
+    min-height: 400px;
+}
+
+.Container h1 {
+    color: rgb(72, 72, 72);
+    user-select: none;
+}
+
+.Categories {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    padding-left: 10%; /* TODO sensible padding-left value, find a responsive value */
+}
+
+.Category {
+    flex: 1 0 21%; /* explanation below */
+    margin: 5px auto;
+    height: 50px;
+    list-style-type: none;
+}
+/* With flex-grow: 1 defined in the flex shorthand, there's no need for flex-basis to be 25%, 
+which would actually result in three items per row due to the margins. Since flex-grow will 
+consume free space on the row, flex-basis only needs to be large enough to enforce a wrap. 
+In this case, with flex-basis: 21%, there's plenty of space for the margins, but never enough 
+space for a fifth item. Meaning, 4 categories per row.*/
+
+.Category a {
+    display: inline-block;
+    height: 100%;
+    min-width: 100px;
+    color: rgb(72, 72, 72);
+    text-decoration: none;
+    overflow-wrap: break-word;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: normal;
+    font-weight: 600;
+    margin: 0px;
+    transition: color 0.15s ease-out;
+}
+
+.Category svg {
+    margin-right: 10px;
+    transition: fill 0.15s ease-out;
+}
+
+.Category a:hover,
+.Category a:hover svg,
+.Category a:hover svg g path {
+    color: #FF7043;
+    /* For SVG */
+    fill: #FF7043 !important;
+}
+

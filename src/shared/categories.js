@@ -1,3 +1,5 @@
+import * as icons from '../assets/svg/Categories/';
+
 const categories = [
 	{
 		id: 0,
@@ -62,6 +64,7 @@ const categories = [
 				dbReference: 'other',
 			},
 		],
+		icon: icons.homeServices
 	},
 	{
 		id: 1,
@@ -211,6 +214,7 @@ const categories = [
 				dbReference: 'all_plumbing',
 			},
 		],
+		icon: icons.plumbing
 	},
 	{
 		id: 5,
