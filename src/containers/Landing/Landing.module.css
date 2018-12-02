@@ -174,7 +174,7 @@
     height: 0;
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
-    border-top: 20px solid rgb(72, 72, 72);
+    border-top: 20px solid #FF7043;
     position: absolute;
     left: 48%;
     bottom: -20px;
