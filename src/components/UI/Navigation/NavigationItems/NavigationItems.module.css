@@ -7,6 +7,19 @@
     flex-grow: 1;
 }
 
+.SpacingHalf{
+    flex-grow: 0.5;
+}
+
+.SpacingSmall {
+    flex-grow: 0.1;
+}
+
+.Navtext{
+    color: #757575;
+    margin-right: 10px;
+}
+
 .NavigationItems {
     user-select: none;
     margin: 16px 0;

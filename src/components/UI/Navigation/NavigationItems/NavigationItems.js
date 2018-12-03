@@ -1,24 +1,69 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 // CSS
 import classes from './NavigationItems.module.css';
 // JSX
 import NavigationItem from './NagivationItem/NagivationItem.js';
+import ButtonFilled from '../../ButtonFilled/ButtonFilled';
 // Logo
 import servifyLogo from '../../../../assets/images/servify-logo-96x96.png';
 
-const nagivationItems = (props) => {
-    return (
-        <ul className={classes.NavigationItems}>
-            <div className={classes.NavbarLogo}>
-                <img src={servifyLogo} alt='' />
-            </div>
-            <div className={classes.Spacing}></div>
-            <NavigationItem {...props} link='/post/info'>Post a service</NavigationItem>
-            <NavigationItem {...props} link='/help'>Help</NavigationItem>
-            <NavigationItem {...props} link='/signup'>Sign up</NavigationItem>
-            <NavigationItem {...props} link='/login'>Sign in</NavigationItem>
-        </ul>
-    )
-}
+const renderNavigationItems = (props) => {
+	switch (props.location.pathname) {
+		case '/':
+			return (
+				<>
+					<div className={classes.Spacing} />
+					<NavigationItem {...props} link="/post/info" color="white">
+						Post a service
+					</NavigationItem>
+					<NavigationItem {...props} link="/help" color="white">
+						Help
+					</NavigationItem>
+					<NavigationItem {...props} link="/signup" color="white">
+						Sign up
+					</NavigationItem>
+					<NavigationItem {...props} link="/login" color="white">
+						Sign in
+					</NavigationItem>
+				</>
+			);
+		case '/post/info':
+			return (
+				<>
+					<div className={classes.SpacingSmall} />
+					<NavigationItem {...props} link="/post/info">
+						Overview
+					</NavigationItem>
+					<NavigationItem {...props} link="/help">
+						Create a service
+					</NavigationItem>
+					<NavigationItem {...props} link="/signup">
+						Questions
+					</NavigationItem>
+					<div className={classes.Spacing} />
+					<div className={classes.Navtext}>Ready to grow?</div>
+					<ButtonFilled style={{ width: 'auto' }} type="primary">
+						Get started
+					</ButtonFilled>
+					<div className={classes.SpacingSmall}/>
+				</>
+			);
 
-export default nagivationItems;
+		default:
+	}
+};
+const nagivationItems = (props) => {
+	return (
+		<ul className={classes.NavigationItems}>
+			<div className={classes.SpacingSmall} />
+			<div className={classes.NavbarLogo}>
+				<img src={servifyLogo} alt="" />
+			</div>
+			{renderNavigationItems(props)}
+			<div className={classes.SpacingSmall} />
+		</ul>
+	);
+};
+
+export default withRouter(nagivationItems);
