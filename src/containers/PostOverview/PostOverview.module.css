@@ -1,0 +1,49 @@
+.Header{
+	padding: 0;
+	margin-top: 1%;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+	width: 95%;
+	height: 60vh;
+	position: relative;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	-webkit-box-shadow: inset 0px 40px 220px -29px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0px 40px 220px -29px rgba(0,0,0,0.75);
+    box-shadow: inset 0px 40px 220px -29px rgba(0,0,0,0.75);
+}
+
+.Box{
+	background: rgba(255,255,255,.97);
+    color: #484848;
+    border-radius: 4px;
+    padding: 32px;
+    padding-bottom: 62px;
+    width: 350px;
+	box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+	top: 30%;
+	float: right;
+	margin-right: 10%;
+	position: relative;
+}
+
+.Description{
+	font-size: 20px;
+	font-weight: 400
+}
+
+.WhyContainer{
+	padding-left: 10%;
+	padding-right: 10%;
+	margin-top: 4%;
+	display: flex;
+	flex-wrap: wrap 
+}
+
+.WhyText{
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}

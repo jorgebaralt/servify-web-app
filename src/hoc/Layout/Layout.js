@@ -10,13 +10,15 @@ class Layout extends Component {
 	render() {
 		const footer =
 			this.props.location.pathname === '/' ||
-			this.props.location.pathname === '/post/info' ? (
+			this.props.location.pathname === '/post/overview' ? (
 				<Footer />
 			) : null;
 		return (
-            <>
-				<Navbar /> 
-				<main className={classes.Layout}>{this.props.children}</main>
+			<>
+				<Navbar />
+				<main className={classes.Layout}>
+					{this.props.children}
+				</main>
 				{/* TODO: Footer */}
 				{/* {footer} */}
 			</>

@@ -140,7 +140,7 @@ class Navbar extends PureComponent {
 						click={this.sideDrawerToggleClick}
 					/>
 				);
-			case '/post/info':
+			case '/post/overview':
 				return (
                     <PostInfoNavbar reference={this.navbar} />
 				);

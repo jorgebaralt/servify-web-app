@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 // CSS
 import classes from './NavigationItems.module.css';
 // JSX
@@ -14,7 +14,7 @@ const renderNavigationItems = (props) => {
 			return (
 				<>
 					<div className={classes.Spacing} />
-					<NavigationItem {...props} link="/post/info" color="white">
+					<NavigationItem {...props} link="/post/overview" color="white">
 						Post a service
 					</NavigationItem>
 					<NavigationItem {...props} link="/help" color="white">
@@ -28,18 +28,18 @@ const renderNavigationItems = (props) => {
 					</NavigationItem>
 				</>
 			);
-		case '/post/info':
+		case '/post/overview':
 			return (
 				<>
 					<div className={classes.SpacingSmall} />
-					<NavigationItem {...props} link="/post/info">
+					<NavigationItem {...props} link="/post/overview">
 						Overview
 					</NavigationItem>
 					<NavigationItem {...props} link="/help">
 						Create a service
 					</NavigationItem>
 					<NavigationItem {...props} link="/signup">
-						Questions
+						FAQ
 					</NavigationItem>
 					<div className={classes.Spacing} />
 					<div className={classes.Navtext}>Ready to grow?</div>
@@ -57,9 +57,9 @@ const nagivationItems = (props) => {
 	return (
 		<ul className={classes.NavigationItems}>
 			<div className={classes.SpacingSmall} />
-			<div className={classes.NavbarLogo}>
+			<NavLink className={classes.NavbarLogo} to ="/">
 				<img src={servifyLogo} alt="" />
-			</div>
+			</NavLink>
 			{renderNavigationItems(props)}
 			<div className={classes.SpacingSmall} />
 		</ul>

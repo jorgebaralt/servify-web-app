@@ -7,7 +7,7 @@ import { mobileCreator } from './store/actions';
 // JSX
 import Layout from './hoc/Layout/Layout';
 import Landing from './containers/Landing/Landing';
-import PostInfo from './containers/PostInfo/PostInfo';
+import PostOverview from './containers/PostOverview/PostOverview';
 
 class App extends Component {
 	componentDidMount() {
@@ -22,7 +22,7 @@ class App extends Component {
 		return (
 			<Layout>
 				<Switch>
-					<Route exact path="/post/info" component={PostInfo} />
+					<Route exact path="/post/overview" component={PostOverview} />
 					<Route exact path="/" component={Landing} />
 				</Switch>
 			</Layout>
