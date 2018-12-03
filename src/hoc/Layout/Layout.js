@@ -15,10 +15,10 @@ class Layout extends Component {
 			) : null;
 		return (
             <>
-                {/* TODO: Check state, and decide which navbar to show. there will be multiple navbar options */}
 				<Navbar /> 
 				<main className={classes.Layout}>{this.props.children}</main>
-				{footer}
+				{/* TODO: Footer */}
+				{/* {footer} */}
 			</>
 		);
 	}

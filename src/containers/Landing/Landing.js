@@ -111,6 +111,69 @@ class Landing extends Component {
                 {/* TODO: Show a new search-bar, Fixed top  */}
                 <div className={classes.Container}>
                     <h1>Top Categories</h1>
+                    <div className={classes.CardContainer}>
+                        {/* PLACEHOLDER Home Services */}
+                        <a href='/'>
+                            <div className={classes.CardWrapper}>
+                                <div className={classes.Card}>
+                                    <div className={classes.CardTable}>
+                                        <div className={classes.ThumbnailCell}>
+                                            <div class={classes.CardThumbnail}>
+                                                <div className={classes.CardThumbnailImage} style={{backgroundImage: "url(https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large)"}}></div>
+                                            </div>
+                                        </div>
+                                        <div className={classes.CategoryCell}>
+                                            <div className={classes.CategoryCellText}>
+                                                <div><span>Home Services</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        {/* PLACEHOLDER Plumbing */}
+                        <a href='/'>
+                            <div className={classes.CardWrapper}>
+                                <div className={classes.Card}>
+                                    <div className={classes.CardTable}>
+                                        <div className={classes.ThumbnailCell}>
+                                            <div class={classes.CardThumbnail}>
+                                                <div className={classes.CardThumbnailImage} style={{backgroundImage: "url(https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large)"}}></div>
+                                            </div>
+                                        </div>
+                                        <div className={classes.CategoryCell}>
+                                            <div className={classes.CategoryCellText}>
+                                                <div><span>Plumbing</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        {/* PLACEHOLDER Beauty */}
+                        <a href='/'>
+                            <div className={classes.CardWrapper}>
+                                <div className={classes.Card}>
+                                    <div className={classes.CardTable}>
+                                        <div className={classes.ThumbnailCell}>
+                                            <div class={classes.CardThumbnail}>
+                                                <div className={classes.CardThumbnailImage} style={{backgroundImage: "url(https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large)"}}></div>
+                                            </div>
+                                        </div>
+                                        <div className={classes.CategoryCell}>
+                                            <div className={classes.CategoryCellText}>
+                                                <div><span>Beauty</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <br />
+                    <h1>Top-rated services near you</h1>
+                    <br />
+                    <h1>All Categories</h1>
                     <hr/>
                     <ul className={classes.Categories}>
                         {categoriesList}
