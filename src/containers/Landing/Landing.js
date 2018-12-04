@@ -8,12 +8,12 @@ import placeholderHeader from '../../assets/images/placeholder-header.jpg'
 import SVG from '../../components/SVG/SVG';
 // JSX
 import HeaderImage from '../../components/UI/HeaderImage/HeaderImage';
-import Button from '../../components/UI/Button/Button';
 import Carousel from '../../components/UI/Carousel/Carousel';
 import SearchBox from '../../components/UI/SearchBox/SearchBox';
 import Banner from '../../components/UI/Banner/Banner';
 import CardContainer from '../../components/Landing/CardContainer/CardContainer';
 import Card from '../../components/Landing/Card/Card';
+import Service from '../../components/Landing/Service/Service';
 
 class Landing extends Component {
 
@@ -51,7 +51,7 @@ class Landing extends Component {
                 {/* Page Content */}
                 {/* TODO: Show a new search-bar, Fixed top  */}
                 <div className={classes.Container}>
-                    <h1>Top Categories</h1>
+                    <h1 style={{marginBottom: 20}}>Top Categories</h1>
                     {/* TODO category images */}
                     <CardContainer>
                         {/* PLACEHOLDER Categories */}
@@ -63,12 +63,42 @@ class Landing extends Component {
                     <h1>Top-rated services near you</h1>
                     <div>
                         <Carousel>
-                            <div style={{background: 'darkorange', textAlign: 'center', padding: 50, color: 'white'}}>Dummy</div>
-                            <div style={{background: 'darkorange', textAlign: 'center', padding: 50, color: 'white'}}>Carousel</div>
-                            <div style={{background: 'darkorange', textAlign: 'center', padding: 50, color: 'white'}}>Item</div>
-                            <div style={{background: 'darkorange', textAlign: 'center', padding: 50, color: 'white'}}>Item</div>
-                            <div style={{background: 'darkorange', textAlign: 'center', padding: 50, color: 'white'}}>Item</div>
-                            <div style={{background: 'darkorange', textAlign: 'center', padding: 50, color: 'white'}}>Item</div>
+                            <Service
+                                header='Home Services'
+                                title='A Random Service'
+                                price='$100.0'
+                                RatingsAvg='4.99'
+                                ratingsAmount='209'
+                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                            {/* PLACEHOLDERS */}
+                                <Service
+                                header='Home Services'
+                                title='A Random Service'
+                                price='$100.0'
+                                RatingsAvg='4.99'
+                                ratingsAmount='209'
+                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                <Service
+                                header='Home Services'
+                                title='A Random Service'
+                                price='$100.0'
+                                RatingsAvg='4.99'
+                                ratingsAmount='209'
+                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                <Service
+                                header='Home Services'
+                                title='A Random Service'
+                                price='$100.0'
+                                RatingsAvg='4.99'
+                                ratingsAmount='209'
+                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                <Service
+                                header='Home Services'
+                                title='A Random Service'
+                                price='$100.0'
+                                RatingsAvg='4.99'
+                                ratingsAmount='209'
+                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                         </Carousel>
                     </div>
                     <br />

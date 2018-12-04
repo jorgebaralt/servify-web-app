@@ -11,8 +11,10 @@ class Carousel extends Component {
     render () {
         // let reactSwipeEl;
         let settings = {
-            dots: true,
+            dots: false,
             infinite: false,
+            // TODO connect to global reducer to set true if on mobile
+            swipeToSlide: false,
             speed: 500,
             slidesToShow: 4,
             slidesToScroll: 4,

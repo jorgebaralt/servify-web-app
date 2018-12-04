@@ -21,6 +21,9 @@ const SVGComponent = (props) => {
         case 'typing':
             svg = <SVG.Typing {...props} />;
             break;
+        case 'star':
+            svg = <SVG.Star {...props} />;
+            break;
         default:
             svg = <div>Please specify a <strong>props.svg</strong>, 
             or make sure you're using the right file name inside the <strong>assets/svg folder</strong>.</div>;

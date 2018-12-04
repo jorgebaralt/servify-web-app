@@ -10,7 +10,7 @@
 }
 
 .CardContainer a {
-    margin: 20px;
+    margin: 0 20px 0 20px;
     width: 22.5%;
     flex: 1 0 26%; /* explanation below */
 } 
