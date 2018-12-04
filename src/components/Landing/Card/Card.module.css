@@ -1,0 +1,78 @@
+.CardWrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.Card {
+    background-color: transparent;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px;
+    float: left;
+    text-align: left;
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.1);
+    border-image: initial;
+    border-radius: 3px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.CardTable {
+    display: table;
+    width: 100%;
+    height: 100%;
+    border-spacing: 0px;
+}
+
+.ThumbnailCell {
+    /* If display: table-cell it will be horizontal */
+    /* display: table-cell; */
+    vertical-align: middle;
+}
+
+.CardThumbnail {
+    /* Desired values for horizontal */
+    /* width: 96px;
+    height: 72px; */
+    /* Desired values for vertical */
+    width: 100%;
+    height: 125px;
+    min-height: 100%;
+    overflow: auto;
+    background: rgb(72, 72, 72);
+}
+
+.CardThumbnailImage {
+    width: 100%;
+    height: 100%;
+    background-size: cover !important;
+    background-position: 50% 50% !important;
+    background-repeat: no-repeat !important;
+}
+
+.TextCell {
+    /* If display: table-cell it will be horizontal */
+    /* display: table-cell; */
+    width: 100%;
+    vertical-align: middle;
+}
+
+.TextCellText {
+    text-align: center;
+    padding: 10px;
+    min-height: 36px;
+    overflow-wrap: break-word;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: normal;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    color: rgb(72, 72, 72);
+    margin: 0px;
+}
+
+.TextCellText span {
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 21px;
+}

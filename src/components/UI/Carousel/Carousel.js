@@ -1,31 +1,56 @@
 import React, { Component } from 'react';
-import ReactSwipe from 'react-swipe';
+// JSX
+import Slider from 'react-slick';
 // CSS
-import classes from './Carousel.module.css';
+// import classes from './Carousel.module.css';
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 class Carousel extends Component {
 
     render () {
-        let reactSwipeEl;
+        // let reactSwipeEl;
+        let settings = {
+            dots: true,
+            infinite: false,
+            speed: 500,
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            initialSlide: 0,
+            responsive: [
+                {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+                },
+                {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    initialSlide: 2
+                }
+                },
+                {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+                }
+            ]
+        };
+        if (this.props.settings) {
+            settings = this.props.settings;
+        }
         return (
-            <div>
-                <ReactSwipe
-                    className="carousel"
-                    swipeOptions={{ continuous: false }}
-                    ref={el => (reactSwipeEl = el)} >
-                        {/* {this.props.children} */}
-                        <div style={{width: '200px'}}>PANE 1</div>
-                        <div style={{width: '200px'}}>PANE 2</div>
-                        <div style={{width: '200px'}}>PANE 3</div>
-                        <div style={{width: '200px'}}>PANE 4</div>
-                        <div style={{width: '200px'}}>PANE 5</div>
-                        <div style={{width: '200px'}}>PANE 6</div>
-                        <div style={{width: '200px'}}>PANE 7</div>
-                        <div style={{width: '200px'}}>PANE 8</div>
-                </ReactSwipe>
-                <button onClick={() => reactSwipeEl.prev()}>Previous</button>
-                <button onClick={() => reactSwipeEl.next()}>Next</button>
-            </div>
+            <Slider {...settings}>
+                {this.props.children} 
+            </Slider>
         );
     };
 };

@@ -10,6 +10,10 @@ import SVG from '../../components/SVG/SVG';
 import HeaderImage from '../../components/UI/HeaderImage/HeaderImage';
 import Button from '../../components/UI/Button/Button';
 import Carousel from '../../components/UI/Carousel/Carousel';
+import SearchBox from '../../components/UI/SearchBox/SearchBox';
+import Banner from '../../components/UI/Banner/Banner';
+import CardContainer from '../../components/Landing/CardContainer/CardContainer';
+import Card from '../../components/Landing/Card/Card';
 
 class Landing extends Component {
 
@@ -24,7 +28,7 @@ class Landing extends Component {
                 <li className={classes.Category} key={category.title}>
                     <a href="/">
                         {/* Category.icon pointer protection */}
-                        {category.icon ? <category.icon/> : null}{category.title}&nbsp;<SVG svg='right-arrow' />
+                        {category.icon ? <category.icon /> : null}{category.title}&nbsp;<SVG svg='right-arrow' />
                     </a>
                 </li>
             );
@@ -38,139 +42,23 @@ class Landing extends Component {
                     </ul>
                     {/* Header Content */}
                     <div className={classes.HeaderContent}>
-                        <div>
-                            <div className={classes.SearchBox}>
-                                <h1>What service are you looking for?</h1>
-                                <br />
-                                {/* SERVICES */}
-                                <small>Services</small>
-                                <div className={classes.InputWrapper}>
-                                    <div className={classes.InputContainer}>
-                                        <label htmlFor="services-search-bar__input" className={classes.Label}>
-                                            <input 
-                                                className={classes.Input}
-                                                id="services-search-bar__input"
-                                                role="combobox" 
-                                                type="text" 
-                                                aria-autocomplete="list" 
-                                                aria-expanded="false" 
-                                                aria-controls=""
-                                                autoComplete="off" 
-                                                autoCorrect="off" 
-                                                spellCheck="false" 
-                                                name="services-query"
-                                                placeholder="Anything" />
-                                        </label>
-                                    </div>
-                                </div>
-                                <br />
-                                {/* CATEGORIES */}
-                                <small>Categories</small>
-                                <div className={classes.InputWrapper}>
-                                    <div className={classes.InputContainer}>
-                                        <label htmlFor="services-search-bar__input" className={classes.Label}>
-                                            <input 
-                                                style={{height: '48px'}}
-                                                className={classes.Input}
-                                                id="categories-list__input"
-                                                list="categories-list"
-                                                autoComplete="off"
-                                                name="categories-query"
-                                                placeholder="Category" />
-                                            <datalist id="categories-list">
-                                                {categoriesDatalist}
-                                            </datalist>
-                                        </label>
-                                    </div>
-                                </div>
-                                <br />
-                                <Button style={{float: 'right'}} type={'primary'}>Search</Button>
-                            </div>
-                            <a style={{textDecoration: 'none'}} href='/'>
-                                <div className={classes.MakeMoneyContainer}>
-                                    <span className={classes.MakeMoney}>
-                                        <SVG svg="tools" />
-                                        <span>Make money hosting your services on Servify</span>
-                                        <SVG svg="right-arrow" />
-                                    </span>&nbsp;
-                                </div>
-                            </a>
-                        </div>
+                        <SearchBox categoriesDatalist={categoriesDatalist} />
                         {/* TODO Get custom logo */}
                         <h1>Servify</h1>
                     </div>
                 </div>
-                {/* Banner */}
-                <section className={classes.Banner}>
-                    <div>
-                        <div className={classes.BannerPoint}><SVG height='36' svg='checkmark' />&nbsp;<strong>FREE</strong>&nbsp;Service Hosting</div>
-                        <div className={classes.BannerPoint}><SVG height='36' svg='checkmark' />&nbsp;<strong>The Best</strong>&nbsp;Service Provider</div>
-                        <div className={classes.BannerArrow}>&nbsp;</div>
-                    </div>
-                </section>
+                <Banner />
                 {/* Page Content */}
                 {/* TODO: Show a new search-bar, Fixed top  */}
                 <div className={classes.Container}>
                     <h1>Top Categories</h1>
-                    <div className={classes.CardContainer}>
-                        {/* PLACEHOLDER Home Services */}
-                        <a href='/'>
-                            <div className={classes.CardWrapper}>
-                                <div className={classes.Card}>
-                                    <div className={classes.CardTable}>
-                                        <div className={classes.ThumbnailCell}>
-                                            <div className={classes.CardThumbnail}>
-                                                <div className={classes.CardThumbnailImage} style={{backgroundImage: "url(https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large)"}}></div>
-                                            </div>
-                                        </div>
-                                        <div className={classes.CategoryCell}>
-                                            <div className={classes.CategoryCellText}>
-                                                <div><span>Home Services</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        {/* PLACEHOLDER Plumbing */}
-                        <a href='/'>
-                            <div className={classes.CardWrapper}>
-                                <div className={classes.Card}>
-                                    <div className={classes.CardTable}>
-                                        <div className={classes.ThumbnailCell}>
-                                            <div className={classes.CardThumbnail}>
-                                                <div className={classes.CardThumbnailImage} style={{backgroundImage: "url(https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large)"}}></div>
-                                            </div>
-                                        </div>
-                                        <div className={classes.CategoryCell}>
-                                            <div className={classes.CategoryCellText}>
-                                                <div><span>Plumbing</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        {/* PLACEHOLDER Beauty */}
-                        <a href='/'>
-                            <div className={classes.CardWrapper}>
-                                <div className={classes.Card}>
-                                    <div className={classes.CardTable}>
-                                        <div className={classes.ThumbnailCell}>
-                                            <div className={classes.CardThumbnail}>
-                                                <div className={classes.CardThumbnailImage} style={{backgroundImage: "url(https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large)"}}></div>
-                                            </div>
-                                        </div>
-                                        <div className={classes.CategoryCell}>
-                                            <div className={classes.CategoryCellText}>
-                                                <div><span>Beauty</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                    {/* TODO category images */}
+                    <CardContainer>
+                        {/* PLACEHOLDER Categories */}
+                        <Card title='Home Services' image='https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large'/>
+                        <Card title='Plumbing' image='https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large'/>
+                        <Card title='Beauty' image='https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large'/>
+                    </CardContainer>
                     <br />
                     <h1>Top-rated services near you</h1>
                     <div>
@@ -178,11 +66,13 @@ class Landing extends Component {
                             <div style={{background: 'darkorange', textAlign: 'center', padding: 50, color: 'white'}}>Dummy</div>
                             <div style={{background: 'darkorange', textAlign: 'center', padding: 50, color: 'white'}}>Carousel</div>
                             <div style={{background: 'darkorange', textAlign: 'center', padding: 50, color: 'white'}}>Item</div>
+                            <div style={{background: 'darkorange', textAlign: 'center', padding: 50, color: 'white'}}>Item</div>
+                            <div style={{background: 'darkorange', textAlign: 'center', padding: 50, color: 'white'}}>Item</div>
+                            <div style={{background: 'darkorange', textAlign: 'center', padding: 50, color: 'white'}}>Item</div>
                         </Carousel>
                     </div>
                     <br />
                     <h1>All Categories</h1>
-                    <hr/>
                     <ul className={classes.Categories}>
                         {categoriesList}
                     </ul>
