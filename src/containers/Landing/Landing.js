@@ -9,6 +9,7 @@ import SVG from '../../components/SVG/SVG';
 // JSX
 import HeaderImage from '../../components/UI/HeaderImage/HeaderImage';
 import Button from '../../components/UI/Button/Button';
+import Carousel from '../../components/UI/Carousel/Carousel';
 
 class Landing extends Component {
 
@@ -118,7 +119,7 @@ class Landing extends Component {
                                 <div className={classes.Card}>
                                     <div className={classes.CardTable}>
                                         <div className={classes.ThumbnailCell}>
-                                            <div class={classes.CardThumbnail}>
+                                            <div className={classes.CardThumbnail}>
                                                 <div className={classes.CardThumbnailImage} style={{backgroundImage: "url(https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large)"}}></div>
                                             </div>
                                         </div>
@@ -137,7 +138,7 @@ class Landing extends Component {
                                 <div className={classes.Card}>
                                     <div className={classes.CardTable}>
                                         <div className={classes.ThumbnailCell}>
-                                            <div class={classes.CardThumbnail}>
+                                            <div className={classes.CardThumbnail}>
                                                 <div className={classes.CardThumbnailImage} style={{backgroundImage: "url(https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large)"}}></div>
                                             </div>
                                         </div>
@@ -156,7 +157,7 @@ class Landing extends Component {
                                 <div className={classes.Card}>
                                     <div className={classes.CardTable}>
                                         <div className={classes.ThumbnailCell}>
-                                            <div class={classes.CardThumbnail}>
+                                            <div className={classes.CardThumbnail}>
                                                 <div className={classes.CardThumbnailImage} style={{backgroundImage: "url(https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large)"}}></div>
                                             </div>
                                         </div>
@@ -172,6 +173,13 @@ class Landing extends Component {
                     </div>
                     <br />
                     <h1>Top-rated services near you</h1>
+                    <div>
+                        <Carousel>
+                            <div style={{background: 'darkorange', textAlign: 'center', padding: 50, color: 'white'}}>Dummy</div>
+                            <div style={{background: 'darkorange', textAlign: 'center', padding: 50, color: 'white'}}>Carousel</div>
+                            <div style={{background: 'darkorange', textAlign: 'center', padding: 50, color: 'white'}}>Item</div>
+                        </Carousel>
+                    </div>
                     <br />
                     <h1>All Categories</h1>
                     <hr/>
@@ -179,6 +187,7 @@ class Landing extends Component {
                         {categoriesList}
                     </ul>
                 </div>
+                
             </>
         );
     }

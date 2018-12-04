@@ -1,0 +1,14 @@
+.swipe {
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+}
+.SwipeWrap{
+    overflow: hidden;
+    position: relative;
+}
+.SwipeWrap > div {
+    float:left;
+    width:20%;
+    position: relative;
+}

@@ -1,0 +1,5 @@
+.CarouselSlot {
+    flex: 1 0 100%;
+    flex-basis: 30%;
+    margin-right: 20px;
+}
