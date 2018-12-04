@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // CSS
 import classes from './Service.module.css';
-import SVG from '../../SVG/SVG';
+import StarsRating from '../../../components/UI/StarsRating/StarsRating';
 
 class Service extends Component  {
 
@@ -25,19 +25,11 @@ class Service extends Component  {
                     </div>
                     <div className={classes.Title}>{this.props.title}</div>
                     <div className={classes.Price}>{this.props.price}</div>
-                    {/* Rating */}
+                    {/* Star Rating */}
                     <div>
-                        {/* TODO Star rating algorithm */}
                         <span role="img">
                             <span className={classes.RatingsAvg}>{this.props.RatingsAvg}</span>
-                            {/* Stars go here */}
-                            <span className={classes.Stars}>
-                                <span className={classes.Star}><SVG svg='star' /></span>
-                                <span className={classes.Star}><SVG svg='star' /></span>
-                                <span className={classes.Star}><SVG svg='star' /></span>
-                                <span className={classes.Star}><SVG svg='star' /></span>
-                                <span className={classes.Star}><SVG svg='star' /></span>
-                            </span>
+                            <StarsRating rating={.7} />
                         </span>
                         <span className={classes.RatingsAmount}><span className={classes.Amount}>{this.props.ratingsAmount}</span></span>
                     </div>

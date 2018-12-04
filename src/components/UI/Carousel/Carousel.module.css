@@ -1,14 +1,63 @@
-.swipe {
-    overflow: hidden;
-    visibility: hidden;
+.Carousel {
     position: relative;
 }
-.SwipeWrap{
-    overflow: hidden;
-    position: relative;
+
+.PrevButton {
+    position: absolute;
+    top: 50%;
+    right: 97.5%;
+    display: block;
+    transform: translateY(-50%);
+    z-index: 1;
 }
-.SwipeWrap > div {
-    float:left;
-    width:20%;
+
+.NextButton {
+    position: absolute;
+    top: 50%;
+    left: 97.5%;
+    display: block;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.PrevButton button,
+.NextButton button {
+    display: inline-block;
     position: relative;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 1;
+    position: relative;
+    touch-action: manipulation;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 1px 1px;
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+    background: rgb(255, 255, 255);
+}
+
+.PrevButton button:after,
+.NextButton button:after {
+    display: block;
+    position: absolute;
+    content: '';
+    top: 25%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+    width: 15px;
+    height: 15px;
+    border: 2px solid #FF7043;
+    border-radius: 12.5%;
+    border-left: 0;
+    border-bottom: 0;
+    transform: rotate(45deg)
+}
+
+.PrevButton button:after {
+    top: 25%;
+    left: 35%;
+    transform: rotate(-135deg)
 }
