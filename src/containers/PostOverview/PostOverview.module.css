@@ -16,7 +16,7 @@
 
 .Box{
 	background: rgba(255,255,255,.97);
-    color: #484848;
+    color: #616161;
     border-radius: 4px;
     padding: 32px;
     padding-bottom: 62px;
@@ -41,9 +41,13 @@
 	flex-wrap: wrap 
 }
 
-.WhyText{
+.WhyDiv{
 	width: 50%;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
+}
+.WhyTitle{
+
+	color: #616161;
 }
