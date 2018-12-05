@@ -63,42 +63,210 @@ class Landing extends Component {
                     <h1>Top-rated services near you</h1>
                     <div>
                         <Carousel>
+                            {/* PLACEHOLDERS */}
                             <Service
                                 header='Home Services'
                                 title='A Random Service'
                                 price='$100.0'
-                                RatingsAvg='4.99'
-                                ratingsAmount='209'
-                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                            {/* PLACEHOLDERS */}
-                                <Service
-                                header='Home Services'
-                                title='A Random Service'
-                                price='$100.0'
-                                RatingsAvg='4.99'
-                                ratingsAmount='209'
+                                ratingAvg='.72'
+                                ratingAmount='1293'
                                 image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                                 <Service
-                                header='Home Services'
-                                title='A Random Service'
+                                    header='Plumbing'
+                                    title='A Toilet'
+                                    price='$100.0'
+                                    ratingAvg={0.33}
+                                    ratingAmount='1537'
+                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                    <Service
+                                        header='Plumbing'
+                                        title='A Toilet'
+                                        price='$100.0'
+                                        ratingAvg={0.33}
+                                        ratingAmount='1537'
+                                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                        <Service
+                                            header='Plumbing'
+                                            title='A Toilet'
+                                            price='$100.0'
+                                            ratingAvg={0.33}
+                                            ratingAmount='1537'
+                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                            <Service
+                                                header='Plumbing'
+                                                title='A Toilet'
+                                                price='$100.0'
+                                                ratingAvg={0.33}
+                                                ratingAmount='1537'
+                                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                <Service
+                                                    header='Plumbing'
+                                                    title='A Toilet'
+                                                    price='$100.0'
+                                                    ratingAvg={0.33}
+                                                    ratingAmount='1537'
+                                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                    <Service
+                                                        header='Plumbing'
+                                                        title='A Toilet'
+                                                        price='$100.0'
+                                                        ratingAvg={0.33}
+                                                        ratingAmount='1537'
+                                                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                        <Service
+                                                            header='Plumbing'
+                                                            title='A Toilet'
+                                                            price='$100.0'
+                                                            ratingAvg={0.33}
+                                                            ratingAmount='1537'
+                                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                            <Service
+                                                                header='Plumbing'
+                                                                title='A Toilet'
+                                                                price='$100.0'
+                                                                ratingAvg={0.33}
+                                                                ratingAmount='1537'
+                                                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                                <Service
+                                                                    header='Plumbing'
+                                                                    title='A Toilet'
+                                                                    price='$100.0'
+                                                                    ratingAvg={0.33}
+                                                                    ratingAmount='1537'
+                                                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                                    <Service
+                                                                        header='Plumbing'
+                                                                        title='A Toilet'
+                                                                        price='$100.0'
+                                                                        ratingAvg={0.33}
+                                                                        ratingAmount='1537'
+                                                                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                                        <Service
+                                                                            header='Plumbing'
+                                                                            title='A Toilet'
+                                                                            price='$100.0'
+                                                                            ratingAvg={0.33}
+                                                                            ratingAmount='1537'
+                                                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                                            <Service
+                                                                                header='Plumbing'
+                                                                                title='A Toilet'
+                                                                                price='$100.0'
+                                                                                ratingAvg={0.33}
+                                                                                ratingAmount='1537'
+                                                                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                                                <Service
+                                                                                    header='Plumbing'
+                                                                                    title='A Toilet'
+                                                                                    price='$100.0'
+                                                                                    ratingAvg={0.33}
+                                                                                    ratingAmount='1537'
+                                                                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                                                    <Service
+                                                                                        header='Plumbing'
+                                                                                        title='A Toilet'
+                                                                                        price='$100.0'
+                                                                                        ratingAvg={0.33}
+                                                                                        ratingAmount='1537'
+                                                                                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                                                        <Service
+                                                                                            header='Plumbing'
+                                                                                            title='A Toilet'
+                                                                                            price='$100.0'
+                                                                                            ratingAvg={0.33}
+                                                                                            ratingAmount='1537'
+                                                                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                                                            <Service
+                                                                                                header='Plumbing'
+                                                                                                title='A Toilet'
+                                                                                                price='$100.0'
+                                                                                                ratingAvg={0.33}
+                                                                                                ratingAmount='1537'
+                                                                                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                                                                <Service
+                                                                                                    header='Plumbing'
+                                                                                                    title='A Toilet'
+                                                                                                    price='$100.0'
+                                                                                                    ratingAvg={0.33}
+                                                                                                    ratingAmount='1537'
+                                                                                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                                                                    <Service
+                                                                                                        header='Plumbing'
+                                                                                                        title='A Toilet'
+                                                                                                        price='$100.0'
+                                                                                                        ratingAvg={0.33}
+                                                                                                        ratingAmount='1537'
+                                                                                                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                                                                        <Service
+                                                                                                            header='Plumbing'
+                                                                                                            title='A Toilet'
+                                                                                                            price='$100.0'
+                                                                                                            ratingAvg={0.33}
+                                                                                                            ratingAmount='1537'
+                                                                                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                                                                            <Service
+                                                                                                                header='Plumbing'
+                                                                                                                title='A Toilet'
+                                                                                                                price='$100.0'
+                                                                                                                ratingAvg={0.33}
+                                                                                                                ratingAmount='1537'
+                                                                                                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                                                                                <Service
+                                                                                                                    header='Plumbing'
+                                                                                                                    title='A Toilet'
+                                                                                                                    price='$100.0'
+                                                                                                                    ratingAvg={0.33}
+                                                                                                                    ratingAmount='1537'
+                                                                                                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                                                                                    <Service
+                                                                                                                        header='Plumbing'
+                                                                                                                        title='A Toilet'
+                                                                                                                        price='$100.0'
+                                                                                                                        ratingAvg={0.33}
+                                                                                                                        ratingAmount='1537'
+                                                                                                                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                        <Service
+                                            header='Plumbing'
+                                            title='A Toilet'
+                                            price='$100.0'
+                                            ratingAvg={0.33}
+                                            ratingAmount='1537'
+                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                            <Service
+                                                header='Plumbing'
+                                                title='A Toilet'
+                                                price='$100.0'
+                                                ratingAvg={0.33}
+                                                ratingAmount='1537'
+                                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                <Service
+                                                    header='Plumbing'
+                                                    title='A Toilet'
+                                                    price='$100.0'
+                                                    ratingAvg={0.33}
+                                                    ratingAmount='1537'
+                                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                    <Service
+                                                        header='Plumbing'
+                                                        title='A Toilet'
+                                                        price='$100.0'
+                                                        ratingAvg={0.33}
+                                                        ratingAmount='1537'
+                                                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                                        <Service
+                                                            header='Plumbing'
+                                                            title='A Toilet'
+                                                            price='$100.0'
+                                                            ratingAvg={0.33}
+                                                            ratingAmount='1537'
+                                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                            {/* <Service
+                                header='Beauty'
+                                title='A Beautiful Service'
                                 price='$100.0'
-                                RatingsAvg='4.99'
-                                ratingsAmount='209'
-                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                                <Service
-                                header='Home Services'
-                                title='A Random Service'
-                                price='$100.0'
-                                RatingsAvg='4.99'
-                                ratingsAmount='209'
-                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                                <Service
-                                header='Home Services'
-                                title='A Random Service'
-                                price='$100.0'
-                                RatingsAvg='4.99'
-                                ratingsAmount='209'
-                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                ratingAvg='.95'
+                                ratingAmount='532'
+                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/> */}
                         </Carousel>
                     </div>
                     <br />
