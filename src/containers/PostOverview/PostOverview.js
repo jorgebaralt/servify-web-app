@@ -24,11 +24,11 @@ class PostOverview extends Component {
 				</div>
 				{/* - why post a service  - why we are the best option*/}
 				<div className={classes.WhyContainer}>
-					<div className={classes.WhyText}>
-						<h2>Why pick Servify?</h2>
+					<div className={classes.WhyDiv}>
+						<h2 className={classes.WhyTitle}>Why pick Servify?</h2>
 					</div>
-					<div className={classes.WhyText}>
-						<h2>Why we do this?</h2>
+					<div className={classes.WhyDiv}>
+						<h2 className={classes.WhyTitle}>Why we do this?</h2>
 					</div>
 				</div>
 				{/* Steps to create a service */}
