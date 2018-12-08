@@ -52,6 +52,38 @@
     margin-bottom: 40px;
 }
 
+.HeaderSubheader {
+    text-align: left;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    background: transparent;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    padding: 0px;
+}
+
+.HeaderSubheader h1 {
+    font-weight: 600;
+    margin-bottom: 0px;
+    line-height: 30px;
+    letter-spacing: normal;
+    color: rgb(72, 72, 72);
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.HeaderSubheader h4 {
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: normal;
+    color: rgb(72, 72, 72);
+    font-weight: normal;
+    margin-top: 5px;
+}
+
 .Categories {
     display: flex;
     flex-flow: row;

@@ -5,4 +5,6 @@ import Checkmark from './checkmark';
 import Typing from './typing';
 import Star from './star';
 
-export { RightArrow, Tools, Loading, Checkmark, Typing, Star };
+import BlackBorderlessLogo from '../images/servify-logos/blackborder-nobg';
+
+export { RightArrow, Tools, Loading, Checkmark, Typing, Star, BlackBorderlessLogo };

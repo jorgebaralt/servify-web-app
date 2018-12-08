@@ -24,6 +24,9 @@ const SVGComponent = (props) => {
         case 'star':
             svg = <SVG.Star {...props} />;
             break;
+        case 'black-borderless-logo':
+            svg = <SVG.BlackBorderlessLogo {...props} />;
+            break;
         default:
             svg = <div>Please specify a <strong>props.svg</strong>, 
             or make sure you're using the right file name inside the <strong>assets/svg folder</strong>.</div>;

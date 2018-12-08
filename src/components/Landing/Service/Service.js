@@ -21,7 +21,7 @@ class Service extends Component  {
                 <a draggable="false" href='/' className={classes.Details} target="_blank">
                     <div>
                         <div className={classes.Header}>
-                            <span style={{color: '#1fa6c8'}}>{this.props.header}</span>
+                            <span>{this.props.header}</span>
                         </div>
                     </div>
                     {/* Title */}

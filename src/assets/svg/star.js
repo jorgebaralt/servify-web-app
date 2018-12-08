@@ -11,7 +11,7 @@ const star = (props) => {
 			aria-hidden='true' 
 			focusable='false'
 			width={props.width ? props.width : null} 
-			height={props.height ? props.height : null} 
+			height={props.height ? props.height : null} 	
 			fill={props.fill ? props.fill : null}
 			style={props.style ? props.style : {height: '1em', width: '1em', display: 'block', fill: 'currentcolor'}}>
 			<clipPath id='ratingPath'>

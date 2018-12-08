@@ -1,0 +1,37 @@
+.Wrapper {
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+    margin-top: 12px;
+}
+
+.AnchorLink {
+    box-shadow: none;
+    text-align: left;
+    width: auto;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    padding: 4px 0px;
+    border-color: rgb(224, 224, 224);
+    text-decoration: none;
+}
+
+.AnchorLink:hover {
+    text-decoration: underline;
+    text-decoration-color: rgb(255, 112, 67);
+}
+
+.Text {
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 22px;
+    display: inline;
+    margin-right: 6px;
+    letter-spacing: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    color: rgb(255, 112, 67);
+}

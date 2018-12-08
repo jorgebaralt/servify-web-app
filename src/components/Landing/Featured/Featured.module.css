@@ -1,0 +1,199 @@
+.Wrapper {
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+    width: 95%;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+}
+
+/* @media (min-width: 744px)
+{
+    .Wrapper {
+        width: 50%;
+    }
+    
+}
+@media (min-width: 1128px)
+{
+    .Wrapper {
+        width: 33.3333%;
+    }
+} */
+
+.Anchor {
+    color: rgb(72, 72, 72);
+    display: block;
+    text-decoration: none;
+}
+
+.Container {
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    padding-top: 60%;
+    background: transparent;
+    contain: strict;
+    position: relative;
+    width: 100%;
+    z-index: 0;
+}
+
+.BackgroundWrapper {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 100%;
+    width: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.BackgroundContainer {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.Background {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    animation-name: FadeIn;
+    animation-duration: 300ms;
+    animation-timing-function: ease-out;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+.TextWrapper {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding-top: 24px;
+    padding-bottom: 16px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.TextTable {
+    display: table;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.TextCell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.TextContainer {
+    position: relative;
+    text-align: center;
+}
+
+.ServifyLogo {
+    position: absolute;
+    width: 100%;
+    top: -26px;
+    margin: 0px auto;
+    /* TODO May be placeholder */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Text {
+    position: relative;
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: normal;
+    color: rgb(72, 72, 72);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.Underline {
+    position: absolute;
+    right: 0px;
+    top: 100%;
+    margin-top: -25px;
+    left: 10%;
+    width: 80%;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.Underline svg {
+    height: 15px;
+}
+
+@media (min-width: 744px) {
+    .Text {
+        font-size: 46px;
+        line-height: 52px;
+        letter-spacing: normal;
+        color: rgb(72, 72, 72);
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+}
+
+.Feature {
+    margin-bottom: 2px;
+    box-sizing: border-box;
+}
+
+.Feature small {
+    overflow-wrap: break-word;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: normal;
+    color: rgb(72, 72, 72);
+    font-weight: 600;
+    margin: 0px;
+}
+
+.Feature small span {
+    color: rgb(72, 72, 72);
+}
+
+.Description {
+    margin-bottom: 8px;
+}
+
+.Description div {
+    overflow-wrap: break-word;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: normal;
+    color: rgb(72, 72, 72);
+    font-weight: normal;
+    margin: 0px;
+}
+
+.Description div span {
+    letter-spacing: 0.2px;
+}
+
+@keyframes FadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

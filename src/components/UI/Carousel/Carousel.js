@@ -83,7 +83,7 @@ class Carousel extends Component {
     state = {
         activeSlide: 0,
         activeSlide2: 0,
-        slidesToShow: 4, // Default, if on mobile or smaller screens it will be reapplied
+        slidesToShow: this.props.slidesToShow ? this.props.slidesToShow : 4, // Default, if on mobile or smaller screens it will be reapplied
         responsive: this.responsiveSlider(),
     };
 
@@ -110,7 +110,7 @@ class Carousel extends Component {
             swipeToSlide: true,
             draggable: false,
             speed: 250,
-            slidesToShow: 4,
+            slidesToShow: this.props.slidesToShow ? this.props.slidesToShow : 4,
             slidesToScroll: 1,
             initialSlide: 0,
             beforeChange: (current, next) => this.setState({ activeSlide: next }),
@@ -135,6 +135,7 @@ class Carousel extends Component {
                     </div>
                 }
                 {/* NextButton */}
+                {console.log('activeSlite', this.state.activeSlide, 'true?', this.state.activeSlide + this.state.slidesToShow >= this.props.children.length)}
                 {this.state.activeSlide + this.state.slidesToShow >= this.props.children.length  || this.state.slidesToShow >= this.props.children.length  ? 
                     null : 
                     <div className={classes.NextButton}>
