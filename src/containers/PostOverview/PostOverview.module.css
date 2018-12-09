@@ -5,7 +5,7 @@
 	margin-right: 2.5%;
 	width: 95%;
 	height: 60vh;
-	position: relative;
+	/* position: relative; */
 	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -26,6 +26,7 @@
 	float: right;
 	margin-right: 10%;
 	position: relative;
+	z-index: 1;
 }
 
 .Description{
@@ -38,16 +39,54 @@
 	padding-right: 10%;
 	margin-top: 4%;
 	display: flex;
-	flex-wrap: wrap 
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .WhyDiv{
 	width: 50%;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
+	box-sizing: border-box;
+	padding-left: 10%;
+	padding-right: 10%;
 }
 .WhyTitle{
-
+	color: #424242;
+}
+.WhyText{
 	color: #616161;
+	font-size: 20px;
+	text-align: left;
+	width: 90%;
+}
+
+
+
+
+.HowToPostContainer{
+	padding-left: 10%;
+	padding-right: 10%;
+	margin-top: 4%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.HowToPostTitle{
+	color: #424242;
+	margin-bottom: 2%;
+	font-size: 50px;
+	text-align: center;
+}
+.HowToPostStep{
+	padding-left: 30px;
+	padding-right: 30px;
+	width: 20%
+}
+.HowToPostStepTitle{
+	color: #424242;
+}
+.HowToPostText{
+	color: #616161;
+	font-size: 20px;
+	text-align: left;
+	width: 90%;
 }
