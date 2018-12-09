@@ -85,6 +85,7 @@ class Carousel extends Component {
     state = {
         activeSlide: 0,
         activeSlide2: 0,
+        rows: 2,
         slidesToShow: this.props.slidesToShow ? this.props.slidesToShow : 4, // Default, if on mobile or smaller screens it will be reapplied
         responsive: this.responsiveSlider(),
     };
@@ -98,7 +99,7 @@ class Carousel extends Component {
 
     // Update only at the end or beginning of the carousel
     shouldComponentUpdate () {
-        if (this.state.activeSlide === 0 || this.state.activeSlide + this.state.slidesToShow >= this.props.children.length ) {
+        if (this.state.activeSlide === 0 || (this.state.activeSlide + this.state.slidesToShow)*this.state.rows >= this.props.children.length ) {
             return true;
         }
         return false;
@@ -113,6 +114,7 @@ class Carousel extends Component {
             swipeToSlide: true,
             draggable: false,
             speed: 250,
+            rows: this.state.rows ? this.state.rows : 1, // Carousel rows to show, defaults to one
             slidesToShow: this.props.slidesToShow ? this.props.slidesToShow : 4,
             slidesToScroll: 1,
             initialSlide: 0,
@@ -138,7 +140,7 @@ class Carousel extends Component {
                     </div>
                 }
                 {/* NextButton */}
-                {this.state.activeSlide + this.state.slidesToShow >= this.props.children.length || this.state.slidesToShow >= this.props.children.length  ? 
+                {(this.state.activeSlide + this.state.slidesToShow)*settings.rows >= this.props.children.length || this.state.slidesToShow >= this.props.children.length  ? 
                     null : 
                     <div className={classes.NextButton}>
                         <button className="button" onClick={this.next}>
