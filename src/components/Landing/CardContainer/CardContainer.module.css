@@ -15,10 +15,11 @@
 
 .CardContainer a {
     display: inline-block !important;
-    margin: 20px;
+    margin: 5px;
     width: 66%;
     padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
     box-sizing: content-box; /* So the width will be 100% + 17px */
+    max-width: 220px;
 } 
 
 @media (min-width: 650px) {
@@ -26,7 +27,7 @@
         display: flex;
         flex-flow: row;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         margin-bottom: 0px;
         padding: 0px;
