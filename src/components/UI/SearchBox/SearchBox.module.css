@@ -1,12 +1,39 @@
+.Widescreen {
+    display: none;
+}
+
+.Mobile {
+    display: block;
+    width: 100%;
+}
+
+@media (min-width: 960px) {
+    .Widescreen {
+        display: block;
+    }
+
+    .Mobile {
+        display: none;
+    }
+}
+
 .SearchBox {
     background: rgba(255,255,255,.95);
     color: #484848;
     border-radius: 4px;
     padding: 32px;
     padding-bottom: 62px;
-    margin-right: 20vw;
-    width: 350px;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+    margin: auto;
+    box-shadow: none;
+}
+
+@media (min-width: 960px) {
+    .SearchBox {
+        margin: 0;
+        margin-right: 20vw;
+        width: 350px;
+        box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+    }
 }
 
 .SearchBox h1 {
@@ -85,23 +112,80 @@
     outline: none;
 }
 
+@media (max-width: 960px) {
+    .Button {
+        margin: 20px 0;
+        color: #FFF !important;
+        background-color: #FF7043 !important;
+        width: 100% !important;
+    }
+}
+
 .MakeMoneyContainer {
     display: flex;
     align-items: center;
     color: #FFFFFF;
-    width: 414px;
+    font-weight: 600;
+    width: 100%;
     margin-top: 12px;
 }
 
+.MakeMoneyContainer svg,
+.MakeMoneyContainer svg path {
+    fill: rgb(72,72,72);
+}
+
+.Tools {
+    width: 17px;
+    height: 12px;
+    margin-right: 2.5px;
+}
+
+.RightArrow {
+    width: 10px;
+    height: 16px;
+}
+
 .MakeMoney {
-    display: block;
+    display: flex;
+    justify-content: center;
     width: 100%;
-    margin: 0 auto;
-    text-align: center;
-    font-size: 17px;
+    font-size: 13px;
+    color: rgb(72,72,72)
 }
 
 .MakeMoney span {
     margin: 0 5px 0 0px;
-    text-shadow: 3px 3px 5px #333;
+}
+
+@media (min-width: 960px) {
+    .MakeMoneyContainer {
+        width: 414px;
+        align-items: flex-end;
+        height: 30px;
+    }
+
+    .MakeMoneyContainer svg,
+    .MakeMoneyContainer path {
+        fill: rgb(255,255,255) !important;
+    }
+    
+    .Tools {
+        width: 17px;
+        height: 17px;
+    }
+
+    .RightArrow {
+        width: auto;
+        height: auto;
+    }
+
+    .MakeMoney {
+        color: rgb(255,255,255);
+        font-size: 17px;
+    }
+
+    .MakeMoney span {
+        text-shadow: 3px 3px 5px #333;
+    }
 }

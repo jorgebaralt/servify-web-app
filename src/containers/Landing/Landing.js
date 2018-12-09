@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import categories from '../../shared/categories';
+// Redux
+import { connect } from 'react-redux';
 // CSS
 import classes from './Landing.module.css';
 // Images
@@ -35,6 +37,7 @@ class Landing extends Component {
                 </li>
             );
         });
+
         return (
             <>
                 {/* Header */}
@@ -42,9 +45,8 @@ class Landing extends Component {
                     <ul className={classes.Background}>
                         <HeaderImage src={placeholderHeader} />
                     </ul>
-                    {/* Header Content */}
                     <div className={classes.HeaderContent}>
-                        <SearchBox categoriesDatalist={categoriesDatalist} />
+                        { !this.props.mobile ? <SearchBox.widescreen categoriesDatalist={categoriesDatalist} /> : null }
                         {/* TODO Get custom logo */}
                         <h1>Servify</h1>
                     </div>
@@ -54,6 +56,11 @@ class Landing extends Component {
                 {/* Page Content */}
                 {/* TODO: Show a new search-bar, Fixed top  */}
                 <div className={classes.Container}>
+                    { this.props.isMobile ? 
+                        <>
+                            <SearchBox.mobile categoriesDatalist={categoriesDatalist} />
+                            <br />
+                        </> : null }
                     <h1 style={{marginBottom: 20}}>Top Categories</h1>
                     {/* TODO category images */}
                     <CardContainer>
@@ -71,30 +78,37 @@ class Landing extends Component {
                                 header='Home Services'
                                 title='A Random Service'
                                 price='$100.0'
-                                ratingAvg='.72'
+                                ratingAvg={0.97}
                                 ratingAmount='1293'
                                 image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                             <Service
                                 header='Plumbing'
                                 title='A Toilet'
                                 price='$100.0'
-                                ratingAvg={0.33}
+                                ratingAvg={0.52}
                                 ratingAmount='1537'
                                 image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                             <Service
                                 header='Plumbing'
                                 title='A Toilet'
                                 price='$100.0'
-                                ratingAvg={0.33}
+                                ratingAvg={0.31}
                                 ratingAmount='1537'
                                 image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                             <Service
                                 header='Plumbing'
                                 title='A Toilet'
                                 price='$100.0'
-                                ratingAvg={0.33}
+                                ratingAvg={0.65}
                                 ratingAmount='1537'
                                 image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                            <Service
+                                    header='Plumbing'
+                                    title='A Toilet'
+                                    price='$100.0'
+                                    ratingAvg={0.17}
+                                    ratingAmount='1537'
+                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                         </Carousel>
                     </div>
                     <br />
@@ -107,7 +121,7 @@ class Landing extends Component {
                             <Featured image='https://a0.muscache.com/4ea/air/v2/pictures/a728b050-9512-48a7-ab9c-858e9b291cc0.jpg?t=r:w654-h400-sfit,e:fjpg-c90'/>
                             <Featured image='https://a0.muscache.com/4ea/air/v2/pictures/a728b050-9512-48a7-ab9c-858e9b291cc0.jpg?t=r:w654-h400-sfit,e:fjpg-c90'/>
                         </Carousel>
-                        <div class="_ttoj70">
+                        <div>
                             <AnchorLink text='Show more Servify featured services' href='/' />
                         </div>
                     </div>
@@ -123,4 +137,10 @@ class Landing extends Component {
     }
 }
 
-export default Landing;
+const mapStateToProps = (state) => {
+	return {
+		isMobile: state.mobileReducer.isMobile,
+	};
+};
+
+export default connect(mapStateToProps)(Landing);

@@ -25,8 +25,8 @@
     display: inline-block;
     position: relative;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     text-align: center;
     line-height: 1;
     position: relative;
@@ -39,16 +39,24 @@
     background: rgb(255, 255, 255);
 }
 
+@media (min-width: 960px) {
+    .PrevButton button,
+    .NextButton button {
+        width: 40px;
+        height: 40px;
+    }
+}
+
 .PrevButton button:after,
 .NextButton button:after {
     display: block;
     position: absolute;
     content: '';
-    top: 25%;
+    top: 27.5%;
     left: 15%;
     transform: translate(-50%, -50%);
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
     border: 2px solid #FF7043;
     border-radius: 12.5%;
     border-left: 0;
@@ -57,7 +65,15 @@
 }
 
 .PrevButton button:after {
-    top: 25%;
     left: 35%;
     transform: rotate(-135deg)
+}
+
+@media (min-width: 960px) { 
+    .PrevButton button:after,
+    .NextButton button:after {
+        top: 25%;
+        width: 15px;
+        height: 15px;
+    }
 }

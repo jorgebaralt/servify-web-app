@@ -8,7 +8,7 @@ const tools = (props) => {
 			y="0px" 
 			viewBox="0 0 420.555 420.555"
 			enableBackground="new 0 0 129 129"
-            className={props.class}
+            className={props.className}
 			style={props.style}
 			width={props.width ? props.width : "30px"} 
 			height={props.height ? props.height : "18px"} 

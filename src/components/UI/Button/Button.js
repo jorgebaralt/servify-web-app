@@ -5,7 +5,7 @@ import classes from './Button.module.css';
 const button = (props) => {
 
     // Success/Danger classes
-    let buttonClass = [props.class]
+    let buttonClass = [props.className];
     buttonClass.push(classes.Button);
     if (props.type === 'success') {
         buttonClass.push(classes.Success);

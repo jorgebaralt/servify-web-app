@@ -10,6 +10,7 @@ import Landing from './containers/Landing/Landing';
 import PostOverview from './containers/PostOverview/PostOverview';
 
 class App extends Component {
+	
 	componentDidMount() {
 		this.props.onIsMobile();
 		// TODO fetch popular categories global
