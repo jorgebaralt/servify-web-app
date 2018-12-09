@@ -129,12 +129,17 @@
 .Underline {
     position: absolute;
     right: 0px;
-    top: 100%;
+    top: 90%;
     margin-top: -25px;
     left: 10%;
-    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-left: 0px;
     margin-right: 0px;
+    animation-name: FadeIn;
+    animation-duration: 300ms;
+    animation-timing-function: ease-out;
 }
 
 .Underline svg {

@@ -1,25 +1,49 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-
+// CSS
 import classes from './Footer.module.css';
+// JSX
+import { NavLink, withRouter } from 'react-router-dom';
+import SVG from '../../SVG/SVG';
+// Logo
+import logo from '../../../assets/images/servify-logos/roundedborders.png';
 
 const footer = (props) => {
+    const bgImage = null;
     return (
         <div className={classes.Footer}>
-            <div className={classes.FooterWrapper}>
-                <span className={classes.Interested}>Header</span>
-                <span>Subheader.</span>
-                <br />
-                <div className={classes.PageReferences}>
-                    <span>Header</span>
-                    <br />
-                    <div className={classes.LinksWrapper}>
-                        {props.location.pathname !== "/" ? <Link className={classes.Link} to="/" >About Me</Link> : null}
-                        {props.location.pathname !== "/projects" ? <Link className={classes.Link} to="/projects">Projects</Link> : null}
-                        {props.location.pathname !== "/skills" ? <Link className={classes.Link} to="/skills">Skills</Link> : null}
+            <div>
+                <div className={classes.BannerWrapper}>
+                    <div 
+                        style={{backgroundImage: `url(${bgImage ? bgImage : 'http://www.bonpreufoods.com/images/image-background.jpg'})`}} 
+                        className={classes.BannerBackground}
+                    />
+                    <div className={classes.BannerContainer}>
+                        <div className={classes.SocialMedia}>
+                            <div className={classes.FollowUs}>Follow Us</div>
+                            <div className={classes.MediaLinks}>
+                                <span className={classes.MediaLink}><a href='/' target='_blank'><SVG svg='facebook' /></a></span>
+                                <span className={classes.MediaLink}><a href='/' target='_blank'><SVG svg='instagram' /></a></span>
+                            </div>
+                        </div>
                     </div>
-                    <div className={classes.CloserWrapper}>
-                        <div>Copyright © Servify</div>
+                </div>
+                <div className={classes.FooterWrapper}>
+                    <div className={classes.LogoWrapper}><img className={classes.Logo} draggable='false' src={logo} alt='' /></div>
+                    <div className={classes.NavLinks}>
+                        <NavLink activeClassName={classes.active} className={classes.NavLink} to='/'><span className={classes.Link}>Homepage</span></NavLink>
+                        <NavLink activeClassName={classes.active} className={classes.NavLink} to='/post/overview'><span className={classes.Link}>Post</span></NavLink>
+                        <NavLink activeClassName={classes.active} className={classes.NavLink} to='/help'><span className={classes.Link}>Help</span></NavLink>
+                        <NavLink activeClassName={classes.active} className={classes.NavLink} to='/support'><span className={classes.Link}>Support</span></NavLink>
+                        <NavLink activeClassName={classes.active} className={classes.NavLink} to='/contact'><span className={classes.Link}>Contact</span></NavLink>
+                    </div>
+                    <div className={classes.CopyrightWrapper}>
+                        <span> 
+                            <ins className={classes.Legalmark}>©</ins>
+                            <span>2018 Servify, Inc. All rights reserved.</span>
+                        </span>
+                    </div>
+                    <div className={classes.TrademarkWrapper}>
+                        <span>All trademarks referenced herein are the properties of their respective owners.</span>
                     </div>
                 </div>
             </div>

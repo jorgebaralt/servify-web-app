@@ -26,7 +26,7 @@ const featured = (props) => {
                                         <span style={{color: 'rgb(255, 112, 67)'}}>
                                             {props.text ? props.text : 'Text'}
                                         </span>
-                                        <span className={classes.Underline}></span>
+                                        <span className={classes.Underline}><SVG svg='underline' /></span>
                                     </span>
                                 </div>
                             </div>

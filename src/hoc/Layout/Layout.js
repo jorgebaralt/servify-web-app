@@ -19,8 +19,7 @@ class Layout extends Component {
 				<main className={classes.Layout}>
 					{this.props.children}
 				</main>
-				{/* TODO: Footer */}
-				{/* {footer} */}
+				<Footer />
 			</>
 		);
 	}

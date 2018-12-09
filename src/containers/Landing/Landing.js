@@ -49,7 +49,8 @@ class Landing extends Component {
                         <h1>Servify</h1>
                     </div>
                 </div>
-                <Banner />
+                {/* TODO improve banner */}
+                {/* <Banner /> */}
                 {/* Page Content */}
                 {/* TODO: Show a new search-bar, Fixed top  */}
                 <div className={classes.Container}>

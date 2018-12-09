@@ -52,7 +52,7 @@ class Navbar extends PureComponent {
 	 * component will be shown.
 	 */
 	changeNavbarOnWindowScroll = () => {
-		if (!this.navbar) {
+		if (!this.navbar.current) {
 			return;
 		}
 		if (window.scrollY > this.navbar.current.clientHeight) {

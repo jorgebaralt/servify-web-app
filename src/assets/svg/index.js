@@ -7,4 +7,5 @@ import Star from './star';
 
 import BlackBorderlessLogo from '../images/servify-logos/blackborder-nobg';
 
+// TODO randomize colors
 export { RightArrow, Tools, Loading, Checkmark, Typing, Star, BlackBorderlessLogo };

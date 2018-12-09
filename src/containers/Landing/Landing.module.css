@@ -76,6 +76,7 @@
 }
 
 .HeaderSubheader h4 {
+    user-select: none;
     font-size: 16px;
     line-height: 22px;
     letter-spacing: normal;
