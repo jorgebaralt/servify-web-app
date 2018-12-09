@@ -40,6 +40,13 @@
     color: inherit;
     margin: 0px;
     padding: 0px;
+    font-size: 24px;
+}
+
+@media (min-width: 960px) {
+    .SearchBox h1 {
+        font-size: inherit;
+    }
 }
 
 .SearchBox small {
@@ -149,6 +156,7 @@
 .MakeMoney {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
     font-size: 13px;
     color: rgb(72,72,72)

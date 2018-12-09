@@ -12,10 +12,12 @@ class Carousel extends Component {
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
     }
-        next() {
+
+    next() {
         this.mySlider.slickNext();
     }
-        previous() {
+
+    previous() {
         this.mySlider.slickPrev();
     }
 
@@ -88,6 +90,7 @@ class Carousel extends Component {
     };
 
     componentDidMount () {
+        this.setSlidesToShow();
         window.onresize = () => {
             this.setSlidesToShow();
         };
@@ -95,7 +98,7 @@ class Carousel extends Component {
 
     // Update only at the end or beginning of the carousel
     shouldComponentUpdate () {
-        if (this.state.activeSlide === 0 || this.state.activeSlide + this.state.slidesToShow >= this.props.children.length) {
+        if (this.state.activeSlide === 0 || this.state.activeSlide + this.state.slidesToShow >= this.props.children.length ) {
             return true;
         }
         return false;
@@ -135,8 +138,7 @@ class Carousel extends Component {
                     </div>
                 }
                 {/* NextButton */}
-                {console.log('activeSlite', this.state.activeSlide, 'true?', this.state.activeSlide + this.state.slidesToShow >= this.props.children.length)}
-                {this.state.activeSlide + this.state.slidesToShow >= this.props.children.length  || this.state.slidesToShow >= this.props.children.length  ? 
+                {this.state.activeSlide + this.state.slidesToShow >= this.props.children.length || this.state.slidesToShow >= this.props.children.length  ? 
                     null : 
                     <div className={classes.NextButton}>
                         <button className="button" onClick={this.next}>

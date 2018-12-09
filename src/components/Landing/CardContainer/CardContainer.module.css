@@ -1,19 +1,42 @@
+.CardWrapper {
+    overflow: hidden;
+}
+
 .CardContainer {
-    display: flex;
-    flex-flow: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0px;
-    padding: 0px;
-    overflow: visible;
+    height: 100%;
+    overflow-y: auto;
+    white-space: nowrap;
+    overflow-x: scroll;
+    padding-bottom: 30px;
+    margin-bottom: -30px;
+    
+    overflow:auto;
 }
 
 .CardContainer a {
+    display: inline-block !important;
     margin: 20px;
-    width: 22.5%;
-    flex: 1 0 26%; /* explanation below */
+    width: 66%;
+    padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+    box-sizing: content-box; /* So the width will be 100% + 17px */
 } 
+
+@media (min-width: 650px) {
+    .CardContainer {
+        display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 0px;
+        padding: 0px;
+        overflow: visible;
+    } 
+    .CardContainer a {
+        margin: 5px;
+        width: 27.5%;
+    } 
+}
 
 /* With flex-grow: 1 defined in the flex shorthand, there's no need for flex-basis to be 25%, 
 which would actually result in three items per row due to the margins. Since flex-grow will 

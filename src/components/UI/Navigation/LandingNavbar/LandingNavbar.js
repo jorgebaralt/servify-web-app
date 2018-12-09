@@ -11,7 +11,6 @@ const landingNavbar = (props) => {
     if (props.isNavbarTransparent) {
         navbarClasses.push(classes.NavbarTransparent);
     }
-    console.log(props.isNavbarTransparent)
     return (
         <header className={navbarClasses.join(' ')} ref={props.reference}>
             <nav className={classes.DesktopOnly} onScroll={props.onScroll}>
