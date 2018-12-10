@@ -5,6 +5,7 @@ import classes from './Navbar.module.css';
 // JSX
 import LandingNavbar from '../../components/UI/Navigation/LandingNavbar/LandingNavbar';
 import PostInfoNavbar from '../../components/UI/Navigation/PostInfoNavbar/PostInfoNavbar';
+import SearchNavbar from '../../components/UI/Navigation/SearchNavbar/SearchNavbar';
 import ScrollToTopButton from '../../components/UI/ScrollToTopButton/ScrollToTopButton';
 
 class Navbar extends PureComponent {
@@ -129,6 +130,7 @@ class Navbar extends PureComponent {
 					<LandingNavbar
 						// passing reference from constructor
 						reference={this.navbar}
+						navbarType='LandingNavbar' // pass navbarType prop to select respective navigation items
 						// Scroll Tracking Functionality if dependant on scroll then pass 'this.trackScrolling'
 						onScroll={() => { return }} // No functionality
 						// Passing Is Navbar Transparent functionality, if dependant on scroll then pass 'this.state.navbarTransparent'
@@ -141,12 +143,14 @@ class Navbar extends PureComponent {
 				);
 			case this.props.location.pathname.includes('/services'): // Renders navbar for every address that has /services as root
 				return (
-                    <PostInfoNavbar 
+                    <SearchNavbar 
+						navbarType='SearchNavbar' // pass navbarType prop to select respective navigation items
 						reference={this.navbar} />
 				);
 			case this.props.location.pathname === '/post/overview':
 				return (
                     <PostInfoNavbar 
+						navbarType='PostInfoNavbar' // pass navbarType prop to select respective navigation items
 						reference={this.navbar} />
 				);
 			default:

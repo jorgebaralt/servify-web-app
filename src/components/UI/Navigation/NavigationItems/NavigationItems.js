@@ -9,8 +9,8 @@ import ButtonFilled from '../../ButtonFilled/ButtonFilled';
 import servifyLogo from '../../../../assets/images/servify-logo-96x96.png';
 
 const renderNavigationItems = (props) => {
-	switch (props.location.pathname) {
-		case '/':
+	switch (props.navbarType) {
+		case 'LandingNavbar':
 			return (
 				<>
 					<div className={classes.Spacing} />
@@ -31,7 +31,7 @@ const renderNavigationItems = (props) => {
 					</NavigationItem>
 				</>
 			);
-		case '/post/overview':
+		case 'PostInfoNavbar':
 			return (
 				<>
 					<div className={classes.SpacingSmall} />
@@ -52,13 +52,39 @@ const renderNavigationItems = (props) => {
 					<div className={classes.SpacingSmall}/>
 				</>
 			);
-		case '/services':
+		case 'SearchNavbar':
 			return (
 				<>
+					<div className={classes.Spacing} />
+					<NavigationItem {...props} link="/post/overview" >
+						Post a service
+					</NavigationItem>
+					<NavigationItem {...props} link="/services" >
+						Services
+					</NavigationItem>
+					<NavigationItem {...props} link="/help" >
+						Help
+					</NavigationItem>
+					<NavigationItem {...props} link="/signup" >
+						Sign up
+					</NavigationItem>
+					<NavigationItem {...props} link="/login" >
+						Sign in
+					</NavigationItem>
 				</>
 			);
 		default:
-			// do nothing
+			return (
+				<>
+					<div className={classes.Spacing} />
+					<NavigationItem {...props} link="/" color="white" >
+						No navigation items found
+					</NavigationItem>
+					<NavigationItem {...props} link="/" >
+						No navigation items found
+					</NavigationItem>
+				</>
+			);
 	}
 };
 const nagivationItems = (props) => {

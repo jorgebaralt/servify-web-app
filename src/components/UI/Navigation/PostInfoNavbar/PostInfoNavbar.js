@@ -8,7 +8,7 @@ const PostInfoNavbar = (props) => {
 	return (
 		<header className={classes.Navbar}>
 			<nav ref={props.reference}>
-				<NavigationItems />
+				<NavigationItems navbarType={props.navbarType} />
 			</nav>
 		</header>
 	)

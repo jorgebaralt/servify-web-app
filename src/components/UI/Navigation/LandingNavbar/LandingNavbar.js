@@ -14,7 +14,7 @@ const landingNavbar = (props) => {
     return (
         <header className={navbarClasses.join(' ')} ref={props.reference}>
             <nav className={classes.DesktopOnly} onScroll={props.onScroll}>
-                <NagivationItems isNavbarTransparent={props.navbarTransparent}/>
+                <NagivationItems  navbarType={props.navbarType} isNavbarTransparent={props.navbarTransparent}/>
             </nav>
             <DrawerToggle 
                 drawerClass={classes.MobileOnly}
