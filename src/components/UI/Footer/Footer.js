@@ -30,7 +30,7 @@ const footer = (props) => {
                 <div className={classes.FooterWrapper}>
                     <div className={classes.LogoWrapper}><img className={classes.Logo} draggable='false' src={logo} alt='' /></div>
                     <div className={classes.NavLinks}>
-                        <NavLink activeClassName={classes.active} className={classes.NavLink} to='/'><span className={classes.Link}>Homepage</span></NavLink>
+                        <NavLink exact activeClassName={classes.active} className={classes.NavLink} to='/'><span className={classes.Link}>Homepage</span></NavLink>
                         <NavLink activeClassName={classes.active} className={classes.NavLink} to='/post/overview'><span className={classes.Link}>Post</span></NavLink>
                         <NavLink activeClassName={classes.active} className={classes.NavLink} to='/help'><span className={classes.Link}>Help</span></NavLink>
                         <NavLink activeClassName={classes.active} className={classes.NavLink} to='/support'><span className={classes.Link}>Support</span></NavLink>
