@@ -5,7 +5,7 @@ import Checkmark from './checkmark';
 import Typing from './typing';
 import Star from './Rating/star';
 import Currency from './Rating/currency';
-import ListStar from './Rating/listStar'
+import ListStar from './listStar'
 
 import BlackBorderlessLogo from '../images/servify-logos/blackborder-nobg';
 

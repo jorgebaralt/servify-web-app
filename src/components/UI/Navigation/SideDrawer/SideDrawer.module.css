@@ -38,7 +38,7 @@
     margin-bottom: 32px;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 650px) {
     .SideDrawerWrapper {
         display: none;
     }

@@ -36,11 +36,11 @@
     border-color: transparent !important;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 650px) {
     .NavigationItem {
         margin: 0;
         display: flex;
-        width: 22.5vw;
+        width: 17.5vw;
         max-width: 140px;
         align-items: center;
         justify-content: flex-start;

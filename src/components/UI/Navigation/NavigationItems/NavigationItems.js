@@ -17,6 +17,9 @@ const renderNavigationItems = (props) => {
 					<NavigationItem {...props} link="/post/overview" color="white">
 						Post a service
 					</NavigationItem>
+					<NavigationItem {...props} link="/services" color="white">
+						Services
+					</NavigationItem>
 					<NavigationItem {...props} link="/help" color="white">
 						Help
 					</NavigationItem>
@@ -49,8 +52,13 @@ const renderNavigationItems = (props) => {
 					<div className={classes.SpacingSmall}/>
 				</>
 			);
-
+		case '/services':
+			return (
+				<>
+				</>
+			);
 		default:
+			// do nothing
 	}
 };
 const nagivationItems = (props) => {

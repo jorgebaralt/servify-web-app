@@ -123,8 +123,8 @@ class Navbar extends PureComponent {
 	 *   Function decides which navbar to display according to the path
 	 */
 	decideNavbar = () => {
-		switch (this.props.location.pathname) {
-			case '/':
+		switch (true) {
+			case this.props.location.pathname === '/':
 				return (
 					<LandingNavbar
 						// passing reference from constructor
@@ -132,20 +132,25 @@ class Navbar extends PureComponent {
 						// Scroll Tracking Functionality if dependant on scroll then pass 'this.trackScrolling'
 						onScroll={() => { return }} // No functionality
 						// Passing Is Navbar Transparent functionality, if dependant on scroll then pass 'this.state.navbarTransparent'
-						// if never transparent then pass false, if always transparent then pass true
+						// if never transparent then pass false or pass nothing, if always transparent then pass true
 						isNavbarTransparent={true}
 						// SideDrawer and mobile props
 						drawerClass={classes.MobileOnly}
 						isOpen={this.state.isDrawerOpen}
-						click={this.sideDrawerToggleClick}
-					/>
+						click={this.sideDrawerToggleClick} />
 				);
-			case '/post/overview':
+			case this.props.location.pathname.includes('/services'): // Renders navbar for every address that has /services as root
 				return (
-                    <PostInfoNavbar reference={this.navbar} />
+                    <PostInfoNavbar 
+						reference={this.navbar} />
+				);
+			case this.props.location.pathname === '/post/overview':
+				return (
+                    <PostInfoNavbar 
+						reference={this.navbar} />
 				);
 			default:
-				return null;
+				// do nothing
 		}
 	};
 
@@ -160,7 +165,6 @@ class Navbar extends PureComponent {
 			<>
 				{/* Decide navbar to display */}
 				{this.decideNavbar()}
-
 				{/* ScrollToTopButton after scrolling */}
 				{this.state.showScrollToTop ? (
 					<ScrollToTopButton clicked={this.scrollToTop} />
