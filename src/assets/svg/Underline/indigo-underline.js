@@ -23,7 +23,7 @@ const indigoUnderline = (props) => {
                 <g>
                     <g>
                         <g>
-                            <use xlinkHref="#b6XFDCkjKV" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use>
+                            <use xlinkHref="#b6XFDCkjKV" opacity="1" floodColor="0" stroke="#000000" strokeWidth="1" strokeOpacity="1"></use>
                         </g>
                     </g>
                     <g>
@@ -33,7 +33,7 @@ const indigoUnderline = (props) => {
                                 <feComposite in2="SourceAlpha" operator="in"></feComposite>
                                 <feGaussianBlur stdDeviation="1"></feGaussianBlur>
                                 <feOffset dx="1" dy="1" result="afterOffset"></feOffset>
-                                <feFlood flood-color="#000000" flood-opacity="0.5"></feFlood>
+                                <feFlood floodColor="#000000" floodOpacity="0.5"></feFlood>
                                 <feComposite in2="afterOffset" operator="in"></feComposite>
                                 <feMorphology operator="dilate" radius="1"></feMorphology>
                                 <feComposite in2="SourceAlpha" operator="out"></feComposite>
@@ -41,7 +41,7 @@ const indigoUnderline = (props) => {
                             <path d="" id="e1PoA2F7t0" fill="none" stroke="white" filter="url(#shadow7530976)"></path>
                         </g>
                         <g>
-                            <use xlinkHref="#a2zN5jEn3Y" opacity="1" fill-opacity="0" stroke="#23bd99" stroke-width="3" stroke-opacity="1"></use>
+                            <use xlinkHref="#a2zN5jEn3Y" opacity="1" floodColor="0" stroke="#23bd99" strokeWidth="3" strokeOpacity="1"></use>
                         </g>
                     </g>
                     <g>
@@ -51,7 +51,7 @@ const indigoUnderline = (props) => {
                                 <feComposite in2="SourceAlpha" operator="in"></feComposite>
                                 <feGaussianBlur stdDeviation="1"></feGaussianBlur>
                                 <feOffset dx="1" dy="1" result="afterOffset"></feOffset>
-                                <feFlood flood-color="#000000" flood-opacity="0.5"></feFlood>
+                                <feFlood floodColor="#000000" floodOpacity="0.5"></feFlood>
                                 <feComposite in2="afterOffset" operator="in"></feComposite>
                                 <feMorphology operator="dilate" radius="1"></feMorphology>
                                 <feComposite in2="SourceAlpha" operator="out"></feComposite>
@@ -59,7 +59,7 @@ const indigoUnderline = (props) => {
                             <path d="" id="amGcG7iEd" fill="none" stroke="white" filter="url(#shadow8641298)"></path>
                         </g>
                         <g>
-                            <use xlinkHref="#adTh5VYD4" opacity="1" fill-opacity="0" stroke="#23bd99" stroke-width="4" stroke-opacity="1"></use>
+                            <use xlinkHref="#adTh5VYD4" opacity="1" floodColor="0" stroke="#23bd99" strokeWidth="4" strokeOpacity="1"></use>
                         </g>
                     </g>
                     <g>
@@ -69,7 +69,7 @@ const indigoUnderline = (props) => {
                                 <feComposite in2="SourceAlpha" operator="in"></feComposite>
                                 <feGaussianBlur stdDeviation="1"></feGaussianBlur>
                                 <feOffset dx="1" dy="1" result="afterOffset"></feOffset>
-                                <feFlood flood-color="#000000" flood-opacity="0.5"></feFlood>
+                                <feFlood floodColor="#000000" floodOpacity="0.5"></feFlood>
                                 <feComposite in2="afterOffset" operator="in"></feComposite>
                                 <feMorphology operator="dilate" radius="1"></feMorphology>
                                 <feComposite in2="SourceAlpha" operator="out"></feComposite>
@@ -77,7 +77,7 @@ const indigoUnderline = (props) => {
                             <path d="M201.68 7.98C111.08 10.58 46.52 8.75 8 2.5" id="c1VPZqw2yK" fill="none" stroke="white" filter="url(#shadow10649307)"></path>
                         </g>
                         <g>
-                            <use xlinkHref="#e22MqLEBeS" opacity="1" fill-opacity="0" stroke="#5f79c4" stroke-width="3" stroke-opacity="1"></use>
+                            <use xlinkHref="#e22MqLEBeS" opacity="1" floodColor="0" stroke="#5f79c4" strokeWidth="3" strokeOpacity="1"></use>
                         </g>
                     </g>
                     <g>
@@ -87,7 +87,7 @@ const indigoUnderline = (props) => {
                                 <feComposite in2="SourceAlpha" operator="in"></feComposite>
                                 <feGaussianBlur stdDeviation="1"></feGaussianBlur>
                                 <feOffset dx="1" dy="1" result="afterOffset"></feOffset>
-                                <feFlood flood-color="#000000" flood-opacity="0.5"></feFlood>
+                                <feFlood floodColor="#000000" floodOpacity="0.5"></feFlood>
                                 <feComposite in2="afterOffset" operator="in"></feComposite>
                                 <feMorphology operator="dilate" radius="1"></feMorphology>
                                 <feComposite in2="SourceAlpha" operator="out"></feComposite>
@@ -95,12 +95,12 @@ const indigoUnderline = (props) => {
                             <path d="" id="ajWoKafxC" fill="none" stroke="white" filter="url(#shadow10830854)"></path>
                         </g>
                         <g>
-                            <use xlinkHref="#d1gXrdbiCy" opacity="1" fill-opacity="0" stroke="#5f79c4" stroke-width="3" stroke-opacity="1"></use>
+                            <use xlinkHref="#d1gXrdbiCy" opacity="1" floodColor="0" stroke="#5f79c4" strokeWidth="3" strokeOpacity="1"></use>
                         </g>
                     </g>
                     <g>
                         <g>
-                            <use xlinkHref="#gDBLOo3rG" opacity="1" fill-opacity="0" stroke="#5f79c4" stroke-width="3" stroke-opacity="1"></use>
+                            <use xlinkHref="#gDBLOo3rG" opacity="1" floodColor="0" stroke="#5f79c4" strokeWidth="3" strokeOpacity="1"></use>
                         </g>
                     </g>
                     <g>
@@ -110,7 +110,7 @@ const indigoUnderline = (props) => {
                                 <feComposite in2="SourceAlpha" operator="in"></feComposite>
                                 <feGaussianBlur stdDeviation="1"></feGaussianBlur>
                                 <feOffset dx="1" dy="2" result="afterOffset"></feOffset>
-                                <feFlood flood-color="#000000" flood-opacity="0.5"></feFlood>
+                                <feFlood floodColor="#000000" floodOpacity="0.5"></feFlood>
                                 <feComposite in2="afterOffset" operator="in"></feComposite>
                                 <feMorphology operator="dilate" radius="1"></feMorphology>
                                 <feComposite in2="SourceAlpha" operator="out"></feComposite>
@@ -118,7 +118,7 @@ const indigoUnderline = (props) => {
                             <path d="M186.69 18.03C166.58 15.65 116.19 14.46 35.52 14.46" id="c1HttSrkJS" fill="none" stroke="white" filter="url(#shadow10649664)"></path>
                         </g>
                         <g>
-                            <use xlinkHref="#d2hjthTykG" opacity="1" fill-opacity="0" stroke="#5f79c4" stroke-width="3" stroke-opacity="1"></use>
+                            <use xlinkHref="#d2hjthTykG" opacity="1" floodColor="0" stroke="#5f79c4" strokeWidth="3" strokeOpacity="1"></use>
                         </g>
                     </g>
                     <g>
@@ -128,7 +128,7 @@ const indigoUnderline = (props) => {
                                 <feComposite in2="SourceAlpha" operator="in"></feComposite>
                                 <feGaussianBlur stdDeviation="1"></feGaussianBlur>
                                 <feOffset dx="1" dy="1" result="afterOffset"></feOffset>
-                                <feFlood flood-color="#000000" flood-opacity="0.5"></feFlood>
+                                <feFlood floodColor="#000000" floodOpacity="0.5"></feFlood>
                                 <feComposite in2="afterOffset" operator="in"></feComposite>
                                 <feMorphology operator="dilate" radius="1"></feMorphology>
                                 <feComposite in2="SourceAlpha" operator="out"></feComposite>
@@ -136,7 +136,7 @@ const indigoUnderline = (props) => {
                             <path d="" id="adPq55VDe" fill="none" stroke="white" filter="url(#shadow8915263)"></path>
                         </g>
                         <g>
-                            <use xlinkHref="#a1C3Tl4z88" opacity="1" fill-opacity="0" stroke="#23bd99" stroke-width="4" stroke-opacity="1"></use>
+                            <use xlinkHref="#a1C3Tl4z88" opacity="1" floodColor="0" stroke="#23bd99" strokeWidth="4" strokeOpacity="1"></use>
                         </g>
                     </g>
                 </g>

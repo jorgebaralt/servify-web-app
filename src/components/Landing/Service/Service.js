@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // CSS
 import classes from './Service.module.css';
-import StarsRating from '../../../components/UI/StarsRating/StarsRating';
+import Rating from '../../../components/UI/Rating/Rating';
 
 class Service extends Component  {
     render () {
@@ -27,14 +27,20 @@ class Service extends Component  {
                     {/* Title */}
                     <div className={classes.Title}>{this.props.title}</div>
                     {/* Price */}
-                    <div className={classes.Price}>{this.props.price}</div>
+                    <div className={classes.Price}>
+                        <span role="img" className={classes.RatingsWrapper}>
+                            {/* Price rating for easier interpretation */}
+                            <span className={classes.RatingsAvg}>Price</span>
+                            <Rating type='price' rating={this.props.priceRating} />
+                        </span>
+                    </div>
                     {/* Rating */}
                     <div>
                         {/* Average Rating */}
-                        <span role="img">
+                        <span role="img" className={classes.RatingsWrapper}>
                             {/* Rating Average times the total amount of stars for easier interpretation */}
                             <span className={classes.RatingsAvg}>{(this.props.ratingAvg*totalStarsRatingAmount).toFixed(2)}</span>
-                            <StarsRating rating={this.props.ratingAvg} amount={totalStarsRatingAmount}/>
+                            <Rating type='stars' rating={this.props.ratingAvg} amount={totalStarsRatingAmount}/>
                         </span>
                         {/* Total amount of Ratings */}
                         <span className={classes.RatingsAmount}>

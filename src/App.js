@@ -6,8 +6,11 @@ import { connect } from 'react-redux';
 import { mobileCreator } from './store/actions';
 // JSX
 import Layout from './hoc/Layout/Layout';
+import RouterScrollToTop from './hoc/RouterScrollToTop/RouterScrollToTop';
 import Landing from './containers/Landing/Landing';
 import PostOverview from './containers/PostOverview/PostOverview';
+import Services from './containers/Services/Services';
+import ServiceId from './containers/Services/ServiceId/ServiceId';
 
 class App extends Component {
 	
@@ -22,8 +25,11 @@ class App extends Component {
 	render() {
 		return (
 			<Layout>
+				<RouterScrollToTop />
 				<Switch>
 					<Route exact path="/post/overview" component={PostOverview} />
+					<Route exact path="/services/:id" component={ServiceId} />
+					<Route exact path="/services" component={Services} />
 					<Route exact path="/" component={Landing} />
 				</Switch>
 			</Layout>

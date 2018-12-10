@@ -17,7 +17,7 @@ const mountainMeadowUnderline = (props) => {
                 <g>
                     <g>
                         <g>
-                            <use xlinkHref="#b6XFDCkjKV" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use>
+                            <use xlinkHref="#b6XFDCkjKV" opacity="1" floodColor="0" stroke="#000000" strokeWidth="1" strokeOpacity="1"></use>
                         </g>
                     </g>
                     <g>
@@ -27,16 +27,16 @@ const mountainMeadowUnderline = (props) => {
                                 <feComposite in2="SourceAlpha" operator="in"></feComposite>
                                 <feGaussianBlur stdDeviation="1.41"></feGaussianBlur>
                                 <feOffset dx="1" dy="1" result="afterOffset"></feOffset>
-                                <feFlood flood-color="#021d17" flood-opacity="0.5"></feFlood>
+                                <feFlood floodColor="#021d17" floodOpacity="0.5"></feFlood>
                                 <feComposite in2="afterOffset" operator="in"></feComposite>
                                 <feMorphology operator="dilate" radius="1"></feMorphology>
                                 <feComposite in2="SourceAlpha" operator="out"></feComposite>
                             </filter>
                             <path d="M45.17 16.5C153.27 4.18 206.19 0.97 203.93 6.86C201.66 12.75 135.02 13.02 4 7.66" id="hDO2nCzzF" fill="none" stroke="white" filter="url(#shadow8138377)"></path>
                         </g>
-                        <use xlinkHref="#aoEHCql77" opacity="1" fill="#23bd99" fill-opacity="0"></use>
+                        <use xlinkHref="#aoEHCql77" opacity="1" fill="#23bd99" floodColor="0"></use>
                         <g>
-                            <use xlinkHref="#aoEHCql77" opacity="1" fill-opacity="0" stroke="#23bd99" stroke-width="5" stroke-opacity="1"></use>
+                            <use xlinkHref="#aoEHCql77" opacity="1" floodColor="0" stroke="#23bd99" strokeWidth="5" strokeOpacity="1"></use>
                         </g>
                     </g>
                 </g>

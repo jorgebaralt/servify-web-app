@@ -19,7 +19,7 @@ const cabaretUnderline = (props) => {
                 <g>
                     <g>
                         <g>
-                            <use xlinkHref="#b6XFDCkjKV" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use>
+                            <use xlinkHref="#b6XFDCkjKV" opacity="1" floodColor="0" stroke="#000000" strokeWidth="1" strokeOpacity="1"></use>
                         </g>
                     </g>
                     <g>
@@ -29,7 +29,7 @@ const cabaretUnderline = (props) => {
                                 <feComposite in2="SourceAlpha" operator="in"></feComposite>
                                 <feGaussianBlur stdDeviation="1"></feGaussianBlur>
                                 <feOffset dx="1" dy="1" result="afterOffset"></feOffset>
-                                <feFlood flood-color="#000000" flood-opacity="0.5"></feFlood>
+                                <feFlood floodColor="#000000" floodOpacity="0.5"></feFlood>
                                 <feComposite in2="afterOffset" operator="in"></feComposite>
                                 <feMorphology operator="dilate" radius="1"></feMorphology>
                                 <feComposite in2="SourceAlpha" operator="out"></feComposite>
@@ -37,7 +37,7 @@ const cabaretUnderline = (props) => {
                             <path d="M8.73 7.55C21.97 0.75 86.78 1.58 203.16 10.05" id="cuvHqXkn5" fill="none" stroke="white" filter="url(#shadow12775770)"></path>
                         </g>
                         <g>
-                            <use xlinkHref="#e2CTDBi7bz" opacity="1" fill-opacity="0" stroke="#d84768" stroke-width="2" stroke-opacity="1"></use>
+                            <use xlinkHref="#e2CTDBi7bz" opacity="1" floodColor="0" stroke="#d84768" strokeWidth="2" strokeOpacity="1"></use>
                         </g>
                     </g>
                     <g>
@@ -47,7 +47,7 @@ const cabaretUnderline = (props) => {
                                 <feComposite in2="SourceAlpha" operator="in"></feComposite>
                                 <feGaussianBlur stdDeviation="1"></feGaussianBlur>
                                 <feOffset dx="1" dy="1" result="afterOffset"></feOffset>
-                                <feFlood flood-color="#000000" flood-opacity="0.5"></feFlood>
+                                <feFlood floodColor="#000000" floodOpacity="0.5"></feFlood>
                                 <feComposite in2="afterOffset" operator="in"></feComposite>
                                 <feMorphology operator="dilate" radius="1"></feMorphology>
                                 <feComposite in2="SourceAlpha" operator="out"></feComposite>
@@ -55,12 +55,12 @@ const cabaretUnderline = (props) => {
                             <path d="M111.67 9.2C36.75 11.61 2.44 11.06 8.73 7.55" id="a5FujJ6tW" fill="none" stroke="white" filter="url(#shadow6445638)"></path>
                         </g>
                         <g>
-                            <use xlinkHref="#a5NBaZN2E" opacity="1" fill-opacity="0" stroke="#d84768" stroke-width="2" stroke-opacity="1"></use>
+                            <use xlinkHref="#a5NBaZN2E" opacity="1" floodColor="0" stroke="#d84768" strokeWidth="2" strokeOpacity="1"></use>
                         </g>
                     </g>
                     <g>
                         <g>
-                            <use xlinkHref="#b3XXgroJP" opacity="1" fill-opacity="0" stroke="#d84768" stroke-width="2" stroke-opacity="1"></use>
+                            <use xlinkHref="#b3XXgroJP" opacity="1" floodColor="0" stroke="#d84768" strokeWidth="2" strokeOpacity="1"></use>
                         </g>
                     </g>
                 </g>

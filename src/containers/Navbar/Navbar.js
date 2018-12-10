@@ -130,7 +130,7 @@ class Navbar extends PureComponent {
 						// passing reference from constructor
 						reference={this.navbar}
 						// Scroll Tracking Functionality if dependant on scroll then pass 'this.trackScrolling'
-						onScroll={false}
+						onScroll={() => { return }} // No functionality
 						// Passing Is Navbar Transparent functionality, if dependant on scroll then pass 'this.state.navbarTransparent'
 						// if never transparent then pass false, if always transparent then pass true
 						isNavbarTransparent={true}

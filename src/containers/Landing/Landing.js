@@ -78,49 +78,49 @@ class Landing extends Component {
                             <Service
                                 header='Home Services'
                                 title='A Random Service'
-                                price='$100.0'
+                                priceRating='0.05'
                                 ratingAvg={0.97}
                                 ratingAmount='1293'
                                 image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                             <Service
                                 header='Plumbing'
                                 title='A Toilet'
-                                price='$100.0'
+                                priceRating='0.66'
                                 ratingAvg={0.52}
                                 ratingAmount='1537'
                                 image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                             <Service
                                 header='Plumbing'
                                 title='A Toilet'
-                                price='$100.0'
+                                priceRating='0.23'
                                 ratingAvg={0.31}
                                 ratingAmount='1537'
                                 image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                             <Service
                                 header='Plumbing'
                                 title='A Toilet'
-                                price='$100.0'
+                                priceRating='0.88'
                                 ratingAvg={0.65}
                                 ratingAmount='1537'
                                 image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                             <Service
                                     header='Plumbing'
                                     title='A Toilet'
-                                    price='$100.0'
+                                    priceRating='0.35'
                                     ratingAvg={0.17}
                                     ratingAmount='1537'
                                     image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                             <Service
                                         header='Plumbing'
                                         title='A Toilet'
-                                        price='$100.0'
+                                        priceRating='0.57'
                                         ratingAvg={0.17}
                                         ratingAmount='1537'
                                         image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                             <Service
                                         header='Plumbing'
                                         title='A Toilet'
-                                        price='$100.0'
+                                        priceRating='0.75'
                                         ratingAvg={0.17}
                                         ratingAmount='1537'
                                         image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>

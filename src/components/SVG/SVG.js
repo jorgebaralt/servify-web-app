@@ -35,6 +35,9 @@ class SVGComponent extends PureComponent {
             case 'star':
                 svg = <SVG.Star {...this.props} />;
                 break;
+            case 'currency':
+                svg = <SVG.Currency {...this.props} />;
+                break;
             case 'black-borderless-logo':
                 svg = <SVG.BlackBorderlessLogo {...this.props} />;
                 break;

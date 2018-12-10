@@ -8,11 +8,11 @@ import Footer from '../../components/UI/Footer/Footer';
 
 class Layout extends Component {
 	render() {
-		const footer =
-			this.props.location.pathname === '/' ||
-			this.props.location.pathname === '/post/overview' ? (
-				<Footer />
-			) : null;
+		// const footer =
+		// 	this.props.location.pathname === '/' ||
+		// 	this.props.location.pathname === '/post/overview' ? (
+		// 		<Footer />
+		// 	) : null;
 		return (
 			<>
 				<Navbar />

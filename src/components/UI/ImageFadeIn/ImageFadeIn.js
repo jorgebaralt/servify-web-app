@@ -57,15 +57,15 @@ class ImageFadeIn extends Component {
                         alt=''
                         sizes="100vw"
                         src={this.state.src}
-                        srcset={this.state.srcset}
+                        srcSet={this.state.srcset}
                         className={imgClasses.join(' ')}
-                        onload={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 1000))} /> :
+                        onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 1000))} /> :
                     <img
                         ref={this.myImage}
                         alt=''
                         src={this.state.src}
                         className={imgClasses.join(' ')}
-                        onload={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 1000))} />
+                        onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 1000))} />
                 }
             </div>
             

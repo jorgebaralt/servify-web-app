@@ -2,7 +2,7 @@ import React from 'react';
 // CSS
 import classes from './Star.module.css';
 // JSX
-import SVG from '../../../SVG/SVG';
+import SVG from '../../../../SVG/SVG';
 
 const star = (props) => {
     return (
