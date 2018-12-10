@@ -18,6 +18,7 @@ import Card from '../../components/Landing/Card/Card';
 import Service from '../../components/Landing/Service/Service';
 import Featured from '../../components/Landing/Featured/Featured';
 import AnchorLink from '../../components/UI/AnchorLink/AnchorLink';
+import LearnMore from '../../components/Landing/LearnMore/LearnMore';
 
 class Landing extends Component {
 
@@ -146,6 +147,7 @@ class Landing extends Component {
                             <AnchorLink text='Show more Servify featured services' href='/' />
                         </div>
                     </div>
+                    <LearnMore />
                     <br />
                     <h1>All Categories</h1>
                     <ul className={classes.Categories}>

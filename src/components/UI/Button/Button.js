@@ -1,6 +1,8 @@
 import React from 'react';
-
+// CSS
 import classes from './Button.module.css';
+
+// TODO Refactor ButtonFilled and Button into one
 
 const button = (props) => {
 
@@ -15,6 +17,9 @@ const button = (props) => {
     }
     if (props.type === 'primary') {
         buttonClass.push(classes.Primary)
+    }
+    if (props.type === 'default') {
+        buttonClass.push(classes.Default)
     }
     return (
         <button

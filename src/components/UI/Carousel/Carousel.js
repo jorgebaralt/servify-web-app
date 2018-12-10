@@ -63,7 +63,7 @@ class Carousel extends Component {
      */
     setSlidesToShow = () => {
         // Pointer protection
-        // if (!this.mySlider) { return; }
+        if (!this.mySlider) { return; }
         // For every object containing the breakpoints in the responsive array set and sent to the slider
         for (let breakpoint in this.mySlider.props.responsive) {
             /**
@@ -85,7 +85,7 @@ class Carousel extends Component {
     state = {
         activeSlide: 0,
         activeSlide2: 0,
-        rows: 2,
+        rows: this.props.children.length >= 8 ? 2 : 1,
         slidesToShow: this.props.slidesToShow ? this.props.slidesToShow : 4, // Default, if on mobile or smaller screens it will be reapplied
         responsive: this.responsiveSlider(),
     };
