@@ -28,13 +28,9 @@ class SearchBar extends Component {
     }
 
     removeFocusWithin () {
-        // Dealying in case a result was clicked
-        // TODO Find a better solution
-        setTimeout( ()=> {
-            this.setState(() => {
-                return { bIsFocused: false }
-            });
-        }, 100);
+        this.setState(() => {
+            return { bIsFocused: false }
+        });
     }
 
     inputChangeHandler = (event) => {
@@ -132,7 +128,15 @@ class SearchBar extends Component {
                                 </small>
                             </div>
                             <ul className={classes.SearchResultsWrapper}>
-                                <NavLink to='/'>
+                                <NavLink 
+                                to='/'
+                                /**
+                                * onMouseDown event fires before onBlur event on input. It calls event.preventDefault() to
+                                * prevent onBlur from being called, and doesn't prevent the navLink click from happening, 
+                                * this guarantees that the NavLink will redirect on click without having to use SetTimeout 
+                                * or any other hack.
+                                 */
+                                onMouseDown={event => event.preventDefault()}>
                                     <li aria-selected="false" 
                                         id="Result__option__option-0" 
                                         role="option" 
