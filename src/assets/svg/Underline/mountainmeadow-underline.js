@@ -8,7 +8,8 @@ const mountainMeadowUnderline = (props) => {
             preserveAspectRatio="xMidYMid meet" 
             viewBox="0 0 210 20" 
             width="210" 
-            height="20">
+            height="20"
+            style={{fill: 'transparent'}}>
             <defs>
                 <path d="" id="b6XFDCkjKV"></path>
                 <path d="M45.17 16.5C153.27 4.18 206.19 0.97 203.93 6.86C201.66 12.75 135.02 13.02 4 7.66" id="aoEHCql77"></path>

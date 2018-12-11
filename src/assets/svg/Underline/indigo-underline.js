@@ -8,7 +8,8 @@ const indigoUnderline = (props) => {
             preserveAspectRatio="xMidYMid meet" 
             viewBox="0 0 210 20" 
             width="210" 
-            height="20">
+            height="20"
+            style={{fill: 'transparent'}}>
             <defs>
                 <path d="" id="b6XFDCkjKV"></path>
                 <path d="" id="a2zN5jEn3Y"></path>

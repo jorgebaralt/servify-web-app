@@ -33,7 +33,7 @@
     display: none;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 743px) {
     .Navbar{
         padding-right: 20px;
     }

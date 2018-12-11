@@ -8,7 +8,8 @@ const curiousBlueUnderline = (props) => {
             preserveAspectRatio="xMidYMid meet" 
             viewBox="0 0 210 20" 
             width="210" 
-            height="20">
+            height="20"
+            style={{fill: 'transparent'}}>
             <defs>
                 <path d="" id="b6XFDCkjKV"></path>
                 <path d="M210 6.92C169.78 10.56 99.78 8.75 0 1.5" id="asM9TH0a6"></path>

@@ -8,7 +8,7 @@ const searchNavbar = (props) => {
 	return (
 		<header className={classes.Navbar}>
 			<nav ref={props.reference}>
-				<NavigationItems navbarType={props.navbarType} />
+				<NavigationItems className={classes.DesktopOnly} navbarType={props.navbarType} />
 			</nav>
 		</header>
 	)

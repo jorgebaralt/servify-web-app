@@ -21,6 +21,7 @@ const navigationItem = (props) => {
 		<li className={navItemClass.join(' ')}>
 			<NavLink
 				// activeClassName={navLinkClasses.join(' ')}
+				className={props.className} // Desktop only
 				exact={props.exact}
 				to={props.link}
 				onClick={props.clicked}

@@ -8,6 +8,28 @@ body {
 
 /* Common */
 
+input, button, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button, input {
+  line-height: normal;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
 [type="text"], [type="password"], [type="search"], [type="email"], [type="url"], [type="number"], [type="tel"], textarea, select, .input-prefix, .input-suffix {
   display: block;
   padding: 8px 10px;
@@ -28,4 +50,30 @@ body {
   border-radius: 2px;
   background-color: #fff;
   color: #484848;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+}
+
+label {
+  display: block;
+  padding-top: 9px;
+  padding-bottom: 8px;
+}
+
+label, input, textarea, select, input[type="radio"], input[type="checkbox"], .input-prefix, .input-suffix {
+  line-height: normal;
+}
+
+*:focus {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
 }

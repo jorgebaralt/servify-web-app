@@ -7,6 +7,7 @@ import NavigationItem from './NagivationItem/NagivationItem.js';
 import ButtonFilled from '../../ButtonFilled/ButtonFilled';
 // Logo
 import servifyLogo from '../../../../assets/images/servify-logo-96x96.png';
+import SearchBar from '../SearchBar/SearchBar';
 
 const renderNavigationItems = (props) => {
 	switch (props.navbarType) {
@@ -15,7 +16,7 @@ const renderNavigationItems = (props) => {
 				<>
 					<div className={classes.Spacing} />
 					<NavigationItem {...props} link="/post/overview" color="white">
-						Post a service
+						Post
 					</NavigationItem>
 					<NavigationItem {...props} link="/services" color="white">
 						Services
@@ -55,20 +56,18 @@ const renderNavigationItems = (props) => {
 		case 'SearchNavbar':
 			return (
 				<>
+					<SearchBar />
 					<div className={classes.Spacing} />
-					<NavigationItem {...props} link="/post/overview" >
-						Post a service
+					<NavigationItem className={props.className} {...props} link="/post/overview" >
+						Post
 					</NavigationItem>
-					<NavigationItem {...props} link="/services" >
-						Services
-					</NavigationItem>
-					<NavigationItem {...props} link="/help" >
+					<NavigationItem className={props.className} {...props} link="/help" >
 						Help
 					</NavigationItem>
-					<NavigationItem {...props} link="/signup" >
+					<NavigationItem className={props.className} {...props} link="/signup" >
 						Sign up
 					</NavigationItem>
-					<NavigationItem {...props} link="/login" >
+					<NavigationItem className={props.className} {...props} link="/login" >
 						Sign in
 					</NavigationItem>
 				</>
@@ -95,7 +94,6 @@ const nagivationItems = (props) => {
 				<img src={servifyLogo} alt="" />
 			</NavLink>
 			{renderNavigationItems(props)}
-			<div className={classes.SpacingSmall} />
 		</ul>
 	);
 };

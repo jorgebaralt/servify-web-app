@@ -8,7 +8,8 @@ const porscheUnderline = (props) => {
             preserveAspectRatio="xMidYMid meet" 
             viewBox="0 0 210 20" 
             width="210" 
-            height="20">
+            height="20"
+            style={{fill: 'transparent'}}>
             <defs>
                 <path d="M204.08 9.74L5.92 3.76" id="afkMHwf1"></path>
                 <path d="M204.08 9.74L5.92 3.76" id="a1OZ0VaYdH"></path>
