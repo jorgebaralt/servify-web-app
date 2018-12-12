@@ -44,13 +44,6 @@ class SearchBar extends Component {
         });
     }
 
-    // componentDidMount () {
-    //     this.myList.current.style.width = this.mySearchBar.current.offsetWidth;
-    //     console.log(this.myList.current.style.width, this.mySearchBar.current.getBoundingClientRect().width)
-    //     console.log(this.mySearchBar.current.offsetWidth)
-    //     console.log(this.myList.current.style)
-    // }
-
     render () {
         const searchBarContainerClasses = [classes.SearchBarContainer];
         const ListClasses = [classes.List];
@@ -128,6 +121,7 @@ class SearchBar extends Component {
                                 </small>
                             </div>
                             <ul className={classes.SearchResultsWrapper}>
+                                {/* PLACEHOLDERS */}
                                 <NavLink 
                                 to='/'
                                 /**
