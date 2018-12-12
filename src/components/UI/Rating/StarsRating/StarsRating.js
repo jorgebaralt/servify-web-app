@@ -45,19 +45,19 @@ const starsRating = (props) => {
                  * character string.
                  */
                 const rating = (props.rating*amountOfStars - (i-1)) * 100 + '%';
-                stars.push(<Star key={i} fill={rating}/>);
+                stars.push(<Star {...props} key={i} fill={rating}/>);
                 /**
                  * Continue to break the current loop and return the rest of the stars with 0% of fill, if any.
                  */
                 continue;
             }
             // Stars with 100% of fill if we have not reached the last star.
-            stars.push(<Star key={i} />);
+            stars.push(<Star {...props} key={i} />);
             // Continue to break the current loop and avoid returning extra stars.
             continue;
         }
         // Stars with 0% of fill.
-        stars.push(<Star key={i} fill={'0%'} />);
+        stars.push(<Star {...props} key={i} fill={'0%'} />);
     }
     return (
         <span className={classes.Stars}>

@@ -1,4 +1,5 @@
 .ScrollToTopButton {
+    box-sizing: content-box;
     z-index: 5;
     position: fixed;
     cursor: pointer;
@@ -18,6 +19,7 @@
 
 .ScrollToTopButton span {
     display: block;
+    box-sizing: content-box;
     width: 50%;
     height: 50%;
     border-left: 2px solid rgb(255, 112, 67);
@@ -27,6 +29,7 @@
 .ScrollToTopButton span:before {
     content: '';
     display: block;
+    box-sizing: content-box;
     width: 100%;
     height: 100%;
     border-left: 2px solid rgb(255, 112, 67);

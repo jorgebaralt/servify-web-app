@@ -6,7 +6,7 @@ import SVG from '../../../../SVG/SVG';
 
 const star = (props) => {
     return (
-        <span className={classes.Star}><SVG svg='star' fill={props.fill} /></span>
+        <span className={classes.Star}><SVG svg='star' {...props} /></span>
     );
 }
 

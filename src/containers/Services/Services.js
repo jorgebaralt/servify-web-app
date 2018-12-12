@@ -5,7 +5,7 @@ import classes from './Services.module.css'
 class Services extends Component {
     render () {
         return (
-            <div>
+            <div className={classes.ServicesContainer}>
                 Services
             </div>
         )

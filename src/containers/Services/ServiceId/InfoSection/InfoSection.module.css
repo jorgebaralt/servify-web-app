@@ -1,0 +1,109 @@
+.Container {
+    display: flex;
+    flex-direction: row;
+}
+
+.InfoWrapper {
+    min-width: 0px;
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+    margin-right: 40px;
+}
+
+.Header {
+    margin-bottom: 30px;
+    font-weight: 600;
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 18px;
+    line-height: 30px;
+    letter-spacing: normal;
+    color: #484848;
+}
+
+.InfoContainer {
+    margin-bottom: 0;
+    white-space: pre-line;
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: normal;
+    color: #484848;
+    font-weight: normal;
+}
+
+.Info {
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: normal;
+    color: #484848;
+    font-weight: normal;
+}
+
+.LogoWrapper {
+    flex: 1;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.LogoContainer {
+    margin-bottom: 8px;
+}
+
+.Logo {
+    height: 72px;
+    width: 72px;
+    display: inline-block;
+}
+
+.Logo img {
+    border: 0;
+    vertical-align: middle;
+    background-color: #D8D8D8;
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #ffffff;
+    vertical-align: middle;
+    overflow: hidden;
+    background-color: var(--color-accent-light-gray, #D8D8D8);
+    border-radius: var(--border-profile-photo-border-radius, 50%);
+    border-width: var(--border-profile-photo-border-width, 2px);
+    border-color: var(--color-white, #ffffff);
+}
+
+.Name {
+    font-weight: 600;
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: normal;
+    color: #484848;
+}
+
+.Contact {
+    color: rgb(255, 112, 67);
+    font: inherit;
+    text-decoration: none;
+    appearance: none;
+    background: transparent;
+    border: 0px;
+    cursor: pointer;
+    margin: 0px;
+    padding: 0px;
+    user-select: auto;
+    text-align: center;
+}
+
+.Contact:hover {
+    text-decoration: underline;
+    color: var(--color-text-link-hover, rgb(255, 112, 67));
+}

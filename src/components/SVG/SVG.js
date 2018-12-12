@@ -41,6 +41,18 @@ class SVGComponent extends PureComponent {
             case 'black-borderless-logo':
                 svg = <SVG.BlackBorderlessLogo {...this.props} />;
                 break;
+            case 'share':
+                svg = <SVG.Share {...this.props} />;
+                break;
+            case 'favorite':
+                svg = <SVG.Favorite {...this.props} />;
+                break;
+            case 'location-pin':
+                svg = <SVG.LocationPin {...this.props} />;
+                break;
+            case 'chat':
+                svg = <SVG.Chat {...this.props} />;
+                break;
             case 'underline':
                 svg = <div style={this.props.style}>
                         {this.randomUnderline(Underlines)(this.props)}

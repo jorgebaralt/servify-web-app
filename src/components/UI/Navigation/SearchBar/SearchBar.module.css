@@ -38,6 +38,10 @@
 	}
 }
 
+.SearchBarContainer {
+    overflow: hidden;
+}
+
 @media (min-width: 744px) {
     .SearchBarContainer {
         width: 100%;
@@ -152,7 +156,7 @@
     padding: 0px;
     width: 100%;
     text-overflow: ellipsis;
-    font-weight: 6  00;
+    font-weight: 600;
     font-size: 17px;
 }
 
@@ -209,6 +213,7 @@
     padding-top: 8px;
     transition: background-color 100ms linear, visibility linear 100ms, box-shadow linear 100ms;
     visibility: hidden; /*TODO Change to show*/
+    z-index: 10;
 }
 
 @media (max-width: 743px) {

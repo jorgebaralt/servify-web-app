@@ -1,0 +1,200 @@
+.ServiceContainer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+}
+
+.GalleryWrapper {
+    align-items: center;
+    width: calc(42.2222% - 5.333333333333333px);
+    flex: none;
+    /* padding-right: 24px; */
+    padding-right: 36px;
+    display: block;
+    padding: 0px;
+}
+
+.GalleryContainer {
+    position: sticky;
+    max-width: 100%;
+    top: 12px;
+    /* margin-top: 12px; */
+    margin-left: 12px;
+    margin-right: 24px;
+    /* Placeholders */
+    background: red;
+    width: 100%;
+    height: 100px;
+}
+
+.DescriptionContainer {
+    position: relative;
+    min-width: 0px;
+    width: 100%;
+    margin-left: 24px;
+    margin-right: 12px;
+}
+
+.HeaderContent {
+    width: 80%;
+}
+
+.CategoryContainer {
+    text-transform: uppercase;
+}
+
+.Category {
+    user-select: none;
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: normal;
+    color: #484848;
+    font-weight: 600;
+}
+
+.TitleContainer {
+    margin-bottom: 14px;
+}
+
+.Title {
+    font-weight: 600;
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 46px;
+    line-height: 52px;
+    letter-spacing: normal;
+    color: #484848;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.Title h1 {
+    color: inherit;
+    font-size: 1em;
+    font-weight: inherit;
+    line-height: inherit;
+    margin: 0px;
+    padding: 0px;
+}
+
+.ShareButtons {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+.Share {
+    margin-right: 6px;
+}
+
+.ShareButton {
+    cursor: pointer;
+    background-color: transparent;
+    display: block;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+}
+
+.SeparatorWrapper {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.Separator {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #EBEBEB;
+    border-bottom-width: var(--border-rule-border-width, 1px);
+    border-bottom-color: var(--color-divider, #EBEBEB);
+}
+
+.ReviewsWrapper {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.ReviewsSeparator {
+    position: relative;
+    width: 100vw;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    left: 50%;
+    right: 50%;
+}
+
+.ReviewsSeparatorLine {
+    margin-top: 55px;
+    margin-bottom: 55px;
+}
+
+.ReviewsSeparatorLine div {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #EBEBEB;
+    border-bottom-width: var(--border-rule-border-width, 1px);
+    border-bottom-color: var(--color-divider, #EBEBEB);
+}
+
+.ReviewsContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.RatingsWrapper {
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    width: calc(33.3333% - 5.33333px);
+    padding-right: 24px;
+    display: block;
+    flex: 0 0 auto;
+}
+
+.RatingsContainer {
+    max-width: 360px;
+    position: sticky;
+    top: 48px;
+}
+
+.RatingsContainer section {
+    max-width: 100%;
+}
+
+.RatingsHeader {
+    font-weight: 600;
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: normal;
+    color: #484848;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.Reviews {
+    color: inherit;
+    font-size: 1em;
+    font-weight: inherit;
+    line-height: inherit;
+    margin: 0px;
+    padding: 0px;
+}
+
+.RatingAvg {
+    overflow-wrap: break-word;
+    font-size: 18px;
+    line-height: 30px;
+    letter-spacing: normal;
+    color: rgb(72, 72, 72);
+    font-weight: 600;
+    margin: 0px;
+    margin-right: 10px;
+}

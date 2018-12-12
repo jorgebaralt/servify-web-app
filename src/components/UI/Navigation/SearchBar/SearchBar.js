@@ -13,6 +13,11 @@ class SearchBar extends Component {
 
     state = {
         bIsFocused: false,
+        myList: {
+            width: null,
+            top: null,
+            right: null
+        },
         searchBar: {
             inputId: 'SearchBar_Input',
             description: 'SearchBar_Description',
@@ -33,6 +38,18 @@ class SearchBar extends Component {
         });
     }
 
+    setListDimensions () {
+        this.setState( () => {
+            return { 
+                myList: {
+                    width: this.mySearchBar.current.offsetWidth,
+                    top: this.mySearchBar.current.offsetHeight + this.mySearchBar.current.offsetTop,
+                    right: document.body.getBoundingClientRect().right - this.mySearchBar.current.getBoundingClientRect().right,
+                } 
+            }
+        });
+    }
+
     inputChangeHandler = (event) => {
         event.preventDefault();
         const updatedSearchBar = {
@@ -42,6 +59,22 @@ class SearchBar extends Component {
         this.setState({
             searchBar: updatedSearchBar
         });
+    }
+
+    componentDidMount () {
+        this.setListDimensions();
+        // adding event listener
+        window.onresize = () => {
+            this.setListDimensions()
+        };
+        
+    }
+
+    componentWillUnmount () {
+        // removing event listener
+        window.onresize = () => {
+            return;
+        };
     }
 
     render () {
@@ -88,12 +121,13 @@ class SearchBar extends Component {
                                                             role="combobox"
                                                             aria-autocomplete="list" 
                                                             aria-describedby={this.state.searchBar.description}
+                                                            aria-controls={this.state.searchBar.listId}
                                                             aria-expanded="false" 
                                                             autoComplete="off" 
                                                             autoCorrect="off" 
                                                             spellCheck="false" 
                                                             id={this.state.searchBar.inputId} 
-                                                            name="query" 
+                                                            name="services_query" 
                                                             placeholder="Search" 
                                                             value={this.state.searchBar.value}  />
                                                     </div>
@@ -112,6 +146,11 @@ class SearchBar extends Component {
                 <ul ref={this.myList}
                     id={this.state.searchBar.listId}
                     role="listbox" 
+                    style={{
+                        width: this.state.myList.width,
+                        top: this.state.myList.top, 
+                        right: this.state.myList.right
+                    }}
                     className={ListClasses.join(' ')}>
                     <div className={RecentSearchesWrapperClasses.join(' ')}>
                         <li className={classes.RecentSearchesContainer}>
@@ -148,7 +187,7 @@ class SearchBar extends Component {
                                 <li aria-selected="false" 
                                     id="Result__option__option-1" 
                                     role="option" 
-                                    tabindex="-1" 
+                                    tabIndex="-1" 
                                     className={classes.ResultWrapper}>
                                     <div className={classes.PinWrapper}>
                                         <span className={classes.Pin} role='img' aria-label='service' aria-hidden="true">&#x2699;</span>
@@ -163,7 +202,7 @@ class SearchBar extends Component {
                                 <li aria-selected="false" 
                                     id="Result__option-2" 
                                     role="option" 
-                                    tabindex="-1" 
+                                    tabIndex="-1" 
                                     className={classes.ResultWrapper}>
                                     <div className={classes.PinWrapper}>
                                         <span className={classes.Pin} role='img' aria-label='service' aria-hidden="true">&#x2699;</span>
