@@ -49,10 +49,10 @@ class LearnMore extends Component {
     }
 
     render () {
-        const price = <span key='price'>{this.props.price ? this.props.price : '$XXXX'}</span>;
-        let offer = ['Earn up to ', price, '/month by hosting your services in Servify!'];
+        const earnMoney = <span key='price'>Earn money</span>;
+        let offer = [earnMoney, ' by hosting your services in Servify!'];
         if (this.state.state && this.state.city) {
-            offer = ['Earn up to ', price, `/month by hosting your services near ${this.state.city},  ${this.state.state}`];
+            offer = [earnMoney, ` by hosting your services near ${this.state.city},  ${this.state.state}`];
         }
         return (
             <div className={classes.Wrapper}>

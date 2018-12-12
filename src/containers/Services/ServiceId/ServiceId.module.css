@@ -120,21 +120,20 @@
     margin: 0 auto;
 }
 
-.ReviewsSeparator {
+.SectionSeparator {
     position: relative;
-    width: 100vw;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    width: 100%;
+    overflow: hidden;
     left: 50%;
-    right: 50%;
+    transform: translateX(-50%);
 }
 
-.ReviewsSeparatorLine {
+.SectionSeparatorLine {
     margin-top: 55px;
     margin-bottom: 55px;
 }
 
-.ReviewsSeparatorLine div {
+.SectionSeparatorLine div {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: #EBEBEB;
@@ -197,4 +196,59 @@
     font-weight: 600;
     margin: 0px;
     margin-right: 10px;
+}
+
+.ReviewsWrapper {
+    position: relative;
+}
+
+.SimilarServices {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+}
+
+.ServicesWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: calc(33.3333% - 5.3333px);
+    flex: none;
+    padding-right: 12px;
+    margin-right: 12px;
+}
+
+.ServicesContainer {
+    max-width: 320px;
+    font-weight: 600;
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 34px;
+    line-height: 39px;
+    letter-spacing: normal;
+    color: #484848;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.ServicesContainer h1 {
+    color: inherit;
+    font-size: 1em;
+    font-weight: inherit;
+    line-height: inherit;
+    margin: 0px;
+    padding: 0px;
+}
+
+.CarouselWrapper {
+    min-width: 0px;
+    width: 100%;
+    padding: 30px;
+    height: 100%;
+}
+
+.CarouselContainer {
+    margin-top: -24px;
+    margin-bottom: -48px;
 }

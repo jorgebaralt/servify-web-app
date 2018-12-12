@@ -6,6 +6,9 @@ import SVG from '../../../components/SVG/SVG';
 import InfoPoint from './InfoPoint/InfoPoint';
 import InfoSection from './InfoSection/InfoSection';
 import Rating from '../../../components/UI/Rating/Rating';
+import Review from './Review/Review';
+import Carousel from '../../../components/UI/Carousel/Carousel';
+import Service from '../../../components/Landing/Service/Service'
 
 class ServiceId extends Component {
     render () {
@@ -51,22 +54,78 @@ class ServiceId extends Component {
                         </InfoSection>
                     </div>
                 </div>
+                <div className={classes.SectionSeparator}><div className={classes.SectionSeparatorLine}><div/></div></div>
                 <div className={classes.ReviewsWrapper}>
-                    <div className={classes.ReviewsSeparator}><div className={classes.ReviewsSeparatorLine}><div/></div></div>
                     <div className={classes.ReviewsContainer}>
                         <div className={classes.RatingsWrapper}>
                             <div className={classes.RatingsContainer}>
                                 <section>
                                     <div className={classes.RatingsHeader}> 
                                         {/* TODO Make dynamic */}
-                                        <h1 tabIndex='-1' className={classes.Reviews}>8 reviews from people who used this service</h1>
+                                        <h1 tabIndex='-1' className={classes.Reviews}>8 total reviews from people who used this service</h1>
                                     </div>
                                 </section>
-                                <span className={classes.RatingAvg}>5.0</span><Rating height={'17.5px'} width={'17.5px'} type='stars' />
+                                <span className={classes.RatingAvg}>5.0</span>
+                                <Rating height={'17.5px'} width={'17.5px'} type='stars' />
                             </div>
+                        </div>
+                        <div className={classes.ReviewsWrapper}>
+                            <Review />
+                            <Review />
+                            <Review />
                         </div>
                     </div>
                 </div>
+                <div className={classes.SectionSeparator}><div className={classes.SectionSeparatorLine}><div/></div></div>
+                <div className={classes.SimilarServices}>
+                    <div className={classes.ServicesWrapper}>
+                        <div className={classes.ServicesContainer}>
+                            <h1 tabIndex='-1'>Similar experiences near you</h1>
+                        </div>
+                    </div>
+                    <div className={classes.CarouselWrapper}>
+                        <div className={classes.CarouselContainer}>
+                            <Carousel>
+                                <Service
+                                            header='Plumbing'
+                                            title='A Toilet'
+                                            priceRating='0.75'
+                                            ratingAvg={0.17}
+                                            ratingAmount='1537'
+                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                <Service
+                                            header='Plumbing'
+                                            title='A Toilet'
+                                            priceRating='0.75'
+                                            ratingAvg={0.17}
+                                            ratingAmount='1537'
+                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                <Service
+                                            header='Plumbing'
+                                            title='A Toilet'
+                                            priceRating='0.75'
+                                            ratingAvg={0.17}
+                                            ratingAmount='1537'
+                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                <Service
+                                            header='Plumbing'
+                                            title='A Toilet'
+                                            priceRating='0.75'
+                                            ratingAvg={0.17}
+                                            ratingAmount='1537'
+                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                <Service
+                                            header='Plumbing'
+                                            title='A Toilet'
+                                            priceRating='0.75'
+                                            ratingAvg={0.17}
+                                            ratingAmount='1537'
+                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                            </Carousel>
+                        </div>
+                    </div>
+                </div>
+                <div className={classes.SectionSeparator}><div className={classes.SectionSeparatorLine}><div/></div></div>
             </>
         );
     }
