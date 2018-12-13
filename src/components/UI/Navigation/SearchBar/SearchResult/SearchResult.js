@@ -2,11 +2,11 @@ import React from 'react';
 // CSS
 import classes from './SearchResult.module.css'
 // JSX
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const searchResult = (props) => {
     return (
-        <NavLink 
+        <Link 
             to='/'
             /**
             * onMouseDown event fires before onBlur event on input. It calls event.preventDefault() to
@@ -27,7 +27,7 @@ const searchResult = (props) => {
                         <div className={classes.ResultLocation}>{props.location}</div>
                     </div>
             </li>
-        </NavLink>
+        </Link>
     );
 }
 
