@@ -1,5 +1,6 @@
-const fadeIn = (el, time) => {
+const fadeIn = (el, time, bShouldNotFadeIn) => {
     if (!el) { return; }
+    if (bShouldNotFadeIn) {return; }
     el.style.opacity = 0;
     // Declaring last frame
     let lastFrame = +new Date();

@@ -30,7 +30,10 @@ const infoSection = (props) => {
                     </div>
                 </div>
                 <div className={classes.Name}>{props.title}</div>
-                <button type="button" className={classes.Contact} aria-busy="false">Contact provider</button>
+                {props.contact ? 
+                    <button type="button" className={classes.Contact} aria-busy="false">Contact provider</button> : 
+                    null}
+                
             </div>
         </div>
     );

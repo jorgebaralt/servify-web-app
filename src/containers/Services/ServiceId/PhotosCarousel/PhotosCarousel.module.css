@@ -4,17 +4,17 @@
 
 .PrevButton {
     position: absolute;
-    top: 37.5%;
-    right: 97.5%;
-    transform: translateY(-37.5%);
+    top: 42.5%;
+    right: 92.5%;
+    transform: translateY(-42.5%);
     z-index: 1;
 }
 
 .NextButton {
     position: absolute;
-    top: 37.5%;
-    left: 97.5%;
-    transform: translateY(-37.5%);
+    top: 42.5%;
+    left: 92.5%;
+    transform: translateY(-42.5%);
     z-index: 1;
 }
 
@@ -81,13 +81,35 @@
     }
 }
 
+.PhotoContainer {
+    display: block;
+}
+
+.Photo {
+    padding: 2.5px;
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+}
+
 .Thumbnail {
-    width: 33.3333%;
+    width: 100%;
+}
+
+.ThumbnailContainer {
+    padding: 2.5px;
 }
 
 .Thumbnail img {
-    border-radius: 10px;
-    padding: 5px;
-    width: 100%;
-    height: 100%;
+    position: relative;
+    border-radius: 7.5px;
+    box-shadow: 1px 1px 8px rgba(0,0,0,0.36), -1px -1px 6px rgba(0,0,0,0.43);
+    transition: box-shadoww 0.5s cubic-bezier(.25,.8,.25,1);
+    box-sizing: content-box;
+    padding: 0;
+    margin: 0;
+}
+
+.Thumbnail.active img {
+    box-shadow: 1px 1px 10px rgba(255, 112, 67,1), -1px -1px 10px rgba(255, 112, 67,1);
 }

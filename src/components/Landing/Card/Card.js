@@ -15,7 +15,7 @@ const card = (props) => {
                         </div>
                         <div className={classes.TextCell}>
                             <div className={classes.TextCellText}>
-                                <div><span>{props.title}s</span></div>
+                                <div><span>{props.title}</span></div>
                             </div>
                         </div>
                     </div>

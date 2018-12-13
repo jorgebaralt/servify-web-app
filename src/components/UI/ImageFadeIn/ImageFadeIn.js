@@ -14,11 +14,13 @@ class ImageFadeIn extends Component {
     }
 
     state = {
+        bShouldUpdate: true,
+        watcherImageWidth: null, // To update on resize
         src: null,
         srcset: null
     }
 
-    componentDidMount () {
+    setImage () {
         // src object variable equal to props received
         const src = this.props.src;
         // imageLoader variable declaration to be a new Image element type object
@@ -30,26 +32,55 @@ class ImageFadeIn extends Component {
             // src is loaded, sets the state's src equal to the props.src, and then is rendered on the image element in render()
             imageLoader.onload = () => {
                 this.setState({ 
+                    watcherImageWidth: this.props.style ? this.props.style.width : null,
                     src: src,
                     srcset: srcset,
+                    bShouldUpdate: false
                 });
             };
         } else {
             imageLoader.onload = () => {
                 this.setState({ 
+                    watcherImageWidth: this.props.style ? this.props.style.width : null,
                     src: src,
+                    bShouldUpdate: false
                 });
             };
         }
     }
 
+    componentDidMount () {
+        this.setImage();
+    }
+
+    // If there is a resize, then reset the image
+    componentDidUpdate () {
+        if (this.props.style) { 
+            if (this.state.watcherImageWidth !== this.props.style.width) {
+                this.setImage();
+            }
+        }
+    }
+
+    shouldComponentUpdate (nextProps, nextState) {
+        // Pointer protection
+        if (this.props.style) {
+            // To update on resize
+            if (nextState.watcherImageWidth !== nextProps.style.width) {
+                return true;
+            }
+        }
+        return this.state.bShouldUpdate;
+    }
+
     render () {
-        const imgClasses = [classes.Image];
+        let imgClasses = classes.Image;
+        // if there is prop className use those instead
         if (this.props.className) {
-            imgClasses.push(this.props.className);
+            imgClasses = this.props.className;
         }
         return (
-            <div className={classes.ImageWrapper}>
+            <div className={this.props.className ? null : classes.ImageWrapper}>
                 {this.bIsSrcset ? 
                     // If there is a srcset, otherwise render image without srcset
                     <img
@@ -58,13 +89,15 @@ class ImageFadeIn extends Component {
                         sizes="100vw"
                         src={this.state.src}
                         srcSet={this.state.srcset}
-                        className={imgClasses.join(' ')}
+                        style={this.props.style}
+                        className={imgClasses}
                         onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 1000))} /> :
                     <img
                         ref={this.myImage}
                         alt=''
                         src={this.state.src}
-                        className={imgClasses.join(' ')}
+                        style={this.props.style}
+                        className={imgClasses}
                         onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 1000))} />
                 }
             </div>

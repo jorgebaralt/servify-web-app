@@ -29,7 +29,7 @@
     width: 15px;
 }
 
-.LocationContainer {
+.LinkContainer {
     color: rgb(255, 112, 67);
     font: inherit;
     text-decoration: none;
@@ -43,11 +43,11 @@
     text-align: left;
 }
 
-.Location {
+.Link {
     font-size: 18px;
 }
 
-.LocationContainer:hover {
+.LinkContainer:hover {
     text-decoration: underline;
 }
 

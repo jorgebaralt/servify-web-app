@@ -3,6 +3,16 @@
     flex-direction: row;
 }
 
+@media (max-width: 744px) {
+    .Container {
+        flex-direction: column;
+    }
+    .LogoWrapper {
+        margin-top: 30px;
+        margin: 0 auto;
+    }
+}
+
 .InfoWrapper {
     min-width: 0px;
     -webkit-flex: 3;

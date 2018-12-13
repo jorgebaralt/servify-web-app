@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // CSS
 import classes from './SearchBar.module.css'
 // JSX
-import { NavLink } from 'react-router-dom';
+import SearchResult from './SearchResult/SearchResult';
 
 class SearchBar extends Component {
     constructor (props) {
@@ -64,17 +64,19 @@ class SearchBar extends Component {
     componentDidMount () {
         this.setListDimensions();
         // adding event listener
-        window.onresize = () => {
-            this.setListDimensions()
-        };
-        
+        this.mySearchBar.current.addEventListener('onresize', this.setListDimensions);
+    }
+
+    componentDidUpdate () {
+        if (this.state.myList.width !== this.mySearchBar.current.offsetWidth) {
+            this.setListDimensions();
+        }
     }
 
     componentWillUnmount () {
         // removing event listener
-        window.onresize = () => {
-            return;
-        };
+        this.mySearchBar.current.removeEventListener('onresize', this.setListDimensions);
+
     }
 
     render () {
@@ -147,6 +149,7 @@ class SearchBar extends Component {
                     id={this.state.searchBar.listId}
                     role="listbox" 
                     style={{
+                        maxWidth: '100vw',
                         width: this.state.myList.width,
                         top: this.state.myList.top, 
                         right: this.state.myList.right
@@ -161,58 +164,18 @@ class SearchBar extends Component {
                             </div>
                             <ul className={classes.SearchResultsWrapper}>
                                 {/* PLACEHOLDERS */}
-                                <NavLink 
-                                to='/'
-                                /**
-                                * onMouseDown event fires before onBlur event on input. It calls event.preventDefault() to
-                                * prevent onBlur from being called, and doesn't prevent the navLink click from happening, 
-                                * this guarantees that the NavLink will redirect on click without having to use SetTimeout 
-                                * or any other hack.
-                                 */
-                                onMouseDown={event => event.preventDefault()}>
-                                    <li aria-selected="false" 
-                                        id="Result__option__option-0" 
-                                        role="option" 
-                                        className={classes.ResultWrapper}>
-                                            <div className={classes.PinWrapper}>
-                                                <span className={classes.Pin} role='img' aria-label='service' aria-hidden="true">&#x2699;</span>
-                                            </div>
-                                            <div className={classes.ResultContainer}>
-                                                <div className={classes.ResultService}>Service</div>
-                                                <div className={classes.ResultLocation}>Location</div>
-                                            </div>
-                                    </li>
-                                </NavLink>
-                                <NavLink to='/'>
-                                <li aria-selected="false" 
-                                    id="Result__option__option-1" 
-                                    role="option" 
-                                    tabIndex="-1" 
-                                    className={classes.ResultWrapper}>
-                                    <div className={classes.PinWrapper}>
-                                        <span className={classes.Pin} role='img' aria-label='service' aria-hidden="true">&#x2699;</span>
-                                    </div>
-                                    <div className={classes.ResultContainer}>
-                                        <div className={classes.ResultService}>Service</div>
-                                        <div className={classes.ResultLocation}>Location</div>
-                                    </div>
-                                </li>
-                                </NavLink>
-                                <NavLink to='/'>
-                                <li aria-selected="false" 
-                                    id="Result__option-2" 
-                                    role="option" 
-                                    tabIndex="-1" 
-                                    className={classes.ResultWrapper}>
-                                    <div className={classes.PinWrapper}>
-                                        <span className={classes.Pin} role='img' aria-label='service' aria-hidden="true">&#x2699;</span>
-                                    </div>
-                                    <div className={classes.ResultContainer}>
-                                        <div className={classes.ResultService}>Service</div>
-                                        <div className={classes.ResultLocation}>Location</div>
-                                    </div>
-                                </li>
-                                </NavLink>
+                                <SearchResult 
+                                    service='Servify'
+                                    location='Florida'
+                                />
+                                <SearchResult 
+                                    service='Servify'
+                                    location='Florida'
+                                />
+                                <SearchResult 
+                                    service='Servify'
+                                    location='Florida'
+                                />
                             </ul>
                         </li>
                     </div>
