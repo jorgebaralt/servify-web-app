@@ -2,6 +2,7 @@ import React from 'react';
 // CSS
 import classes from './SearchBox.module.css'
 // JSX
+import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import SVG from '../../SVG/SVG';
 
@@ -54,15 +55,15 @@ const Container = (props) => (
             <br />
             <Button className={classes.Button} style={{float: 'right'}} type={'primary'}>Search</Button>
         </div>
-        <a style={{textDecoration: 'none'}} href='/'>
+        <Link style={{textDecoration: 'none'}} to='/publish/overview'>
             <div className={classes.MakeMoneyContainer}>
                 <span className={classes.MakeMoney}>
                     <SVG className={classes.Tools} svg="tools" />&nbsp;
-                    <span>Make money hosting your services on Servify</span>
+                    <span>Make money publishing your services on Servify</span>
                     <SVG className={classes.RightArrow} svg="right-arrow" />
                 </span>
             </div>
-        </a>
+        </Link>
     </>
 )
 

@@ -10,6 +10,8 @@ import Favorite from './favorite';
 import Share from './share';
 import LocationPin from './location-pin';
 import Chat from './chat';
+import Cancel from './cancel';
+import CheckmarkNoBg from './checkmark-nobg';
 
 import BlackBorderlessLogo from '../images/servify-logos/blackborder-nobg';
 
@@ -27,5 +29,7 @@ export {
     Favorite, 
     Share, 
     LocationPin, 
-    Chat 
+    Chat,
+    Cancel,
+    CheckmarkNoBg
 };

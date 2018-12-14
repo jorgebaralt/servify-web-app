@@ -1,10 +1,10 @@
 import React from 'react';
 // CSS
-import classes from './PostInfoNavbar.module.css';
+import classes from './PublishNavbar.module.css';
 // JSX 
 import NavigationItems from '../NavigationItems/NavigationItems';
 
-const PostInfoNavbar = (props) => {
+const publishNavbar = (props) => {
 	return (
 		<header className={classes.Navbar}>
 			<nav ref={props.reference}>
@@ -14,4 +14,4 @@ const PostInfoNavbar = (props) => {
 	)
 }
 
-export default PostInfoNavbar;
+export default publishNavbar;

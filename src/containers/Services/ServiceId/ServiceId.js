@@ -186,7 +186,6 @@ class ServiceId extends Component {
                         </div>
                     </div>
                 </div>
-                <div className={classes.SectionSeparator}><div className={classes.SectionSeparatorLine}><div/></div></div>
             </>
         );
     }

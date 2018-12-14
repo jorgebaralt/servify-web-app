@@ -4,9 +4,10 @@ import { withRouter, NavLink } from 'react-router-dom';
 import classes from './NavigationItems.module.css';
 // JSX
 import NavigationItem from './NagivationItem/NagivationItem.js';
-import ButtonFilled from '../../ButtonFilled/ButtonFilled';
+import ButtonFilled from '../../UI/ButtonFilled/ButtonFilled';
+import AuthButtons from '../../AuthModal/AuthButtons/AuthButtons';
 // Logo
-import servifyLogo from '../../../../assets/images/servify-logo-96x96.png';
+import servifyLogo from '../../../assets/images/servify-logo-96x96.png';
 import SearchBar from '../SearchBar/SearchBar';
 
 const renderNavigationItems = (props) => {
@@ -15,8 +16,8 @@ const renderNavigationItems = (props) => {
 			return (
 				<>
 					<div className={classes.Spacing} />
-					<NavigationItem {...props} link="/post/overview" color="white">
-						Post
+					<NavigationItem {...props} link="/publish/overview" color="white">
+						Publish
 					</NavigationItem>
 					<NavigationItem {...props} link="/services" color="white">
 						Services
@@ -24,23 +25,18 @@ const renderNavigationItems = (props) => {
 					<NavigationItem {...props} link="/help" color="white">
 						Help
 					</NavigationItem>
-					<NavigationItem {...props} link="/signup" color="white">
-						Sign up
-					</NavigationItem>
-					<NavigationItem {...props} link="/login" color="white">
-						Sign in
-					</NavigationItem>
+					<AuthButtons {...props} color="white"/>
 				</>
 			);
-		case 'PostInfoNavbar':
+		case 'PublishNavbar':
 			return (
 				<>
 					<div className={classes.SpacingSmall} />
-					<NavigationItem {...props} link="/post/overview">
+					<NavigationItem {...props} link="/publish/overview">
 						Overview
 					</NavigationItem>
 					<NavigationItem {...props} link="/help">
-						Create a service
+						Publish
 					</NavigationItem>
 					<NavigationItem {...props} link="/signup">
 						FAQ
@@ -58,43 +54,44 @@ const renderNavigationItems = (props) => {
 				<>
 					<SearchBar />
 					<div className={classes.Spacing} />
-					<NavigationItem className={props.className} {...props} link="/post/overview" >
-						Post
+					<NavigationItem className={props.className} {...props} link="/publish/overview" >
+						Publish
 					</NavigationItem>
 					<NavigationItem className={props.className} {...props} link="/help" >
 						Help
 					</NavigationItem>
-					<NavigationItem className={props.className} {...props} link="/signup" >
-						Sign up
-					</NavigationItem>
-					<NavigationItem className={props.className} {...props} link="/login" >
-						Sign in
-					</NavigationItem>
+					<AuthButtons {...props} />
 				</>
 			);
 		default:
 			return (
 				<>
 					<div className={classes.Spacing} />
-					<NavigationItem {...props} link="/" color="white" >
-						No navigation items found
+					<NavigationItem {...props} link="/publish/overview" color="white">
+						Publish
 					</NavigationItem>
-					<NavigationItem {...props} link="/" >
-						No navigation items found
+					<NavigationItem {...props} link="/services" color="white">
+						Services
 					</NavigationItem>
+					<NavigationItem {...props} link="/help" color="white">
+						Help
+					</NavigationItem>
+					<AuthButtons {...props} color="white"/>
 				</>
 			);
 	}
 };
 const nagivationItems = (props) => {
 	return (
-		<ul className={classes.NavigationItems}>
-			<div className={classes.SpacingSmall} />
-			<NavLink className={classes.NavbarLogo} to ="/">
-				<img src={servifyLogo} alt="" />
-			</NavLink>
-			{renderNavigationItems(props)}
-		</ul>
+		<>
+			<ul className={classes.NavigationItems}>
+				<div className={classes.SpacingSmall} />
+				<NavLink className={classes.NavbarLogo} to ="/">
+					<img src={servifyLogo} alt="" />
+				</NavLink>
+				{renderNavigationItems(props)}
+			</ul>
+		</>
 	);
 };
 

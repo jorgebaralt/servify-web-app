@@ -29,6 +29,9 @@ class SVGComponent extends PureComponent {
             case 'checkmark':
                 svg = <SVG.Checkmark {...this.props} />;
                 break;
+            case 'checkmark-nobg':
+                svg = <SVG.CheckmarkNoBg {...this.props} />;
+                break;
             case 'typing':
                 svg = <SVG.Typing {...this.props} />;
                 break;
@@ -52,6 +55,9 @@ class SVGComponent extends PureComponent {
                 break;
             case 'chat':
                 svg = <SVG.Chat {...this.props} />;
+                break;
+            case 'cancel':
+                svg = <SVG.Cancel {...this.props} />;
                 break;
             case 'underline':
                 svg = <div style={this.props.style}>

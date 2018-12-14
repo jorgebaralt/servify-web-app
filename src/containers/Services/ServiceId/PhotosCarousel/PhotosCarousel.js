@@ -128,7 +128,7 @@ class Carousel extends Component {
                     ref={slider => (this.myBottomSlider = slider)}
                     slidesToShow={this.props.images.length}
                     swipeToSlide={true}
-w                    focusOnSelect={true} >
+                    focusOnSelect={false} >
                     {this.props.images.map((image, index) => {
                         return (
                             <div 

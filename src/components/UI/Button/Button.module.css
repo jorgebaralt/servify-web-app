@@ -19,6 +19,10 @@
     transition: background-color .1s ease-in-out, border-color .15s ease-in-out,box-shadow .15s ease-in-out, opacity 0.15s;
 }
 
+.BlockButton {
+    width: 100%;
+}
+
 .Button:disabled {
     opacity: 0.45;
     cursor: not-allowed;
@@ -74,4 +78,25 @@
     color: #fff;
     background-color: #484848;
     border-color: #484848;
+}
+
+.Facebook {
+    margin-bottom: 12px;
+    color: rgb(255, 255, 255);
+    background: rgb(59, 89, 152);
+    border-color: transparent;
+}
+
+.Google {
+    margin-bottom: 12px;
+    color: rgb(255, 255, 255);
+    background: rgb(219, 50, 54);
+    border-color: transparent;
+}
+
+.Auth {
+    margin: 12px 0;
+    color: rgb(255, 255, 255);
+    background: rgb(255, 112, 67);
+    border-color: transparent;
 }

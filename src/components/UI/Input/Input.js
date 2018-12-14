@@ -81,12 +81,13 @@ const input = (props) => {
 
 
     return (
-        <div className={classes.Input}>
+        <div style={props.style}
+            className={classes.Input}>
             {inputElement}
             {validationMessage}
             {/* <span className="highlight"></span> */}
             <span className={classes.Bar}></span>
-            <label className={classes.Label}>{props.valueType}</label>
+            <label className={classes.Label}>{props.elementConfig.placeholder}</label>
         </div>
     );
 }

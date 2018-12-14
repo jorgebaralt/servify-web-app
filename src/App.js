@@ -27,7 +27,7 @@ class App extends Component {
 			<Layout>
 				<RouterScrollToTop />
 				<Switch>
-					<Route exact path="/post/overview" component={PostOverview} />
+					<Route exact path="/publish/overview" component={PostOverview} />
 					<Route exact path="/services/:id" component={ServiceId} />
 					<Route exact path="/services" component={Services} />
 					<Route exact path="/" component={Landing} />

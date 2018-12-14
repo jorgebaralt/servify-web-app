@@ -3,10 +3,12 @@ import { withRouter } from 'react-router-dom';
 // CSS
 import classes from './Navbar.module.css';
 // JSX
-import LandingNavbar from '../../components/UI/Navigation/LandingNavbar/LandingNavbar';
-import PostInfoNavbar from '../../components/UI/Navigation/PostInfoNavbar/PostInfoNavbar';
-import SearchNavbar from '../../components/UI/Navigation/SearchNavbar/SearchNavbar';
-import ScrollToTopButton from '../../components/UI/ScrollToTopButton/ScrollToTopButton';
+import LandingNavbar from '../../components/Navigation/LandingNavbar/LandingNavbar';
+import PublishNavbar from '../../components/Navigation/PublishNavbar/PublishNavbar';
+import SearchNavbar from '../../components/Navigation/SearchNavbar/SearchNavbar';
+import ScrollToTopButton from '../../components/Navigation/ScrollToTopButton/ScrollToTopButton';
+import Modal from '../../components/UI/Modal/Modal';
+import AuthModal from '../AuthModal/AuthModal';
 
 class Navbar extends PureComponent {
 	constructor(props) {
@@ -18,6 +20,7 @@ class Navbar extends PureComponent {
 		isDrawerOpen: false,
 		navbarTransparent: false,
 		showScrollToTop: false,
+		bShowAuthModal: false
 	};
 
 	/**
@@ -106,6 +109,12 @@ class Navbar extends PureComponent {
 		}
 	}
 
+	toggleAuthModal = () => {
+		this.setState( (prevState) => {
+			return { bShowAuthModal: !prevState.bShowAuthModal };
+		});
+	}
+
 	/**
 	 * Add Event Listener
 	 */
@@ -123,11 +132,13 @@ class Navbar extends PureComponent {
 	/**
 	 *   Function decides which navbar to display according to the path
 	 */
-	decideNavbar = () => {
+	setNavbar = () => {
 		switch (true) {
 			case this.props.location.pathname === '/':
 				return (
 					<LandingNavbar
+						// Toggle Auth Modal
+						toggleAuthModal={this.toggleAuthModal}
 						// passing reference from constructor
 						reference={this.navbar}
 						navbarType='LandingNavbar' // pass navbarType prop to select respective navigation items
@@ -144,13 +155,17 @@ class Navbar extends PureComponent {
 			case this.props.location.pathname.includes('/services'): // Renders navbar for every address that has /services as root
 				return (
                     <SearchNavbar 
+						// Toggle Auth Modal
+						toggleAuthModal={this.toggleAuthModal}
 						navbarType='SearchNavbar' // pass navbarType prop to select respective navigation items
 						reference={this.navbar} />
 				);
-			case this.props.location.pathname === '/post/overview':
+			case this.props.location.pathname.includes('/publish'):
 				return (
-                    <PostInfoNavbar 
-						navbarType='PostInfoNavbar' // pass navbarType prop to select respective navigation items
+                    <PublishNavbar 
+						// Toggle Auth Modal
+						toggleAuthModal={this.toggleAuthModal}
+						navbarType='PublishNavbar' // pass navbarType prop to select respective navigation items
 						reference={this.navbar} />
 				);
 			default:
@@ -167,8 +182,13 @@ class Navbar extends PureComponent {
 		}
 		return (
 			<>
+				<Modal
+					toggleModal={this.toggleAuthModal}
+					show={this.state.bShowAuthModal}>
+					<AuthModal />
+				</Modal>
 				{/* Decide navbar to display */}
-				{this.decideNavbar()}
+				{this.setNavbar()}
 				{/* ScrollToTopButton after scrolling */}
 				{this.state.showScrollToTop ? (
 					<ScrollToTopButton clicked={this.scrollToTop} />

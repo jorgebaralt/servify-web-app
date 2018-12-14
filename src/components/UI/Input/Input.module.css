@@ -1,7 +1,7 @@
 .Input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 10px 0;
+    margin: 15px 0;
     box-sizing: border-box;
     position: relative;
 }
@@ -12,29 +12,35 @@
     font-weight:normal;
     position:absolute;
     pointer-events:none;
-    left:20px;
-    top:20px;
+    left:10px;
+    /* top:20px; */
+    top: 50%;
+    transform: translateY(-50%);
     transition:0.2s ease all; 
 }
 
 .Input input:focus ~ .Label, .Input input:valid ~ .Label {
     top: -7.5px;
-    left: 10px;
+    left: 5px;
     font-size:14px;
-    color:#703b09;
+    color:#484848;
 }
 
 .InputElement {
-    border:none;
-    border-radius: 0;
-    border-bottom:1px solid #757575;
+    /* border:none; */
+    border-radius: 5px;
+    /* border-bottom: 1px solid rgba(72,72,72,0.3333); */
+    border: 1px solid rgba(72,72,72,0.3333);
     background-color: #fff;
     font: inherit;
     font-size:18px;
     padding:10px 10px 10px 5px;
     display: block;
     width: 100%;
+    height: 45px;
     box-sizing: border-box;
+    transition: all 0.2s ease; 
+    transition-delay: 0.2s; 
 }
 
 input.InputElement::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -55,6 +61,7 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
 
 .InputElement:focus {
     outline: none;
+    border-color: #1ea3cc;
 }
 
 .Bar  { 
@@ -65,23 +72,22 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
 
 .Bar:before, .Bar:after   {
     content: '';
-    height: 2px;
+    height: 1.5px;
     width: 0;
     bottom: 0px;
     position: absolute;
-    background: #703b09;
-    -webkit-transition: 0.2s ease all;
+    background: #1ea3cc;
     transition: 0.2s ease all;
 }
 .Bar:before {
-    left:50%;
+    left: 50%;
 }
 .Bar:after {
-    right:50%; 
+    right: 50%; 
 }
 
 .Input input:focus ~ .Bar:before, .Input input:focus ~ .Bar:after {
-    width:50%;
+    width: calc(50% - 2.5px);
 }
 
 .Invalid {
@@ -96,6 +102,7 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
     color: #dc3545;
     position: absolute;
     left: 0;
+    text-align: center;
 }
 
 .Valid {
@@ -109,4 +116,5 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
     color: #28a745;
     position: absolute;
     left: 0;
+    text-align: center;
 }

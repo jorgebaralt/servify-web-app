@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -37,24 +37,27 @@ textarea:focus, input:focus{
 }
 
 [type="text"], [type="password"], [type="search"], [type="email"], [type="url"], [type="number"], [type="tel"], textarea, select, input[type="radio"], input[type="checkbox"] {
-  -webkit-transition: border-color 0.2s;
-  -o-transition: border-color 0.2s;
-  -moz-transition: border-color 0.2s;
   transition: border-color 0.2s;
 }
 
 [type="text"], [type="password"], [type="search"], [type="email"], [type="url"], [type="number"], [type="tel"], textarea, select, input[type="radio"], input[type="checkbox"], .input-prefix, .input-suffix {
   border: 1px solid #aaa;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
   border-radius: 2px;
   background-color: #fff;
   color: #484848;
 }
 
+input[type="radio"], input[type="checkbox"] {
+  position: relative;
+  appearance: none;
+  height: 1.25em;
+  width: 1.25em;
+  margin-bottom: -0.25em;
+  margin-right: 5px;
+  vertical-align: top;
+}
+
 *, *:before, *:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
   flex: 0 1 auto;
   -ms-flex: 0 1 auto;
@@ -76,4 +79,14 @@ label, input, textarea, select, input[type="radio"], input[type="checkbox"], .in
 
 a {
   text-decoration: none;
+}
+
+button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
