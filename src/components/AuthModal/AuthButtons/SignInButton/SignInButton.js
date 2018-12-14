@@ -1,14 +1,14 @@
 import React from 'react';
 
-const signUpButton = (props) => {
+const signInButton = (props) => {
     return (
         <li className={props.className} 
             onClick={props.onClick}>
             <button>
-                Sign up
+                Sign in
             </button>
         </li>
     );
 }
 
-export default signUpButton;
+export default signInButton;

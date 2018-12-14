@@ -3,6 +3,7 @@ import React from 'react';
 import classes from './AuthButton.module.css';
 // JSX
 import SignOutButton from './SignOutButton/SignOutButton';
+import SignInButton from './SignInButton/SignInButton';
 import SignUpButton from './SignUpButton/SignUpButton';
 
 const authButton = (props) => {
@@ -19,6 +20,10 @@ const authButton = (props) => {
     return (
         <>
             <SignOutButton 
+                className={buttonClass.join(' ')} 
+                onClick={props.toggleAuthModal}
+                color={props.color} />
+            <SignInButton
                 className={buttonClass.join(' ')} 
                 onClick={props.toggleAuthModal}
                 color={props.color} />

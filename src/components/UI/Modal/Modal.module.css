@@ -33,7 +33,7 @@
     .Modal {
         height: auto;
         left: 15%;
-        top: 15%;
+        top: 10%;
         width: 500px;
         left: calc(50% - 300px);
     }
