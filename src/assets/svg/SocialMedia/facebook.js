@@ -1,5 +1,4 @@
 import React from 'react';
-import { Facebook } from '.';
 
 const facebook = (props) => {
     return (

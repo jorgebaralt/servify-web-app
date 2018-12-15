@@ -1,5 +1,35 @@
-.Modal {
+.Null {
+    visibility: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.BodyOverlay {
+    display: block;
     position: fixed;
+    z-index: 2000;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    overflow-y: auto;
+}
+
+.ModalWrapper {
+    display: block;
+    height: 100%;
+    width: 100%; 
+}
+
+.ModalContainer {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.Modal {
+    position: relative;
+    margin: auto;
     z-index: 500;
     background-color: rgb(255, 255, 255);
     width: 100%;
@@ -25,22 +55,19 @@
     justify-content: center;
     height: 25px;
     width: 25px;
-    border-radius: 50%;
-    box-shadow: 1px 1px 2.5px #c8c8c8, -1px -1px 2.5px #c8c8c8;
 }
 
 @media (min-width: 600px) {
     .Modal {
         height: auto;
-        left: 15%;
         top: 10%;
-        width: 500px;
-        left: calc(50% - 300px);
+        width: 450px;
     }
 }
 
 @media (max-height: 600px) {
     .Modal {
+        overflow: scroll;
         width: 100%;
         height: 100%;
         left: 0;

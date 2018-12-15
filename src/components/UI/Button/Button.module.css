@@ -19,6 +19,13 @@
     transition: background-color .1s ease-in-out, border-color .15s ease-in-out,box-shadow .15s ease-in-out, opacity 0.15s;
 }
 
+.Logo {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto 10px;
+}
+
 .BlockButton {
     width: 100%;
 }
@@ -81,6 +88,9 @@
 }
 
 .Facebook {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 12px;
     color: rgb(255, 255, 255);
     background: rgb(59, 89, 152);
@@ -88,6 +98,9 @@
 }
 
 .Google {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
     margin-bottom: 12px;
     color: rgb(255, 255, 255);
     background: rgb(219, 50, 54);

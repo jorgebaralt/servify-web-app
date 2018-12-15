@@ -1,5 +1,4 @@
 import React from 'react';
-import loading from '../../../assets/svg/source/loading.svg';
 import classes from './LoadingDots.module.css';
 
 const LoadingDots = ( props ) => {
@@ -7,7 +6,6 @@ const LoadingDots = ( props ) => {
 		<div className={classes.LoadingDots}>
 			<svg 
 				xmlns="http://www.w3.org/2000/svg" 
-				class="lds-message" 
 				width="60px" 
 				height="40px" viewBox="0 0 100 100" 
 				preserveAspectRatio="xMidYMid">

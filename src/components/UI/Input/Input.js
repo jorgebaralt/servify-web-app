@@ -17,7 +17,7 @@ const input = (props) => {
 
 
     switch (props.elementType) {
-        case('input'):
+        case('input' || 'text' || 'email' || 'number'):
             inputElement = <input 
                 className={inputClasses.join(' ')} 
                 {...props.elementConfig} 
@@ -29,24 +29,6 @@ const input = (props) => {
         case('textarea'):
             inputElement = <textarea 
                 className={inputClasses.join(' ')} 
-                {...props.elementConfig} 
-                required
-                value={props.value}
-                onChange={props.changed}
-                />;
-            break;
-        case('email'):
-            inputElement = <input
-                className={inputClasses.join(' ')} 
-                {...props.elementConfig} 
-                required
-                value={props.value}
-                onChange={props.changed}
-                />;
-            break;
-        case('number'):
-            inputElement = <input 
-                className={inputClasses.join(' ')}
                 {...props.elementConfig} 
                 required
                 value={props.value}

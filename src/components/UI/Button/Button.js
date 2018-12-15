@@ -1,12 +1,15 @@
 import React from 'react';
 // CSS
 import classes from './Button.module.css';
+// JSX
+import SVG from '../../SVG/SVG';
 
 // TODO Refactor ButtonFilled and Button into one
 
 const button = (props) => {
 
     // Success/Danger classes
+    let logo = null;
     const buttonClass = [props.className];
     buttonClass.push(classes.Button);
     switch (props.type) {
@@ -23,9 +26,11 @@ const button = (props) => {
             buttonClass.push(classes.Default)
             break;
         case 'facebook':
+            logo = <span className={classes.Logo}><SVG svg='facebook-nobg'/></span>
             buttonClass.push(classes.Facebook)
             break;
         case 'google':
+            logo = <span style={{backgroundColor: '#FFF', padding: '2px', borderRadius: '50%'}} className={classes.Logo}><SVG svg='google-nobg'/></span>
             buttonClass.push(classes.Google)
             break;
         case 'auth':
@@ -44,7 +49,7 @@ const button = (props) => {
             className={buttonClass.join(' ')}
             type={props.type}
             disabled={props.disabled}
-            onClick={props.clicked}>{props.children}</button>
+            onClick={props.clicked}>{logo}{props.children}</button>
     );
 }
 

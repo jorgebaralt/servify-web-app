@@ -7,6 +7,20 @@ import SVG from '../../SVG/SVG';
 
 class Modal extends Component {
 
+    constructor(props) {
+        super(props);
+        this.myModal = React.createRef();
+        this.escFunction = this.escFunction.bind(this);
+    }
+
+    escFunction(e){
+        if(e.keyCode === 27) {
+            //Do whatever when esc is pressed
+            this.props.closeModal();
+        }
+    }
+    
+
     shouldComponentUpdate(nextProps, nextState) {
         return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
     }
@@ -14,39 +28,45 @@ class Modal extends Component {
     componentDidUpdate () {
         // To prevent scrolling when the modal is open
         if (this.props.show) {
+            document.addEventListener("keydown", (e) => this.escFunction(e), false);
             document.body.style.overflow = 'hidden';
         } else {
-                document.body.style.overflow = null;
+            document.removeEventListener("keydown", () => this.escFunction(), false);
+            document.body.style.overflow = null;
         }
     }
 
     render() {
         return (
-            <>  
-                <Backdrop 
-                    show={this.props.show} 
-                    clicked={this.props.toggleModal} />
-                <div 
-                    style={{
-                        visibility: this.props.show ? 'visible' : 'hidden',
-                        transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
-                        opacity: this.props.show ? '1' : '0',
-                    }}
-                    className={classes.Modal}>
-                    <div className={classes.CloseButtonWrapper}>
-                        <button 
-                            type="button"
-                            onClick={this.props.toggleModal}
-                            className={classes.CancelButton} 
-                            aria-busy="false" >
-                            <SVG svg='cancel'/>
-                        </button>
+            <div className={this.props.show ? classes.BodyOverlay : classes.Null}> 
+                <div className={this.props.show ? classes.ModalWrapper : null}>
+                    <div className={this.props.show ? classes.ModalContainer : null}>
+                        <Backdrop 
+                            show={this.props.show} 
+                            clicked={this.props.toggleModal} />
+                        <div ref={this.myModal}
+                            style={{
+                                visibility: this.props.show ? 'visible' : 'hidden',
+                                transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
+                                opacity: this.props.show ? '1' : '0',
+                            }}
+                            className={classes.Modal}>
+                            <div className={classes.CloseButtonWrapper}>
+                                <button 
+                                    type="button"
+                                    onClick={this.props.toggleModal}
+                                    className={classes.CancelButton} 
+                                    aria-busy="false" >
+                                    <SVG svg='cancel'/>
+                                </button>
+                            </div>
+                            <section>
+                                {this.props.children}
+                            </section>
+                        </div>
                     </div>
-                    <section>
-                        {this.props.children}
-                    </section>
                 </div>
-            </>
+            </div>
         );
     }
 };

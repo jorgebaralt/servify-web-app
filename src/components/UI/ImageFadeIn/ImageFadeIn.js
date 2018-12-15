@@ -41,7 +41,6 @@ class ImageFadeIn extends Component {
             };
         } else {
             imageLoader.onload = () => {
-                console.log(src)
                 this.setState({
                         watcherImageWidth: this.props.style ? this.props.style.width : null,
                         src: src,

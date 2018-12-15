@@ -6,20 +6,13 @@ import Modal from '../../../components/UI/Modal/Modal';
 
 
 class AuthModal extends Component {
-
-    componentDidMount () {
-        // TODO Auth Redux Saga
-        // if (!this.props.buildingBurger && this.props.authRedirectPath !== "/") {
-        //     this.props.onSetAuthRedirectPath();
-        // }
-    }
-
+    
     switchAuthModeHandler = () => {
         switch (this.props.authModalType) {
             case 'sign up':
-                return <SignUpModal />
+                return <SignUpModal switchAuthModalHandler={this.props.switchAuthModalHandler} />
             case 'sign in':
-                return <SignInModal />
+                return <SignInModal switchAuthModalHandler={this.props.switchAuthModalHandler} />
             default:
                 // do nothing
                 return;
@@ -32,7 +25,8 @@ class AuthModal extends Component {
 
     render() {
         return (
-            <Modal 
+            <Modal
+                closeModal={this.props.closeModal}
                 toggleModal={this.props.toggleModal}
                 show={this.props.show}>  
                 {this.switchAuthModeHandler()}

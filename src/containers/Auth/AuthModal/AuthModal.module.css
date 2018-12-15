@@ -156,12 +156,13 @@
 }
 
 .DontHaveAccount {
+    cursor: initial;
+    user-select: none;
     color: #484848;
 } 
 
 .ShowPassword:hover,
 .ForgotPassword:hover,
-.DontHaveAccount:hover,
 .SignUp:hover {
     color: #1ea5c8;
     text-decoration: underline;
@@ -183,4 +184,14 @@
     display: table-cell;
     vertical-align: middle;
     text-align: center;
+}
+
+@media (max-width: 350px) {
+    @media {
+        .SignUp {
+            display: block;
+            text-align: center;
+            margin-top: 8px;
+        }
+    }
 }

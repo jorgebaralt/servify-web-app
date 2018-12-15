@@ -64,8 +64,14 @@ class SVGComponent extends PureComponent {
                         {this.randomUnderline(Underlines)(this.props)}
                     </div>
                 break;
+            case 'facebook-nobg':
+                svg = <SocialMedia.FacebookNoBg {...this.props} />
+                break;
             case 'facebook':
                 svg = <SocialMedia.Facebook {...this.props} />
+                break;
+            case 'google-nobg':
+                svg = <SocialMedia.GoogleNoBg {...this.props} />
                 break;
             case 'instagram':
                 svg = <SocialMedia.Instagram {...this.props} />

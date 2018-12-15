@@ -8,16 +8,19 @@ import Button from '../../../../components/UI/Button/Button';
 import Input from '../../../../components/UI/Input/Input';
 import SVG from '../../../../components/SVG/SVG';
 
-class AuthModal extends Component {
+class SignInModal extends Component {
 
     state = {
         controls: {
             email: {
-                elementType: 'email',
+                elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    autoComplete: 'username',
-                    placeholder: 'Email'
+                    autoComplete: 'email',
+                    placeholder: 'Email',
+                    autocorrect:"off",
+                    autocapitalize:"off",
+                    spellcheck:"false"
                 },
                 value: '',
                 valueType: 'email',
@@ -199,23 +202,23 @@ class AuthModal extends Component {
                                 aria-busy="false">{this.state.bShowPassword ? 'Hide password' : 'Show password'}</button>
                         </div>
                     </div>
-                    <Button disabled={!this.state.formIsValid} type='auth' blockButton={true}>Sign In</Button>
+                    <Button disabled={!this.state.formIsValid} type='auth' blockButton={true}>Sign in</Button>
                     <div className={classes.ForgotPasswordContainer}>
                         <button type="button" 
                             className={classes.ForgotPassword} 
                             aria-busy="false">Forgot password</button>
                     </div>
-                    <div style={{margin: '10px auto'}} className={classes.SeparatorWrapper}><div className={classes.SeparatorContainer}><div className={classes.Line} /></div></div>
-                    <div className={classes.NoAccountWrapper}>
-                        <div className={classes.NoAccountContainer}>
-                            <span className={classes.DontHaveAccount}>Don't have an account yet?</span>
-                            <span className={classes.SignUp}>Sign up!</span>
-                        </div>
-                    </div>
                 </form>
+                <div style={{margin: '10px auto'}} className={classes.SeparatorWrapper}><div className={classes.SeparatorContainer}><div className={classes.Line} /></div></div>
+                <div className={classes.NoAccountWrapper}>
+                    <div className={classes.NoAccountContainer}>
+                        <span className={classes.DontHaveAccount}>Don't have an account yet?</span>
+                        <span onClick={() => this.props.switchAuthModalHandler('sign up')} className={classes.SignUp}>Sign up!</span>
+                    </div>
+                </div>
             </>
         );
     }
 };
 
-export default React.memo(AuthModal);
+export default React.memo(SignInModal);
