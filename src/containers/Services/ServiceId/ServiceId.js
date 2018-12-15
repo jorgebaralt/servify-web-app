@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // CSS
 import classes from './ServiceId.module.css'
 // JSX
-import PhotosCarousel from './PhotosCarousel/PhotosCarousel';
+import PhotosCarousel from '../../../components/UI/PhotosCarousel/PhotosCarousel';
 import SVG from '../../../components/SVG/SVG';
 import InfoPoint from './InfoPoint/InfoPoint';
 import InfoSection from './InfoSection/InfoSection';
@@ -38,7 +38,6 @@ class ServiceId extends Component {
 
     componentDidMount () {
         this.setGalleryDimensions();
-        
         window.onresize = () => {
             this.setGalleryDimensions();
         }

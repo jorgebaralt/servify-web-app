@@ -14,7 +14,10 @@ const landingNavbar = (props) => {
     return (
         <header className={navbarClasses.join(' ')} ref={props.reference}>
             <nav className={classes.DesktopOnly} onScroll={props.onScroll}>
-                <NagivationItems  navbarType={props.navbarType} isNavbarTransparent={props.navbarTransparent} toggleAuthModal={props.toggleAuthModal} />
+                <NagivationItems  
+                    navbarType={props.navbarType} 
+                    isNavbarTransparent={props.navbarTransparent} 
+                    toggleAuthModal={props.toggleAuthModal} />
             </nav>
             <DrawerToggle 
                 drawerClass={classes.MobileOnly}

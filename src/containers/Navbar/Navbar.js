@@ -7,8 +7,6 @@ import LandingNavbar from '../../components/Navigation/LandingNavbar/LandingNavb
 import PublishNavbar from '../../components/Navigation/PublishNavbar/PublishNavbar';
 import SearchNavbar from '../../components/Navigation/SearchNavbar/SearchNavbar';
 import ScrollToTopButton from '../../components/Navigation/ScrollToTopButton/ScrollToTopButton';
-import Modal from '../../components/UI/Modal/Modal';
-import AuthModal from '../AuthModal/AuthModal';
 
 class Navbar extends PureComponent {
 	constructor(props) {
@@ -19,8 +17,7 @@ class Navbar extends PureComponent {
 	state = {
 		isDrawerOpen: false,
 		navbarTransparent: false,
-		showScrollToTop: false,
-		bShowAuthModal: false
+		showScrollToTop: false
 	};
 
 	/**
@@ -40,6 +37,7 @@ class Navbar extends PureComponent {
 			top: 0,
 			left: 0,
 			behavior: 'smooth',
+			bShowAuthModal: false
 		});
 	};
 
@@ -85,29 +83,27 @@ class Navbar extends PureComponent {
 	 * object to update the state, or null to update nothing.
 	 * TODO determine if this method is needed.
 	 */
-	static getDerivedStateFromProps(nextProps) {
-		// if on the addresses navbar is not transparent.
-		if (
-			nextProps.location.pathname !== '/projects' &&
-			nextProps.location.pathname !== '/skills'
-		) {
-			// if the window.scrollY is higher then 56 pixels the navbar shall be false, else it's true
-			if (window.scrollY > 56) {
-				return {
-					navbarTransparent: false,
-				};
-			} else {
-				return {
-					navbarTransparent: true,
-				};
-			}
-			// if not on the addresses navbar is not transparent.
-		} else {
-			return {
-				navbarTransparent: false,
-			};
-		}
-	}
+	// static getDerivedStateFromProps(nextProps) {
+	// 	// if on the addresses navbar is not transparent.
+	// 	if ( nextProps.location.pathname !== '/projects' &&
+	// 		nextProps.location.pathname !== '/skills' ) {
+	// 		// if the window.scrollY is higher then 56 pixels the navbar shall be false, else it's true
+	// 		if (window.scrollY > 56) {
+	// 			return {
+	// 				navbarTransparent: false,
+	// 			};
+	// 		} else {
+	// 			return {
+	// 				navbarTransparent: true,
+	// 			};
+	// 		}
+	// 		// if not on the addresses navbar is not transparent.
+	// 	} else {
+	// 		return {
+	// 			navbarTransparent: false,
+	// 		};
+	// 	}
+	// }
 
 	toggleAuthModal = () => {
 		this.setState( (prevState) => {
@@ -119,14 +115,14 @@ class Navbar extends PureComponent {
 	 * Add Event Listener
 	 */
 	componentDidMount() {
-		window.addEventListener('scroll', this.changeNavbarOnWindowScroll);
+		// window.addEventListener('scroll', this.changeNavbarOnWindowScroll);
 	}
 
 	/**
 	 * Remove Event Listener
 	 */
 	componentWillUnmount() {
-		window.removeEventListener('scroll', this.changeNavbarOnWindowScroll);
+		// window.removeEventListener('scroll', this.changeNavbarOnWindowScroll);
 	}
 
 	/**
@@ -138,7 +134,7 @@ class Navbar extends PureComponent {
 				return (
 					<LandingNavbar
 						// Toggle Auth Modal
-						toggleAuthModal={this.toggleAuthModal}
+						toggleAuthModal={this.props.toggleAuthModal}
 						// passing reference from constructor
 						reference={this.navbar}
 						navbarType='LandingNavbar' // pass navbarType prop to select respective navigation items
@@ -155,16 +151,14 @@ class Navbar extends PureComponent {
 			case this.props.location.pathname.includes('/services'): // Renders navbar for every address that has /services as root
 				return (
                     <SearchNavbar 
-						// Toggle Auth Modal
-						toggleAuthModal={this.toggleAuthModal}
+						toggleAuthModal={this.props.toggleAuthModal} // Toggle Auth Modal
 						navbarType='SearchNavbar' // pass navbarType prop to select respective navigation items
 						reference={this.navbar} />
 				);
 			case this.props.location.pathname.includes('/publish'):
 				return (
                     <PublishNavbar 
-						// Toggle Auth Modal
-						toggleAuthModal={this.toggleAuthModal}
+						toggleAuthModal={this.props.toggleAuthModal} // Toggle Auth Modal
 						navbarType='PublishNavbar' // pass navbarType prop to select respective navigation items
 						reference={this.navbar} />
 				);
@@ -182,11 +176,6 @@ class Navbar extends PureComponent {
 		}
 		return (
 			<>
-				<Modal
-					toggleModal={this.toggleAuthModal}
-					show={this.state.bShowAuthModal}>
-					<AuthModal />
-				</Modal>
 				{/* Decide navbar to display */}
 				{this.setNavbar()}
 				{/* ScrollToTopButton after scrolling */}

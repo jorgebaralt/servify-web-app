@@ -5,7 +5,7 @@ import Slider from 'react-slick';
 import classes from './PhotosCarousel.module.css';
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import ImageFadeIn from '../../../../components/UI/ImageFadeIn/ImageFadeIn'
+import ImageFadeIn from '../ImageFadeIn/ImageFadeIn'
 
 class Carousel extends Component {
     constructor(props) {
@@ -66,6 +66,16 @@ class Carousel extends Component {
             this.setSlidesToShow();
         };
     }
+
+    componentWillMount () {
+        window.onresize = () => {
+            return;
+        };
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps !== this.props || nextState !== this.state || nextProps.children !== this.props.children;
+    }
     
     render () {
         // Carousel default settings buildup.
@@ -104,8 +114,8 @@ class Carousel extends Component {
                                 <ImageFadeIn
                                     bShouldUpdate={false}
                                     style={{
-                                            width: this.props.dimensions.width,
-                                            height: this.props.dimensions.height,
+                                            width: this.props.dimensions ? this.props.dimensions.width : null,
+                                            height: this.props.dimensions ? this.props.dimensions.height : null,
                                         }}
                                     className={classes.Photo}
                                     src={image}/>
@@ -132,17 +142,19 @@ class Carousel extends Component {
                     {this.props.images.map((image, index) => {
                         return (
                             <div 
-                                className={this.state.activeSlide === index ? 
+                                className={
+                                    this.state.activeSlide === index ? 
                                     [classes.Thumbnail, classes.active].join(' ') :
-                                    classes.Thumbnail} 
+                                    classes.Thumbnail
+                                } 
                                 key={index}>
                                 <div 
-                                className={classes.ThumbnailContainer}>
+                                    className={classes.ThumbnailContainer}>
                                     <ImageFadeIn
                                         bShouldUpdate={false}
                                         style={{
-                                            width: this.props.dimensions.width/this.props.images.length*0.9,
-                                            height: this.props.dimensions.height/this.props.images.length*0.9,
+                                            width: this.props.dimensions ? this.props.dimensions.width/this.props.images.length*0.9 : null,
+                                            height: this.props.dimensions ? this.props.dimensions.height/this.props.images.length*0.9 : null,
                                         }}
                                         className={classes.Photo}
                                         src={image} />

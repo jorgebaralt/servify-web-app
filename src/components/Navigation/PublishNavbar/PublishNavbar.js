@@ -8,7 +8,10 @@ const publishNavbar = (props) => {
 	return (
 		<header className={classes.Navbar}>
 			<nav ref={props.reference}>
-				<NavigationItems navbarType={props.navbarType} />
+				<NavigationItems 
+                    navbarType={props.navbarType} 
+                    isNavbarTransparent={props.navbarTransparent} 
+                    toggleAuthModal={props.toggleAuthModal} />
 			</nav>
 		</header>
 	)

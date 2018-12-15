@@ -4,7 +4,7 @@
 
 .PrevButton {
     position: absolute;
-    top: 37.5%;
+    top: 50%;
     right: 97.5%;
     transform: translateY(-37.5%);
     z-index: 1;
@@ -12,7 +12,7 @@
 
 .NextButton {
     position: absolute;
-    top: 37.5%;
+    top: 50%;
     left: 97.5%;
     transform: translateY(-37.5%);
     z-index: 1;
@@ -57,11 +57,14 @@
 
 .PrevButton button:after,
 .NextButton button:after {
+    position: absolute;
+    top: 25%;
+    right: 37.5%;
     display: block;
     content: '';
     transform: rotate(45deg);
-    width: 10px;
-    height: 10px;
+    width: 12.5px;
+    height: 12.5px;
     border: 2px solid #FF7043;
     border-radius: 12.5%;
     border-left: 0;
@@ -69,13 +72,13 @@
 }
 
 .PrevButton button:after {
-    transform: rotate(-135deg)
+    left: 37.5%;
+    transform: rotate(-135deg);
 }
 
 @media (min-width: 960px) { 
     .PrevButton button:after,
     .NextButton button:after {
-        top: 25%;
         width: 15px;
         height: 15px;
     }

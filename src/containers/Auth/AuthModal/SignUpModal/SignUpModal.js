@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 // CSS
 import classes from '../AuthModal.module.css'
 // Input Validity
-import { checkValidity } from '../../../shared/checkValidity';
+import { checkValidity } from '../../../../shared/checkValidity';
 // JSX
-import Button from '../../../components/UI/Button/Button';
-import Input from '../../../components/UI/Input/Input';
-import SVG from '../../../components/SVG/SVG';
+import Button from '../../../../components/UI/Button/Button';
+import Input from '../../../../components/UI/Input/Input';
+import SVG from '../../../../components/SVG/SVG';
 
 class AuthModal extends Component {
 
@@ -16,6 +16,7 @@ class AuthModal extends Component {
                 elementType: 'email',
                 elementConfig: {
                     type: 'text',
+                    autoComplete: 'username',
                     placeholder: 'Email'
                 },
                 value: '',
@@ -25,12 +26,14 @@ class AuthModal extends Component {
                     email: true
                 },
                 valid: false,
-                touched: false
+                touched: false,
+                style: {marginTop: 0}
             },
             password: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'password',
+                    autoComplete: 'current-password',
                     placeholder: 'Password'
                 },
                 value: '',
@@ -40,7 +43,8 @@ class AuthModal extends Component {
                     minLength: 8
                 },
                 valid: false,
-                touched: false
+                touched: false,
+                style: null
             },
         },
         bRememberMe: false,
@@ -142,6 +146,7 @@ class AuthModal extends Component {
         }
         return (
             <>  
+                Sign Up Modal
                 <Button type='facebook' blockButton={true}>Sign in with Facebook</Button>
                 <Button type='google' blockButton={true}>Sign in with Google</Button>
                 <div className={classes.SeparatorWrapper}>
@@ -151,12 +156,12 @@ class AuthModal extends Component {
                     </div>
                 </div>
                 <form style={{userSelect: 'none'}} onSubmit={this.onSubmitHandler}>
-                    {formElementsArray.map( (input, index) => {
+                    {formElementsArray.map( (input) => {
                         return <Input 
-                            style={index === 0 ? {marginTop: 0} : null}
+                            style={input[1].style}
                             key={input[0]} 
                             elementType={input[1].elementType} 
-                            elementConfig={this.state.controls[input[1].valueType].elementConfig} 
+                            elementConfig={this.state.controls[input[1].valueType].elementConfig} // Referenced to state to mutate
                             changed={(event) => this.inputChangeHandler(event, input[0])}
                             invalid={!input[1].valid}
                             shouldValidate={input[1].validation}
@@ -175,7 +180,7 @@ class AuthModal extends Component {
                                                 id="AuthModal__LoginRememberMeCheckbox" 
                                                 name="remember_me" 
                                                 value="1" 
-                                                checked={this.state.bRememberMe} />
+                                                defaultChecked={this.state.bRememberMe} />
                                             <span className={checked}>
                                                 {/* SVG Here */}
                                                 <SVG svg='checkmark-nobg'/>
@@ -206,6 +211,7 @@ class AuthModal extends Component {
                         <div className={classes.NoAccountContainer}>
                             <span className={classes.DontHaveAccount}>Don't have an account yet?</span>
                             <span className={classes.SignUp}>Sign up!</span>
+                            
                         </div>
                     </div>
                 </form>

@@ -135,7 +135,7 @@ class Carousel extends Component {
                 {this.state.activeSlide === 0 ? 
                     null : 
                     <div className={classes.PrevButton}>
-                        <button className="button" onClick={this.previous}>
+                        <button onClick={this.previous}>
                         </button>
                     </div>
                 }
@@ -143,7 +143,7 @@ class Carousel extends Component {
                 {(this.state.activeSlide + this.state.slidesToShow)*settings.rows >= this.props.children.length || this.state.slidesToShow >= this.props.children.length  ? 
                     null : 
                     <div className={classes.NextButton}>
-                        <button className="button" onClick={this.next}>
+                        <button onClick={this.next}>
                         </button>
                     </div>
                 }

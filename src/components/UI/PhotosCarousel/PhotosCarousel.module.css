@@ -57,6 +57,9 @@
 
 .PrevButton button:after,
 .NextButton button:after {
+    position: absolute;
+    top: 25%;
+    right: 37.5%;
     display: block;
     content: '';
     transform: rotate(45deg);
@@ -69,6 +72,7 @@
 }
 
 .PrevButton button:after {
+    left: 37.5%;
     transform: rotate(-135deg)
 }
 

@@ -49,11 +49,7 @@
 .Thumbnail {
     width: 100%;
     height: 100%;
-    background-image: url(https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large);
     position: absolute;
-    animation-name: keyframe_18jn58a;
-    animation-duration: 300ms;
-    animation-timing-function: ease-out;
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;

@@ -8,7 +8,10 @@ const searchNavbar = (props) => {
 	return (
 		<header className={classes.Navbar}>
 			<nav ref={props.reference}>
-				<NavigationItems className={classes.DesktopOnly} navbarType={props.navbarType} />
+				<NavigationItems 
+                    navbarType={props.navbarType} 
+                    isNavbarTransparent={props.navbarTransparent} 
+                    toggleAuthModal={props.toggleAuthModal}/>
 			</nav>
 		</header>
 	)

@@ -2,7 +2,7 @@ import React from 'react';
 // CSS
 import classes from './Footer.module.css';
 // JSX
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import SVG from '../../SVG/SVG';
 // Logo
 import logo from '../../../assets/images/servify-logos/roundedborders.png';
@@ -14,6 +14,7 @@ const footer = (props) => {
             <div>
                 <div className={classes.BannerWrapper}>
                     <div 
+                        // TODO Add background image to source assets
                         style={{backgroundImage: `url(${bgImage ? bgImage : 'http://www.bonpreufoods.com/images/image-background.jpg'})`}} 
                         className={classes.BannerBackground}
                     />
@@ -54,4 +55,4 @@ const footer = (props) => {
     );
 }
 
-export default withRouter(footer);
+export default footer;

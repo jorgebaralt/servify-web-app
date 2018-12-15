@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-// CSS
-import classes from './AuthModal.module.css'
 // JSX
 import SignUpModal from './SignUpModal/SignUpModal';
+import SignInModal from './SignInModal/SignInModal';
+import Modal from '../../../components/UI/Modal/Modal';
+
 
 class AuthModal extends Component {
-
-    state = {
-        isSignUp: false,
-    }
 
     componentDidMount () {
         // TODO Auth Redux Saga
@@ -18,9 +15,15 @@ class AuthModal extends Component {
     }
 
     switchAuthModeHandler = () => {
-        this.setState(prevState => {
-            return {isSignUp: !prevState.isSignUp};
-        });
+        switch (this.props.authModalType) {
+            case 'sign up':
+                return <SignUpModal />
+            case 'sign in':
+                return <SignInModal />
+            default:
+                // do nothing
+                return;
+        }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -29,9 +32,11 @@ class AuthModal extends Component {
 
     render() {
         return (
-            <>  
-                <SignUpModal />
-            </>
+            <Modal 
+                toggleModal={this.props.toggleModal}
+                show={this.props.show}>  
+                {this.switchAuthModeHandler()}
+            </Modal>
         );
     }
 };

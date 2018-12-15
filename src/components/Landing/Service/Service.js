@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // CSS
 import classes from './Service.module.css';
 import Rating from '../../../components/UI/Rating/Rating';
+import ImageFadeIn from '../../UI/ImageFadeIn/ImageFadeIn';
 
 class Service extends Component  {
     render () {
@@ -12,9 +13,8 @@ class Service extends Component  {
                 <a draggable="false" href='/' className={classes.Wrapper} target="_blank">
                     <div className={classes.ThumbnailWrapper}>
                         <div className={classes.ThumbnailContainer}>
-                            <div className={classes.Thumbnail} style={{backgroundImage: `url(${this.props.image})`}}>
-    
-                            </div>
+                            {/* <div className={classes.Thumbnail} style={{backgroundImage: `url(${this.props.image})`}} /> */}
+                            <ImageFadeIn className={classes.Thumbnail} src={this.props.image} />
                         </div>
                     </div>
                 </a>

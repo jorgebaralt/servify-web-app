@@ -3,9 +3,9 @@ import { withRouter, NavLink } from 'react-router-dom';
 // CSS
 import classes from './NavigationItems.module.css';
 // JSX
-import NavigationItem from './NagivationItem/NagivationItem.js';
+import NavigationItem from './NagivationItem/NagivationItem';
 import ButtonFilled from '../../UI/ButtonFilled/ButtonFilled';
-import AuthButtons from '../../AuthModal/AuthButtons/AuthButtons';
+import NavAuthButtons from './NavAuthButtons/NavAuthButtons'
 // Logo
 import servifyLogo from '../../../assets/images/servify-logo-96x96.png';
 import SearchBar from '../SearchBar/SearchBar';
@@ -25,7 +25,7 @@ const renderNavigationItems = (props) => {
 					<NavigationItem {...props} link="/help" color="white">
 						Help
 					</NavigationItem>
-					<AuthButtons {...props} color="white"/>
+					<NavAuthButtons {...props} color="white"/>
 				</>
 			);
 		case 'PublishNavbar':
@@ -60,7 +60,7 @@ const renderNavigationItems = (props) => {
 					<NavigationItem className={props.className} {...props} link="/help" >
 						Help
 					</NavigationItem>
-					<AuthButtons {...props} />
+					<NavAuthButtons {...props} />
 				</>
 			);
 		default:
@@ -76,7 +76,7 @@ const renderNavigationItems = (props) => {
 					<NavigationItem {...props} link="/help" color="white">
 						Help
 					</NavigationItem>
-					<AuthButtons {...props} color="white"/>
+					<NavAuthButtons {...props} color="white"/>
 				</>
 			);
 	}

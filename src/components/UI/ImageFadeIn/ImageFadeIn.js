@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import classes from './ImageFadeIn.module.css';
 // fadeIn function for elements
 import fadeIn from '../../../shared/fadeInElement';
+import LoadingDots from '../LoadingDots/LoadingDots';
 
 class ImageFadeIn extends Component {
     constructor (props) {
@@ -40,10 +41,11 @@ class ImageFadeIn extends Component {
             };
         } else {
             imageLoader.onload = () => {
-                this.setState({ 
-                    watcherImageWidth: this.props.style ? this.props.style.width : null,
-                    src: src,
-                    bShouldUpdate: false
+                console.log(src)
+                this.setState({
+                        watcherImageWidth: this.props.style ? this.props.style.width : null,
+                        src: src,
+                        bShouldUpdate: false
                 });
             };
         }
@@ -81,6 +83,7 @@ class ImageFadeIn extends Component {
         }
         return (
             <div className={this.props.className ? null : classes.ImageWrapper}>
+                {!this.state.src ? <div className={classes.Loading}><LoadingDots /></div> : null}
                 {this.bIsSrcset ? 
                     // If there is a srcset, otherwise render image without srcset
                     <img
@@ -91,14 +94,14 @@ class ImageFadeIn extends Component {
                         srcSet={this.state.srcset}
                         style={this.props.style}
                         className={imgClasses}
-                        onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 1000))} /> :
+                        onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 500))} /> :
                     <img
                         ref={this.myImage}
                         alt=''
                         src={this.state.src}
                         style={this.props.style}
                         className={imgClasses}
-                        onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 1000))} />
+                        onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 500))} />
                 }
             </div>
             
