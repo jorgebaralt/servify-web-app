@@ -4,9 +4,12 @@ import classes from '../AuthModal.module.css'
 // Input Validity
 import { checkValidity } from '../../../../shared/checkValidity';
 // JSX
+import OrSeparator from '../../../../components/UI/AuthModal/OrSeparator/OrSeparator';
+import Separator from '../../../../components/UI/AuthModal/Separator/Separator';
+import UtilContainer from '../../../../components/UI/AuthModal/UtilContainer/UtilContainer';
+import AuthModalSwitch from '../../../../components/UI/AuthModal/AuthModalSwitch/AuthModalSwitch';
 import Button from '../../../../components/UI/Button/Button';
 import Input from '../../../../components/UI/Input/Input';
-import SVG from '../../../../components/SVG/SVG';
 
 class SignUpModal extends Component {
 
@@ -161,7 +164,7 @@ class SignUpModal extends Component {
 
     inputChangeHandler = (event, inputIdentifier) => {
         const updatedOrderForm = {
-            ...this.state.controls
+            ...this.state.controls,
         };
         const updatedFormElement = {
             ...updatedOrderForm[inputIdentifier]
@@ -182,7 +185,7 @@ class SignUpModal extends Component {
 
     onSubmitHandler = (event) => {
         event.preventDefault();
-        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignUp);
+        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.bRememberMe);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -191,20 +194,11 @@ class SignUpModal extends Component {
 
     render() {
         const formElementsArray = Object.entries(this.state.controls);
-        let checked;
-        if (this.state.bRememberMe) {
-            checked = classes.Checked;
-        }
         return (
             <>  
                 <Button type='facebook' blockButton={true}>Sign up with Facebook</Button>
                 <Button type='google' blockButton={true}>Sign up with Google</Button>
-                <div className={classes.SeparatorWrapper}>
-                    <div className={classes.SeparatorContainer}>
-                        <div className={classes.Line} />
-                        <span className={classes.Option}>or</span>
-                    </div>
-                </div>
+                <OrSeparator />
                 <Button type='auth' clicked={this.toggleSignUpWithEmail} blockButton={true}>Sign up with Email</Button>
                 {this.state.bSignUpWithEmail ? 
                     <form style={{userSelect: 'none'}} onSubmit={this.onSubmitHandler}>
@@ -221,53 +215,20 @@ class SignUpModal extends Component {
                                 value={input[1].value} 
                                 valueType={input[1].valueType} />;
                         })}
-                        <div className={classes.UtilContainer}>
-                            <div className={classes.RememberPasswordWrapper}>
-                                <div className={classes.RememberPasswordContainer} onClick={this.toggleRememberMe}>
-                                    <div className={classes.RememberPassword}>
-                                        <div className={classes.RememberPasswordCheckbox}>
-                                            <div>
-                                                <input type="checkbox"
-                                                    aria-invalid="false" 
-                                                    id="AuthModal__LoginRememberMeCheckbox" 
-                                                    name="remember_me" 
-                                                    value="1" 
-                                                    defaultChecked={this.state.bRememberMe} />
-                                                <span className={checked}>
-                                                    {/* SVG Here */}
-                                                    <SVG svg='checkmark-nobg'/>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div className={classes.RememberMeContainer}>
-                                            <span className={classes.RememberMe}>Remember me</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={classes.ShowPasswordWrapper}>
-                                <button type="button"
-                                    onClick={this.toggleShowPassword}
-                                    className={classes.ShowPassword} 
-                                    aria-busy="false">{this.state.bShowPassword ? 'Hide password' : 'Show password'}</button>
-                            </div>
-                        </div>
+                        <UtilContainer 
+                            toggleShowPassword={this.toggleShowPassword}
+                            bShowPassword={this.state.bShowPassword}
+                            toggleRememberMe={this.toggleRememberMe}
+                            bRememberMe={this.state.bRememberMe} />
                         <Button disabled={!this.state.formIsValid} type='auth' blockButton={true}>Sign up</Button>
-                        <div className={classes.ForgotPasswordContainer}>
-                            <button type="button" 
-                                className={classes.ForgotPassword} 
-                                aria-busy="false">Forgot password</button>
-                        </div>
                     </form>
                     : null
                 }
-                <div style={{margin: '10px auto'}} className={classes.SeparatorWrapper}><div className={classes.SeparatorContainer}><div className={classes.Line} /></div></div>
-                <div className={classes.NoAccountWrapper}>
-                    <div className={classes.NoAccountContainer}>
-                        <span className={classes.DontHaveAccount}>Already have a Servify account?</span>
-                        <span onClick={() => this.props.switchAuthModalHandler('sign in')} className={classes.SignUp}>Log in</span>
-                    </div>
-                </div>
+                <Separator />
+                <AuthModalSwitch 
+                    text="Already have a Servify account?"
+                    switchText='Log in'
+                    switchAuthModalHandler={() => this.props.switchAuthModalHandler('sign up')} />
             </>
         );
     }
