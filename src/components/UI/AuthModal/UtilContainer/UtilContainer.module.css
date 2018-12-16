@@ -30,7 +30,6 @@
     vertical-align: middle;
     white-space: normal;
     position: relative;
-    /* top: 2px; */
 }
 
 .RememberPasswordCheckbox div {
@@ -97,10 +96,7 @@
     float: right;
 }
 
-.ShowPassword,
-.ForgotPassword,
-.DontHaveAccount,
-.SignUp {
+.ShowPassword {
     cursor: pointer;
     color: #1ea5c8;
     appearance: none;

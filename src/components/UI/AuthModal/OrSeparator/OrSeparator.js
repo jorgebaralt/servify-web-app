@@ -13,4 +13,4 @@ const orSeparator = () => {
     );
 }
 
-export default orSeparator
+export default orSeparator;

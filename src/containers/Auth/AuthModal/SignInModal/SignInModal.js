@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-// CSS
-import classes from '../AuthModal.module.css'
 // Input Validity
 import { checkValidity } from '../../../../shared/checkValidity';
 // JSX
 import OrSeparator from '../../../../components/UI/AuthModal/OrSeparator/OrSeparator';
 import Separator from '../../../../components/UI/AuthModal/Separator/Separator';
+import ForgotPassword from '../../../../components/UI/AuthModal/ForgotPassword/ForgotPassword';
 import UtilContainer from '../../../../components/UI/AuthModal/UtilContainer/UtilContainer';
 import AuthModalSwitch from '../../../../components/UI/AuthModal/AuthModalSwitch/AuthModalSwitch';
 import Button from '../../../../components/UI/Button/Button';
@@ -171,11 +170,7 @@ class SignInModal extends Component {
                         toggleRememberMe={this.toggleRememberMe}
                         bRememberMe={this.state.bRememberMe} />
                     <Button disabled={!this.state.formIsValid} type='auth' blockButton={true}>Sign in</Button>
-                    <div className={classes.ForgotPasswordContainer}>
-                        <button type="button" 
-                            className={classes.ForgotPassword} 
-                            aria-busy="false">Forgot password</button>
-                    </div>
+                    <ForgotPassword />
                 </form>
                 <Separator />
                 <AuthModalSwitch 

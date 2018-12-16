@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// CSS
-import classes from '../AuthModal.module.css'
 // Input Validity
 import { checkValidity } from '../../../../shared/checkValidity';
 // JSX
@@ -228,7 +226,7 @@ class SignUpModal extends Component {
                 <AuthModalSwitch 
                     text="Already have a Servify account?"
                     switchText='Log in'
-                    switchAuthModalHandler={() => this.props.switchAuthModalHandler('sign up')} />
+                    switchAuthModalHandler={() => this.props.switchAuthModalHandler('sign in')} />
             </>
         );
     }
