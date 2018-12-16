@@ -23,7 +23,6 @@ const utilContainer = (props) => {
                                     value="1" 
                                     defaultChecked={props.bRememberMe} />
                                 <span className={checked}>
-                                    {/* SVG Here */}
                                     <SVG svg='checkmark-nobg'/>
                                 </span>
                             </div>

@@ -1,0 +1,38 @@
+.Wrapper {
+    display: flex;
+    flex-flow: row;
+    height: 100%;
+    /* TODO REMOVE PLACEHOLDER BELOW */
+    height: 100vh;
+}
+
+.SidePanelWrapper {
+    position: absolute;
+    overflow-x: hidden;
+    top: 80px;
+    float: left;
+    -webkit-transform: translateZ(0px);
+    transform: translateZ(0px);
+    vertical-align: top;
+    z-index: 1;
+    overflow: auto overlay;
+}
+
+.SidePanelContainer {
+    width: 300px;
+    padding: 24px;
+    margin-bottom: 24px;
+    height: 200vh;
+}
+
+.ServicesWrapper {
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 12px;
+    width: calc(100% - 288px);
+    margin-left: 288px;
+    padding-left: 0px;
+    overflow: hidden;
+}
+
+.ServicesContainer {
+    padding: 48px 24px;
+}

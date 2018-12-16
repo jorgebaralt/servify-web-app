@@ -1,0 +1,88 @@
+.UtilContainer {
+    display: table;
+    position: relative;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.PromptWrapper {
+    display: table-cell;
+    vertical-align: top;
+    padding-right: 12px;
+    padding-top: 2px;
+}
+
+.PromptContainer {
+    display: table;
+    cursor: pointer;
+    background: transparent;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    padding: 0px;
+}
+
+.Prompt {
+    display: table-row;
+}
+
+.PromptCheckbox {
+    display: table-cell;
+    vertical-align: middle;
+    white-space: normal;
+    position: relative;
+}
+
+.PromptCheckbox div {
+    display: inline-block;
+    cursor: pointer;
+    padding: 0px;
+}
+
+.PromptCheckbox input {
+    position: absolute;
+    width: 0px;
+    opacity: 0;
+}
+
+.PromptCheckbox span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 20px;
+    height: var(--size-check-box-size, 20px);
+    width: var(--size-check-box-size, 20px);
+    text-align: center;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(215, 215, 215);
+    border-radius: 25%;
+    overflow: hidden;
+    position: relative;
+    transition: background-color 0.2s ease;
+}
+
+.Checked {
+    height: 20px !important;
+    width: 20px !important;
+    height: var(--size-check-box-size, 20px) !important;
+    width: var(--size-check-box-size, 20px) !important;
+    color: rgb(255, 255, 255) !important;
+    border-style: 1px solid #1ea5c8 !important;
+    background-color: #1ea5c8 !important;
+    color: #FFF !important;
+}
+
+.Info {
+    display: table-cell;
+    vertical-align: top;
+    text-align: justify;
+    float: right;
+    overflow-wrap: break-word;
+    color: rgb(72, 72, 72);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 8px;
+}

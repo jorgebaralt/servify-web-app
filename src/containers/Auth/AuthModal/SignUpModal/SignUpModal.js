@@ -4,6 +4,8 @@ import { checkValidity } from '../../../../shared/checkValidity';
 // JSX
 import OrSeparator from '../../../../components/UI/AuthModal/OrSeparator/OrSeparator';
 import Separator from '../../../../components/UI/AuthModal/Separator/Separator';
+import Marketing from '../../../../components/UI/AuthModal/Marketing/Marketing';
+import MarketingPrompt from '../../../../components/UI/AuthModal/MarketingPrompt/MarketingPrompt';
 import UtilContainer from '../../../../components/UI/AuthModal/UtilContainer/UtilContainer';
 import AuthModalSwitch from '../../../../components/UI/AuthModal/AuthModalSwitch/AuthModalSwitch';
 import Button from '../../../../components/UI/Button/Button';
@@ -91,6 +93,7 @@ class SignUpModal extends Component {
             },
         },
         bRememberMe: false,
+        bMarketingPrompt: false,
         bShowPassword: false,
         bSignUpWithEmail: false,
         formIsValid: false,
@@ -115,6 +118,14 @@ class SignUpModal extends Component {
         this.setState( (prevState) => {
             return {
                 bSignUpWithEmail: !prevState.bSignUpWithEmail
+            };
+        })
+    }
+
+    toggleMarketingPrompt = () => {
+        this.setState( (prevState) => {
+            return {
+                bMarketingPrompt: !prevState.bMarketingPrompt
             };
         })
     }
@@ -218,7 +229,11 @@ class SignUpModal extends Component {
                             bShowPassword={this.state.bShowPassword}
                             toggleRememberMe={this.toggleRememberMe}
                             bRememberMe={this.state.bRememberMe} />
+                        <Marketing />
                         <Button disabled={!this.state.formIsValid} type='auth' blockButton={true}>Sign up</Button>
+                        <MarketingPrompt  
+                            toggleMarketingPrompt={this.toggleMarketingPrompt}
+                            bMarketingPrompt={this.state.bMarketingPrompt} />
                     </form>
                     : null
                 }
