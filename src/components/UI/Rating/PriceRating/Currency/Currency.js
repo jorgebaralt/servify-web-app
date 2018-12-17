@@ -6,7 +6,17 @@ import SVG from '../../../../SVG/SVG';
 
 const star = (props) => {
     return (
-        <span className={classes.Currency}><SVG svg='currency' fill={props.fill} /></span>
+        <span
+            onClick={props.onClick}
+            style={props.containerStyle}
+            className={[classes.Currency, props.containerClassname].join(' ')}>
+            <SVG svg='currency' 
+                viewBox={props.viewBox}
+                width={props.width} 
+                height={props.height} 
+                style={props.style} 
+                fill={props.fill} />
+        </span>
     );
 }
 

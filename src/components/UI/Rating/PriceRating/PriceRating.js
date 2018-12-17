@@ -39,22 +39,39 @@ const starsRating = (props) => {
                  * will be filled fully. Every subsequent svg, if any, will be empty.
                  */
                 const rating = '100%';
-                currencies.push(<Currency key={i} fill={rating}/>);
+                currencies.push(
+                    <Currency 
+                        {...props}
+                        onClick={() => props.onClick((i-1)/amountOfCurrencies)}
+                        key={i} 
+                        fill={rating}/>
+                );
                 /**
                  * Continue to break the current loop and return the rest of the stars with 0% of fill, if any.
                  */
                 continue;
             }
             // Stars with 100% of fill if we have not reached the last star.
-            currencies.push(<Currency key={i} />);
+            currencies.push(
+                <Currency 
+                    {...props} 
+                    onClick={() => props.onClick((i-1)/amountOfCurrencies)} 
+                    key={i} />
+            );
             // Continue to break the current loop and avoid returning extra stars.
             continue;
         }
         // Stars with 0% of fill.
-        currencies.push(<Currency key={i} fill={'0%'} />);
+        currencies.push(
+            <Currency 
+                {...props} 
+                onClick={() => props.onClick((i-1)/amountOfCurrencies)} 
+                key={i} 
+                fill={'0%'} />
+        );
     }
     return (
-        <span className={classes.Price}>
+        <span className={[classes.Price, props.priceContainerClassname].join(' ')}>
             {currencies}
         </span>
     );

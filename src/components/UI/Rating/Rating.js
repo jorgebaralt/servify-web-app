@@ -10,7 +10,9 @@ const rating = (props) => {
             rating = <StarsRating {...props} />
             break;
         case 'price':
-            rating = <PriceRating {...props} />
+            rating = <PriceRating
+                onClick={props.onClick}
+                {...props} />
             break;
         default:
             rating = <span>Please specify an appropriate rating type.</span>

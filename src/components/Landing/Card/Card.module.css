@@ -5,13 +5,10 @@
 
 .Card {
     background-color: transparent;
-    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px;
+    box-shadow: 1px 1px 1px rgb(229, 229, 229), -1px -1px 1px rgb(229, 229, 229), rgba(0, 0, 0, 0.06) 0px 2px 4px 0px;
     float: left;
     text-align: left;
     width: 100%;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0.1);
     border-image: initial;
     border-radius: 3px;
     padding: 0px;
@@ -40,12 +37,13 @@
     height: 125px;
     min-height: 100%;
     overflow: auto;
-    background: rgb(72, 72, 72);
+    background: #EEEEEE;
 }
 
 .CardThumbnailImage {
     width: 100%;
     height: 100%;
+    background: #EEEEEE;
     background-size: cover !important;
     background-position: 50% 50% !important;
     background-repeat: no-repeat !important;
@@ -66,7 +64,6 @@
     font-size: 14px;
     line-height: 18px;
     letter-spacing: normal;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
     color: rgb(72, 72, 72);
     margin: 0px;
 }

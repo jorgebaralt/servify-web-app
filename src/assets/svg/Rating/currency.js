@@ -6,7 +6,7 @@ const currency = (props) => {
             xmlns='http://www.w3.org/2000/svg' 
 			x='0px' 
 			y='0px'
-			viewBox='0 0 1000 1000' 
+			viewBox={props.viewBox ? props.viewBox : '0 0 1000 1000' }
 			aria-hidden='true' 
 			focusable='false'
 			role='presentation' 

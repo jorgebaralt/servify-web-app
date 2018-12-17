@@ -105,12 +105,13 @@
     justify-content: center;
     align-items: center;
     padding: 0;
-    padding-left: 10%; /* TODO sensible padding-left value, find a responsive value */
+    margin: 0 auto;
 }
 
 .Category {
     flex: 1 0 21%; /* explanation below */
-    margin: 5px auto;
+    flex-grow: 0;
+    margin: 5px;
     height: 50px;
     list-style-type: none;
 }
@@ -120,8 +121,23 @@ consume free space on the row, flex-basis only needs to be large enough to enfor
 In this case, with flex-basis: 21%, there's plenty of space for the margins, but never enough 
 space for a fifth item. Meaning, 4 categories per row.*/
 
+@media (max-width: 744px) {
+    .Category {
+        flex-grow: 1;
+    }
+    .Category a {
+        justify-content: flex-start;
+    }
+}
+
 .Category a {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(229,229,229);
+    border-radius: 5px;
+    padding: 4px 8px;
+    padding-left: 16px;
     height: 100%;
     min-width: 100px;
     color: rgb(72, 72, 72);
@@ -132,17 +148,26 @@ space for a fifth item. Meaning, 4 categories per row.*/
     letter-spacing: normal;
     font-weight: 600;
     margin: 0px;
-    transition: color 0.15s ease-out;
+    transition: all 0.05s ease-out;
+}
+
+.Category a:hover {
+    border: 1px solid #FF7043;
 }
 
 .Category svg {
+    fill: #484848;
     margin-right: 10px;
-    transition: fill 0.15s ease-out;
+    transition: fill 0.05s ease-out;
+}
+
+.Category svg path {
+    fill: #484848;
 }
 
 .Category a:hover,
 .Category a:hover svg,
-.Category a:hover svg g path {
+.Category a:hover svg path {
     color: #FF7043;
     /* For SVG */
     fill: #FF7043;

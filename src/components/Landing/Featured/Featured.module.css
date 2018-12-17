@@ -66,6 +66,7 @@
     right: 0px;
     top: 0px;
     bottom: 0px;
+    background-color: #EEEEEE;
     animation-name: FadeIn;
     animation-duration: 300ms;
     animation-timing-function: ease-out;
