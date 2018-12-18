@@ -68,10 +68,9 @@
     width: 100%;
     height: 100%;
     background-color: #ffffff;
-    transition: box-shadow 200ms ease-in;
     border: 1px solid #EBEBEB;
     border-radius: 4px;
-    transition: border 0.2s ease;
+    transition: box-shadow 200ms ease-in, border 0.2s ease;
 }
 
 .BarWrapper:hover,
@@ -164,15 +163,21 @@
     bottom: 0;
 }
 
+.InputSelect {
+    border-radius: 4px;
+    color: #484848;
+    border: 1px solid #EBEBEB;
+    transition: box-shadow 200ms ease-in, border 0.2s ease;
+}
 
+.InputSelect option {
+    color: #484848;
+}
 
-
-
-
-
-
-
-
+.InputSelect:hover,
+.InputSelect:focus-within {
+    border: 1px solid rgba(255, 112, 67);
+}
 
 
 .FilterSearchButtonWrapper {

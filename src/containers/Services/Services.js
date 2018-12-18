@@ -22,7 +22,7 @@ class Services extends Component {
                 value: '',
                 bIsFocused: false
             },
-            sortBy: 'Distance' // Default
+            sortBy: 'distance' // Default
         },
         categories: {
             ...categoriesObj,
@@ -66,14 +66,32 @@ class Services extends Component {
         });
     }
 
-    inputChangeHandler = (event) => {
-        event.preventDefault();
+    inputChangeHandler = (e) => {
+        e.preventDefault();
         const updatedSearchBar = {
-            ...this.state.searchBar,
-            value: event.target.value
+            ...this.state.filter.searchBar,
+            value: e.target.value
         };
-        this.setState({
-            searchBar: updatedSearchBar
+        this.setState( (prevState) => {
+                return {
+                    filter: {
+                        ...prevState.filter,
+                        searchBar: updatedSearchBar
+                    }
+                }
+        });
+    }
+
+    selectInputHandler = (e) => {
+        e.preventDefault();
+        const value = e.target.value;
+        this.setState((prevState) => {
+            return {
+                filter: {
+                    ...prevState.filter,
+                    sortBy: value
+                }
+            }
         });
     }
 
@@ -242,7 +260,18 @@ class Services extends Component {
                                 <span>Sort by</span>
                             </div>
                             <div className={classes.SortBy}>
-
+                                <form action="/services/all" method="GET">
+                                    <select className={classes.InputSelect} 
+                                        onChange={(e) => this.selectInputHandler(e)} 
+                                        value={this.state.filter.sortBy}  
+                                        required>
+                                        <option value='distance'>Distance</option>
+                                        <option value='popularity'>Popularity</option>
+                                        <option value='priceRating'>Price Rating</option>
+                                        <option value='newest'>Newest</option>
+                                        <option value='oldest'>Oldest</option>
+                                    </select>
+                                </form>
                             </div>
                         </div>
                         {/* Sort By End */}
