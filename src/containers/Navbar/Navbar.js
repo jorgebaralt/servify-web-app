@@ -115,14 +115,14 @@ class Navbar extends PureComponent {
 	 * Add Event Listener
 	 */
 	componentDidMount() {
-		// window.addEventListener('scroll', this.changeNavbarOnWindowScroll);
+		window.addEventListener('scroll', this.changeNavbarOnWindowScroll);
 	}
 
 	/**
 	 * Remove Event Listener
 	 */
 	componentWillUnmount() {
-		// window.removeEventListener('scroll', this.changeNavbarOnWindowScroll);
+		window.removeEventListener('scroll', this.changeNavbarOnWindowScroll);
 	}
 
 	/**
