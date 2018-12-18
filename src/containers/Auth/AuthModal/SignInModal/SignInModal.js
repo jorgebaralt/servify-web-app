@@ -20,9 +20,9 @@ class SignInModal extends Component {
                     type: 'text',
                     autoComplete: 'email',
                     placeholder: 'Email',
-                    autocorrect:"off",
-                    autocapitalize:"off",
-                    spellcheck:"false"
+                    autoCorrect:"off",
+                    autoCapitalize:"off",
+                    spellCheck:"false"
                 },
                 value: '',
                 valueType: 'email',

@@ -21,9 +21,9 @@ class SignUpModal extends Component {
                     type: 'text',
                     autoComplete: 'email',
                     placeholder: 'Email',
-                    autocorrect:"off",
-                    autocapitalize:"off",
-                    spellcheck:"false"
+                    autoCorrect:"off",
+                    autoCapitalize:"off",
+                    spellCheck:"false"
                 },
                 value: '',
                 valueType: 'email',
@@ -41,9 +41,9 @@ class SignUpModal extends Component {
                     type: 'text',
                     autoComplete: 'first name',
                     placeholder: 'First name',
-                    autocorrect:"off",
-                    autocapitalize:"on",
-                    spellcheck:"false"
+                    autoCorrect:"off",
+                    autoCapitalize:"on",
+                    spellCheck:"false"
                 },
                 value: '',
                 valueType: 'text',
@@ -59,9 +59,9 @@ class SignUpModal extends Component {
                     type: 'text',
                     autoComplete: 'last name',
                     placeholder: 'Last name',
-                    autocorrect:"off",
-                    autocapitalize:"on",
-                    spellcheck:"false"
+                    autoCorrect:"off",
+                    autoCapitalize:"on",
+                    spellCheck:"false"
                 },
                 value: '',
                 valueType: 'text',
@@ -77,9 +77,9 @@ class SignUpModal extends Component {
                     type: 'password',
                     autoComplete: 'current-password',
                     placeholder: 'Password',
-                    autocorrect:"off",
-                    autocapitalize:"off",
-                    spellcheck:"false"
+                    autoCorrect:"off",
+                    autoCapitalize:"off",
+                    spellCheck:"false"
                 },
                 value: '',
                 valueType: 'password',

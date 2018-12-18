@@ -57,8 +57,7 @@ const input = (props) => {
                 className={inputClasses.join(' ')} 
                 {...props.elementConfig} 
                 defaultValue={props.value}
-                onChange={props.changed}
-                />;
+                onChange={props.changed} />;
     }
 
 

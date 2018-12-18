@@ -7,7 +7,7 @@ import Navbar from '../../containers/Navbar/Navbar';
 import Footer from '../../components/UI/Footer/Footer';
 
 /**
- * Modal functionality and context, provider and consumer in layout render
+ * Modal functionality and context. The provider and consumer is inside the layout render method
  */
 const MyAuthModalContext = React.createContext();
 class MyAuthModalProvider extends Component {
