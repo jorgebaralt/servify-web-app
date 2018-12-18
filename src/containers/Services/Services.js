@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 import categories from '../../shared/categories';
 // CSS
 import classes from './Services.module.css'
 // JSX
-import { Link } from 'react-router-dom';
+// import Carousel from '../../components/UI/Carousel/Carousel';
+// import Service from '../../components/Landing/Service/Service';
+// import Featured from '../../components/Landing/Featured/Featured';
 import Rating from '../../components/UI/Rating/Rating';
+import DefaultServices from './DefaultServices/DefaultServices';
+import FilteredServices from './FilteredServices/FilteredServices';
 
 // Categories object to be used for filtering
 const categoriesObj = {};
@@ -35,6 +40,10 @@ class Services extends Component {
             list: {
                 bIsClosed: false
             }
+        },
+        location: {
+            city: null,
+            state: null
         }
     }
 
@@ -128,6 +137,28 @@ class Services extends Component {
                 }
             }
         });
+    }
+
+    savePosition = (position) => {
+        const city = position.data.city;
+        const state = position.data.region;
+        this.setState( () => {
+                return {
+                    location: {
+                        city,
+                        state
+                    }
+                }
+            }
+        );
+    }
+
+    componentDidMount () {
+        if (navigator.geolocation) {
+            axios.get('http://ipinfo.io').then(
+                (response) => this.savePosition(response)
+            );
+        }
     }
 
     render () {
@@ -364,7 +395,11 @@ class Services extends Component {
                 {/* Side Panel Wrapper End */}
                 <div className={classes.ServicesWrapper}>
                     <div className={classes.ServicesContainer}>
-                        <Link to='/services/1'>Test Service</Link>
+                        { !Object.values(this.state.categories).includes(true) ? 
+                        <DefaultServices 
+                            city={this.state.location.city} 
+                            state={this.state.location.state} /> :
+                        <FilteredServices categories={this.state.categories} />}
                     </div>
                 </div>
             </div>

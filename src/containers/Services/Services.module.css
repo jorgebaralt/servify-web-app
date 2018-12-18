@@ -5,8 +5,11 @@
 }
 
 .SidePanelWrapper {
+    position: sticky;
+    top: 0;
+    left: 0;
     overflow-x: hidden;
-    max-height: calc(100vh - 70px);
+    max-height: 100vh;
     width: 300px;
     transform: translateZ(0px);
     vertical-align: top;
@@ -441,13 +444,23 @@
 
 .ServicesWrapper {
     border-left: 1px solid rgb(229, 229, 229);
-    width: calc(100% - 288px);
+    width: calc(100% - 300px);
     padding-left: 0px;
     overflow: hidden;
 }
 
 .ServicesContainer {
-    padding: 48px 24px;
+    padding: 28px 24px;
+    margin: 0 auto;
+    background-color: transparent;
+    max-width: 1080px;
+    min-height: 400px;
+}
+
+.ServicesContainer h1 {
+    color: rgb(72, 72, 72);
+    user-select: none;
+    margin-bottom: 40px;
 }
 
 .RatingFilter {

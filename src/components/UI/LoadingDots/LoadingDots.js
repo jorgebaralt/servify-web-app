@@ -1,4 +1,5 @@
 import React from 'react';
+// CSS
 import classes from './LoadingDots.module.css';
 
 const LoadingDots = ( props ) => {
@@ -6,8 +7,10 @@ const LoadingDots = ( props ) => {
 		<div className={classes.LoadingDots}>
 			<svg 
 				xmlns="http://www.w3.org/2000/svg" 
-				width="60px" 
-				height="40px" viewBox="0 0 100 100" 
+				width={props.width ? props.width : "60px"} 
+				height={props.height ? props.height : "40px"}
+				className={props.className ? props.className : null}
+				viewBox="0 0 100 100" 
 				preserveAspectRatio="xMidYMid">
 				<g transform="translate(20 50)">
 					<circle cx="0" cy="0" r="10" fill="#FFCC80" transform="scale(0.842474 0.842474)">

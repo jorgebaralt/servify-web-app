@@ -54,6 +54,16 @@ class ImageFadeIn extends Component {
         this.setImage();
     }
 
+    componentWillMount () {
+        console.log('ping')
+        // TODO Fix memory leaks
+        if (!this.state.bShouldUpdate) {
+            this.setImage = () => {
+                return;
+            }
+        }
+    }
+
     // If there is a resize, then reset the image
     componentDidUpdate () {
         if (this.props.style) { 
