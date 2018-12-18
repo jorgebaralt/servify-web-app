@@ -5,6 +5,7 @@ import classes from './Footer.module.css';
 import { NavLink } from 'react-router-dom';
 import SVG from '../../SVG/SVG';
 // Logo
+import ImageFadeIn from '../../../components/UI/ImageFadeIn/ImageFadeIn';
 import logo from '../../../assets/images/servify-logos/roundedborders.png';
 
 const footer = (props) => {
@@ -16,8 +17,7 @@ const footer = (props) => {
                     <div 
                         // TODO Add background image to source assets
                         style={{backgroundImage: `url(${bgImage ? bgImage : 'http://www.bonpreufoods.com/images/image-background.jpg'})`}} 
-                        className={classes.BannerBackground}
-                    />
+                        className={classes.BannerBackground} />
                     <div className={classes.BannerContainer}>
                         <div className={classes.SocialMedia}>
                             <div className={classes.FollowUs}>Follow Us</div>
@@ -30,11 +30,13 @@ const footer = (props) => {
                 </div>
                 <div className={classes.FooterWrapper}>
                     <NavLink to='/'>
-                        <div className={classes.LogoWrapper}><img className={classes.Logo} draggable='false' src={logo} alt='' /></div>
+                        <div className={classes.LogoWrapper}>
+                            <ImageFadeIn className={classes.Logo} draggable='false' src={logo} alt='' />
+                        </div>
                     </NavLink>
                     <div className={classes.NavLinks}>
                         <NavLink exact activeClassName={classes.active} className={classes.NavLink} to='/'><span className={classes.Link}>Homepage</span></NavLink>
-                        <NavLink activeClassName={classes.active} className={classes.NavLink} to='/post/overview'><span className={classes.Link}>Post</span></NavLink>
+                        <NavLink activeClassName={classes.active} className={classes.NavLink} to='/publish/overview'><span className={classes.Link}>Post</span></NavLink>
                         <NavLink activeClassName={classes.active} className={classes.NavLink} to='/services'><span className={classes.Link}>Services</span></NavLink>
                         <NavLink activeClassName={classes.active} className={classes.NavLink} to='/help'><span className={classes.Link}>Help</span></NavLink>
                         <NavLink activeClassName={classes.active} className={classes.NavLink} to='/support'><span className={classes.Link}>Support</span></NavLink>

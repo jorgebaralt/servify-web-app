@@ -1,10 +1,12 @@
 import React from 'react';
 // CSS
 import classes from './Card.module.css';
+// JSX
+import { Link } from 'react-router-dom';
 
 const card = (props) => {
     return (
-        <a href='/'>
+        <Link to='/services'>
             <div className={classes.CardWrapper}>
                 <div className={classes.Card}>
                     <div className={classes.CardTable}>
@@ -21,7 +23,7 @@ const card = (props) => {
                     </div>
                 </div>
             </div>
-        </a>
+        </Link>
     );
 };
 

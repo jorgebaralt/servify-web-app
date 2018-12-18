@@ -86,7 +86,6 @@ class Landing extends Component {
                 {/* TODO improve banner */}
                 {/* <Banner /> */}
                 {/* Page Content */}
-                {/* TODO: Show a new search-bar, Fixed top  */}
                 <div className={classes.Container}>
                     { this.props.isMobile ? 
                         <>
@@ -175,7 +174,7 @@ class Landing extends Component {
                             <Featured image='https://a0.muscache.com/4ea/air/v2/pictures/a728b050-9512-48a7-ab9c-858e9b291cc0.jpg?t=r:w654-h400-sfit,e:fjpg-c90'/>
                         </Carousel>
                         <div>
-                            <AnchorLink text='Show more Servify featured services' href='/' />
+                            <AnchorLink text='Show more Servify featured services' href='/services/featured' />
                         </div>
                     </div>
                     <br />

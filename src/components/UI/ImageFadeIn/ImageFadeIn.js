@@ -86,6 +86,7 @@ class ImageFadeIn extends Component {
                 {this.bIsSrcset ? 
                     // If there is a srcset, otherwise render image without srcset
                     <img
+                        draggable={this.props.draggable}
                         ref={this.myImage}
                         alt=''
                         sizes="100vw"
@@ -95,6 +96,7 @@ class ImageFadeIn extends Component {
                         className={imgClasses}
                         onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 500))} /> :
                     <img
+                        draggable={this.props.draggable}
                         ref={this.myImage}
                         alt=''
                         src={this.state.src}

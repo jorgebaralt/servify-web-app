@@ -128,9 +128,14 @@
 }
 
 .Logo {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     width: 124px;
+    height: 124px;
+    background-color: #EEEEEE;
+    border-radius: 30px;
     margin: 0 auto;
     text-decoration: none;
 }
