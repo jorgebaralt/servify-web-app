@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import categories from '../../shared/categories';
 // Redux
 import { connect } from 'react-redux';
@@ -9,6 +10,7 @@ import placeholderHeader from '../../assets/images/placeholder-header.jpg'
 // SVG
 import SVG from '../../components/SVG/SVG';
 // JSX
+import { Link } from 'react-router-dom';
 import HeaderImage from '../../components/UI/HeaderImage/HeaderImage';
 import Carousel from '../../components/UI/Carousel/Carousel';
 import SearchBox from '../../components/UI/SearchBox/SearchBox';
@@ -22,6 +24,35 @@ import LearnMore from '../../components/Landing/LearnMore/LearnMore';
 
 class Landing extends Component {
 
+    state = {
+        city: null,
+        state: null,
+    }
+
+    savePosition = (position) => {
+        const city = position.data.city;
+        const state = position.data.region;
+        this.setState( () => {
+                return {
+                    city,
+                    state
+                }
+            }
+        );
+    }
+
+    componentDidMount () {
+        if (navigator.geolocation) {
+            axios.get('http://ipinfo.io').then(
+                (response) => this.savePosition(response)
+            );
+        }
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps !== this.props || nextState !== this.state || nextProps.children !== this.props.children;
+    }
+
     render() {
         // Array that holds the JSX option elements containing the category titles for a datalist
         const categoriesDatalist = categories.map( (category, index) => {
@@ -31,10 +62,10 @@ class Landing extends Component {
         const categoriesList = categories.map( (category) => {
             return (
                 <li className={classes.Category} key={category.title}>
-                    <a href="/">
+                    <Link to="/services">
                         {/* Category.icon pointer protection */}
                         {category.icon ? <category.icon /> : null}{category.title}&nbsp;<SVG svg='right-arrow' />
-                    </a>
+                    </Link>
                 </li>
             );
         });
@@ -104,26 +135,26 @@ class Landing extends Component {
                                 ratingAmount='1537'
                                 image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                             <Service
-                                    header='Plumbing'
-                                    title='A Toilet'
-                                    priceRating='0.35'
-                                    ratingAvg={0.17}
-                                    ratingAmount='1537'
-                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                header='Plumbing'
+                                title='A Toilet'
+                                priceRating='0.35'
+                                ratingAvg={0.17}
+                                ratingAmount='1537'
+                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                             <Service
-                                        header='Plumbing'
-                                        title='A Toilet'
-                                        priceRating='0.57'
-                                        ratingAvg={0.17}
-                                        ratingAmount='1537'
-                                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                header='Plumbing'
+                                title='A Toilet'
+                                priceRating='0.57'
+                                ratingAvg={0.17}
+                                ratingAmount='1537'
+                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                             <Service
-                                        header='Plumbing'
-                                        title='A Toilet'
-                                        priceRating='0.75'
-                                        ratingAvg={0.17}
-                                        ratingAmount='1537'
-                                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                header='Plumbing'
+                                title='A Toilet'
+                                priceRating='0.75'
+                                ratingAvg={0.17}
+                                ratingAmount='1537'
+                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                         </Carousel>
                     </div>
                     <br />
@@ -147,7 +178,44 @@ class Landing extends Component {
                             <AnchorLink text='Show more Servify featured services' href='/' />
                         </div>
                     </div>
-                    <LearnMore />
+                    <br />
+                    <h1>New services near {this.state.city && this.state.state ? `${this.state.city},  ${this.state.state}` : 'you'}</h1>
+                    <div>
+                        <Carousel>
+                            {/* PLACEHOLDERS */}
+                            <Service
+                                header='Home Services'
+                                title='A Random Service'
+                                priceRating='0.05'
+                                ratingAvg={0.97}
+                                ratingAmount='1293'
+                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                            <Service
+                                header='Plumbing'
+                                title='A Toilet'
+                                priceRating='0.66'
+                                ratingAvg={0.52}
+                                ratingAmount='1537'
+                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                            <Service
+                                header='Plumbing'
+                                title='A Toilet'
+                                priceRating='0.23'
+                                ratingAvg={0.31}
+                                ratingAmount='1537'
+                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                            <Service
+                                header='Plumbing'
+                                title='A Toilet'
+                                priceRating='0.23'
+                                ratingAvg={0.31}
+                                ratingAmount='1537'
+                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                        </Carousel>
+                    </div>
+                    <LearnMore 
+                        city={this.state.city}
+                        state={this.state.state} />
                     <br />
                     <h1>All Categories</h1>
                     <ul className={classes.Categories}>

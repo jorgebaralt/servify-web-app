@@ -22,6 +22,7 @@ class Services extends Component {
                 value: '',
                 bIsFocused: false
             },
+            sortBy: 'Distance' // Default
         },
         categories: {
             ...categoriesObj,
@@ -235,6 +236,16 @@ class Services extends Component {
                             </div>
                         </div>
                         {/* Service Name Filter End */}
+                        {/* Sort By Start */}
+                        <div className={classes.FilterWrapper}>
+                            <div className={classes.FilterTitle}>
+                                <span>Sort by</span>
+                            </div>
+                            <div className={classes.SortBy}>
+
+                            </div>
+                        </div>
+                        {/* Sort By End */}
                         {/* Categories Start */}
                         <div className={classes.ListWrapper}>
                             <button className={classes.ListToggleButton} onClick={() => this.toggleListHandler(listKeys[1])}>
@@ -264,7 +275,7 @@ class Services extends Component {
                             }
                         </div>
                         {/* Categories End */}
-                        {/* Service Name Filter Start */}
+                        {/* Service Price Filter Start */}
                         <div className={classes.ListWrapper}>
                             <button className={classes.ListToggleButton} onClick={() => this.toggleListHandler(listKeys[2])}>
                                 <div className={classes.ToggleButtonHeader}>
@@ -282,11 +293,17 @@ class Services extends Component {
                                         <div className={classes.RatingContainer}>
                                             <div className={classes.FilterOverview}>
                                                 <Rating
+                                                    rating={0} 
                                                     type='price' /> 
-                                                <span style={{    display: 'inline-flex',
-                                                    alignItems: 'flex-end',
-                                                    height: '13px',
-                                                    marginLeft: '5px'}}>-</span> 
+                                                <span style={
+                                                    {    
+                                                        display: 'inline-flex',
+                                                        alignItems: 'center',
+                                                        fontSize: '16px',
+                                                        fontWeight: '600',
+                                                        height: '13px',
+                                                        margin: '0 5px 0 10px'
+                                                    }}>-</span> {/** Separator */}
                                                 <Rating 
                                                     rating={this.state.prices.rating} 
                                                     type='price' />
@@ -312,7 +329,7 @@ class Services extends Component {
                                 </>
                             }
                         </div>
-                        {/* Service Name Filter End */}
+                        {/* Service Price Filter End */}
                     </div>
                 </div>
                 {/* Side Panel Wrapper End */}
