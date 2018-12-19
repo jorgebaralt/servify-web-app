@@ -2,11 +2,12 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between
 }
 
 .Service {
-    flex: 1 0 21%;
+    flex: 1 0 22.5%;
     margin: 5px;
     height: 100%;
+    flex-grow: 0;
 }

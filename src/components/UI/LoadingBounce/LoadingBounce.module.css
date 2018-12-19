@@ -10,7 +10,7 @@
     margin: 6px;
     border-radius: 100%;
     display: inline-block;
-    animation: BounceDelay 1.4s infinite ease-in-out both;
+    animation: bounceDelay 1.4s infinite ease-in-out both;
 }
 
 .Spinner .Bounce1 {
@@ -33,7 +33,7 @@
     background-color: #FB8C00;
 }
 
-@-webkit-keyframes BounceDelay {
+@-webkit-keyframes bounceDelay {
     0%, 80%, 100% { 
         transform: scale(0);
     }
@@ -42,7 +42,7 @@
     }
 }
 
-@keyframes BounceDelay {
+@keyframes bounceDelay {
     0%, 80%, 100% { 
         transform: scale(0);
     } 40% { 

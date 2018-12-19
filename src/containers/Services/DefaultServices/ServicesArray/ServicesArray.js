@@ -105,6 +105,7 @@ const services = (props) => {
                 ` ${props.city}, ${props.state}` : 
                 ' you'}
             </h1>
+            {placeholderServicesCarousel}
         </>
     );
 }

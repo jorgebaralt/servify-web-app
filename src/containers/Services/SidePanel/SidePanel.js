@@ -44,8 +44,7 @@ class Services extends Component {
         location: {
             city: null,
             state: null
-        },
-        bIsDefault: true
+        }
     }
 
     applyFocusWithin () {
@@ -124,8 +123,7 @@ class Services extends Component {
                 categories: {
                     ...prevState.categories,
                     [key]: !prevState.categories[key]
-                },
-                bIsDefault: !Object.values(prevState.categories).includes(true)
+                }
             }
         });
     }
@@ -221,6 +219,7 @@ class Services extends Component {
         // List keys to toggle lists close status respectively
         const listKeys = Object.keys(this.state);
         // bIsDefault bool to decide which container to load
+        const bIsDefault = !Object.values(this.state.categories).includes(true);
         return (
             <div className={classes.Wrapper}>
                 {/* Side Panel Wrapper Start */}
@@ -398,13 +397,13 @@ class Services extends Component {
                 {/* Side Panel Wrapper End */}
                 <div className={classes.ServicesWrapper}>
                     <div className={classes.ServicesContainer}>
-                        { this.state.bIsDefault ? 
+                        { bIsDefault ? 
                         <DefaultServices 
-                            bIsDefault={this.state.bIsDefault}
+                            bIsDefault={bIsDefault}
                             city={this.state.location.city} 
                             state={this.state.location.state} /> :
                         <FilteredServices 
-                            bIsDefault={this.state.bIsDefault}
+                            bIsDefault={bIsDefault}
                             categories={this.state.categories} />}
                     </div>
                 </div>

@@ -4,7 +4,7 @@ import classes from './Service.module.css';
 // JSX
 import { Link } from 'react-router-dom';
 import Rating from '../../../components/UI/Rating/Rating';
-import ImageFadeIn from '../../UI/ImageFadeIn/ImageFadeIn';
+// import ImageFadeIn from '../../UI/ImageFadeIn/ImageFadeIn';
 
 const service = (props) => {
     const totalStarsRatingAmount = props.totalAmount ? props.totalAmount : 5;
@@ -14,8 +14,8 @@ const service = (props) => {
             <Link draggable="false" to={props.href ? props.href : '/services/notfound'} className={classes.Wrapper} target="_blank">
                 <div className={classes.ThumbnailWrapper}>
                     <div className={classes.ThumbnailContainer}>
-                        {/* <div className={classes.Thumbnail} style={{backgroundImage: `url(${props.image})`}} /> */}
-                        <ImageFadeIn className={classes.Thumbnail} src={props.image} />
+                        <div className={classes.Thumbnail} style={{backgroundImage: `url(${props.image})`}} />
+                        {/* <ImageFadeIn className={classes.Thumbnail} src={props.image} /> */}
                     </div>
                 </div>
             </Link>

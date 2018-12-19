@@ -7,7 +7,7 @@ import Service from '../../../../components/Landing/Service/Service';
 const services = () => {
     const services = [];
     // PLACEHOLDER
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 20; i++) {
         services.push(i);
     }
     return (
