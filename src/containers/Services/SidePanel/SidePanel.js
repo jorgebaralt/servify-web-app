@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import categories from '../../shared/categories';
+import categories from '../../../shared/categories';
 // CSS
-import classes from './Services.module.css'
+import classes from './SidePanel.module.css'
 // JSX
-// import Carousel from '../../components/UI/Carousel/Carousel';
-// import Service from '../../components/Landing/Service/Service';
-// import Featured from '../../components/Landing/Featured/Featured';
-import Rating from '../../components/UI/Rating/Rating';
-import DefaultServices from './DefaultServices/DefaultServices';
-import FilteredServices from './FilteredServices/FilteredServices';
+import Rating from '../../../components/UI/Rating/Rating';
 
 // Categories object to be used for filtering
 const categoriesObj = {};
@@ -17,7 +12,7 @@ categories.map( (category) => {
     return categoriesObj[category.title.replace(/[^a-zA-Z0-9]/g, '')] = false; // Parsing special characters from titles to allow only letters
 });
 
-class Services extends Component {
+class SidePanel extends Component {
     state = {
         filter: {
             searchBar: {
@@ -137,28 +132,6 @@ class Services extends Component {
                 }
             }
         });
-    }
-
-    savePosition = (position) => {
-        const city = position.data.city;
-        const state = position.data.region;
-        this.setState( () => {
-                return {
-                    location: {
-                        city,
-                        state
-                    }
-                }
-            }
-        );
-    }
-
-    componentDidMount () {
-        if (navigator.geolocation) {
-            axios.get('http://ipinfo.io').then(
-                (response) => this.savePosition(response)
-            );
-        }
     }
 
     render () {
@@ -395,21 +368,9 @@ class Services extends Component {
                     </div>
                 </div>
                 {/* Side Panel Wrapper End */}
-                <div className={classes.ServicesWrapper}>
-                    <div className={classes.ServicesContainer}>
-                        { bIsDefault ? 
-                        <DefaultServices 
-                            bIsDefault={bIsDefault}
-                            city={this.state.location.city} 
-                            state={this.state.location.state} /> :
-                        <FilteredServices 
-                            bIsDefault={bIsDefault}
-                            categories={this.state.categories} />}
-                    </div>
-                </div>
             </div>
         )
     }
 }
 
-export default React.memo(Services);
+export default SidePanel;

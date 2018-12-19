@@ -4,12 +4,8 @@ import categories from '../../shared/categories';
 // CSS
 import classes from './Services.module.css'
 // JSX
-// import Carousel from '../../components/UI/Carousel/Carousel';
-// import Service from '../../components/Landing/Service/Service';
-// import Featured from '../../components/Landing/Featured/Featured';
-import Rating from '../../components/UI/Rating/Rating';
-import DefaultServices from './DefaultServices/DefaultServices';
-import FilteredServices from './FilteredServices/FilteredServices';
+import ServicesContainer from './ServicesContainer/ServicesContainer';
+import SidePanel from './SidePanel/SidePanel';
 
 // Categories object to be used for filtering
 const categoriesObj = {};
@@ -44,8 +40,7 @@ class Services extends Component {
         location: {
             city: null,
             state: null
-        },
-        bIsDefault: true
+        }
     }
 
     applyFocusWithin () {
@@ -124,8 +119,7 @@ class Services extends Component {
                 categories: {
                     ...prevState.categories,
                     [key]: !prevState.categories[key]
-                },
-                bIsDefault: !Object.values(prevState.categories).includes(true)
+                }
             }
         });
     }
@@ -221,196 +215,20 @@ class Services extends Component {
         // List keys to toggle lists close status respectively
         const listKeys = Object.keys(this.state);
         // bIsDefault bool to decide which container to load
+        const bIsDefault = !Object.values(this.state.categories).includes(true);
         return (
             <div className={classes.Wrapper}>
-                {/* Side Panel Wrapper Start */}
                 <div className={classes.SidePanelWrapper}>
-                    <div className={classes.SidePanelContainer}>
-                        {/* Service Name Filter Start */}
-                        <div className={classes.FilterWrapper}>
-                            <div className={classes.FilterTitle}>
-                                <span>Service</span>
-                            </div>
-                            <div className={classes.FilterContainer}>
-                                <div className={classes.FilterInputWrapper}>
-                                    {/* Search Bar Start */}
-                                    <div className={[classes.SearchBarAnchor, classes.SearchBarWrapper].join(' ')}>
-                                        <div className={searchBarContainerClasses.join(' ')}>
-                                            <div className={classes.BarWrapper}>
-                                                <form action="/services/all" method="GET">
-                                                    <div 
-                                                        // dir means direction of text for languages (ltr = left to right)
-                                                        dir="ltr">
-                                                        <div className={classes.BarContainer}>
-                                                            <label htmlFor={this.state.filter.searchBar.inputId} className={classes.LabelWrapper}>
-                                                                <span className={classes.SearchBarSpan}>Search</span>
-                                                                <div className={classes.InputWrapper}>
-                                                                    <div className={classes.InputContainer}>
-                                                                        <input
-                                                                            onFocus={() => this.applyFocusWithin()}
-                                                                            onBlur={() => this.removeFocusWithin()}
-                                                                            onChange={(event) => this.inputChangeHandler(event)}
-                                                                            type="text"
-                                                                            className={classes.Input}
-                                                                            role="combobox"
-                                                                            aria-autocomplete="list" 
-                                                                            aria-describedby={this.state.filter.searchBar.description}
-                                                                            aria-controls={this.state.filter.searchBar.listId}
-                                                                            aria-expanded="false" 
-                                                                            autoComplete="off" 
-                                                                            autoCorrect="off" 
-                                                                            spellCheck="false" 
-                                                                            id={this.state.filter.searchBar.inputId}
-                                                                            name="services_filter_query" 
-                                                                            placeholder="Name" 
-                                                                            value={this.state.filter.searchBar.value}  />
-                                                                    </div>
-                                                                </div>
-                                                                <button className={classes.QuestionMark}>
-                                                                    <svg
-                                                                        viewBox="0 0 16 16" 
-                                                                        role="presentation" 
-                                                                        aria-hidden="true" 
-                                                                        focusable="false" 
-                                                                        style={{height: '18px',width: '18px',display: 'block',fill: 'currentColor'}}>
-                                                                        <path d="m2.5 7c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5-2 4.5-4.5 4.5-4.5-2-4.5-4.5m13.1 6.9-2.8-2.9c.7-1.1 1.2-2.5 1.2-4 0-3.9-3.1-7-7-7s-7 3.1-7 7 3.1 7 7 7c1.5 0 2.9-.5 4-1.2l2.9 2.8c.2.3.5.4.9.4.3 0 .6-.1.8-.4.5-.5.5-1.2 0-1.7"></path>
-                                                                    </svg>
-                                                                </button>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {/* Search Bar End */}
-                                </div>
-                            </div>
-                        </div>
-                        {/* Service Name Filter End */}
-                        {/* Sort By Start */}
-                        <div className={classes.FilterWrapper}>
-                            <div className={classes.FilterTitle}>
-                                <span>Sort by</span>
-                            </div>
-                            <div className={classes.SortBy}>
-                                <form action="/services/all" method="GET">
-                                    <select className={classes.InputSelect} 
-                                        onChange={(e) => this.selectInputHandler(e)} 
-                                        value={this.state.filter.sortBy}  
-                                        required>
-                                        <option value='distance'>Distance</option>
-                                        <option value='popularity'>Popularity</option>
-                                        <option value='priceRating'>Price Rating</option>
-                                        <option value='newest'>Newest</option>
-                                        <option value='oldest'>Oldest</option>
-                                    </select>
-                                </form>
-                            </div>
-                        </div>
-                        {/* Sort By End */}
-                        {/* Categories Start */}
-                        <div className={classes.ListWrapper}>
-                            <button className={classes.ListToggleButton} onClick={() => this.toggleListHandler(listKeys[1])}>
-                                <div className={classes.ToggleButtonHeader}>
-                                    <div className={classes.ToggleButtonTextContainer}>
-                                        <span className={classes.ToggleButtonText}>Categories</span>
-                                    </div>
-                                    <div className={classes.ToggleButtonArrowWrapper}>
-                                        <div className={classes.ToggleButtonArrowContainer}>
-                                            <span className={toggleButtonCategoriesClasses.join(' ')} />
-                                        </div>
-                                    </div>
-                                </div>
-                                {this.state.categories.list.bIsClosed ? 
-                                    <span className={classes.ClosedText}>
-                                        Home Services, Health, +{categories.length - 2} more
-                                    </span> :
-                                    null}
-                            </button>
-                            {this.state.categories.list.bIsClosed ?
-                                null :
-                                <div className={classes.CategoriesListWrapper}>
-                                    <ul className={classes.CategoriesListContainer}>
-                                        {categoriesList}
-                                    </ul>
-                                </div>
-                            }
-                        </div>
-                        {/* Categories End */}
-                        {/* Service Price Filter Start */}
-                        <div className={classes.ListWrapper}>
-                            <button className={classes.ListToggleButton} onClick={() => this.toggleListHandler(listKeys[2])}>
-                                <div className={classes.ToggleButtonHeader}>
-                                    <div className={classes.ToggleButtonTextContainer}>
-                                        <span className={classes.ToggleButtonText}>Price rating</span>
-                                    </div>
-                                    <div className={classes.ToggleButtonArrowWrapper}>
-                                        <div className={classes.ToggleButtonArrowContainer}>
-                                            <span className={toggleButtonPricesClasses.join(' ')} />
-                                        </div>
-                                    </div>
-                                </div>
-                                {this.state.prices.list.bIsClosed ? 
-                                    <span className={classes.ClosedText}>
-                                        <div className={classes.RatingContainer}>
-                                            <div className={classes.FilterOverview}>
-                                                <Rating
-                                                    rating={0} 
-                                                    type='price' /> 
-                                                <span style={
-                                                    {    
-                                                        display: 'inline-flex',
-                                                        alignItems: 'center',
-                                                        fontSize: '16px',
-                                                        fontWeight: '600',
-                                                        height: '13px',
-                                                        margin: '0 5px 0 10px'
-                                                    }}>-</span> {/** Separator */}
-                                                <Rating 
-                                                    rating={this.state.prices.rating} 
-                                                    type='price' />
-                                            </div>
-                                        </div>
-                                    </span> :
-                                    null}
-                            </button>
-                            {this.state.prices.list.bIsClosed ?
-                                null :
-                                <>
-                                    <div className={classes.RatingContainer}>
-                                        <Rating 
-                                            rating={this.state.prices.rating} 
-                                            onClick={this.setRatingFilter}
-                                            priceContainerClassname={ratingClasses.join(' ')} 
-                                            viewBox={'0 0 500 500'} 
-                                            type='price'/>
-                                    </div>
-                                    <div className={classes.RatingFilter}>
-                                        <span>Price rating filter</span>
-                                    </div>
-                                </>
-                            }
-                        </div>
-                        {/* Service Price Filter End */}
-                    </div>
+                    {/* Side Panel */}
+                    <SidePanel />
                 </div>
-                {/* Side Panel Wrapper End */}
                 <div className={classes.ServicesWrapper}>
-                    <div className={classes.ServicesContainer}>
-                        { this.state.bIsDefault ? 
-                        <DefaultServices 
-                            bIsDefault={this.state.bIsDefault}
-                            city={this.state.location.city} 
-                            state={this.state.location.state} /> :
-                        <FilteredServices 
-                            bIsDefault={this.state.bIsDefault}
-                            categories={this.state.categories} />}
-                    </div>
+                    {/* Default and Filtered */}
+                    <ServicesContainer />
                 </div>
             </div>
         )
     }
 }
 
-export default React.memo(Services);
+export default Services;
