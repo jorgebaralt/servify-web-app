@@ -22,6 +22,7 @@ const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX
 const store = createStore(reducers, composeEnhancers(applyMiddleware(sagaMiddleware)));
 
 sagaMiddleware.run(sagas.watchMobile);
+sagaMiddleware.run(sagas.watchServices);
 
 ReactDOM.render(<Provider store={store}><BrowserRouter><App /></BrowserRouter></Provider>, document.getElementById('root'));
 

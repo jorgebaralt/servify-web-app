@@ -55,7 +55,6 @@ class ImageFadeIn extends Component {
     }
 
     componentWillMount () {
-        console.log('ping')
         // TODO Fix memory leaks
         if (!this.state.bShouldUpdate) {
             this.setImage = () => {

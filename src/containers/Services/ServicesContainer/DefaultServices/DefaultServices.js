@@ -5,14 +5,11 @@ const Services = lazy(() => import('./ServicesArray/ServicesArray'));
 
 class DefaultServices extends Component {
     render () {
-        let defaultServices = null;
-        if (this.props.bIsDefault) {
-            defaultServices = (
+        const defaultServices = (
                 <Suspense fallback={<LoadingBounce />}>
                     <Services {...this.props} />
                 </Suspense>
             );
-        }
         return (
             defaultServices
         );

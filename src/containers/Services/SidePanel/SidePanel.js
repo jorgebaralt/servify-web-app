@@ -1,46 +1,73 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 import categories from '../../../shared/categories';
+// redux-sagas
+import { connect } from 'react-redux';
+import { servicesCreator } from '../../../store/actions';
 // CSS
 import classes from './SidePanel.module.css'
 // JSX
 import Rating from '../../../components/UI/Rating/Rating';
 
-// Categories object to be used for filtering
-const categoriesObj = {};
-categories.map( (category) => {
-    return categoriesObj[category.title.replace(/[^a-zA-Z0-9]/g, '')] = false; // Parsing special characters from titles to allow only letters
-});
-
 class SidePanel extends Component {
-    state = {
-        filter: {
-            searchBar: {
-                inputId: 'Filter_SearchBar_Input',
-                description: 'Filter_SearchBar_Description',
-                listId: 'Filter_SearchBar_List',
-                value: '',
-                bIsFocused: false
+    constructor (props) {
+        super(props);
+        this.state = {
+            filter: {
+                searchBar: {
+                    inputId: 'Filter_SearchBar_Input',
+                    description: 'Filter_SearchBar_Description',
+                    listId: 'Filter_SearchBar_List',
+                    value: '',
+                    bIsFocused: false
+                },
+                sortBy: 'distance' // Default
             },
-            sortBy: 'distance' // Default
-        },
-        categories: {
-            ...categoriesObj,
-            list: {
-                bIsClosed: false
+            categories: {
+                list: {
+                    bIsClosed: false
+                }
+            },
+            prices: {
+                rating: 1, // Default value, 1 means show all
+                list: {
+                    bIsClosed: false
+                }
+            },
+            location: {
+                city: null,
+                state: null
             }
-        },
-        prices: {
-            rating: 1, // Default value, 1 means show all
-            list: {
-                bIsClosed: false
-            }
-        },
-        location: {
-            city: null,
-            state: null
         }
     }
+
+    // state = {
+    //     filter: {
+    //         searchBar: {
+    //             inputId: 'Filter_SearchBar_Input',
+    //             description: 'Filter_SearchBar_Description',
+    //             listId: 'Filter_SearchBar_List',
+    //             value: '',
+    //             bIsFocused: false
+    //         },
+    //         sortBy: 'distance' // Default
+    //     },
+    //     categories: {
+    //         ...categoriesObj,
+    //         list: {
+    //             bIsClosed: false
+    //         }
+    //     },
+    //     prices: {
+    //         rating: 1, // Default value, 1 means show all
+    //         list: {
+    //             bIsClosed: false
+    //         }
+    //     },
+    //     location: {
+    //         city: null,
+    //         state: null
+    //     }
+    // }
 
     applyFocusWithin () {
         this.setState( (prevState) => {
@@ -112,15 +139,9 @@ class SidePanel extends Component {
         });
     }
 
-    toggleCategoryFilter = (key) => {
-        this.setState( (prevState) => {
-            return {
-                categories: {
-                    ...prevState.categories,
-                    [key]: !prevState.categories[key]
-                }
-            }
-        });
+    toggleCategoryFilter = (prevState, key) => {
+        window.scrollTo(0,0); // Scroll to the top of the window on click
+        this.props.onToggleCategoryFilter(prevState, key);
     }
 
     setRatingFilter = (rating) => {
@@ -148,14 +169,14 @@ class SidePanel extends Component {
         const categoriesList = categories.map( (category) => {
             const categoryListItemClasses = [classes.CategoryListItem];
             const categoryListIconClasses = [classes.CategoryListItemIcon];
-            if (this.state.categories[category.title]) {
+            if (this.props.categories[category.title]) {
                 categoryListItemClasses.push(classes.CategoryListItemActive);
                 categoryListIconClasses.push(classes.CategoryListIconActive);
             }
             return (
                 <li className={classes.CategoryListItemWrapper} 
                     key={category.title}>
-                    <button onClick={ () => this.toggleCategoryFilter(category.title) } className={categoryListItemClasses.join(' ')}>
+                    <button onClick={ () => this.toggleCategoryFilter(this.props.categories, category.title) } className={categoryListItemClasses.join(' ')}>
                         <div className={classes.CategoryListItemContainer}>
                             {category.icon ? 
                                 <div className={categoryListIconClasses.join(' ')}>
@@ -191,8 +212,6 @@ class SidePanel extends Component {
         }
         // List keys to toggle lists close status respectively
         const listKeys = Object.keys(this.state);
-        // bIsDefault bool to decide which container to load
-        const bIsDefault = !Object.values(this.state.categories).includes(true);
         return (
             <div className={classes.Wrapper}>
                 {/* Side Panel Wrapper Start */}
@@ -373,4 +392,16 @@ class SidePanel extends Component {
     }
 }
 
-export default SidePanel;
+const mapStateToProps = (state) => {
+	return {
+		categories: state.servicesReducer.categories,
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onToggleCategoryFilter: (prevState, key) => dispatch(servicesCreator.filteredCategoriesHandler(prevState, key)),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SidePanel);

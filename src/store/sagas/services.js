@@ -1,13 +1,13 @@
-// import { put } from 'redux-saga/effects';
+import { put } from 'redux-saga/effects';
 
-// import { servicesActions } from '../actions';
+import { servicesActions } from '../actions';
 
-// export const mobileSagas = {
-//     postService: function* (action) {
-//         yield put(servicesActions.GetService())
-//         const bServices = action.hasService; 
-//         if (bServices) {
-//          yield put(servicesActions.PostService())
-//         }
-//     },
-// }
+export const servicesSagas = {
+    setFilteredCategories: function* (action) {
+        const categories = {
+            ...action.prevCategories,
+            [action.toggledCategory]: !action.prevCategories[action.toggledCategory]
+        }
+        yield put(servicesActions.setFilteredCategories(categories));
+    }
+}

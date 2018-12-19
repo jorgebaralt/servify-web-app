@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import categories from '../../../shared/categories';
+// redux-sagas
+import { connect } from 'react-redux';
 // CSS
 import classes from './ServicesContainer.module.css'
 // JSX
@@ -15,12 +17,6 @@ categories.map( (category) => {
 
 class Services extends Component {
     state = {
-        categories: {
-            ...categoriesObj,
-            list: {
-                bIsClosed: false
-            }
-        },
         location: {
             city: null,
             state: null
@@ -52,20 +48,23 @@ class Services extends Component {
     render () {
         
         // bIsDefault bool to decide which container to load
-        const bIsDefault = !Object.values(this.state.categories).includes(true);
+        // const bIsDefault = !Object.values(this.state.categories).includes(true);
         return (
             <div className={classes.ServicesContainer}>
-                {/* { !Object.values(this.state.categories).includes(true) ?  */}
-                { true ? 
+                { !Object.values(this.props.categories).includes(true) ? 
                 <DefaultServices 
-                    bIsDefault={bIsDefault}
                     city={this.state.location.city} 
                     state={this.state.location.state} /> :
-                <FilteredServices 
-                    bIsDefault={bIsDefault} />}
+                <FilteredServices />}
             </div>
         )
     }
 }
 
-export default Services;
+const mapStateToProps = (state) => {
+	return {
+		categories: state.servicesReducer.categories,
+	};
+};
+
+export default connect(mapStateToProps)(Services);
