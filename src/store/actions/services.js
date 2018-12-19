@@ -15,6 +15,12 @@ export const servicesActions = {
             type: actionTypes.SERVICES_SET_FILTERED_CATEGORIES,
             filteredCategories: filteredCategories
         }
+    },
+    setBIsDefault: (bIsDefault) => {
+        return {
+            type: actionTypes.SERVICES_SET_BISDEFAULT,
+            bIsDefault: bIsDefault
+        }
     }
 }
 

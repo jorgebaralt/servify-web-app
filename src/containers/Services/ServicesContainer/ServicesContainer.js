@@ -8,6 +8,7 @@ import classes from './ServicesContainer.module.css'
 // JSX
 import DefaultServices from './DefaultServices/DefaultServices';
 import FilteredServices from './FilteredServices/FilteredServices';
+import LoadingBounce from '../../../components/UI/LoadingBounce/LoadingBounce';
 
 // Categories object to be used for filtering
 const categoriesObj = {};
@@ -51,11 +52,15 @@ class Services extends Component {
         // const bIsDefault = !Object.values(this.state.categories).includes(true);
         return (
             <div className={classes.ServicesContainer}>
-                { !Object.values(this.props.categories).includes(true) ? 
-                <DefaultServices 
-                    city={this.state.location.city} 
-                    state={this.state.location.state} /> :
-                <FilteredServices />}
+                { this.props.bIsLoading ? 
+                    <LoadingBounce /> :   
+                    this.props.bIsDefault ? 
+                        <DefaultServices 
+                            city={this.state.location.city} 
+                            state={this.state.location.state} /> :
+                        <FilteredServices />
+                }
+                
             </div>
         )
     }
@@ -63,7 +68,8 @@ class Services extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		categories: state.servicesReducer.categories,
+        bIsLoading: state.servicesReducer.bIsLoading,
+		bIsDefault: state.servicesReducer.bIsDefault
 	};
 };
 

@@ -8,3 +8,4 @@ export const AUTH_MODE_HANDLER = 'auth_mode_handler';
 export const SERVICES_INIT = 'services_init';
 export const SERVICES_INIT_FILTERED_CATEGORIES = 'services_init_filtered_categories';
 export const SERVICES_SET_FILTERED_CATEGORIES = 'services_set_filtered_categories';
+export const SERVICES_SET_BISDEFAULT = 'services_set_bisdefault';

@@ -54,6 +54,9 @@
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
+    animation-name: FadeIn;
+    animation-duration: 300ms;
+    animation-timing-function: ease-out;
 }
 
 .Details {
@@ -132,4 +135,13 @@
     color: rgb(72, 72, 72);
     display: inline;
     margin: 0px;
+}
+
+@keyframes FadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

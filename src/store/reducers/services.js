@@ -13,13 +13,17 @@ categories.map( (category) => {
 const initialState = {
     categories: {
         ...categoriesObj
-    }
+    },
+    bIsLoading: false,
+    bIsDefault: true
 }
 
 const servicesReducer = (state = initialState, action) => {
     switch(action.type) {
         case types.SERVICES_SET_FILTERED_CATEGORIES:
-            return updateObject(state, {categories: action.filteredCategories});
+            return updateObject(state, {categories: action.filteredCategories, bIsLoading: true});
+        case types.SERVICES_SET_BISDEFAULT:
+            return updateObject(state, {bIsLoading: false, bIsDefault: action.bIsDefault});
         default:
             // do nothing
     }
