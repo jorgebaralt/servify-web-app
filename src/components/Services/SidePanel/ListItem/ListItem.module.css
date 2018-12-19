@@ -1,0 +1,71 @@
+.ListItemWrapper {
+    align-self: flex-start;
+    display: inline-block;
+    padding: 4px;
+    animation: FadeIn linear 0.1s;
+}
+
+.ListItem {
+    height: 38px;
+    max-width: 250px;
+    background: none;
+    outline: none;
+    color: #484848;
+    font-weight: 600;
+    border: 1px solid rgb(232, 232, 232);
+    border-image: initial;
+    border-radius: 4px;
+    padding: 8px 12px;
+    transition: all 0.15s ease;
+}
+
+.ListItem:focus,
+.ListItem:hover {
+    border-color: rgb(255, 112, 67);
+}
+
+
+.ListItem:focus {
+    box-shadow: rgb(232, 232, 232) 0px 0px 7px;
+    border-color: rgb(255, 112, 67);
+}
+
+.ListItemActive {
+    color: #FFF;
+    background: rgb(255, 112, 67);
+    border-color: rgb(255, 112, 67);
+}
+
+.ListItemContainer {
+    display: flex;
+    max-width: 225px;
+    overflow-wrap: break-word;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    margin: 0 auto;
+}
+
+.ListItemIcon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+}
+
+.ListItemIcon svg {
+    transition: fill 0.2s ease;
+}
+
+.ListIconActive svg {
+    fill: #FFF;
+}
+
+.ListItemText {
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

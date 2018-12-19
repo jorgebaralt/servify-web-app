@@ -6,68 +6,43 @@ import { servicesCreator } from '../../../store/actions';
 // CSS
 import classes from './SidePanel.module.css'
 // JSX
-import Rating from '../../../components/UI/Rating/Rating';
+import Filter from '../../../components/Services/SidePanel/Filter/Filter';
+import SearchBar from '../../../components/Services/SidePanel/SearchBar/SearchBar';
+import InputSelect from '../../../components/Services/SidePanel/InputSelect/InputSelect';
+import List from '../../../components/Services/SidePanel/List/List';
+import ListItem from '../../../components/Services/SidePanel/ListItem/ListItem';
+import { ClosedRatingContainer, RatingContainer } from '../../../components/Services/SidePanel/RatingContainer/RatingContainer';
 
 class SidePanel extends Component {
-    constructor (props) {
-        super(props);
-        this.state = {
-            filter: {
-                searchBar: {
-                    inputId: 'Filter_SearchBar_Input',
-                    description: 'Filter_SearchBar_Description',
-                    listId: 'Filter_SearchBar_List',
-                    value: '',
-                    bIsFocused: false
-                },
-                sortBy: 'distance' // Default
+    state = {
+        filter: {
+            searchBar: {
+                inputId: 'Filter_SearchBar_Input',
+                description: 'Filter_SearchBar_Description',
+                listId: 'Filter_SearchBar_List',
+                name: 'services_filter_query',
+                placeholder: 'Name',
+                value: '',
+                bIsFocused: false
             },
-            categories: {
-                list: {
-                    bIsClosed: false
-                }
-            },
-            prices: {
-                rating: 1, // Default value, 1 means show all
-                list: {
-                    bIsClosed: false
-                }
-            },
-            location: {
-                city: null,
-                state: null
+            sortBy: 'distance' // Default
+        },
+        categories: {
+            list: {
+                bIsClosed: false
             }
+        },
+        prices: {
+            rating: 1, // Default value, 1 means show all
+            list: {
+                bIsClosed: false
+            }
+        },
+        location: {
+            city: null,
+            state: null
         }
     }
-
-    // state = {
-    //     filter: {
-    //         searchBar: {
-    //             inputId: 'Filter_SearchBar_Input',
-    //             description: 'Filter_SearchBar_Description',
-    //             listId: 'Filter_SearchBar_List',
-    //             value: '',
-    //             bIsFocused: false
-    //         },
-    //         sortBy: 'distance' // Default
-    //     },
-    //     categories: {
-    //         ...categoriesObj,
-    //         list: {
-    //             bIsClosed: false
-    //         }
-    //     },
-    //     prices: {
-    //         rating: 1, // Default value, 1 means show all
-    //         list: {
-    //             bIsClosed: false
-    //         }
-    //     },
-    //     location: {
-    //         city: null,
-    //         state: null
-    //     }
-    // }
 
     applyFocusWithin () {
         this.setState( (prevState) => {
@@ -156,237 +131,48 @@ class SidePanel extends Component {
     }
 
     render () {
-        // Toggle button state
-        const toggleButtonCategoriesClasses = [classes.ToggleButtonArrow];
-        if (this.state.categories.list.bIsClosed) {
-            toggleButtonCategoriesClasses.push(classes.Closed);
-        }
-        const toggleButtonPricesClasses = [classes.ToggleButtonArrow];
-        if (this.state.prices.list.bIsClosed) {
-            toggleButtonPricesClasses.push(classes.Closed);
-        }
         // Array that holds the JSX list elements containing the category titles for an unordered list
         const categoriesList = categories.map( (category) => {
-            const categoryListItemClasses = [classes.CategoryListItem];
-            const categoryListIconClasses = [classes.CategoryListItemIcon];
-            if (this.props.categories[category.title]) {
-                categoryListItemClasses.push(classes.CategoryListItemActive);
-                categoryListIconClasses.push(classes.CategoryListIconActive);
-            }
             return (
-                <li className={classes.CategoryListItemWrapper} 
-                    key={category.title}>
-                    <button onClick={ () => this.toggleCategoryFilter(this.props.categories, category.title) } className={categoryListItemClasses.join(' ')}>
-                        <div className={classes.CategoryListItemContainer}>
-                            {category.icon ? 
-                                <div className={categoryListIconClasses.join(' ')}>
-                                    <category.icon />
-                                </div>
-                            : null}
-                            <div className={classes.CategoryListItemText}>
-                                {category.title}
-                            </div>
-                        </div>
-                    </button>
-                </li>
+                <ListItem
+                    key={category.title}
+                    active={this.props.categories[category.title]}
+                    item={category}
+                    onClick={ () => this.toggleCategoryFilter(this.props.categories, category.title) } />
             );
         });
-        const ratingClasses = [classes.Rating];
-        switch (true) {
-            case this.state.prices.rating >= 0.75:
-                ratingClasses.push(classes.RatingActiveFour);
-                break;
-            case this.state.prices.rating >= 0.5:
-                ratingClasses.push(classes.RatingActiveThree);
-                break;
-            case this.state.prices.rating >= 0.25:
-                ratingClasses.push(classes.RatingActiveTwo);
-                break;
-            default:
-                // do nothing
-        }
-        // Search Bar
-        const searchBarContainerClasses = [classes.SearchBarContainer];
-        if (this.state.filter.searchBar.bIsFocused) {
-            searchBarContainerClasses.push(classes.FocusWithin);
-        }
         // List keys to toggle lists close status respectively
         const listKeys = Object.keys(this.state);
         return (
             <div className={classes.Wrapper}>
-                {/* Side Panel Wrapper Start */}
                 <div className={classes.SidePanelWrapper}>
                     <div className={classes.SidePanelContainer}>
-                        {/* Service Name Filter Start */}
-                        <div className={classes.FilterWrapper}>
-                            <div className={classes.FilterTitle}>
-                                <span>Service</span>
-                            </div>
-                            <div className={classes.FilterContainer}>
-                                <div className={classes.FilterInputWrapper}>
-                                    {/* Search Bar Start */}
-                                    <div className={[classes.SearchBarAnchor, classes.SearchBarWrapper].join(' ')}>
-                                        <div className={searchBarContainerClasses.join(' ')}>
-                                            <div className={classes.BarWrapper}>
-                                                <form action="/services/all" method="GET">
-                                                    <div 
-                                                        // dir means direction of text for languages (ltr = left to right)
-                                                        dir="ltr">
-                                                        <div className={classes.BarContainer}>
-                                                            <label htmlFor={this.state.filter.searchBar.inputId} className={classes.LabelWrapper}>
-                                                                <span className={classes.SearchBarSpan}>Search</span>
-                                                                <div className={classes.InputWrapper}>
-                                                                    <div className={classes.InputContainer}>
-                                                                        <input
-                                                                            onFocus={() => this.applyFocusWithin()}
-                                                                            onBlur={() => this.removeFocusWithin()}
-                                                                            onChange={(event) => this.inputChangeHandler(event)}
-                                                                            type="text"
-                                                                            className={classes.Input}
-                                                                            role="combobox"
-                                                                            aria-autocomplete="list" 
-                                                                            aria-describedby={this.state.filter.searchBar.description}
-                                                                            aria-controls={this.state.filter.searchBar.listId}
-                                                                            aria-expanded="false" 
-                                                                            autoComplete="off" 
-                                                                            autoCorrect="off" 
-                                                                            spellCheck="false" 
-                                                                            id={this.state.filter.searchBar.inputId}
-                                                                            name="services_filter_query" 
-                                                                            placeholder="Name" 
-                                                                            value={this.state.filter.searchBar.value}  />
-                                                                    </div>
-                                                                </div>
-                                                                <button className={classes.QuestionMark}>
-                                                                    <svg
-                                                                        viewBox="0 0 16 16" 
-                                                                        role="presentation" 
-                                                                        aria-hidden="true" 
-                                                                        focusable="false" 
-                                                                        style={{height: '18px',width: '18px',display: 'block',fill: 'currentColor'}}>
-                                                                        <path d="m2.5 7c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5-2 4.5-4.5 4.5-4.5-2-4.5-4.5m13.1 6.9-2.8-2.9c.7-1.1 1.2-2.5 1.2-4 0-3.9-3.1-7-7-7s-7 3.1-7 7 3.1 7 7 7c1.5 0 2.9-.5 4-1.2l2.9 2.8c.2.3.5.4.9.4.3 0 .6-.1.8-.4.5-.5.5-1.2 0-1.7"></path>
-                                                                    </svg>
-                                                                </button>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {/* Search Bar End */}
-                                </div>
-                            </div>
-                        </div>
-                        {/* Service Name Filter End */}
-                        {/* Sort By Start */}
-                        <div className={classes.FilterWrapper}>
-                            <div className={classes.FilterTitle}>
-                                <span>Sort by</span>
-                            </div>
-                            <div className={classes.SortBy}>
-                                <form action="/services/all" method="GET">
-                                    <select className={classes.InputSelect} 
-                                        onChange={(e) => this.selectInputHandler(e)} 
-                                        value={this.state.filter.sortBy}  
-                                        required>
-                                        <option value='distance'>Distance</option>
-                                        <option value='popularity'>Popularity</option>
-                                        <option value='priceRating'>Price Rating</option>
-                                        <option value='newest'>Newest</option>
-                                        <option value='oldest'>Oldest</option>
-                                    </select>
-                                </form>
-                            </div>
-                        </div>
-                        {/* Sort By End */}
-                        {/* Categories Start */}
-                        <div className={classes.ListWrapper}>
-                            <button className={classes.ListToggleButton} onClick={() => this.toggleListHandler(listKeys[1])}>
-                                <div className={classes.ToggleButtonHeader}>
-                                    <div className={classes.ToggleButtonTextContainer}>
-                                        <span className={classes.ToggleButtonText}>Categories</span>
-                                    </div>
-                                    <div className={classes.ToggleButtonArrowWrapper}>
-                                        <div className={classes.ToggleButtonArrowContainer}>
-                                            <span className={toggleButtonCategoriesClasses.join(' ')} />
-                                        </div>
-                                    </div>
-                                </div>
-                                {this.state.categories.list.bIsClosed ? 
-                                    <span className={classes.ClosedText}>
-                                        Home Services, Health, +{categories.length - 2} more
-                                    </span> :
-                                    null}
-                            </button>
-                            {this.state.categories.list.bIsClosed ?
-                                null :
-                                <div className={classes.CategoriesListWrapper}>
-                                    <ul className={classes.CategoriesListContainer}>
-                                        {categoriesList}
-                                    </ul>
-                                </div>
-                            }
-                        </div>
-                        {/* Categories End */}
-                        {/* Service Price Filter Start */}
-                        <div className={classes.ListWrapper}>
-                            <button className={classes.ListToggleButton} onClick={() => this.toggleListHandler(listKeys[2])}>
-                                <div className={classes.ToggleButtonHeader}>
-                                    <div className={classes.ToggleButtonTextContainer}>
-                                        <span className={classes.ToggleButtonText}>Price rating</span>
-                                    </div>
-                                    <div className={classes.ToggleButtonArrowWrapper}>
-                                        <div className={classes.ToggleButtonArrowContainer}>
-                                            <span className={toggleButtonPricesClasses.join(' ')} />
-                                        </div>
-                                    </div>
-                                </div>
-                                {this.state.prices.list.bIsClosed ? 
-                                    <span className={classes.ClosedText}>
-                                        <div className={classes.RatingContainer}>
-                                            <div className={classes.FilterOverview}>
-                                                <Rating
-                                                    rating={0} 
-                                                    type='price' /> 
-                                                <span style={
-                                                    {    
-                                                        display: 'inline-flex',
-                                                        alignItems: 'center',
-                                                        fontSize: '16px',
-                                                        fontWeight: '600',
-                                                        height: '13px',
-                                                        margin: '0 5px 0 10px'
-                                                    }}>-</span> {/** Separator */}
-                                                <Rating 
-                                                    rating={this.state.prices.rating} 
-                                                    type='price' />
-                                            </div>
-                                        </div>
-                                    </span> :
-                                    null}
-                            </button>
-                            {this.state.prices.list.bIsClosed ?
-                                null :
-                                <>
-                                    <div className={classes.RatingContainer}>
-                                        <Rating 
-                                            rating={this.state.prices.rating} 
-                                            onClick={this.setRatingFilter}
-                                            priceContainerClassname={ratingClasses.join(' ')} 
-                                            viewBox={'0 0 500 500'} 
-                                            type='price'/>
-                                    </div>
-                                    <div className={classes.RatingFilter}>
-                                        <span>Price rating filter</span>
-                                    </div>
-                                </>
-                            }
-                        </div>
-                        {/* Service Price Filter End */}
+                        <Filter title='Service'>
+                            <SearchBar
+                                applyFocusWithin={() => this.applyFocusWithin}
+                                removeFocusWithin={() => this.removeFocusWithin}
+                                inputChangeHandler={this.inputChangeHandler}
+                                {...this.state.filter.searchBar}/>
+                        </Filter>
+                        <Filter title='Sort by'>
+                            <InputSelect action='/services/all'
+                                onChange={this.selectInputHandler}
+                                value={this.state.filter.sortBy} />
+                        </Filter>
+                        <List title='Categories'
+                            onClick={() => this.toggleListHandler(listKeys[1])}
+                            bIsClosed={this.state.categories.list.bIsClosed}
+                            closedChildren={`Home Services, Health, +${categories.length - 2} more`}>
+                            {categoriesList}
+                        </List>
+                        <List title='Price rating'
+                            onClick={() => this.toggleListHandler(listKeys[2])}
+                            bIsClosed={this.state.prices.list.bIsClosed}
+                            closedChildren={<ClosedRatingContainer rating={this.state.prices.rating} />}>
+                            <RatingContainer rating={this.state.prices.rating} onClick={this.setRatingFilter} />
+                        </List>
                     </div>
                 </div>
-                {/* Side Panel Wrapper End */}
             </div>
         )
     }

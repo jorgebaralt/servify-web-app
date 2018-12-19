@@ -112,6 +112,7 @@ class Carousel extends Component {
                                 key={['Photo__', index].join(' ')}
                                 className={classes.PhotoContainer}>
                                 <ImageFadeIn
+                                    loading={true}
                                     bShouldUpdate={false}
                                     style={{
                                             width: this.props.dimensions ? this.props.dimensions.width : null,

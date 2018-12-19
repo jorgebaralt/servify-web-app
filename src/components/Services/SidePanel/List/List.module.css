@@ -1,0 +1,116 @@
+.ListWrapper {
+    padding: 18px 0;
+    border-top: 1px solid rgb(229, 229, 229);
+}
+
+.ListToggleButton {
+    display: block;
+    width: 100%;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+    background: none;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    padding: 0px;
+    font: inherit;
+    outline: inherit;
+}
+
+.ToggleButtonHeader {
+    user-select: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: justify;
+    line-height: 0;
+}
+
+.ToggleButtonTextContainer {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.ToggleButtonText {
+    color: #484848;
+    overflow-wrap: break-word;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 18px;
+    margin: 0px;
+}
+
+.ToggleButtonArrowWrapper {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.ToggleButtonArrowContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    padding: 6px;
+}
+
+.ToggleButtonArrow {
+    width: 100%;
+    height: 100%;
+    margin-top: 4px;
+    border-top: 1px solid #484848;
+    border-right: 1px solid #484848;
+    transform: rotate(-45deg);
+    transition: all ease 0.25s;
+}
+
+.Closed {
+    margin-bottom: 4px;
+    transform: rotate(135deg);
+}
+
+.ClosedText {
+    overflow-wrap: break-word;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    color: rgb(72, 72, 72);
+    animation: FadeIn linear 0.2s;
+    margin: 0px;
+}
+
+.ChildrenListWrapper {
+    margin: 16px auto;
+    animation: FadeIn linear 0.2s;
+}
+
+.ChildrenListContainer {
+    display: flex;
+    flex-flow: row;
+    height: auto;
+    box-sizing: border-box;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    list-style-type: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-start: 0;
+}
+
+@keyframes FadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

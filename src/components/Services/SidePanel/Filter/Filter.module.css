@@ -1,0 +1,25 @@
+.FilterWrapper {
+    padding-bottom: 20px;
+}
+
+.FilterTitle {
+    user-select: none;
+    margin: 12px 0;
+    overflow-wrap: break-word;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 18px;
+    color: #484848;
+}
+
+.FilterContainer {
+    user-select: none;
+    display: table;
+    width: 100%;
+}
+
+.FilterInputWrapper {
+    display: table-cell;
+    width: 100%;
+    vertical-align: middle;
+}

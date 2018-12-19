@@ -17,8 +17,8 @@ import SearchBox from '../../components/UI/SearchBox/SearchBox';
 import Banner from '../../components/UI/Banner/Banner';
 import CardContainer from '../../components/Landing/CardContainer/CardContainer';
 import Card from '../../components/Landing/Card/Card';
-import Service from '../../components/Landing/Service/Service';
-import Featured from '../../components/Landing/Featured/Featured';
+import Service from '../../components/Services/Service/Service';
+import Featured from '../../components/Services/Featured/Featured';
 import AnchorLink from '../../components/UI/AnchorLink/AnchorLink';
 import LearnMore from '../../components/Landing/LearnMore/LearnMore';
 

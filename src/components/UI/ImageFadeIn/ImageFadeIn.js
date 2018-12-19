@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import classes from './ImageFadeIn.module.css';
 // fadeIn function for elements
 import fadeIn from '../../../shared/fadeInElement';
-import LoadingDots from '../LoadingDots/LoadingDots';
+import LoadingBounce from '../LoadingBounce/LoadingBounce';
 
 class ImageFadeIn extends Component {
     constructor (props) {
@@ -91,7 +91,11 @@ class ImageFadeIn extends Component {
         }
         return (
             <div className={this.props.className ? null : classes.ImageWrapper}>
-                {!this.state.src ? <div className={classes.Loading}><LoadingDots /></div> : null}
+                {!this.state.src ? 
+                    this.props.loading ? 
+                        <div className={classes.Loading}><LoadingBounce /></div> 
+                        : null
+                : null}
                 {this.bIsSrcset ? 
                     // If there is a srcset, otherwise render image without srcset
                     <img
@@ -103,8 +107,8 @@ class ImageFadeIn extends Component {
                         srcSet={this.state.srcset}
                         style={this.props.style}
                         className={imgClasses}
-                        onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 500))} /> :
-                    <img
+                        onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 500))} /> 
+                    : <img
                         draggable={this.props.draggable}
                         ref={this.myImage}
                         alt=''
