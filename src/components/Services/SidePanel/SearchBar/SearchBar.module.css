@@ -37,9 +37,11 @@
     background-color: rgba(255, 112, 67);
 }
 
-.BarWrapper:hover .QuestionMark svg,
-.BarWrapper:focus-within .QuestionMark svg {
-    fill: #FFF !important;
+@media (min-width: 1024px) {
+    .BarWrapper:hover .QuestionMark svg,
+    .BarWrapper:focus-within .QuestionMark svg {
+        fill: #FFF !important;
+    }
 }
 
 .BarContainer {

@@ -12,6 +12,7 @@ import LocationPin from './location-pin';
 import Chat from './chat';
 import Cancel from './cancel';
 import CheckmarkNoBg from './checkmark-nobg';
+import Menu from './menu';
 
 import BlackBorderlessLogo from '../images/servify-logos/blackborder-nobg';
 
@@ -31,5 +32,6 @@ export {
     LocationPin, 
     Chat,
     Cancel,
-    CheckmarkNoBg
+    CheckmarkNoBg,
+    Menu
 };

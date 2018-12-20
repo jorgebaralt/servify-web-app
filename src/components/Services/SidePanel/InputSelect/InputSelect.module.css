@@ -1,15 +1,94 @@
-.InputSelect {
-    border-radius: 4px;
-    color: #484848;
+.Wrapper {
+    position: relative;
+}
+
+.Container {
+    display: table;
+    margin: 0px;
+    margin-bottom: -1px;
+    margin-right: -1px;
+    padding: 0px;
+    table-layout: fixed;
+    white-space: nowrap;
     border: 1px solid #EBEBEB;
+    border-radius: 4px;
+    background-color: #FFF;
+    width: 100%;
     transition: box-shadow 200ms ease-in, border 0.2s ease;
 }
 
+.ArrowWrapper {
+    display: table-cell;
+    box-sizing: border-box;
+    border-left: 1px solid rgba(26, 26, 29, 0.08);
+    cursor: pointer;
+    vertical-align: middle;
+    transition: all 0.2s ease;
+    width: 39px;
+}
+
+.ArrowContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 6px;
+    margin: 0 auto;
+}
+
+.Arrow {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 4px;
+    border-top: 2px solid #484848;
+    border-right: 2px solid #484848;
+    margin-bottom: 4px;
+    transform: rotate(135deg);
+    transition: all ease 0.25s;
+}
+
+.InputSelect {
+    display: table-cell;
+    width: 100%;
+    width: 250px;
+    height: 100%;
+    vertical-align: middle;
+    padding-right: 12px;
+    appearance: none;
+    border-radius: 4px;
+    background: #FFF;
+    color: #484848;
+    border: 0 !important;
+    outline: 0 !important;
+}
+
 .InputSelect option {
+    width: 252px;
     color: #484848;
 }
 
-.InputSelect:hover,
-.InputSelect:focus-within {
+.Container:hover,
+.Container:focus-within {
     border: 1px solid rgba(255, 112, 67);
+}
+
+.Container:focus-within .Arrow {
+    margin-bottom: 0;
+    margin-top: 4px;
+    transform: rotate(-45deg);
+}
+
+.Container:hover .ArrowWrapper,
+.Container:focus-within .ArrowWrapper {
+    background-color: rgba(255, 112, 67);
+    border-left: 1px solid rgba(255, 112, 67);
+}
+
+@media (min-width: 1024px) {
+    .Container:hover .Arrow,
+    .Container:focus-within .Arrow {
+        border-top: 2px solid #FFF;
+        border-right: 2px solid #FFF;
+    }
 }

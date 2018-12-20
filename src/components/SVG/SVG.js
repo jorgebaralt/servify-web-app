@@ -59,6 +59,9 @@ class SVGComponent extends PureComponent {
             case 'cancel':
                 svg = <SVG.Cancel {...this.props} />;
                 break;
+            case 'menu':
+                svg = <SVG.Menu {...this.props} />;
+                break;
             case 'underline':
                 svg = <div style={this.props.style}>
                         {this.randomUnderline(Underlines)(this.props)}

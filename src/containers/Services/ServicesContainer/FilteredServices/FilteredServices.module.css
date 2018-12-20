@@ -2,7 +2,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between
+    justify-content: space-between;
+    margin-top: 24px;
 }
 
 .Service {
@@ -10,4 +11,10 @@
     margin: 5px;
     height: 100%;
     flex-grow: 0;
+}
+
+@media (max-width: 460px) {
+    .Service {
+        flex: 1 0 46.5%;
+    }
 }

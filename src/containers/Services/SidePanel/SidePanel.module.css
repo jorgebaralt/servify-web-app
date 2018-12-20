@@ -1,10 +1,4 @@
 .Wrapper {
-    display: flex;
-    flex-flow: row;
-    margin-bottom: -30px;
-}
-
-.SidePanelWrapper {
     position: sticky;
     top: 0;
     left: 0;
@@ -17,29 +11,26 @@
     overflow: auto overlay;
 }
 
-.SidePanelContainer {
+.Container {
     width: 100%;
     padding: 24px;
     padding-bottom: 96px;
 }
 
-.ServicesWrapper {
-    border-left: 1px solid rgb(229, 229, 229);
-    width: calc(100% - 300px);
-    padding-left: 0px;
-    overflow: hidden;
-}
-
-.ServicesContainer {
-    padding: 28px 24px;
-    margin: 0 auto;
-    background-color: transparent;
-    max-width: 1080px;
-    min-height: 400px;
-}
-
-.ServicesContainer h1 {
-    color: rgb(72, 72, 72);
-    user-select: none;
-    margin-bottom: 40px;
+@media (max-width: 920px) {
+    .Wrapper {
+        order: 2;
+        flex-basis: 0px;
+        flex-basis: 0px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        border-left: 1px solid rgb(229, 229, 229);
+        transition: flex-basis ease .2s;
+    }
+    .Wrapper.Open {
+        flex-basis: 300px;
+    }
+    .Container {
+        padding: 48px 24px;
+    }
 }

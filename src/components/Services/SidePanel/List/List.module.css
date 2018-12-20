@@ -114,3 +114,10 @@
         opacity: 1;
     }
 }
+
+@media (max-width: 920px) {
+    .ListWrapper {
+        overflow-x: hidden;
+        width: 252px;
+    }
+}

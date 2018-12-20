@@ -12,6 +12,7 @@ import InputSelect from '../../../components/Services/SidePanel/InputSelect/Inpu
 import List from '../../../components/Services/SidePanel/List/List';
 import ListItem from '../../../components/Services/SidePanel/ListItem/ListItem';
 import { ClosedRatingContainer, RatingContainer } from '../../../components/Services/SidePanel/RatingContainer/RatingContainer';
+import { Toggle, MenuToggle } from '../../../components/Services/SidePanel/Toggle/Toggle';
 
 class SidePanel extends Component {
     state = {
@@ -41,7 +42,16 @@ class SidePanel extends Component {
         location: {
             city: null,
             state: null
-        }
+        },
+        bIsOpen: false
+    }
+
+    toggleSidePanel = () => {
+        this.setState( (prevState) => {
+            return {
+                bIsOpen: !prevState.bIsOpen
+            }
+        });
     }
 
     applyFocusWithin () {
@@ -117,6 +127,9 @@ class SidePanel extends Component {
     toggleCategoryFilter = (prevState, key) => {
         window.scrollTo(0,0); // Scroll to the top of the window on click
         this.props.onToggleCategoryFilter(prevState, key);
+        if (this.props.isMobile) { // Only toggle side panel upon clicking categories if on mobile
+            this.toggleSidePanel();
+        }
     }
 
     setRatingFilter = (rating) => {
@@ -128,6 +141,10 @@ class SidePanel extends Component {
                 }
             }
         });
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps !== this.props || nextState !== this.state || nextProps.children !== this.props.children;
     }
 
     render () {
@@ -143,10 +160,15 @@ class SidePanel extends Component {
         });
         // List keys to toggle lists close status respectively
         const listKeys = Object.keys(this.state);
+        const WrapperClasses = [classes.Wrapper];
+        if (this.state.bIsOpen) {
+            WrapperClasses.push(classes.Open);
+        }
         return (
-            <div className={classes.Wrapper}>
-                <div className={classes.SidePanelWrapper}>
-                    <div className={classes.SidePanelContainer}>
+            <>
+                <div className={WrapperClasses.join(' ')}>
+                    <div className={classes.Container}>
+                        <MenuToggle onClick={this.toggleSidePanel} />
                         <Filter title='Service'>
                             <SearchBar
                                 applyFocusWithin={() => this.applyFocusWithin}
@@ -173,20 +195,22 @@ class SidePanel extends Component {
                         </List>
                     </div>
                 </div>
-            </div>
-        )
+                <Toggle show={!this.state.bIsOpen} onClick={this.toggleSidePanel} />
+            </>
+        );
     }
 }
 
 const mapStateToProps = (state) => {
 	return {
-		categories: state.servicesReducer.categories,
+        categories: state.servicesReducer.categories,
+        isMobile: state.mobileReducer.isMobile
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onToggleCategoryFilter: (prevState, key) => dispatch(servicesCreator.filteredCategoriesHandler(prevState, key)),
+		onToggleCategoryFilter: (prevState, key) => dispatch(servicesCreator.filteredCategoriesHandler(prevState, key))
 	};
 };
 
