@@ -6,6 +6,7 @@ import classes from './NavigationItems.module.css';
 import NavigationItem from './NagivationItem/NagivationItem';
 import ButtonFilled from '../../UI/ButtonFilled/ButtonFilled';
 import NavAuthButtons from './NavAuthButtons/NavAuthButtons'
+import Separator from './Separator/Separator';
 // Logo
 import servifyLogo from '../../../assets/images/servify-logo-96x96.png';
 import SearchBar from '../SearchBar/SearchBar';
@@ -16,6 +17,7 @@ const renderNavigationItems = (props) => {
 			return (
 				<>
 					<div className={classes.Spacing} />
+					<Separator />
 					<NavigationItem {...props} link="/publish/overview" color="white">
 						Publish
 					</NavigationItem>
@@ -25,6 +27,7 @@ const renderNavigationItems = (props) => {
 					<NavigationItem {...props} link="/help" color="white">
 						Help
 					</NavigationItem>
+					<Separator />
 					<NavAuthButtons {...props} color="white"/>
 				</>
 			);

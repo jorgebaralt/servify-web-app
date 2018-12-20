@@ -2,7 +2,8 @@ import React from 'react';
 // CSS
 import classes from './LandingNavbar.module.css';
 // JSX
-import SideDrawer from '../SideDrawer/SideDrawer';
+import DesktopNav from '../DesktopNav/DesktopNav';
+import MobileDrawer from '../MobileDrawer/MobileDrawer';
 import NagivationItems from '../NavigationItems/NavigationItems';
 import DrawerToggle from '../Toolbar/DrawerToggle/DrawerToggle';
 
@@ -11,24 +12,33 @@ const landingNavbar = (props) => {
     if (props.isNavbarTransparent) {
         navbarClasses.push(classes.NavbarTransparent);
     }
+    console.log(props.navbarType)
     return (
         <header className={navbarClasses.join(' ')} ref={props.reference}>
-            <nav className={classes.DesktopOnly} onScroll={props.onScroll}>
-                <NagivationItems  
-                    navbarType={props.navbarType} 
-                    isNavbarTransparent={props.navbarTransparent} 
-                    toggleAuthModal={props.toggleAuthModal} />
+            <nav onScroll={props.onScroll}>
+                <DesktopNav onScroll={props.onScroll}>
+                    <NagivationItems  
+                        navbarType={props.navbarType} 
+                        isNavbarTransparent={props.navbarTransparent} 
+                        toggleAuthModal={props.toggleAuthModal} />
+                </DesktopNav>
             </nav>
             <DrawerToggle 
                 drawerClass={classes.MobileOnly}
                 isOpen={props.isDrawerOpen}
-                click={props.sideDrawerToggleClick}/>
-            <SideDrawer 
+                click={props.MobileDrawerToggleClick}/>
+            
+            <MobileDrawer 
                 drawerClass={classes.MobileOnly}
                 isOpen={props.isDrawerOpen}
-                click={props.sideDrawerToggleClick}/>
+                click={props.MobileDrawerToggleClick}>
+                <NagivationItems  
+                    navbarType={props.navbarType} 
+                    isNavbarTransparent={props.navbarTransparent} 
+                    toggleAuthModal={props.toggleAuthModal} />
+            </MobileDrawer>
         </header>
     );
 }
 
-export default landingNavbar;
+export default React.memo(landingNavbar);

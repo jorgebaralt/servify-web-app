@@ -1,0 +1,9 @@
+.DesktopOnly {
+    display: inherit;
+}
+
+@media screen and (max-width: 1120px) {
+    .DesktopOnly {
+        display: none;
+    }
+}

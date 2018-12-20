@@ -131,6 +131,7 @@ class Navbar extends PureComponent {
 	setNavbar = () => {
 		switch (true) {
 			case this.props.location.pathname === '/':
+				console.log('setnavbar')
 				return (
 					<LandingNavbar
 						// Toggle Auth Modal

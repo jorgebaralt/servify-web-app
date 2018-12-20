@@ -1,4 +1,5 @@
 .NavbarLogo img {
+    user-select: none;
     width: 34px;
     border-radius: 10px;
     display: flex;
@@ -35,7 +36,7 @@
 }
 
 
-@media (min-width: 744px) {
+@media (min-width: 1120px) {
     .NavigationItems {
         width: calc(100vw - 30px);
         margin: 0;
@@ -46,22 +47,11 @@
     }
 }
 
-@media (max-width: 743px) {
+@media (max-width: 1121px) {
     .NavbarLogo {
-        position: absolute;
-        display: flex;
-        height: 100px;
-        flex-grow: 0;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        align-items: center;
-        justify-content: flex-start;
+        padding: 10px 22.5px;
     }
     .NavbarLogo img {
-        /* width: 90px; */
-        display: flex;
-        margin-left: 0;
-        margin-right: 15px;
+
     }
 }
