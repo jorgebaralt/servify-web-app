@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // CSS
 import classes from './MobileDrawer.module.css';
 import NagivationItems from '../NavigationItems/NavigationItems';
+// JSX
+import { withRouter } from 'react-router-dom';
 
 class MobileDrawer extends Component {
     componentDidUpdate () {
@@ -12,9 +14,13 @@ class MobileDrawer extends Component {
         }
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.isOpen !== this.props.isOpen || nextProps.children !== this.props.children;
+    componentWillMount () {
+        document.body.style.overflow = null;
     }
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return nextProps.isOpen !== this.props.isOpen || nextProps.children !== this.props.children;
+    // }
 
     render () {
     let attachedClasses = [classes.Wrapper, classes.Close];
@@ -37,4 +43,4 @@ class MobileDrawer extends Component {
     }
 }
 
-export default MobileDrawer;
+export default withRouter(MobileDrawer);

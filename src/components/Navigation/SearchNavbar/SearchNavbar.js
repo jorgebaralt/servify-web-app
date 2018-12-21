@@ -1,6 +1,6 @@
 import React from 'react';
 // CSS
-import classes from './SearchNavbar.module.css';
+import classes from '../Navbar.module.css';
 // JSX 
 import NavigationItems from '../NavigationItems/NavigationItems';
 

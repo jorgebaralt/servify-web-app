@@ -8,7 +8,7 @@ import NagivationItems from '../NavigationItems/NavigationItems';
 import DrawerToggle from '../Toolbar/DrawerToggle/DrawerToggle';
 
 const landingNavbar = (props) => {
-    let navbarClasses = [classes.Navbar];
+    let navbarClasses = [classes.LandingNavbar];
     if (props.isNavbarTransparent) {
         navbarClasses.push(classes.NavbarTransparent);
     }

@@ -6,7 +6,43 @@ import classes from './Navbar.module.css';
 import LandingNavbar from '../../components/Navigation/LandingNavbar/LandingNavbar';
 import PublishNavbar from '../../components/Navigation/PublishNavbar/PublishNavbar';
 import SearchNavbar from '../../components/Navigation/SearchNavbar/SearchNavbar';
+import DesktopNav from '../../components/Navigation/DesktopNav/DesktopNav';
+import NagivationItems from '../../components/Navigation/NavigationItems/NavigationItems';
+import DrawerToggle from '../../components/Navigation/Toolbar/DrawerToggle/DrawerToggle';
+import MobileDrawer from '../../components/Navigation/MobileDrawer/MobileDrawer';
 import ScrollToTopButton from '../../components/Navigation/ScrollToTopButton/ScrollToTopButton';
+
+const NavbarContainer = (props) => {
+	let navbarClasses = [classes.LandingNavbar];
+    if (props.isNavbarTransparent) {
+        navbarClasses.push(classes.NavbarTransparent);
+    }
+	return (
+		<header className={navbarClasses.join(' ')} ref={props.reference}>
+            <nav onScroll={props.onScroll}>
+                <DesktopNav onScroll={props.onScroll}
+						navbarType={props.navbarType} 
+                        isNavbarTransparent={props.navbarTransparent} 
+                        toggleAuthModal={props.toggleAuthModal}>
+                    <NagivationItems  
+                        navbarType={props.navbarType} 
+                        isNavbarTransparent={props.navbarTransparent} 
+                        toggleAuthModal={props.toggleAuthModal} />
+                </DesktopNav>
+            </nav>
+            <DrawerToggle 
+                isOpen={props.bIsDrawerOpen}
+                onClick={props.toggleMobileDrawer}/>
+            <MobileDrawer
+                drawerClass={classes.MobileOnly}
+                isOpen={props.bIsDrawerOpen}
+                onClick={props.toggleMobileDrawer}
+                // NavItems props
+                isNavbarTransparent={props.navbarTransparent} 
+                toggleAuthModal={props.toggleAuthModal} />
+        </header>
+	);
+}
 
 class Navbar extends PureComponent {
 	constructor(props) {
@@ -17,7 +53,8 @@ class Navbar extends PureComponent {
 	state = {
 		bIsDrawerOpen: false,
 		navbarTransparent: false,
-		showScrollToTop: false
+		showScrollToTop: false,
+		settings: null
 	};
 
 	/**
@@ -129,49 +166,113 @@ class Navbar extends PureComponent {
 	 *   Function decides which navbar to display according to the path
 	 */
 	setNavbar = () => {
+		// switch (true) {
+		// 	case this.props.location.pathname === '/':
+		// 		return (
+		// 			<LandingNavbar
+		// 				// Toggle Auth Modal
+		// 				toggleAuthModal={this.props.toggleAuthModal}
+		// 				// passing reference from constructor
+		// 				navbarType='LandingNavbar' // pass navbarType prop to select respective navigation items
+		// 				// Scroll Tracking Functionality if dependant on scroll then pass 'this.trackScrolling'
+		// 				onScroll={() => { return }} // No functionality
+		// 				// Passing Is Navbar Transparent functionality, if dependant on scroll then pass 'this.state.navbarTransparent'
+		// 				// if never transparent then pass false or pass nothing, if always transparent then pass true
+		// 				isNavbarTransparent={true}
+		// 				// // MobileDrawer and mobile props
+		// 				// drawerClass={classes.MobileOnly}
+		// 				bIsDrawerOpen={this.state.bIsDrawerOpen}
+		// 				toggleMobileDrawer={this.toggleMobileDrawer} 
+		// 				reference={this.navbar} />
+		// 		);
+		// 	case this.props.location.pathname.includes('/services'): // Renders navbar for every address that has /services as root
+		// 		return (
+        //             <SearchNavbar 
+		// 				toggleAuthModal={this.props.toggleAuthModal} // Toggle Auth Modal
+		// 				navbarType='SearchNavbar' // pass navbarType prop to select respective navigation items
+		// 				bIsDrawerOpen={this.state.bIsDrawerOpen}
+		// 				toggleMobileDrawer={this.toggleMobileDrawer} 
+		// 				reference={this.navbar} />
+		// 		);
+		// 	case this.props.location.pathname.includes('/publish'):
+		// 		return (
+        //             <PublishNavbar 
+		// 				toggleAuthModal={this.props.toggleAuthModal} // Toggle Auth Modal
+		// 				navbarType='PublishNavbar' // pass navbarType prop to select respective navigation items
+		// 				bIsDrawerOpen={this.state.bIsDrawerOpen}
+		// 				toggleMobileDrawer={this.toggleMobileDrawer} 
+		// 				reference={this.navbar} />
+		// 		);
+		// 	default:
+		// 		// do nothing
+		// }
+		let settings = {
+			// passing reference from constructor
+			navbarType: 'LandingNavbar', // pass navbarType prop to select respective navigation items
+			// Toggle Auth Modal
+			toggleAuthModal: this.props.toggleAuthModal,
+			// Scroll Tracking Functionality if dependant on scroll then pass 'this.trackScrolling'
+			onScroll: () => { return }, // No functionality
+			// Passing Is Navbar Transparent functionality, if dependant on scroll then pass 'this.state.navbarTransparent'
+			// if never transparent then pass false or pass nothing, if always transparent then pass true
+			isNavbarTransparent: true,
+			// // MobileDrawer and mobile props
+			// drawerClass={classes.MobileOnly}
+			bIsDrawerOpen: this.state.bIsDrawerOpen,
+			toggleMobileDrawer: this.toggleMobileDrawer,
+			reference: this.navbar
+		};
 		switch (true) {
 			case this.props.location.pathname === '/':
-				return (
-					<LandingNavbar
-						// Toggle Auth Modal
-						toggleAuthModal={this.props.toggleAuthModal}
-						// passing reference from constructor
-						navbarType='LandingNavbar' // pass navbarType prop to select respective navigation items
-						// Scroll Tracking Functionality if dependant on scroll then pass 'this.trackScrolling'
-						onScroll={() => { return }} // No functionality
-						// Passing Is Navbar Transparent functionality, if dependant on scroll then pass 'this.state.navbarTransparent'
-						// if never transparent then pass false or pass nothing, if always transparent then pass true
-						isNavbarTransparent={true}
-						// // MobileDrawer and mobile props
-						// drawerClass={classes.MobileOnly}
-						bIsDrawerOpen={this.state.bIsDrawerOpen}
-						toggleMobileDrawer={this.toggleMobileDrawer} 
-						reference={this.navbar} />
-				);
+				break;
 			case this.props.location.pathname.includes('/services'): // Renders navbar for every address that has /services as root
-				return (
-                    <SearchNavbar 
-						toggleAuthModal={this.props.toggleAuthModal} // Toggle Auth Modal
-						navbarType='SearchNavbar' // pass navbarType prop to select respective navigation items
-						bIsDrawerOpen={this.state.bIsDrawerOpen}
-						toggleMobileDrawer={this.toggleMobileDrawer} 
-						reference={this.navbar} />
-				);
+				settings = {
+					navbarType:'SearchNavbar', // pass navbarType prop to select respective navigation items
+					toggleAuthModal:this.props.toggleAuthModal, // Toggle Auth Modal
+					bIsDrawerOpen:this.state.bIsDrawerOpen,
+					toggleMobileDrawer:this.toggleMobileDrawer,
+					reference:this.navbar
+				}
+				break;
 			case this.props.location.pathname.includes('/publish'):
-				return (
-                    <PublishNavbar 
-						toggleAuthModal={this.props.toggleAuthModal} // Toggle Auth Modal
-						navbarType='PublishNavbar' // pass navbarType prop to select respective navigation items
-						bIsDrawerOpen={this.state.bIsDrawerOpen}
-						toggleMobileDrawer={this.toggleMobileDrawer} 
-						reference={this.navbar} />
-				);
+				settings = {
+					navbarType:'PublishNavbar', // pass navbarType prop to select respective navigation items
+					toggleAuthModal:this.props.toggleAuthModal, // Toggle Auth Modal
+					bIsDrawerOpen:this.state.bIsDrawerOpen,
+					toggleMobileDrawer:this.toggleMobileDrawer,
+					reference:this.navbar
+				}
+				break;
 			default:
 				// do nothing
 		}
+		return this.setState( () => {
+			return {
+				settings: settings
+			}
+		});
 	};
 
-	render() {
+	// render() {
+	// 	// array that holds the Navbar CSS
+	// 	let navbarClasses = [classes.Navbar];
+	// 	// if transparent push the transparent CSS properties
+	// 	if (this.state.navbarTransparent) {
+	// 		navbarClasses.push(classes.NavbarTransparent);
+	// 	}
+	// 	return (
+	// 		<>
+	// 			{/* Decide navbar to display */}
+	// 			{this.setNavbar()}
+	// 			{/* ScrollToTopButton after scrolling */}
+	// 			{this.state.showScrollToTop ? (
+	// 				<ScrollToTopButton clicked={this.scrollToTop} />
+	// 			) : null}
+	// 		</>
+	// 	);
+	// }
+
+	render () {
 		// array that holds the Navbar CSS
 		let navbarClasses = [classes.Navbar];
 		// if transparent push the transparent CSS properties
@@ -181,7 +282,7 @@ class Navbar extends PureComponent {
 		return (
 			<>
 				{/* Decide navbar to display */}
-				{this.setNavbar()}
+				<NavbarContainer {...this.state.settings} />
 				{/* ScrollToTopButton after scrolling */}
 				{this.state.showScrollToTop ? (
 					<ScrollToTopButton clicked={this.scrollToTop} />

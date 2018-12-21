@@ -39,6 +39,10 @@ class Modal extends Component {
         }
     }
 
+    componentWillMount () {
+        document.body.style.overflow = null;
+    }
+
     render() {
         return (
             <div className={this.props.show ? classes.BodyOverlay : classes.Null}> 
