@@ -72,10 +72,10 @@ const renderNavigationItems = (props) => {
 					<div className={classes.MobileLogo}>
 						<img src={servifyLogo} draggable='false' alt='' />
 					</div>
-					<button className={classes.CloseToggle}>
+					{/* <button onClick={props.onClick} className={classes.CloseToggle}>
 						<div className={classes.ArrowWrapper}><span className={classes.Arrow}></span></div>
 						<span>Close</span>
-					</button>
+					</button> */}
 					<NavLink className={classes.MobileHomeLink} to ="/">
 						Home
 					</NavLink>
@@ -112,7 +112,6 @@ const renderNavigationItems = (props) => {
 	}
 };
 const nagivationItems = (props) => {
-	console.log(props)
 	return (
 		<>
 			<ul className={classes.NavigationItems}>

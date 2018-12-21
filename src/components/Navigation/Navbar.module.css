@@ -1,9 +1,9 @@
-/* .Navbar {
+.Navbar {
     height: 56px;
     width: 100%;
     position: absolute;
     overflow: hidden;
-    top: 0;
+    top: 10px;
     left: 0;
     background-color: rgba(51,51,51,0.5) !important;
     display: flex;
@@ -35,7 +35,7 @@
 
 @media screen and (max-width: 1121px) {
     .Navbar nav {
-        display: none;
+        order: 2;
     }
     .DesktopOnly {
         display: none;
@@ -43,4 +43,4 @@
     .MobileOnly {
         display: unset;
     }
-} */
+}

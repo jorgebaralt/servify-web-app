@@ -26,6 +26,9 @@ class Modal extends Component {
     }
 
     componentDidUpdate () {
+        if (document.body.clientWidth > 1120) {
+            return;
+        }
         // To prevent scrolling when the modal is open
         if (this.props.show) {
             document.addEventListener("keydown", (e) => this.escFunction(e), false);

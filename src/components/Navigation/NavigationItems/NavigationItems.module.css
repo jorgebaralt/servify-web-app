@@ -60,7 +60,7 @@
     .MobileLogo {
         display: flex;
         width: 100%;
-        padding: 42px 23px;
+        padding: 42px 23px 12px;
         flex-flow: row;
         align-items: center;
         justify-content: center;

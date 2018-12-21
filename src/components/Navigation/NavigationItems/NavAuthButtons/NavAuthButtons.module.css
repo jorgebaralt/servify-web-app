@@ -35,18 +35,18 @@
     border-color: transparent !important;
 }
 
+.Button {
+    margin: 0;
+    display: flex;
+    width: 150px;
+    width: fit-content;
+    padding: 10px 22.5px;
+    max-width: 150px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 @media (min-width: 744px) {
-    .Button {
-        margin: 0;
-        display: flex;
-        width: 150px;
-        width: fit-content;
-        padding: 10px 22.5px;
-        max-width: 150px;
-        align-items: center;
-        justify-content: flex-start;
-    }
-    
     .Button button {
         justify-content: center;
         display: flex;

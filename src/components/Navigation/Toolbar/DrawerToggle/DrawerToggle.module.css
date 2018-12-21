@@ -6,7 +6,7 @@
     justify-content: space-around;
     align-items: center;
     padding: 10px 0;
-    margin-left: 10px;
+    margin-left: 20px;
     box-sizing: border-box;
     cursor: pointer;
     z-index: 205;
@@ -48,7 +48,7 @@
     display: block;
     transform: translateY(-3px) rotate(225deg);
     height: 3px;
-    background-color: white;
+    background-color: #484848;
 }
 
 .Open div:before {
@@ -56,10 +56,10 @@
     display: block;
     transform: rotate(-45deg);
     height: 3px;
-    background-color: white;
+    background-color: #484848;
 }
 
-@media (min-width: 744px) {
+@media (min-width: 1120px) {
     .DrawerToggle {
         display: none;
     }

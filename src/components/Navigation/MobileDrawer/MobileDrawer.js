@@ -1,35 +1,38 @@
 import React, { Component } from 'react';
 // CSS
 import classes from './MobileDrawer.module.css';
+import NagivationItems from '../NavigationItems/NavigationItems';
 
 class MobileDrawer extends Component {
-
-    componentDidMount () {
-        document.body.style.overflow = 'hidden';
+    componentDidUpdate () {
+        if (this.props.isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = null;
+        }
     }
 
-    componentWillMount () {
-
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.isOpen !== this.props.isOpen || nextProps.children !== this.props.children;
     }
 
     render () {
     let attachedClasses = [classes.Wrapper, classes.Close];
-    if (this.props.bIsDrawerOpen) {
+    if (this.props.isOpen) {
         attachedClasses = [classes.Wrapper, classes.Open];
     }
     return (
-        <>  
-            {/* <Backdrop 
-                show={props.bIsDrawerOpen} 
-                clicked={props.click} /> */}
-            <div className={attachedClasses.join(' ')}>
-                <div className={classes.Container}>
-                    <nav className={classes.Anchor}>
-                        {this.props.children}
-                    </nav>
-                </div>
+        <div className={attachedClasses.join(' ')}>
+            <div className={classes.Container}>
+                <nav className={classes.Anchor}>
+                    <NagivationItems  
+                        navbarType='MobileDrawer'
+                        onClick={this.props.onClick}
+                        isNavbarTransparent={this.props.navbarTransparent} 
+                        toggleAuthModal={this.props.toggleAuthModal} />
+                </nav>
             </div>
-        </>
+        </div>
     );
     }
 }
