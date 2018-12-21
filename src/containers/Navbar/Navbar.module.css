@@ -1,18 +1,30 @@
-/* .Navbar {
-    height: 56px;
+.LandingNavbar {
+    height: 70px;
     width: 100%;
     position: absolute;
     overflow: hidden;
     top: 0;
     left: 0;
-    background-color: rgba(51,51,51,0.5) !important;
+    background-color: rgba(255,255,255) !important;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 90;
-    border-bottom: 4px solid rgba(118, 74, 189, .5);
     box-sizing: border-box;
     transition: background-color 0.25s ease-out;
+	z-index: 10;
+}
+
+.Navbar {
+    position: relative;
+    height: 70px;
+	width: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+    background-color: rgba(255,255,255) !important;
+	border-bottom: 0.5px solid rgba(51,51,51,0.5);
+	box-sizing: border-box;
+	z-index: 10;
 }
 
 .NavbarTransparent {
@@ -34,8 +46,8 @@
 }
 
 @media screen and (max-width: 1121px) {
-    .Navbar nav {
-        display: none;
+    .LandingNavbar nav {
+        order: 2;
     }
     .DesktopOnly {
         display: none;
@@ -43,4 +55,4 @@
     .MobileOnly {
         display: unset;
     }
-} */
+}
