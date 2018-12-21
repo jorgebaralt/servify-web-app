@@ -33,8 +33,10 @@
     padding-bottom: 4px;
 }
 
-.Navbar nav {
+.NavbarContainer {
+    display: flex;
     height: 100%;
+    position: relative;
 }
 
 .Logo {
@@ -46,8 +48,9 @@
 }
 
 @media screen and (max-width: 1121px) {
-    .LandingNavbar nav {
+    .NavbarContainer {
         order: 2;
+        height: 0px;
     }
     .DesktopOnly {
         display: none;

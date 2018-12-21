@@ -1,4 +1,7 @@
 .DrawerToggle {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 40px;
     height: 100%;
     display: flex;
@@ -12,19 +15,26 @@
     z-index: 205;
 }
 
+.Transparent div,
+.Transparent div:after,
+.Transparent div:before {
+    height: 2px !important;
+    background-color: #FFF !important;
+}
+
 .DrawerToggle div {
     width: 90%;
-    height: 3px;
-    background-color: white;
+    height: 2px;
+    background-color: #484848;
     transition: all 0.25s ease-out;
 }
 
 .DrawerToggle div:after {
     content: '';
     display: block;
-    transform:translateY(-13px);
+    transform:translateY(-12px);
     height: 3px;
-    background-color: white;
+    background-color: #484848;
     transition: all 0.25s ease-out;
 }
 
@@ -32,14 +42,18 @@
     content: '';
     display: block;
     transform:translateY(10px);
-    height: 3px;
-    background-color: white;
+    height: 2px;
+    background-color: #484848;
     transition: all 0.25s ease-out;
+}
+
+.DrawerToggle.Open {
+    z-index: 225;
 }
 
 .Open div {
     width: 90%;
-    height: 3px;
+    height: 2px;
     background-color: transparent;
 }
 
@@ -48,7 +62,7 @@
     display: block;
     transform: translateY(-3px) rotate(225deg);
     height: 3px;
-    background-color: #484848;
+    background-color: #484848 !important;
 }
 
 .Open div:before {
@@ -56,7 +70,7 @@
     display: block;
     transform: rotate(-45deg);
     height: 3px;
-    background-color: #484848;
+    background-color: #484848 !important;
 }
 
 @media (min-width: 1120px) {

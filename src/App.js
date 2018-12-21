@@ -14,7 +14,7 @@ import ServiceId from './containers/Services/ServiceId/ServiceId';
 
 class App extends Component {
 	
-	componentDidMount() {
+	componentWillMount() {
 		this.props.onIsMobile();
 		// TODO fetch popular categories global
 		// TODO last viewed services --> landing

@@ -76,7 +76,7 @@ const renderNavigationItems = (props) => {
 						<div className={classes.ArrowWrapper}><span className={classes.Arrow}></span></div>
 						<span>Close</span>
 					</button> */}
-					<NavLink className={classes.MobileHomeLink} to ="/">
+					<NavLink onClick={props.onClick} className={classes.MobileHomeLink} to ="/">
 						Home
 					</NavLink>
 					<Separator />

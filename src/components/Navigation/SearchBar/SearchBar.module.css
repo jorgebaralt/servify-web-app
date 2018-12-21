@@ -5,7 +5,7 @@
     height: 100%;
 }
 
-@media (max-width: 743px) {
+@media (max-width: 1121px) {
 	.SearchBarAnchor {
         justify-content: flex-start;
         width: 100%;
@@ -18,7 +18,7 @@
     box-sizing: border-box;
 }
 
-@media (min-width: 744px) {
+@media (min-width: 1120px) {
 .SearchBarWrapper {
         top: auto;
         left: 18px;
@@ -27,7 +27,7 @@
 	}
 }
 
-@media (max-width: 743px) {
+@media (max-width: 1121px) {
 	.SearchBarWrapper {
         display: flex;
         align-items: center;
@@ -42,19 +42,31 @@
     overflow: hidden;
 }
 
-@media (min-width: 744px) {
+@media (min-width: 1120px) {
     .SearchBarContainer {
         width: 100%;
         display: table;
     }
 }
 
-@media (max-width: 743px) {
-    .SearchBarContainer {
-        transition: -ms-transform 300ms ease-out,-webkit-transform 300ms ease-out,transform 300ms ease-out;
+@media (max-width: 1121px) {
+    .SearchBarAnchor {
+        position: absolute;
+        top: 0;
+        left: 0;
         display: flex;
-        will-change: transform;
+        align-items: center;
+        height: 100%;
+        height: 70px;
+        width: 100%;
+        overflow-x: hidden;
+        visibility: visible;
+    }
+    .SearchBarContainer {
+        transition: transform 300ms ease-out;
+        display: flex;
         transform: translate3d(80px, 0, 0);
+        z-index: 210;
     }
     /* When Focused */
     .SearchBarContainer.FocusWithin {
@@ -77,13 +89,13 @@
     height: 48px;
 }
 
-@media (min-width: 744px) {
+@media (min-width: 1120px) {
     .Bar:hover {
         box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 4px 12px rgba(26, 26, 29, 0.08);
     }
 }
 
-@media (min-width: 744px) {
+@media (min-width: 1120px) {
     .Bar {
         display: table-cell;
         width: 100%;
@@ -91,7 +103,7 @@
     }
 }
 
-@media (max-width: 743px) {
+@media (max-width: 1121px) {
     .Bar {
         display: flex;
         align-items: center;
@@ -160,13 +172,13 @@
     font-size: 17px;
 }
 
-@media (min-width: 744px) {
+@media (min-width: 1120px) {
     .Cancel {
         display: none;
     }
 }
 
-@media (max-width: 743px) {
+@media (max-width: 1121px) {
     .Cancel {
         display: flex;
         align-items: center;
@@ -216,7 +228,7 @@
     z-index: 10;
 }
 
-@media (max-width: 743px) {
+@media (max-width: 1121px) {
     .List {
         position: absolute;
         left: 0px;
@@ -229,7 +241,7 @@
     }
 }
 
-@media (min-width: 744px) {
+@media (min-width: 1120px) {
     .List {
         position: absolute;
         top: 100%;

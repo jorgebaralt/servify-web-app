@@ -19,12 +19,8 @@ const navigationItem = (props) => {
 			<NavLink
 				className={props.className} // Desktop only
 				exact={props.exact}
-				to={props.link}
-				onClick={props.onClick}>
-				{/* If the NavLink has an icon prop then render it */}
-				{props.icon && props.link === props.location.pathname ? (
-					<img className={classes.NavigationItemIcon} src={props.icon} alt="" />
-				) : null}
+				onClick={props.onClick}
+				to={props.link}>
 				{props.children}
 			</NavLink>
 		</li>

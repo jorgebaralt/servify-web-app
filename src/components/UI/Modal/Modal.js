@@ -19,14 +19,14 @@ class Modal extends Component {
             this.props.closeModal();
         }
     }
-    
 
     shouldComponentUpdate(nextProps, nextState) {
         return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
     }
 
     componentDidUpdate () {
-        if (document.body.clientWidth > 1120) {
+        // If on mobile drawer then don't do anything
+        if (document.body.clientWidth < 1121) {
             return;
         }
         // To prevent scrolling when the modal is open
@@ -40,6 +40,10 @@ class Modal extends Component {
     }
 
     componentWillMount () {
+        // If on mobile drawer then don't do anything
+        if (document.body.clientWidth < 1121) {
+            return;
+        }
         document.body.style.overflow = null;
     }
 

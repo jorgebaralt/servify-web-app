@@ -12,6 +12,8 @@ class ImageFadeIn extends Component {
         this.bIsSrcset = props.srcset ? true : false;
         // Image reference
         this.myImage = React.createRef();
+        // Pointer to avoid memory leak on component will unmount
+        this.myImageLoader = new Image();
     }
 
     state = {
@@ -24,14 +26,13 @@ class ImageFadeIn extends Component {
     setImage () {
         // src object variable equal to props received
         const src = this.props.src;
-        // imageLoader variable declaration to be a new Image element type object
-        const imageLoader = new Image();
-        imageLoader.src = src;
+        // this.myImageLoader.variable declaration to be a new Image element type object
+        this.myImageLoader.src = src;
         if (this.bIsSrcset) {
             const srcset = this.props.srcset ? this.props.srcset : null;
-            imageLoader.srcset = srcset;
+            this.myImageLoader.srcset = srcset;
             // src is loaded, sets the state's src equal to the props.src, and then is rendered on the image element in render()
-            imageLoader.onload = () => {
+            this.myImageLoader.onload = () => {
                 this.setState({ 
                     watcherImageWidth: this.props.style ? this.props.style.width : null,
                     src: src,
@@ -40,7 +41,7 @@ class ImageFadeIn extends Component {
                 });
             };
         } else {
-            imageLoader.onload = () => {
+            this.myImageLoader.onload = () => {
                 this.setState({
                         watcherImageWidth: this.props.style ? this.props.style.width : null,
                         src: src,
@@ -50,17 +51,12 @@ class ImageFadeIn extends Component {
         }
     }
 
-    componentDidMount () {
+    componentWillMount () {
         this.setImage();
     }
 
-    componentWillMount () {
-        // TODO Fix memory leaks
-        if (!this.state.bShouldUpdate) {
-            this.setImage = () => {
-                return;
-            }
-        }
+    componentWillUnmount () {
+        this.myImageLoader.onload = null;
     }
 
     // If there is a resize, then reset the image
