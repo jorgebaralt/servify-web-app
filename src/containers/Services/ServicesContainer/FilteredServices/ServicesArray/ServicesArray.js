@@ -2,7 +2,7 @@ import React from 'react';
 // CSS
 import classes from '../FilteredServices.module.css';
 // JSX
-import Service from '../../../../../components/Landing/Service/Service';
+import Service from '../../../../../components/Services/Service/Service';
 
 const services = () => {
     const services = [];

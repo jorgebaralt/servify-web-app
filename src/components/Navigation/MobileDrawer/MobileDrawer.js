@@ -14,13 +14,13 @@ class MobileDrawer extends Component {
 
     render () {
     let attachedClasses = [classes.Wrapper, classes.Close];
-    if (this.props.isOpen) {
+    if (this.props.bIsDrawerOpen) {
         attachedClasses = [classes.Wrapper, classes.Open];
     }
     return (
         <>  
             {/* <Backdrop 
-                show={props.isOpen} 
+                show={props.bIsDrawerOpen} 
                 clicked={props.click} /> */}
             <div className={attachedClasses.join(' ')}>
                 <div className={classes.Container}>

@@ -1,8 +1,8 @@
 import React from 'react';
 // JSX
 import Carousel from '../../../../../components/UI/Carousel/Carousel';
-import Service from '../../../../../components/Landing/Service/Service';
-import Featured from '../../../../../components/Landing/Featured/Featured';
+import Service from '../../../../../components/Services/Service/Service';
+import Featured from '../../../../../components/Services/Featured/Featured';
 
 const services = (props) => {
     // TODO remove placeholders

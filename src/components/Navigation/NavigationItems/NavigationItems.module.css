@@ -35,6 +35,12 @@
     overflow: hidden;
 }
 
+.MobileHomeLink,
+.CloseToggle,
+.ArrowWrapper,
+.Arrow, {
+    display: none;
+}
 
 @media (min-width: 1120px) {
     .NavigationItems {
@@ -48,10 +54,62 @@
 }
 
 @media (max-width: 1121px) {
-    .NavbarLogo {
-        padding: 10px 22.5px;
+    .DesktopOnly {
+        display: none !important;
     }
-    .NavbarLogo img {
-
+    .MobileLogo {
+        display: flex;
+        width: 100%;
+        padding: 42px 23px;
+        flex-flow: row;
+        align-items: center;
+        justify-content: center;
+    }
+    .MobileLogo img {
+        user-select: none;
+        display: flex;
+        width: 96px;
+        border-radius: 25%;
+    }
+    .CloseToggle,
+    .MobileHomeLink {
+        display: flex;
+        width: 150px;
+        width: fit-content;
+        margin-top: 25px;
+        padding: 10px 22.5px;
+        max-width: 150px;
+        align-items: center;
+        justify-content: center;
+        color: #484848;
+        font-size: 16px;
+        letter-spacing: normal;
+        font-weight: normal;
+        text-decoration: none;
+    }
+    .CloseToggle {
+        margin-top: 0px;
+        margin: 0 12px;
+        border: 1px solid rgb(209, 209, 209);
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        padding: 0;
+        padding-right: 13px;
+    }
+    .ArrowWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        padding: 13px;
+    }
+    .Arrow {
+        width: 100%;
+        height: 100%;
+        border-top: 2px solid #686868;
+        border-right: 2px solid #686868;
+        transform: rotate(-45deg)
     }
 }

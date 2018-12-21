@@ -9,7 +9,7 @@ import InfoSection from './InfoSection/InfoSection';
 import Rating from '../../../components/UI/Rating/Rating';
 import Review from './Review/Review';
 import Carousel from '../../../components/UI/Carousel/Carousel';
-import Service from '../../../components/Landing/Service/Service'
+import Service from '../../../components/Services/Service/Service'
 
 class ServiceId extends Component {
 

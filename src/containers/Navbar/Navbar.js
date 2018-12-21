@@ -15,7 +15,7 @@ class Navbar extends PureComponent {
 	}
 
 	state = {
-		isDrawerOpen: false,
+		bIsDrawerOpen: false,
 		navbarTransparent: false,
 		showScrollToTop: false
 	};
@@ -23,9 +23,9 @@ class Navbar extends PureComponent {
 	/**
 	 * Toggles (opens/closes) the SideDrawer on click.
 	 */
-	sideDrawerToggleClick = () => {
+	toggleMobileDrawer = () => {
 		this.setState((prevState) => {
-			return { isDrawerOpen: !prevState.isDrawerOpen };
+			return { bIsDrawerOpen: !prevState.bIsDrawerOpen };
 		});
 	};
 
@@ -131,29 +131,30 @@ class Navbar extends PureComponent {
 	setNavbar = () => {
 		switch (true) {
 			case this.props.location.pathname === '/':
-				console.log('setnavbar')
 				return (
 					<LandingNavbar
 						// Toggle Auth Modal
 						toggleAuthModal={this.props.toggleAuthModal}
 						// passing reference from constructor
-						reference={this.navbar}
 						navbarType='LandingNavbar' // pass navbarType prop to select respective navigation items
 						// Scroll Tracking Functionality if dependant on scroll then pass 'this.trackScrolling'
 						onScroll={() => { return }} // No functionality
 						// Passing Is Navbar Transparent functionality, if dependant on scroll then pass 'this.state.navbarTransparent'
 						// if never transparent then pass false or pass nothing, if always transparent then pass true
 						isNavbarTransparent={true}
-						// SideDrawer and mobile props
-						drawerClass={classes.MobileOnly}
-						isOpen={this.state.isDrawerOpen}
-						click={this.sideDrawerToggleClick} />
+						// // MobileDrawer and mobile props
+						// drawerClass={classes.MobileOnly}
+						bIsDrawerOpen={this.state.bIsDrawerOpen}
+						toggleMobileDrawer={this.toggleMobileDrawer} 
+						reference={this.navbar} />
 				);
 			case this.props.location.pathname.includes('/services'): // Renders navbar for every address that has /services as root
 				return (
                     <SearchNavbar 
 						toggleAuthModal={this.props.toggleAuthModal} // Toggle Auth Modal
 						navbarType='SearchNavbar' // pass navbarType prop to select respective navigation items
+						bIsDrawerOpen={this.state.bIsDrawerOpen}
+						toggleMobileDrawer={this.toggleMobileDrawer} 
 						reference={this.navbar} />
 				);
 			case this.props.location.pathname.includes('/publish'):
@@ -161,6 +162,8 @@ class Navbar extends PureComponent {
                     <PublishNavbar 
 						toggleAuthModal={this.props.toggleAuthModal} // Toggle Auth Modal
 						navbarType='PublishNavbar' // pass navbarType prop to select respective navigation items
+						bIsDrawerOpen={this.state.bIsDrawerOpen}
+						toggleMobileDrawer={this.toggleMobileDrawer} 
 						reference={this.navbar} />
 				);
 			default:

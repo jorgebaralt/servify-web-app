@@ -12,7 +12,6 @@ const landingNavbar = (props) => {
     if (props.isNavbarTransparent) {
         navbarClasses.push(classes.NavbarTransparent);
     }
-    console.log(props.navbarType)
     return (
         <header className={navbarClasses.join(' ')} ref={props.reference}>
             <nav onScroll={props.onScroll}>
@@ -25,15 +24,15 @@ const landingNavbar = (props) => {
             </nav>
             <DrawerToggle 
                 drawerClass={classes.MobileOnly}
-                isOpen={props.isDrawerOpen}
+                isOpen={props.bIsDrawerOpen}
                 click={props.MobileDrawerToggleClick}/>
             
             <MobileDrawer 
                 drawerClass={classes.MobileOnly}
-                isOpen={props.isDrawerOpen}
+                isOpen={props.bIsDrawerOpen}
                 click={props.MobileDrawerToggleClick}>
                 <NagivationItems  
-                    navbarType={props.navbarType} 
+                    navbarType='MobileDrawer' 
                     isNavbarTransparent={props.navbarTransparent} 
                     toggleAuthModal={props.toggleAuthModal} />
             </MobileDrawer>

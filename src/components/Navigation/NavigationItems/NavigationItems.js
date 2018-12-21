@@ -66,6 +66,33 @@ const renderNavigationItems = (props) => {
 					<NavAuthButtons {...props} />
 				</>
 			);
+		case 'MobileDrawer':
+			return (
+				<>
+					<div className={classes.MobileLogo}>
+						<img src={servifyLogo} draggable='false' alt='' />
+					</div>
+					<button className={classes.CloseToggle}>
+						<div className={classes.ArrowWrapper}><span className={classes.Arrow}></span></div>
+						<span>Close</span>
+					</button>
+					<NavLink className={classes.MobileHomeLink} to ="/">
+						Home
+					</NavLink>
+					<Separator />
+					<NavigationItem {...props} link="/publish/overview" color="white">
+						Publishing a service
+					</NavigationItem>
+					<NavigationItem {...props} link="/services" color="white">
+						Services
+					</NavigationItem>
+					<NavigationItem {...props} link="/help" color="white">
+						Help
+					</NavigationItem>
+					<Separator />
+					<NavAuthButtons {...props} color="white"/>
+				</>
+			);
 		default:
 			return (
 				<>
@@ -85,12 +112,13 @@ const renderNavigationItems = (props) => {
 	}
 };
 const nagivationItems = (props) => {
+	console.log(props)
 	return (
 		<>
 			<ul className={classes.NavigationItems}>
 				<div className={classes.SpacingSmall} />
-				<NavLink className={classes.NavbarLogo} to ="/">
-					<img src={servifyLogo} alt="" />
+				<NavLink className={[classes.NavbarLogo, classes.DesktopOnly].join(' ')} to ="/">
+					<img src={servifyLogo} draggable='false' alt='' />
 				</NavLink>
 				{renderNavigationItems(props)}
 			</ul>
