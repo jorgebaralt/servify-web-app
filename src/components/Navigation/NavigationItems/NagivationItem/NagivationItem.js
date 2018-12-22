@@ -13,7 +13,6 @@ const navigationItem = (props) => {
 	if (props.isNavbarTransparent) {
 		navItemClass.push(classes.Transparent);
 	}
-
 	return (
 		<li className={navItemClass.join(' ')}>
 			<NavLink

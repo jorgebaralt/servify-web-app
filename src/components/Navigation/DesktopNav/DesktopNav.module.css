@@ -4,6 +4,6 @@
 
 @media screen and (max-width: 1120px) {
     .DesktopOnly {
-        visibility: hidden;
+        /* visibility: hidden; */
     }
 }

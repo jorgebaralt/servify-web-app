@@ -11,6 +11,7 @@
     box-sizing: border-box;
     transition: transform 0.3s ease;
     border-left: 0;
+    border-bottom: 0.5px solid rgba(51,51,51,0.5);
 }
 
 .Container {

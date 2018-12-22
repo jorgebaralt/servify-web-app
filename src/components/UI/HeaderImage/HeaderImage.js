@@ -10,8 +10,7 @@ class HeaderImage extends Component {
             // TODO Make a new li element that renders when image is loaded to trigger fade in animation
             <li  
                 className={[classes.HeaderImage, classes.FadeIn].join(' ')} >
-                <ImageFadeIn 
-                        src={this.props.src} />
+                <ImageFadeIn src={this.props.src} />
             </li>
         );
     }

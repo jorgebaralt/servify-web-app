@@ -43,19 +43,11 @@
     height: 85%;
 }
 
-.MobileOnly {
-    display: none;
-}
-
 @media screen and (max-width: 1121px) {
     .NavbarContainer {
         order: 2;
-        height: 0px;
-    }
-    .DesktopOnly {
-        display: none;
-    }
-    .MobileOnly {
-        display: unset;
+        /* height: 0px; */
+        justify-content: flex-end;
+        margin-right: 15px;
     }
 }

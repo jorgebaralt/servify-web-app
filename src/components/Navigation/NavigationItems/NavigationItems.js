@@ -16,54 +16,73 @@ const renderNavigationItems = (props) => {
 		case 'LandingNavbar':
 			return (
 				<>
-					<div className={classes.Spacing} />
-					<Separator />
-					<NavigationItem {...props} link="/publish/overview" color="white">
-						Publish
-					</NavigationItem>
-					<NavigationItem {...props} link="/services" color="white">
-						Services
-					</NavigationItem>
-					<NavigationItem {...props} link="/help" color="white">
-						Help
-					</NavigationItem>
-					<Separator />
-					<NavAuthButtons {...props} color="white"/>
+					{props.width < 1121 ? 
+						null : 
+						<>
+							<div className={classes.Spacing} />
+							<Separator />
+							<NavigationItem {...props} link="/publish/overview" color="white">
+								Publish
+							</NavigationItem>
+							<NavigationItem {...props} link="/services" color="white">
+								Services
+							</NavigationItem>
+							<NavigationItem {...props} link="/help" color="white">
+								Help
+							</NavigationItem>
+							<Separator />
+							<NavAuthButtons {...props} color="white"/>
+						</>
+					}
 				</>
 			);
 		case 'PublishNavbar':
 			return (
 				<>
 					<div className={classes.SpacingSmall} />
-					<NavigationItem {...props} link="/publish/overview">
-						Overview
-					</NavigationItem>
-					<NavigationItem {...props} link="/help">
-						Publish
-					</NavigationItem>
-					<NavigationItem {...props} link="/signup">
-						FAQ
-					</NavigationItem>
+					{props.width < 1121 ? 
+						null : 
+						<>
+							<NavigationItem {...props} link="/publish/overview">
+								Overview
+							</NavigationItem>
+							<NavigationItem {...props} link="/help">
+								Publish
+							</NavigationItem>
+							<NavigationItem {...props} link="/signup">
+								FAQ
+							</NavigationItem>
+							<NavAuthButtons {...props} />
+						</>
+					}
 					<div className={classes.Spacing} />
 					<div className={classes.Navtext}>Ready to grow?</div>
 					<ButtonFilled style={{ width: 'auto' }} type="primary">
 						Get started
 					</ButtonFilled>
-					<div className={classes.SpacingSmall}/>
+					{props.width < 1121 ? 
+						null : 
+						<div className={classes.SpacingSmall}/>
+					}
 				</>
 			);
 		case 'SearchNavbar':
 			return (
 				<>
 					<SearchBar />
-					<div className={classes.Spacing} />
-					<NavigationItem className={props.className} {...props} link="/publish/overview" >
-						Publish
-					</NavigationItem>
-					<NavigationItem className={props.className} {...props} link="/help" >
-						Help
-					</NavigationItem>
-					<NavAuthButtons {...props} />
+					{props.width < 1121 ? 
+						null : 
+						<>
+							<div className={classes.Spacing} />
+							<NavigationItem className={props.className} {...props} link="/publish/overview" >
+								Publish
+							</NavigationItem>
+							<NavigationItem className={props.className} {...props} link="/help" >
+								Help
+							</NavigationItem>
+							<NavAuthButtons {...props} /> 
+						</>
+					}
 				</>
 			);
 		case 'MobileDrawer':

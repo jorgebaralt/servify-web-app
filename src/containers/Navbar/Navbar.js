@@ -11,31 +11,30 @@ import MobileDrawer from '../../components/Navigation/MobileDrawer/MobileDrawer'
 import ScrollToTopButton from '../../components/Navigation/ScrollToTopButton/ScrollToTopButton';
 
 const NavbarContainer = (props) => {
-	console.log(props)
 	return (
 		<>
 			<nav className={classes.NavbarContainer} onScroll={props.onScroll}>
-				<DesktopNav onScroll={props.onScroll}
-						navbarType={props.navbarType} 
-						isNavbarTransparent={props.isNavbarTransparent} 
-						toggleAuthModal={props.toggleAuthModal}>
-					<NagivationItems  
-						navbarType={props.navbarType} 
-						isNavbarTransparent={props.isNavbarTransparent} 
-						toggleAuthModal={props.toggleAuthModal} />
-				</DesktopNav>
+				<NagivationItems
+					width={props.width}
+					navbarType={props.navbarType} 
+					isNavbarTransparent={props.isNavbarTransparent} 
+					toggleAuthModal={props.toggleAuthModal} />
 			</nav>
-			<DrawerToggle
-				isOpen={props.bIsDrawerOpen}
-				isNavbarTransparent={props.isNavbarTransparent} 
-				onClick={props.toggleMobileDrawer} />
-			<MobileDrawer
-				drawerClass={classes.MobileOnly}
-				isOpen={props.bIsDrawerOpen}
-				onClick={props.toggleMobileDrawer}
-				// NavItems props
-				isNavbarTransparent={props.navbarTransparent} 
-				toggleAuthModal={props.toggleAuthModal} /> 
+			{props.width < 1121 ? 
+			<>
+				<DrawerToggle
+					isOpen={props.bIsDrawerOpen}
+					isNavbarTransparent={props.isNavbarTransparent} 
+					onClick={props.toggleMobileDrawer} />
+				<MobileDrawer
+					drawerClass={classes.MobileOnly}
+					isOpen={props.bIsDrawerOpen}
+					onClick={props.toggleMobileDrawer}
+					// NavItems props
+					isNavbarTransparent={props.navbarTransparent} 
+					toggleAuthModal={props.toggleAuthModal} />
+			</> 
+			: null}
 			
 		</>
 	);
@@ -49,6 +48,7 @@ class Navbar extends PureComponent {
 	}
 
 	state = {
+		width: window.innerWidth,
 		bIsDrawerOpen: false,
 		navbarTransparent: false,
 		showScrollToTop: false,
@@ -125,11 +125,17 @@ class Navbar extends PureComponent {
 		});
 	}
 
+	handleResize = () => {
+		this.setState({ width: window.innerWidth });
+	};
+
 	/**
-	 * Sets Navbar Settings
+	 * Sets Navbar Settings && Add Event Listener
 	 */
 	componentWillMount () {
 		this.setNavbar();
+		window.addEventListener('resize', this.handleResize);
+		window.addEventListener('scroll', this.changeNavbarOnWindowScroll);
 	}
 
 	/**
@@ -142,16 +148,10 @@ class Navbar extends PureComponent {
 	}
 
 	/**
-	 * Add Event Listener
-	 */
-	componentDidMount() {
-		window.addEventListener('scroll', this.changeNavbarOnWindowScroll);
-	}
-
-	/**
 	 * Remove Event Listener
 	 */
 	componentWillUnmount() {
+		window.removeEventListener('resize', this.handleResize);
 		window.removeEventListener('scroll', this.changeNavbarOnWindowScroll);
 	}
 
@@ -211,7 +211,9 @@ class Navbar extends PureComponent {
 		}
 		return (
 			<header className={navbarClasses.join(' ')} ref={this.myNavbar}>
-				<NavbarContainer isMobile={this.props.isMobile} {...this.state} />
+				<NavbarContainer
+					isMobile={this.props.isMobile} 
+					{...this.state} />
 				{/* ScrollToTopButton after scrolling */}
 				{this.state.showScrollToTop ? (
 					<ScrollToTopButton clicked={this.scrollToTop} />
