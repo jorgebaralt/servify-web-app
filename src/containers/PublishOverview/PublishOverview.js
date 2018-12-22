@@ -56,20 +56,20 @@ class PublishOverview extends Component {
 						</div>
 					: null}
 					{/* - why post a service  - why we are the best option*/}
-					<div className={classes.WhyContainer}>
-						<div className={classes.WhyDiv}>
-							<h2 className={classes.SecondTitle}>
+					<div className={classes.AboutUs}>
+						<div className={classes.AboutUsItem}>
+							<h2 className={classes.Title}>
 								Why choose us?
 							</h2>
-							<p className={classes.WhyText}>
+							<p className={classes.AboutUsDescription}>
 								Servify allows users to publish any type of service <strong>free</strong> of 
 								price and/or find any necessary service in a simple and easy way. You have 
 								full control over prices and rules and any kind of contact with your customers.
 							</p>
 						</div>
-						<div className={classes.WhyDiv}>
-							<h2 className={classes.SecondTitle}>Our purpose</h2>
-							<p className={classes.WhyText}>
+						<div className={classes.AboutUsItem}>
+							<h2 className={classes.Title}>Our goal</h2>
+							<p className={classes.AboutUsDescription}>
 								We want to provide a platform where anyone can use and find any service that might
 								be needed in an easy and user-friendly way. All service providers can easily make
 								their services public for anyone to see. Let us help you grow!
@@ -79,46 +79,46 @@ class PublishOverview extends Component {
 					<Separator />
 					{/* Steps to create a service */}
 					<h1>How to post a service</h1>
-					<div className={classes.HowToPostContainer}>
-						<div className={classes.HowToPostStep}>
+					<div className={classes.InstructionsContainer}>
+						<div>
 							<One style={{ borderRadius: '50%', width: 75, height: 75 }} />
-							<h2 className={classes.SecondTitle}>
+							<h2 className={classes.Title}>
 								Create an account
 							</h2>
-							<p className={classes.HowToPostText}>
+							<p className={classes.Instruction}>
 								Before publishing a service, make sure you create an
 								account with us. You can use this account for the mobile
-								versions as well!
+								versions available on iOS and Android as well!
 							</p>
 						</div>
-						<div className={classes.HowToPostStep}>
+						<div>
 							<Two style={{ borderRadius: '50%', width: 75, height: 75 }} />
-							<h2 className={classes.SecondTitle}>
+							<h2 className={classes.Title}>
 								Fill your information
 							</h2>
-							<p className={classes.HowToPostText}>
+							<p className={classes.Instruction}>
 								Once you have an account, you will be able to publish
 								as many services as you want, be sure to provide as
 								many details as possible to atract more customers.
 							</p>
 						</div>
-						<div className={classes.HowToPostStep}>
+						<div>
 							<Three style={{ borderRadius: '50%', width: 75, height: 75 }} />
-							<h2 className={classes.SecondTitle}>
+							<h2 className={classes.Title}>
 								Post your service
 							</h2>
-							<p className={classes.HowToPostText}>
+							<p className={classes.Instruction}>
 								After filling all your information, post your service so 
 								everyone is able to look at it, you will be able to modify
 								anything at any time if you wish to.
 							</p>
 						</div>
-						<div className={classes.HowToPostStep}>
+						<div>
 							<Four style={{ borderRadius: '50%', width: 75, height: 75 }} />
-							<h2 className={classes.SecondTitle}>
+							<h2 className={classes.Title}>
 								Get contacted for jobs
 							</h2>
-							<p className={classes.HowToPostText}>
+							<p className={classes.Instruction}>
 								Once your service is posted, users will be able to
 								contact you through our app or through the to contact
 								information you provided to schedule a job.
@@ -128,15 +128,15 @@ class PublishOverview extends Component {
 					{/* How we display info (what clients see) */}
 					<Separator />
 					<h1>What your customers will see</h1>
-					<div className={classes.WhatUsersSeeContainer}>
-						<div className={classes.WhatUsersSeeImgContainer}>
+					<div className={classes.CustomersContainer}>
+						<div className={classes.ImageWrapper}>
 							<ImageFadeIn
 								draggable='false'
-								className={classes.WhatUsersSeeImg}
+								className={classes.CustomerImage}
 								src={CustomersImage}
 								alt='' />
 						</div>
-						<div className={classes.WhatUsersSeeDescriptionContainer}>
+						<div className={classes.DescriptionContainer}>
 							<ul className={classes.ListContainer}>
 								<li className={classes.ListItem}>
 									<SVG svg='checkmark-nobg' />

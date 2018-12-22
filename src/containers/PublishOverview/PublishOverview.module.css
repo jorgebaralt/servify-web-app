@@ -61,12 +61,12 @@
     }
 }
 
-.Description{
-	font-size: 20px;
+.Description {
+	font-size: 17px;
 	font-weight: 400
 }
 
-.WhyContainer{
+.AboutUs {
 	display: grid;
 	overflow: hidden;
 	grid-template-columns: repeat(2, 1fr);
@@ -77,12 +77,18 @@
 }
 
 @media (max-width: 650px) {
-	.WhyContainer {
+	.AboutUs {
 		grid-template-columns: repeat(1, 1fr);
 	}
 }
 
-.WhyDiv{
+.Title {
+	margin: 12px 0;
+	user-select: none;
+	color: #424242;
+}
+
+.AboutUsItem {
 	display: flex;
 	align-items: flex-start;
 	flex-flow: column;
@@ -91,12 +97,7 @@
 	box-sizing: border-box;
 }
 
-.SecondTitle{
-	margin: 12px 0;
-	user-select: none;
-	color: #424242;
-}
-.WhyText{
+.AboutUsDescription {
 	color: #484848;
 	font-size: 17px;
 	text-align: justify;
@@ -105,7 +106,7 @@
 	hyphens: auto;
 }
 
-.HowToPostContainer{
+.InstructionsContainer{
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-auto-rows: 1fr;
@@ -113,27 +114,16 @@
 	grid-row-gap: 20px;
 }
 
-
-.Title{
-	color: #424242;
-	font-size: 50px;
+.InstructionsContainer div{
 	text-align: center;
 }
 
-.HowToPostStep{
-	text-align: center;
-}
-
-.HowToPostStepTitle{
-	color: #424242;
-}
-
-.HowToPostText{
+.Instruction {
 	color: #484848;
-	font-size: 16px;
+	font-size: 17px;
 }
 
-.WhatUsersSeeContainer{
+.CustomersContainer {
 	display: grid;
     overflow: hidden;
     grid-template-columns: repeat(2, 1fr);
@@ -142,21 +132,23 @@
     grid-row-gap: 0px;
 }
 
-.WhatUsersSeeImgContainer{
+.ImageWrapper {
 	width: 100%;
+	padding: 20px;
 }
 
-.WhatUsersSeeDescriptionContainer{
-	width: 100%;
-	padding: 2px 0 4px;
-}
-
-.WhatUsersSeeImg{
+.CustomerImage {
 	height: 450px;
 	width: 100%;
 	object-fit: cover;
 	animation: FadeIn 1s;
-	background-color: #EEEEEE;
+	border-radius: 15px;
+	background-color: #EEE;
+}
+
+.DescriptionContainer{
+	width: 100%;
+	padding: 30px;
 }
 
 .ListContainer{
@@ -181,9 +173,10 @@
 }
 
 .ListItem svg {
-	flex-basis: 15%;
+	flex-basis: 12.5%;
     flex-grow: 0;
 	flex-shrink: 0;
+	margin-top: 4px;
     width: 12px;
     height: 12px;
 }
@@ -193,33 +186,36 @@
 }
 
 .ListItem span {
-	flex-basis: 85%;
+	flex-basis: 87.5%;
     flex-grow: 0;
     flex-shrink: 0;
 }
 
-@media only screen and (max-width: 900px) {
-	.Header{
+@media (max-width: 720px) {
+	.Header {
 		height: 50vh;
 	}
-	.WhatUsersSeeImgContainer{
-		width: 100%;
-		height: 100%;
+	.DescriptionContainer{
+		padding: 2px 0 4px;
 	}
-	.WhatUsersSeeDescriptionContainer{
-		width: 100%;
-		text-align: left
+	.ImageWrapper {
+		padding: 2px 4px 4px;
 	}
 }
 
-@media only screen and (min-width: 600px) and (max-width: 899px) {
-	.ListItem{
-		/* margin-left: auto;
-		margin-right: auto;
-		margin-top: 20px; */
+@media (max-width: 380px) {
+	.InstructionsContainer{
+		grid-template-columns: repeat(1, 1fr);
+	}
+	.CustomersContainer {
+		grid-template-columns: repeat(1, 1fr);
+		grid-row-gap: 25px;
+	}
+	.CustomerImage {
+		width: 100%;
+		height: 225px;
 	}
 }
-
 
 @keyframes FadeIn {
 	from { 

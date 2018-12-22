@@ -31,7 +31,7 @@ class ReadyToGrow extends Component {
             <div className={classes.Wrapper}>
                 <Link target="_blank" 
                     rel="noopen noreferrer" 
-                    to="/publish/overview">
+                    to="/publish">
                     <div className={classes.BackgroundWrapper}>
                     <ImageFadeIn 
                         src={this.state.src}

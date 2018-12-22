@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 // CSS
 import classes from './Navbar.module.css';
 // JSX
-import DesktopNav from '../../components/Navigation/DesktopNav/DesktopNav';
 import NagivationItems from '../../components/Navigation/NavigationItems/NavigationItems';
 import DrawerToggle from '../../components/Navigation/DrawerToggle/DrawerToggle';
 import MobileDrawer from '../../components/Navigation/MobileDrawer/MobileDrawer';

@@ -43,14 +43,14 @@ const renderNavigationItems = (props) => {
 					{props.width < 1121 ? 
 						null : 
 						<>
-							<NavigationItem {...props} link="/publish/overview">
-								Overview
+							<NavigationItem {...props} link="/">
+								Home
+							</NavigationItem>
+							<NavigationItem {...props} link="/services">
+								Services
 							</NavigationItem>
 							<NavigationItem {...props} link="/help">
-								Publish
-							</NavigationItem>
-							<NavigationItem {...props} link="/signup">
-								FAQ
+								Help
 							</NavigationItem>
 							<NavAuthButtons {...props} />
 						</>
