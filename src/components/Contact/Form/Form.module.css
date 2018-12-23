@@ -1,0 +1,41 @@
+.Container {
+    margin: 0 auto;
+    background-color: transparent;
+    padding: 24px;
+    max-width: 600px;
+    min-height: 100vh;
+    min-height: calc(100vh - 70px);
+}
+
+.Container h1 {
+    color: rgb(72, 72, 72);
+    user-select: none;
+    margin-bottom: 30px;
+}
+
+.Intro {
+    margin-bottom: 50px;
+}
+
+.Intro h2 {
+    font-size: 16px;
+    color: rgb(72, 72, 72);
+    user-select: none;
+    margin: 0px;
+    padding: 0px;
+    max-width: 300px;
+}
+
+.Intro p {
+    font-size: 16px;
+    color: rgb(72, 72, 72);
+    user-select: none;
+    text-align: justify;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    padding: 0px;
+    max-width: 450px;
+}
