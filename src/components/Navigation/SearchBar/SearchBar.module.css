@@ -1,3 +1,7 @@
+.Wrapper {
+    position: relative;
+}
+
 .SearchBarAnchor {
     position: relative;
     display: flex;
@@ -215,17 +219,20 @@
 }
 
 .List {
-    background-color: rgba(255,255,255,0); /*TODO Change to show*/
+    background-color: rgb(255,255,255);
     border: 1px solid #EBEBEB;
+    border-top: 0;
     border-radius: 0 0 4px 4px;
     box-shadow: 0;
     margin: 0px;
-    overflow: hidden; /*TODO Change to show*/
     padding: 0px;
     padding-top: 8px;
-    transition: background-color 100ms linear, visibility linear 100ms, box-shadow linear 100ms;
-    visibility: hidden; /*TODO Change to show*/
     z-index: 10;
+    opacity: 0;
+    animation: FadeIn ease 350ms;
+    margin-left: 18px;
+    width: 460px !important;
+    top: 58px !important;
 }
 
 @media (max-width: 1121px) {
@@ -237,7 +244,9 @@
         max-height: calc(100vh - 64px);
         overflow: auto;
         border: none;
-        width: 100vw;
+        margin-left: 0px;
+        top: 70px !important;
+        width: 100vw !important;
     }
 }
 
@@ -245,14 +254,12 @@
     .List {
         position: absolute;
         top: 100%;
-        /* top: calc(100% - 12px); */
         width: 100%;
     }
 }
 
 .RecentSearchesWrapper {
-    visibility: hidden; /*TODO Change to show*/
-    opacity: 0; /*TODO Change to show*/
+    opacity: 0;
     transition: opacity 300ms linear 266ms;
 }
 
@@ -294,4 +301,13 @@
 
 .List.Show {
     box-shadow: 0 15px 46px -10px rgba(26, 26, 29, 0.3);
+}
+
+@keyframes FadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

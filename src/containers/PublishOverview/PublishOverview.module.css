@@ -195,9 +195,11 @@
 	.Header {
 		height: 50vh;
 	}
+
 	.DescriptionContainer{
 		padding: 2px 0 4px;
 	}
+
 	.ImageWrapper {
 		padding: 2px 4px 4px;
 	}
@@ -207,10 +209,12 @@
 	.InstructionsContainer{
 		grid-template-columns: repeat(1, 1fr);
 	}
+	
 	.CustomersContainer {
 		grid-template-columns: repeat(1, 1fr);
 		grid-row-gap: 25px;
 	}
+	
 	.CustomerImage {
 		width: 100%;
 		height: 225px;

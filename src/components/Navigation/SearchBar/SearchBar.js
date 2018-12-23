@@ -38,17 +38,17 @@ class SearchBar extends Component {
         });
     }
 
-    setListDimensions () {
-        this.setState( () => {
-            return { 
-                myList: {
-                    width: this.mySearchBar.current.offsetWidth,
-                    top: this.mySearchBar.current.offsetHeight + this.mySearchBar.current.offsetTop,
-                    right: document.body.getBoundingClientRect().right - this.mySearchBar.current.getBoundingClientRect().right,
-                } 
-            }
-        });
-    }
+    // setListDimensions () {
+    //     this.setState( () => {
+    //         return { 
+    //             myList: {
+    //                 width: this.mySearchBar.current.offsetWidth,
+    //                 top: this.mySearchBar.current.offsetHeight + this.mySearchBar.current.offsetTop,
+    //                 right: document.body.getBoundingClientRect().right - this.mySearchBar.current.getBoundingClientRect().right,
+    //             } 
+    //         }
+    //     });
+    // }
 
     inputChangeHandler = (event) => {
         event.preventDefault();
@@ -61,24 +61,6 @@ class SearchBar extends Component {
         });
     }
 
-    componentDidMount () {
-        this.setListDimensions();
-        // adding event listener
-        this.mySearchBar.current.addEventListener('onresize', this.setListDimensions);
-    }
-
-    componentDidUpdate () {
-        if (this.state.myList.width !== this.mySearchBar.current.offsetWidth) {
-            this.setListDimensions();
-        }
-    }
-
-    componentWillUnmount () {
-        // removing event listener
-        this.mySearchBar.current.removeEventListener('onresize', this.setListDimensions);
-
-    }
-
     render () {
         const searchBarContainerClasses = [classes.SearchBarContainer];
         const ListClasses = [classes.List];
@@ -89,7 +71,7 @@ class SearchBar extends Component {
             RecentSearchesWrapperClasses.push(classes.Show);
         }
         return (
-            <>
+            <div>
                 <div className={classes.SearchBarAnchor}>
                     <div ref={this.mySearchBar}
                         className={classes.SearchBarWrapper}>
@@ -145,42 +127,44 @@ class SearchBar extends Component {
                         </div>
                     </div>
                 </div>
-                <ul ref={this.myList}
-                    id={this.state.searchBar.listId}
-                    role="listbox" 
-                    style={{
-                        maxWidth: '100vw',
-                        width: this.state.myList.width,
-                        top: this.state.myList.top, 
-                        right: this.state.myList.right
-                    }}
-                    className={ListClasses.join(' ')}>
-                    <div className={RecentSearchesWrapperClasses.join(' ')}>
-                        <li className={classes.RecentSearchesContainer}>
-                            <div className={classes.RecentSearches}>
-                                <small>
-                                    <span>Search Results</span>
-                                </small>
-                            </div>
-                            <ul className={classes.SearchResultsWrapper}>
-                                {/* PLACEHOLDERS */}
-                                <SearchResult 
-                                    service='Servify'
-                                    location='Florida'
-                                />
-                                <SearchResult 
-                                    service='Servify'
-                                    location='Florida'
-                                />
-                                <SearchResult 
-                                    service='Servify'
-                                    location='Florida'
-                                />
-                            </ul>
-                        </li>
-                    </div>
-                </ul>
-            </>
+                {this.state.bIsFocused ? 
+                    <ul ref={this.myList}
+                        id={this.state.searchBar.listId}
+                        role="listbox" 
+                        style={{
+                            maxWidth: '100vw',
+                            width: this.state.myList.width,
+                            top: this.state.myList.top, 
+                            right: this.state.myList.right
+                        }}
+                        className={ListClasses.join(' ')}>
+                        <div className={RecentSearchesWrapperClasses.join(' ')}>
+                            <li className={classes.RecentSearchesContainer}>
+                                <div className={classes.RecentSearches}>
+                                    <small>
+                                        <span>Search Results</span>
+                                    </small>
+                                </div>
+                                <ul className={classes.SearchResultsWrapper}>
+                                    {/* PLACEHOLDERS */}
+                                    <SearchResult 
+                                        service='Servify'
+                                        location='Florida'
+                                    />
+                                    <SearchResult 
+                                        service='Servify'
+                                        location='Florida'
+                                    />
+                                    <SearchResult 
+                                        service='Servify'
+                                        location='Florida'
+                                    />
+                                </ul>
+                            </li>
+                        </div>
+                    </ul>
+                    : null}
+            </div>
         );
     };
 }
