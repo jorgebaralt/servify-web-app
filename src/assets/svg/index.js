@@ -16,7 +16,7 @@ import Menu from './menu';
 
 import BlackBorderlessLogo from '../images/servify-logos/blackborder-nobg';
 
-// TODO randomize colors
+// TODO underline randomize colors
 export { 
     RightArrow, 
     Tools, 

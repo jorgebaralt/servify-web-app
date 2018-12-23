@@ -194,7 +194,14 @@ class Navbar extends PureComponent {
 				}
 				break;
 			default:
-				// do nothing
+				// Same as services nabvar, for now it's the default
+				settings = {
+					className: classes.Navbar,
+					navbarType: 'SearchNavbar', // pass navbarType prop to select respective navigation items
+					toggleAuthModal: this.props.toggleAuthModal, // Toggle Auth Modal
+					toggleMobileDrawer: this.toggleMobileDrawer,
+					isNavbarTransparent: false,
+				}
 		}
 		return this.setState( () => {
 			return {

@@ -1,10 +1,13 @@
 import React, { PureComponent } from 'react';
 // SVG global object
 import * as SVG from '../../assets/svg';
-// Underlines global object
+// Underlines
 import * as Underlines from '../../assets/svg/Underline';
-// Social Meida
-import * as SocialMedia from '../../assets/svg/SocialMedia/';
+// Social Media 
+import * as SocialMedia from '../../assets/svg/SocialMedia';
+// Contact us
+import * as Contact from '../../assets/svg/Contact';
+
 
 class SVGComponent extends PureComponent {
 
@@ -67,6 +70,7 @@ class SVGComponent extends PureComponent {
                         {this.randomUnderline(Underlines)(this.props)}
                     </div>
                 break;
+            // Social Media Icons
             case 'facebook-nobg':
                 svg = <SocialMedia.FacebookNoBg {...this.props} />
                 break;
@@ -78,6 +82,19 @@ class SVGComponent extends PureComponent {
                 break;
             case 'instagram':
                 svg = <SocialMedia.Instagram {...this.props} />
+                break;
+            // Contact us
+            case 'my-account':
+                svg = <Contact.MyAccount />
+                break;
+            case 'other':
+                svg = <Contact.Other />
+                break;
+            case 'security':
+                svg = <Contact.Security />
+                break;
+            case 'service-post':
+                svg = <Contact.ServicePost />
                 break;
             default:
                 svg = <div>Please specify a <strong>props.svg</strong>, 

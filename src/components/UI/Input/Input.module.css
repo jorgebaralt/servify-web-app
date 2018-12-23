@@ -7,23 +7,29 @@
 }
 
 .Label {
-    color:#999; 
-    font-size:18px;
-    font-weight:normal;
-    position:absolute;
-    pointer-events:none;
-    left:10px;
+    color: #999; 
+    font-size: 17px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 10px;
     /* top:20px; */
     top: 50%;
     transform: translateY(-50%);
-    transition:0.2s ease all; 
+    transition: 0.2s ease all; 
 }
 
-.Input input:focus ~ .Label, .Input input:valid ~ .Label {
+.TextAreaLabel {
+    top: 25px;
+    transform: translateY(-15px);
+}
+
+.Input input:focus ~ .Label, .Input input:valid ~ .Label,
+.Input textarea:focus ~ .Label, .Input textarea:valid ~ .Label {
     top: -7.5px;
     left: 5px;
-    font-size:14px;
-    color:#484848;
+    font-size: 14px;
+    color: #484848;
 }
 
 .InputElement {
@@ -31,8 +37,8 @@
     border: 1px solid rgba(72,72,72,0.3333);
     background-color: #fff;
     font: inherit;
-    font-size:18px;
-    padding:10px 10px 10px 5px;
+    font-size: 17px;
+    padding: 10px 10px 10px 5px;
     display: block;
     width: 100%;
     height: 45px;
@@ -40,18 +46,28 @@
     transition: all 0.2s ease; 
 }
 
+.TextAreaElement {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 25vh;
+}
+
+textarea.InputElement::-webkit-input-placeholder,
 input.InputElement::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: transparent;
 }
 
+textarea.InputElement::-moz-placeholder,
 input.InputElement::-moz-placeholder { /* Firefox 19+ */
     color: transparent;
 }
 
+textarea.InputElement:-ms-input-placeholder,
 input.InputElement:-ms-input-placeholder { /* IE 10+ */
     color: transparent;
 }
 
+textarea.InputElement:-moz-placeholder,
 input.InputElement:-moz-placeholder { /* Firefox 18- */
     color: transparent;
 }
@@ -62,9 +78,9 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
 }
 
 .Bar  { 
-    position:relative; 
-    display:block; 
-    width:100%; 
+    position: relative; 
+    display: block; 
+    width: 100%; 
 }
 
 .Bar:before, .Bar:after   {
@@ -83,7 +99,8 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
     right: 50%; 
 }
 
-.Input input:focus ~ .Bar:before, .Input input:focus ~ .Bar:after {
+.Input input:focus ~ .Bar:before, .Input input:focus ~ .Bar:after,
+.Input textarea:focus ~ .Bar:before, .Input textarea:focus ~ .Bar:after {
     width: calc(50% - 2.5px);
 }
 

@@ -12,8 +12,8 @@ const featured = (props) => {
                 <div className={classes.Container}>
                     <div className={classes.BackgroundWrapper}>
                         <div className={classes.BackgroundContainer}>
-                        <div className={classes.Background} style={{width: '100%', height: '100%'}}/>
-                        <ImageFadeIn src={props.image} />
+                            <div className={classes.Background} style={{width: '100%', height: '100%'}}/>
+                            <ImageFadeIn src={props.image} />
                         </div>
                     </div>
                     <div className={classes.TextWrapper}>

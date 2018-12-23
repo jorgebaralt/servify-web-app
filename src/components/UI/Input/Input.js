@@ -5,6 +5,7 @@ import classes from './Input.module.css'
 const input = (props) => {
     let inputElement;
     const inputClasses = [classes.InputElement];
+    const labelClasses = [classes.Label];
     let validationMessage = null;
 
     if (props.invalid && props.shouldValidate && props.touched) {
@@ -14,7 +15,6 @@ const input = (props) => {
         inputClasses.push(classes.Valid);
         validationMessage = <p className={classes.ValidFeedback}>Looks good!</p>;
     }
-
 
     switch (props.elementType) {
         case('input' || 'text' || 'email' || 'number'):
@@ -27,6 +27,8 @@ const input = (props) => {
                 />;
             break;
         case('textarea'):
+            labelClasses.push(classes.TextAreaLabel);
+            inputClasses.push(classes.TextAreaElement);
             inputElement = <textarea 
                 className={inputClasses.join(' ')} 
                 {...props.elementConfig} 
@@ -59,8 +61,6 @@ const input = (props) => {
                 defaultValue={props.value}
                 onChange={props.changed} />;
     }
-
-
     return (
         <div style={props.style}
             className={classes.Input}>
@@ -68,7 +68,7 @@ const input = (props) => {
             {validationMessage}
             {/* <span className="highlight"></span> */}
             <span className={classes.Bar}></span>
-            <label className={classes.Label}>{props.elementConfig.placeholder}</label>
+            <label className={labelClasses.join(' ')}>{props.elementConfig.placeholder}</label>
         </div>
     );
 }

@@ -1,0 +1,110 @@
+.Container {
+    margin: 0 auto;
+    background-color: transparent;
+    padding: 24px;
+    max-width: 600px;
+    min-height: 100vh;
+    min-height: calc(100vh - 70px);
+}
+
+.Container h1 {
+    color: rgb(72, 72, 72);
+    user-select: none;
+    margin-bottom: 30px;
+}
+
+.Intro {
+    margin-bottom: 50px;
+}
+
+.Intro h2 {
+    font-size: 16px;
+    color: rgb(72, 72, 72);
+    user-select: none;
+    margin: 0px;
+    padding: 0px;
+    max-width: 300px;
+}
+
+.Intro p {
+    font-size: 16px;
+    color: rgb(72, 72, 72);
+    user-select: none;
+    text-align: justify;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    padding: 0px;
+    max-width: 450px;
+}
+
+.ReasonsContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+
+@media (max-width: 650px) {
+    .ReasonsContainer {
+        grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
+        justify-content: center;
+        grid-gap: 1rem;
+    }
+}
+
+.ReasonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 150px;
+    max-width: 200px;
+    float: left;
+    border: 1px solid #EBEBEB;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: border ease 100ms;
+}
+
+.ReasonContainer:hover {
+    border-color: rgb(255, 112, 67);
+}
+
+.Reason {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 24px 16px;
+    overflow: hidden;
+}
+
+.Description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 24px 0 0;
+    color: rgb(72, 72, 72);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.Option {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    color: #585858;
+    user-select: none;
+}
