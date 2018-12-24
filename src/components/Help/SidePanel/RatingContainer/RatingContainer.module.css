@@ -1,0 +1,88 @@
+.RatingContainer {
+    width: 100%;
+    animation: FadeIn ease 0.2s;
+}
+
+.FilterOverview {
+    margin-top: 2px;
+    margin-left: -6px;
+    display: flex;
+}
+
+.FilterOverview > span {
+    display: inline-flex;
+}
+
+.Rating {
+    margin: 15px auto;
+    height: 100%;
+}
+
+.Rating span {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.Rating span:not(:first-child):not(:last-child):after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 175%;
+    height: 1px;
+    top: 50%;
+    top: calc(50% - 0.5px);
+    left: -50%;
+    background-color: rgba(0, 119, 145, 0.25);
+    z-index: -1;
+}
+
+.Rating span svg {
+    cursor: pointer;
+    background: #FFF;
+    margin: 0 auto;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 119, 145, 0.25);
+    padding: 5px;
+    transition: border 0.2s ease;
+}
+
+.Rating span:hover svg {
+    border: 1px solid rgb(0, 119, 145);
+}
+
+.Rating span:nth-child(1) svg {
+    border: 1px solid rgb(0, 119, 145);
+}
+
+.Rating.RatingActiveTwo span:nth-child(2) svg {
+    border: 1px solid rgb(0, 119, 145);
+}
+
+.Rating.RatingActiveThree span:nth-child(2) svg,
+.Rating.RatingActiveThree span:nth-child(3) svg {
+    border: 1px solid rgb(0, 119, 145);
+}
+
+.Rating.RatingActiveFour span:nth-child(2) svg,
+.Rating.RatingActiveFour span:nth-child(3) svg,
+.Rating.RatingActiveFour span:nth-child(4) svg {
+    border: 1px solid rgb(0, 119, 145);
+}
+
+.RatingFilter {
+    margin-left: 12.5px;
+    user-select: none;
+    font-size: 12px;
+}
+
+@keyframes FadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

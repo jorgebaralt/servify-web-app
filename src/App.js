@@ -8,6 +8,7 @@ import { mobileCreator } from './store/actions';
 import Layout from './hoc/Layout/Layout';
 import RouterScrollToTop from './hoc/RouterScrollToTop/RouterScrollToTop';
 import Landing from './containers/Landing/Landing';
+import Help from './containers/Help/Help';
 import Contact from './containers/Contact/Contact';
 import PublishOverview from './containers/PublishOverview/PublishOverview';
 import Services from './containers/Services/Services';
@@ -28,6 +29,7 @@ class App extends Component {
 			<Layout>
 				<RouterScrollToTop />
 				<Switch>
+					<Route exact path="/help" component={Help} />
 					<Route exact path="/contact" component={Contact} />
 					<Route exact path="/publish/overview" component={PublishOverview} />
 					<Route exact path="/services/:id" component={ServiceId} />
