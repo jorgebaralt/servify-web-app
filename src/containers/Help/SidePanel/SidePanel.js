@@ -86,12 +86,33 @@ class SidePanel extends Component {
             // Filtered category array
             const filteredArr =  (
                 Object.values(categories[key]).filter( question => {
-                    const questionTitle = question[0].toLowerCase().includes(e.target.value.toLowerCase());
-                    const questionAnswer = question[1].toLowerCase().includes(e.target.value.toLowerCase());
-                    // If question's title or answer includes the input's value, then it will return true and
-                    // avoid being filtered out, otherwise returns false. To lower case is there to ignore case
-                    // sensibility from users.
-                    return questionTitle || questionAnswer;
+                    // Filter bool result
+                    let bIsMatch = false;
+                    // Declaring the question's title and question answer to be used for filtering
+                    const questionTitle = question[0].toLowerCase();
+                    const questionAnswer = question[1].toLowerCase();
+                    // Search word array declaration. Splits each word into an array element. We will 
+                    // be looping through each word and see if the questions have these words
+                    const searchWords = e.target.value.toLowerCase().split(/\s+/g)
+                        .map(string => {
+                            return string.trim();
+                        });
+                    // For loop for every word in the searchWords array
+                    for (let i = 0; i < searchWords.length; i++) {
+                        /**
+                         * If the title of the answer of the question include the searched [i] word,
+                         * bIsMatch is true, otherwise if it's not included then bIsMatch is false and
+                         * the loop is broken.
+                         */
+                        if (questionTitle.includes(searchWords[i]) || questionAnswer.includes(searchWords[i])) {
+                            bIsMatch = true;
+                            continue;
+                        } else {
+                            bIsMatch = false;
+                            break;
+                        }
+                    }
+                    return bIsMatch;
                 })
             );
             // If the array is not empty, then it will be returned into the filtered categories object. If it's empty, 
