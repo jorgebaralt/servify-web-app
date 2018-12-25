@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import isElementInViewport from '../../shared/isInViewport';
 // CSS
 import classes from './Help.module.css'
 // JSX
@@ -62,7 +63,15 @@ class Help extends Component {
         }
     }
 
-    toggleAnswer = (category, question) => {
+    toggleAnswer = (category, question, id) => {
+        if (!isElementInViewport(document.getElementById(id))) {
+            const el = document.getElementById(id);
+            window.scrollTo({
+                top: el.offsetTop - 105,
+                left: null,
+                behavior: 'smooth'
+            });
+        }
         this.setState( prevState => {
             return {
                 categories: {

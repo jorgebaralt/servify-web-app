@@ -141,15 +141,16 @@ class SidePanel extends Component {
                         title={categoryKey}
                         onClick={() => this.toggleListHandler(categoryKey)}
                         bIsClosed={this.state.lists[categoryKey].bIsClosed}
-                        closedChildren={<span>{categoryKey}</span>}>
+                        closedChildren={<span>Hidden</span>}>
                             {Object.entries(categoryObj).map( (question) => { // Mapping through questions array
                                 const questionKey = question[0];
                                 const questionTitle = question[1][0];
+                                const id = [categoryKey,'_',questionKey].join('');
                                 return (
                                     <ListItem
                                         key={questionKey}
                                         title={questionTitle}
-                                        onClick={() => this.props.toggleAnswer(categoryKey, questionKey)}
+                                        onClick={() => this.props.toggleAnswer(categoryKey, questionKey, id)}
                                         active={this.props.categories[categoryKey][questionKey] ? 
                                             this.props.categories[categoryKey][questionKey].bIsOpen : null} />
                                 );

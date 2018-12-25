@@ -17,11 +17,14 @@ const container = (props) => {
                                 {Object.entries(props.categories[category]).map( question => {
                                     const questionKey = question[0];
                                     const questionObj = question[1];
+                                    const id = [category,'_',questionKey].join('');
                                     return (
-                                        <Question key={questionKey}
+                                        <Question 
+                                            id={id}
+                                            key={questionKey}
                                             question={questionObj}
                                             bIsOpen={props.categories[category][question[0]].bIsOpen}
-                                            onClick={() => props.toggleAnswer(category, questionKey)} />
+                                            onClick={(event) => props.toggleAnswer(category, questionKey)} />
                                     );
                                 })}
                                 <Separator />
