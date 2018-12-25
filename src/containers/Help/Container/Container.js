@@ -1,46 +1,37 @@
-import React, { Component } from 'react'
+import React from 'react'
 // CSS
 import classes from './Container.module.css'
 // JSX
-// import LoadingBounce from '../../../components/UI/LoadingBounce/LoadingBounce';
+import Question from '../../../components/Help/Container/Question/Question';
 import Separator from '../../../components/UI/Separator/Separator';
 
-class Container extends Component {
-    state = {
-        categories: this.props.categories
-    }
-
-    render () {
-        return (
-            <div className={classes.HelpWrapper}>
-                <div className={classes.HelpContainer}>
-                    {Object.keys(this.state.categories).map( (category, index) => {
-                        const questions = (
-                            <ul key={index} className={classes.Questions}>
-                                { Object.values(this.state.categories[category]).map( question => {
+const container = (props) => {
+    return (
+        <div className={classes.HelpWrapper}>
+            <div className={classes.HelpContainer}>
+                {Object.keys(props.categories).map( category => {
+                    return (
+                        <div key={category}>
+                            <h1>{category}</h1>
+                            <ul className={classes.Questions}>
+                                {Object.entries(props.categories[category]).map( question => {
+                                    const questionKey = question[0];
+                                    const questionObj = question[1];
                                     return (
-                                        <li className={classes.QuestionContainer} key={question[0]}>
-                                            <a className={classes.Question} href="#0">{question[0]}</a>
-                                            <div class={classes.Answer}>
-                                                <p>{question[1]}</p>
-                                            </div>
-                                        </li>
-                                    )
+                                        <Question key={questionKey}
+                                            question={questionObj}
+                                            bIsOpen={props.categories[category][question[0]].bIsOpen}
+                                            onClick={() => props.toggleAnswer(category, questionKey)} />
+                                    );
                                 })}
-                                <Separator/ >
+                                <Separator />
                             </ul>
-                        );
-                        return (
-                            <>
-                                <h1 key={category}>{category}</h1>
-                                {questions}
-                            </>
-                        );
-                    })}
-                </div>
+                        </div>
+                    );
+                })}
             </div>
-        )
-    }
+        </div>
+    )
 }
 
-export default Container;
+export default container;

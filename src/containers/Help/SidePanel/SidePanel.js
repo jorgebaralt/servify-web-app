@@ -79,55 +79,16 @@ class SidePanel extends Component {
             ...this.state.filter.searchBar,
             value: e.target.value
         };
-        const categories = Object.assign(this.props.categories);
-        const filteredCategories = {}; // Declaring filtered categories object
-        // Looping through each key of the categories object
-        Object.keys(categories).forEach( key => {
-            // Filtered category array
-            const filteredArr =  (
-                Object.values(categories[key]).filter( question => {
-                    // Filter bool result
-                    let bIsMatch = false;
-                    // Declaring the question's title and question answer to be used for filtering
-                    const questionTitle = question[0].toLowerCase();
-                    const questionAnswer = question[1].toLowerCase();
-                    // Search word array declaration. Splits each word into an array element. We will 
-                    // be looping through each word and see if the questions have these words
-                    const searchWords = e.target.value.toLowerCase().split(/\s+/g)
-                        .map(string => {
-                            return string.trim();
-                        });
-                    // For loop for every word in the searchWords array
-                    for (let i = 0; i < searchWords.length; i++) {
-                        /**
-                         * If the title of the answer of the question include the searched [i] word,
-                         * bIsMatch is true, otherwise if it's not included then bIsMatch is false and
-                         * the loop is broken.
-                         */
-                        if (questionTitle.includes(searchWords[i]) || questionAnswer.includes(searchWords[i])) {
-                            bIsMatch = true;
-                            continue;
-                        } else {
-                            bIsMatch = false;
-                            break;
-                        }
-                    }
-                    return bIsMatch;
-                })
-            );
-            // If the array is not empty, then it will be returned into the filtered categories object. If it's empty, 
-            // then it will simply not exist in the filtered object, therefore it won't be displayed in the sidepanel.
-            if (filteredArr.length > 0) { filteredCategories[key] = filteredArr; }
-        });
         this.setState( (prevState) => {
                 return {
-                    categories: filteredCategories,
+                    // categories: filteredCategories,
                     filter: {
                         ...prevState.filter,
                         searchBar: updatedSearchBar
                     }
                 }
         });
+        this.props.filterCategories(e.target.value);
     }
 
     toggleListHandler = (key) => {
@@ -172,20 +133,26 @@ class SidePanel extends Component {
             WrapperClasses.push(classes.Open);
         }
         const categories = (
-            Object.entries(this.state.categories).map( (category) => {
+            Object.entries(this.props.categories).map( (category) => {
+                const categoryKey = category[0];
+                const categoryObj = category[1];
                 return (
-                    <List key={category[0]}
-                        title={category[0]}
-                        onClick={() => this.toggleListHandler(category[0])}
-                        bIsClosed={this.state.lists[category[0]].bIsClosed}
-                        closedChildren={<span>{category[0]}</span>}>
-                            {Object.values(category[1]).map( (question) => { // Mapping through questions array
+                    <List key={categoryKey}
+                        title={categoryKey}
+                        onClick={() => this.toggleListHandler(categoryKey)}
+                        bIsClosed={this.state.lists[categoryKey].bIsClosed}
+                        closedChildren={<span>{categoryKey}</span>}>
+                            {Object.entries(categoryObj).map( (question) => { // Mapping through questions array
+                                const questionKey = question[0];
+                                const questionTitle = question[1][0];
                                 return (
                                     <ListItem
-                                        key={question[0]}
-                                        title={question[0]}
-                                        active={this.state.categories[category.title]} />
-                                )
+                                        key={questionKey}
+                                        title={questionTitle}
+                                        onClick={() => this.props.toggleAnswer(categoryKey, questionKey)}
+                                        active={this.props.categories[categoryKey][questionKey] ? 
+                                            this.props.categories[categoryKey][questionKey].bIsOpen : null} />
+                                );
                             })}
                     </List>
                 );

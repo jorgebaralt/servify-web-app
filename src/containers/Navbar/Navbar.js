@@ -23,7 +23,7 @@ const NavbarContainer = (props) => {
 			<>
 				<DrawerToggle
 					isOpen={props.bIsDrawerOpen}
-					isNavbarTransparent={props.isNavbarTransparent} 
+					isNavbarTransparent={props.isNavbarTransparent || props.isDrawerTransparent} 
 					onClick={props.toggleMobileDrawer} />
 				<MobileDrawer
 					drawerClass={classes.MobileOnly}
@@ -172,6 +172,7 @@ class Navbar extends PureComponent {
 					// Passing Is Navbar Transparent functionality, if dependant on scroll then pass 'this.state.navbarTransparent'
 					// if never transparent then pass false or pass nothing, if always transparent then pass true
 					isNavbarTransparent: true,
+					isDrawerTransparent: true,
 					toggleMobileDrawer: this.toggleMobileDrawer,
 				};
 				break;
@@ -182,6 +183,7 @@ class Navbar extends PureComponent {
 					toggleAuthModal: this.props.toggleAuthModal, // Toggle Auth Modal
 					toggleMobileDrawer: this.toggleMobileDrawer,
 					isNavbarTransparent: false,
+					isDrawerTransparent: false
 				}
 				break;
 			case this.props.location.pathname.includes('/publish'):
@@ -191,7 +193,18 @@ class Navbar extends PureComponent {
 					toggleAuthModal: this.props.toggleAuthModal, // Toggle Auth Modal
 					toggleMobileDrawer: this.toggleMobileDrawer,
 					isNavbarTransparent: false,
+					isDrawerTransparent: false
 				}
+				break;
+			case this.props.location.pathname.includes('/help') || this.props.location.pathname.includes('/contact'):
+				settings = {
+					className: classes.SupportNavbar,
+					navbarType: 'SupportNavbar', // pass navbarType prop to select respective navigation items
+					toggleAuthModal: this.props.toggleAuthModal,
+					toggleMobileDrawer: this.toggleMobileDrawer,
+					isNavbarTransparent: false,
+					isDrawerTransparent: true
+				};
 				break;
 			default:
 				// Same as services nabvar, for now it's the default
@@ -201,6 +214,7 @@ class Navbar extends PureComponent {
 					toggleAuthModal: this.props.toggleAuthModal, // Toggle Auth Modal
 					toggleMobileDrawer: this.toggleMobileDrawer,
 					isNavbarTransparent: false,
+					isDrawerTransparent: false
 				}
 		}
 		return this.setState( () => {

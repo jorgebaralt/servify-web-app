@@ -85,16 +85,29 @@ const renderNavigationItems = (props) => {
 					}
 				</>
 			);
+		
+		case 'SupportNavbar':
+			return (
+				<>
+					<SearchBar />
+					{props.width < 1121 ? 
+						null : 
+						<>
+							<div className={classes.Spacing} />
+							<NavigationItem className={props.className} {...props} link="/" color="white" >
+								Home
+							</NavigationItem>
+							<NavAuthButtons {...props} color="white" /> 
+						</>
+					}
+				</>
+			);
 		case 'MobileDrawer':
 			return (
 				<>
 					<div className={classes.MobileLogo}>
 						<img src={servifyLogo} draggable='false' alt='' />
 					</div>
-					{/* <button onClick={props.onClick} className={classes.CloseToggle}>
-						<div className={classes.ArrowWrapper}><span className={classes.Arrow}></span></div>
-						<span>Close</span>
-					</button> */}
 					<NavLink onClick={props.onClick} className={classes.MobileHomeLink} to ="/">
 						Home
 					</NavLink>

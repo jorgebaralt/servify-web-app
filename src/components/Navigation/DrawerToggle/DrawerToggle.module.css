@@ -18,7 +18,7 @@
 .Transparent div,
 .Transparent div:after,
 .Transparent div:before {
-    height: 2px !important;
+    height: 2.5px !important;
     background-color: #FFF !important;
 }
 

@@ -232,7 +232,7 @@
     animation: FadeIn ease 350ms;
     margin-left: 18px;
     width: 460px !important;
-    top: 58px !important;
+    top: 56px !important;
 }
 
 @media (max-width: 1121px) {
@@ -261,6 +261,7 @@
 .RecentSearchesWrapper {
     opacity: 0;
     transition: opacity 300ms linear 266ms;
+    border-top: 1px solid #EBEBEB;
 }
 
 .RecentSearchesContainer {
