@@ -57,9 +57,11 @@ const renderNavigationItems = (props) => {
 					}
 					<div className={classes.Spacing} />
 					<div className={classes.Navtext}>Ready to grow?</div>
-					<ButtonFilled style={{ width: 'auto' }} type="primary">
-						Get started
-					</ButtonFilled>
+					<NavLink to="/publish">
+						<ButtonFilled style={{ width: 'auto' }} type="primary">
+							Get started
+						</ButtonFilled>
+					</NavLink>
 					{props.width < 1121 ? 
 						null : 
 						<div className={classes.SpacingSmall}/>

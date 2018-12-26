@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 // CSS
 import classes from './PublishOverview.module.css';
 // Image
-import CustomersImage from '../../assets/images/happy.jpg';
+import CustomersImage from '../../../assets/images/happy.jpg';
+import HeaderImage from '../../../assets/images/overview.jpeg';
 // JSX
-import ReadyToGrow from '../../components/Publish/ReadyToGrow/ReadyToGrow';
-import SVG from '../../components/SVG/SVG';
-import HeaderImage from '../../assets/images/overview.jpeg';
-import ImageFadeIn from '../../components/UI/ImageFadeIn/ImageFadeIn';
-import Button from '../../components/UI/Button/Button';
-import Separator from '../../components/UI/Separator/Separator'
-import { One, Two, Three, Four } from '../../assets/svg/Numbers';
+import { Link } from 'react-router-dom';
+import ReadyToGrow from '../../../components/Publish/ReadyToGrow/ReadyToGrow';
+import SVG from '../../../components/SVG/SVG';
+import ImageFadeIn from '../../../components/UI/ImageFadeIn/ImageFadeIn';
+import Button from '../../../components/UI/Button/Button';
+import Separator from '../../../components/UI/Separator/Separator'
+import { One, Two, Three, Four } from '../../../assets/svg/Numbers';
 
 class PublishOverview extends Component {
 	state = { 
@@ -41,7 +42,9 @@ class PublishOverview extends Component {
 							<p className={classes.Description}>
 								Increase your customers by hosting your services on Servify
 							</p>
-							<Button className={classes.Button} blockButton={true} type={'primary'}>Post a Service</Button>
+							<Link to="/publish">
+								<Button className={classes.Button} blockButton={true} type={'primary'}>Publish a Service</Button>
+							</Link>
 						</div>
 					) : null}
 				</div>

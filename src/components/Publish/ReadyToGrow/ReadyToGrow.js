@@ -29,7 +29,7 @@ class ReadyToGrow extends Component {
     render () {
         return (
             <div className={classes.Wrapper}>
-                <Link target="_blank" 
+                <Link
                     rel="noopen noreferrer" 
                     to="/publish">
                     <div className={classes.BackgroundWrapper}>
