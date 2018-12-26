@@ -39,7 +39,6 @@ const footer = (props) => {
                         <NavLink activeClassName={classes.active} className={classes.NavLink} to='/publish/overview'><span className={classes.Link}>Post</span></NavLink>
                         <NavLink activeClassName={classes.active} className={classes.NavLink} to='/services'><span className={classes.Link}>Services</span></NavLink>
                         <NavLink activeClassName={classes.active} className={classes.NavLink} to='/help'><span className={classes.Link}>Help</span></NavLink>
-                        <NavLink activeClassName={classes.active} className={classes.NavLink} to='/support'><span className={classes.Link}>Support</span></NavLink>
                         <NavLink activeClassName={classes.active} className={classes.NavLink} to='/contact'><span className={classes.Link}>Contact</span></NavLink>
                     </div>
                     <div className={classes.CopyrightWrapper}>
