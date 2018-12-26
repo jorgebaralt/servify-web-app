@@ -13,6 +13,7 @@ import Chat from './chat';
 import Cancel from './cancel';
 import CheckmarkNoBg from './checkmark-nobg';
 import Menu from './menu';
+import User from './user';
 
 import BlackBorderlessLogo from '../images/servify-logos/blackborder-nobg';
 
@@ -33,5 +34,6 @@ export {
     Chat,
     Cancel,
     CheckmarkNoBg,
-    Menu
+    Menu,
+    User
 };

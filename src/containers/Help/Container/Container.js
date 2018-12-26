@@ -24,7 +24,7 @@ const container = (props) => {
                                             key={questionKey}
                                             question={questionObj}
                                             bIsOpen={props.categories[category][question[0]].bIsOpen}
-                                            onClick={(event) => props.toggleAnswer(category, questionKey)} />
+                                            onClick={() => props.toggleAnswer(category, questionKey)} />
                                     );
                                 })}
                                 <Separator />

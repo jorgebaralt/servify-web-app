@@ -29,6 +29,10 @@ const navAuthButtons = (props) => {
                 button='Sign up'
                 className={buttonClass.join(' ')} 
                 onClick={props.toggleAuthModal}/>
+            <NavAuthButton
+                button='User'
+                className={buttonClass.join(' ')} 
+                onClick={props.toggleAuthModal}/>
         </>
     );
 }

@@ -64,14 +64,6 @@ class Help extends Component {
     }
 
     toggleAnswer = (category, question, id) => {
-        if (!isElementInViewport(document.getElementById(id))) {
-            const el = document.getElementById(id);
-            window.scrollTo({
-                top: el.offsetTop - 105,
-                left: null,
-                behavior: 'smooth'
-            });
-        }
         this.setState( prevState => {
             return {
                 categories: {
@@ -85,7 +77,15 @@ class Help extends Component {
                     }
                 }
             }
-        })
+        });
+        if (document.getElementById(id) && !isElementInViewport(document.getElementById(id))) {
+            const el = document.getElementById(id);
+            window.scrollTo({
+                top: el.offsetTop - 105,
+                left: null,
+                behavior: 'smooth'
+            });
+        }
     }
 
     filterCategories = (searchBarValue) => {
