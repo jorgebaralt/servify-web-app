@@ -46,9 +46,11 @@ const input = (props) => {
                         defaultValue={props.value}
                         onChange={props.changed}>
                         {props.elementConfig.options.map( (option, index) => {
-                            return (<option key={index} value={option.value}>
-                                        {option.displayValue}
-                                    </option>);
+                            return (
+                                <option key={index} value={option.value}>
+                                    {option.displayValue}
+                                </option>
+                            );
                         })}
                     </select>
                 </>

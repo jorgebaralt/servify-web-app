@@ -1,10 +1,62 @@
 import React, { Component } from 'react';
+import categories from '../../shared/categories';
+// Input Validity
+import { checkValidity } from '../../shared/checkValidity';
 // CSS
 import classes from './Publish.module.css';
 // JSX
 import { Slider, Slide } from '../../components/UI/Slider';
 
+const categoriesDatalist = categories.map( (category) => {
+    return category.title;
+});
+
+console.log(categoriesDatalist);
+
+
 class Publish extends Component {
+    state = {
+        controls: {
+            categories: {
+                elementType: 'select',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Select a Category',
+                    options: categoriesDatalist
+                },
+                value: '',
+                valueType: 'text',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                touched: false,
+            },
+        },
+        formIsValid: false,
+    }
+
+    inputChangeHandler = (event, inputIdentifier) => {
+        const updatedOrderForm = {
+            ...this.state.controls,
+        };
+        const updatedFormElement = {
+            ...updatedOrderForm[inputIdentifier]
+        };
+        updatedFormElement.value = event.target.value;
+        updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.touched = true;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+        let formIsValid = true;
+        for (let inputIdentifier in updatedOrderForm) {
+            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+        }
+        this.setState({
+            controls: updatedOrderForm, 
+            formIsValid: formIsValid
+        });
+    }
+
     render() {
         return (
             <div className={classes.Wrapper}>

@@ -99,13 +99,6 @@ class SignUpModal extends Component {
         formIsValid: false,
     }
 
-    componentDidMount () {
-        // TODO Auth Redux Saga
-        // if (!this.props.buildingBurger && this.props.authRedirectPath !== "/") {
-        //     this.props.onSetAuthRedirectPath();
-        // }
-    }
-
     toggleRememberMe = () => {
         this.setState( (prevState) => {
             return {
@@ -146,29 +139,7 @@ class SignUpModal extends Component {
                 },
                 bShowPassword: !prevState.bShowPassword
             };
-        })
-    }
-
-    checkValidity = (value, rules) => {
-        let isValid = true;
-        if (rules) {
-            if (rules.required) {
-                isValid = value.trim() !== '' && isValid;
-            }
-
-            if (rules.minLength) {
-                isValid = value.length >= rules.minLength && isValid;
-            }
-
-            if (rules.maxLength) {
-                isValid = value.length <= rules.maxLength && isValid;
-            }
-
-            if (rules.email) {
-                isValid = value.includes('@') && value.includes('.') && isValid;
-            }
-        }
-        return isValid;
+        });
     }
 
     inputChangeHandler = (event, inputIdentifier) => {
