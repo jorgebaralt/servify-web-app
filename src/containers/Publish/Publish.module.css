@@ -1,0 +1,63 @@
+.Wrapper {
+    display: flex;
+    flex-flow: row;
+    margin-bottom: -30px;
+    height: 100vh;
+    height: calc(100vh - 70px);
+    overflow-x: hidden;
+    position: relative;
+}
+
+.Container {
+    position: relative;
+    flex:0 0 auto;
+    padding: 28px 56px;
+    margin: 0 auto;
+    background-color: transparent;
+    width: 100vw;
+    height: 100%;
+}
+
+@media (max-width: 744px) {
+    .Container {
+        padding: 24px;
+    }
+}
+
+.Container h1,
+.Container h2 {
+    color: #484848;
+    user-select: none;
+    margin-top: 10px;
+    font-weight: 400;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+.Form {
+    position: relative;
+    max-width: 500px;
+}
+
+.Step {
+    user-select: none;
+    font-size: 17px;
+    letter-spacing: 1px;
+    margin: 6px 0;
+    color: #787878;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.Step span {
+    margin: 0 -2px;
+}
+
+@media (max-width: 920px) {
+    .Container {
+        min-width: 100vw;
+    }
+}

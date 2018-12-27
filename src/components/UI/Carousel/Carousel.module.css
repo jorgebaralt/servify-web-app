@@ -29,7 +29,6 @@
     height: 30px;
     text-align: center;
     line-height: 1;
-    position: relative;
     touch-action: manipulation;
     box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 1px 1px;
     border-radius: 50%;
