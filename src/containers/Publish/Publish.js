@@ -6,9 +6,13 @@ import { checkValidity } from '../../shared/checkValidity';
 import classes from './Publish.module.css';
 // JSX
 import { Slider, Slide } from '../../components/UI/Slider';
+import Input from '../../components/UI/Input/Input';
 
 const categoriesDatalist = categories.map( (category) => {
-    return category.title;
+    return {
+        value: category.title,
+        displayValue: category.title
+    };
 });
 
 console.log(categoriesDatalist);
@@ -20,8 +24,9 @@ class Publish extends Component {
             categories: {
                 elementType: 'select',
                 elementConfig: {
-                    type: 'text',
-                    placeholder: 'Select a Category',
+                    id: 'Publish_Select',
+                    type: 'Choose a category type',
+                    placeholder: 'Select a category',
                     options: categoriesDatalist
                 },
                 value: '',
@@ -56,22 +61,41 @@ class Publish extends Component {
             formIsValid: formIsValid
         });
     }
+    
+    onSubmitHandler = (event) => {
+        event.preventDefault();
+        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.bRememberMe);
+    }
 
     render() {
+        const selectInput = Object.entries(this.state.controls.categories);
+        console.log(selectInput)
         return (
             <div className={classes.Wrapper}>
                 <Slider>
                     <Slide>
-                        <div style={{backgroundColor: 'lightblue'}} className={classes.Container}>
+                        <div className={classes.Container}>
                             <div className={classes.Form}>
                                 <h1>
                                     Hello there! We'll need some information before we can publish your service,
-                                    just follow the steps.
+                                    just follow these steps and you'll be good to go.
                                 </h1>
                                 <div className={classes.Step}><span>S</span>tep 1</div>
                                 <h2>
                                     What type of service do you provide?
                                 </h2>
+                                <form style={{userSelect: 'none'}} onSubmit={this.onSubmitHandler}>
+                                    <Input 
+                                        style={this.state.controls.categories.style}
+                                        elementType={this.state.controls.categories.elementType} 
+                                        elementConfig={this.state.controls.categories.elementConfig}
+                                        changed={(event) => this.inputChangeHandler(event, this.state.controls[categories])}
+                                        invalid={!this.state.controls.categories.valid}
+                                        shouldValidate={this.state.controls.categories.validation}
+                                        touched={this.state.controls.categories.touched}
+                                        value={this.state.controls.categories.value} 
+                                        valueType={this.state.controls.categories.valueType} />
+                                </form>
                             </div>
                         </div>
                     </Slide>

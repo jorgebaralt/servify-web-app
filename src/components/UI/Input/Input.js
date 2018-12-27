@@ -1,6 +1,8 @@
 import React from 'react';
-
+// CSS
 import classes from './Input.module.css'
+// JSX
+import InputSelect from './InputSelect/InputSelect';
 
 const input = (props) => {
     let inputElement;
@@ -38,22 +40,13 @@ const input = (props) => {
                 />;
             break;
         case('select'):
+            inputClasses.push(classes.InputSelect);
+            labelClasses.push(classes.InputSelectLabel);
             inputElement = (
-                <>
-                    <div><strong>{props.elementConfig.type}</strong></div>
-                    <select 
-                        className={inputClasses.join(' ')}
-                        defaultValue={props.value}
-                        onChange={props.changed}>
-                        {props.elementConfig.options.map( (option, index) => {
-                            return (
-                                <option key={index} value={option.value}>
-                                    {option.displayValue}
-                                </option>
-                            );
-                        })}
-                    </select>
-                </>
+                <InputSelect
+                    inputClasses={inputClasses}
+                    labelClasses={labelClasses}
+                    {...props} />
             );
             break;
         default:
@@ -68,7 +61,6 @@ const input = (props) => {
             className={classes.Input}>
             {inputElement}
             {validationMessage}
-            {/* <span className="highlight"></span> */}
             <span className={classes.Bar}></span>
             <label className={labelClasses.join(' ')}>{props.elementConfig.placeholder}</label>
         </div>
