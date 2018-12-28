@@ -49,7 +49,7 @@
 .TextAreaElement {
     min-width: 100%;
     max-width: 100%;
-    min-height: 25vh;
+    min-height: 125px;
 }
 
 textarea.InputElement::-webkit-input-placeholder,

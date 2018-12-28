@@ -47,7 +47,7 @@ const button = (props) => {
         <button
             style={props.style}
             className={buttonClass.join(' ')}
-            type={props.type}
+            type={props.submit ? 'submit' : 'button'}
             disabled={props.disabled}
             onClick={props.clicked}>{logo}{props.children}</button>
     );

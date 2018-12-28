@@ -5,13 +5,14 @@
     height: 100vh;
     height: calc(100vh - 70px);
     overflow-x: hidden;
+    overflow-y: auto;
     position: relative;
 }
 
 .Container {
     position: relative;
     flex:0 0 auto;
-    padding: 28px 56px;
+    padding: 28px 96px;
     margin: 0 auto;
     background-color: transparent;
     width: 100vw;
@@ -39,7 +40,14 @@
 
 .Form {
     position: relative;
-    max-width: 500px;
+    /* max-width: 500px; */
+}
+
+.HiddenInput {
+    display: none;
+    height: 0;
+    width: 0;
+    appearance: none;
 }
 
 .Step {
@@ -60,4 +68,10 @@
     .Container {
         min-width: 100vw;
     }
+}
+
+.MapWrapper {
+    width: 100%;
+    height: 300px;
+    margin: 22px 0;
 }

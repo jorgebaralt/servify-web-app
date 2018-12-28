@@ -18,7 +18,7 @@ const inputSelect = (props) => {
                 // do nnothing
         }
     }
-    const setValue = (inputId, listId, value) => {
+    const setValue = (inputId, listId, value, changed) => {
         const input = document.getElementById(inputId);
         input.value = value;
         switch (true) {
@@ -31,14 +31,15 @@ const inputSelect = (props) => {
             default:
                 // do nothing
         }
-        listHandler(listId, 'close');
-        if (document.addEventListener) { document.activeElement.blur(); }
+        listHandler(listId, 'close'); // After selecting a category, close the list.
+        if (document.addEventListener) { document.activeElement.blur(); } // Blurs (removes focus) out of the list.
+        changed(value); // props.changed passed from stateful container to change its state.
     }
     const inputId = [props.elementConfig.id, 'Input_Select_Input'].join('_');
     const listId = [props.elementConfig.id, 'Input_Select_List'].join('_');
     return (
             <div className={classes.Wrapper}>
-                <div className={classes.InputSelectType}><strong>{props.elementConfig.type}</strong></div>
+                <div className={classes.InputSelectType}><strong>{props.elementConfig.label}</strong></div>
                 <div onFocus={() => listHandler(listId, 'open')} 
                     onBlur={() => listHandler(listId, 'close')} 
                     tabIndex="0"
@@ -71,7 +72,9 @@ const inputSelect = (props) => {
                                     */
                                 onMouseDown={event => event.preventDefault()}
                                 value={option.value}>
-                                <button type='button' onClick={() => setValue(inputId, listId, option.value)}>{option.displayValue}</button>
+                                <button type='button' onClick={() => setValue(inputId, listId, option.value, props.changed)}>
+                                    {option.displayValue}
+                                </button>
                             </li>
                         );
                     })}

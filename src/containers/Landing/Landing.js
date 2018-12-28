@@ -30,6 +30,7 @@ class Landing extends Component {
     }
 
     savePosition = (position) => {
+        console.log(position)
         const city = position.data.city;
         const state = position.data.region;
         this.setState( () => {
@@ -41,12 +42,10 @@ class Landing extends Component {
         );
     }
 
-    componentDidMount () {
-        if (navigator.geolocation) {
-            axios.get('http://ipinfo.io').then(
-                (response) => this.savePosition(response)
-            );
-        }
+    componentWillMount () {
+        axios.get('http://ipinfo.io').then(
+            (response) => this.savePosition(response)
+        );
     }
 
     shouldComponentUpdate(nextProps, nextState) {

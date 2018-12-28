@@ -6,10 +6,9 @@ import InputSelect from './InputSelect/InputSelect';
 
 const input = (props) => {
     let inputElement;
+    let validationMessage = null;
     const inputClasses = [classes.InputElement];
     const labelClasses = [classes.Label];
-    let validationMessage = null;
-
     if (props.invalid && props.shouldValidate && props.touched) {
         inputClasses.push(classes.Invalid);
         validationMessage = <p className={classes.InvalidFeedback}>Please enter a valid {props.valueType}.</p>;
@@ -17,7 +16,6 @@ const input = (props) => {
         inputClasses.push(classes.Valid);
         validationMessage = <p className={classes.ValidFeedback}>Looks good!</p>;
     }
-
     switch (props.elementType) {
         case('input' || 'text' || 'email' || 'number'):
             inputElement = <input 

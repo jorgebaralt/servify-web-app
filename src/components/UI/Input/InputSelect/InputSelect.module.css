@@ -54,6 +54,11 @@
     border: 1px solid rgba(255, 112, 67);
 }
 
+.Container:focus-within {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
 .Container:focus-within .Arrow {
     margin-bottom: 0;
     margin-top: 4px;
@@ -114,9 +119,10 @@
     background-color: #FFF;
     color: #484848;
     border: 1px solid rgba(255, 112, 67);
+    box-shadow: 0px 3px 5px rgb(229,229,229);
     margin: 0 auto;
     padding: 0;
-    top: calc(100%);
+    top: 100%;
     left: 0;
     overflow-y: auto;
     z-index: 5;
