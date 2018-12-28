@@ -120,6 +120,7 @@ class StepFour extends Component {
     }
 
     render () {
+        console.log(this.state.map.initialPosition.join() !== "0,0", this.state.map.initialPosition)
         const formElementsArray = Object.entries(this.state.controls);
         return (
             <div style={{backgroundColor: 'lightorange'}} className={classes.Container}>
@@ -161,10 +162,8 @@ class StepFour extends Component {
                             header='Distance' 
                             value={this.state.map.radiusInMiles}
                             maxValue={this.state.map.maxRadius} 
-                            valueType='miles' />
-                        <div className={classes.MapWrapper}>
-                            <Map map={this.state.map} />
-                        </div>
+                            valueType='miles (approx)' />
+                        <Map height='250px' map={this.state.map} />
                         <Button type='primary' disabled={!this.state.formIsValid}>Next</Button>
                     </form>
                 </div>
