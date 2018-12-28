@@ -1,31 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import geo from 'mapbox-geocoding';
 // CSS
 import classes from '../../Publish.module.css';
 // JSX
-import ReactMapboxGl, { Layer, Feature, Marker , ZoomControl, ScaleControl, Popup } from "react-mapbox-gl";
 import Separator from '../../../../components/UI/Separator/Separator';
+import Map, { setMapboxAccessToken, setInitialMapboxPosition, setAddress } from '../../../../components/UI/Map/Map';
 import Input from '../../../../components/UI/Input/Input';
 import InputSlider from '../../../../components/UI/Input/InputSlider/InputSlider';
 import Button from '../../../../components/UI/Button/Button';
-import SVG from '../../../../components/SVG/SVG';
-
-const mapboxPKey = "pk.eyJ1Ijoicm9iZXJ0MDMxMCIsImEiOiJjam5mZjlzZnQwazhuM3BwN283b3Q0ZDFqIn0.xxJ6Db0UXKmKp3_Z6I_low";
 
 // Mapbox Geocoding
-geo.setAccessToken(mapboxPKey);
-// Mapbox Component
-const Map = ReactMapboxGl({
-    accessToken: mapboxPKey,
-    dragRotate: false,
-    interactive: true
-});
-
-const metersToPixelsAtMaxZoom = (meters, latitude) => {
-    const milesToMeters = 1609.34;
-    return meters*milesToMeters / 0.075 / Math.cos(latitude * Math.PI / 180);
-}
+setMapboxAccessToken();
 
 class StepFour extends Component {
     constructor(props) {
@@ -57,25 +42,40 @@ class StepFour extends Component {
         map: {
             initialPosition: [0,0], // Initialize value, can't be null
             geoData: null,
-            radiusInMiles: 60
+            radiusInMiles: 30,
+            maxRadius: 60 // For the input slider
         },
         formIsValid: false
     }
 
-    // Mapbox coordinate update
+    setInitialPosition = (position) => {
+        const address = [position.data.city, position.data.postal, position.data.region, position.data.country].join(' ');
+        setInitialMapboxPosition(address, (nextMapState) => {
+            this.setState( (prevState) => {
+                return {
+                    map: {
+                        ...prevState.map,
+                        ...nextMapState
+                    }
+                }
+            })
+        });
+    }
+
+    // Mapbox coordinate update based on input's value field
     debouncedSearch = (address) => {
         clearTimeout(this.myTimer);
         this.myTimer = setTimeout( () =>  {
-            geo.geocode('mapbox.places', address, (err, geoData) => {
+            setAddress(address, (nextMapState) => {
                 this.setState( (prevState) => {
                     return {
                         map: {
                             ...prevState.map,
-                            geoData: geoData
+                            ...nextMapState
                         }
                     }
-                });
-            });
+                })
+            })
         }, 1500);
     }
 
@@ -101,21 +101,6 @@ class StepFour extends Component {
         this.debouncedSearch(updatedFormElement.value);
     }
 
-    savePosition = (position) => {
-        const address = [position.data.city, position.data.postal, position.data.region, position.data.country].join(' ');
-        geo.geocode('mapbox.places', address, (err, geoData) => {
-            this.setState( (prevState) => {
-                return {
-                    map: {
-                        ...prevState.map,
-                        geoData: geoData,
-                        initialPosition: geoData.features[0].center
-                    }
-                }
-            });
-        });
-    }
-
     onInputSliderHandler = (event) => {
         const miles = event.target.value;
         this.setState( (prevState) => {
@@ -130,7 +115,7 @@ class StepFour extends Component {
 
     componentWillMount () {
         axios.get('http://ipinfo.io').then(
-            (response) => this.savePosition(response)
+            (response) => this.setInitialPosition(response)
         );
     }
 
@@ -172,82 +157,13 @@ class StepFour extends Component {
                                     valueType={input[1].valueType} />
                             );
                         })}
-                        <InputSlider onChange={this.onInputSliderHandler} header='Distance' value={this.state.map.radiusInMiles} valueType='miles' />
+                        <InputSlider onChange={this.onInputSliderHandler} 
+                            header='Distance' 
+                            value={this.state.map.radiusInMiles}
+                            maxValue={this.state.map.maxRadius} 
+                            valueType='miles' />
                         <div className={classes.MapWrapper}>
-                            <Map style="mapbox://styles/mapbox/streets-v9"
-                                center={this.state.map.geoData ?
-                                    (
-                                        this.state.map.geoData.features.length > 0 ?
-                                            this.state.map.geoData.features[0].center
-                                            : [0,0]
-                                    )
-                                    : this.state.map.initialPosition}
-                                containerStyle={{
-                                    height: "100%",
-                                    width: "100%"
-                                }}
-                                zoom={[11]}
-                                flyToOptions={{
-                                    zoom: 9,
-                                    speed: 0.8,
-                                    curve: 1,
-                                    easing: (t) => {
-                                        return t;
-                                    }
-                                }}>
-                                {this.state.map.geoData ?
-                                    (
-                                    this.state.map.geoData.features.length > 0 ?
-                                        <Layer
-                                            type="circle" 
-                                            id="marker" 
-                                            paint={{
-                                                'circle-color': "transparent",
-                                                'circle-radius': {
-                                                    stops: [
-                                                        [0, 0],
-                                                        [20, metersToPixelsAtMaxZoom(this.state.map.radiusInMiles, this.state.map.geoData.features[0].center[1])]
-                                                    ],
-                                                    base: 2
-                                                },
-                                                'circle-stroke-width': 2,
-                                                'circle-stroke-color': '#484848',
-                                                'circle-stroke-opacity': 1
-                                            }}>
-                                            {/* {console.log('inside layer feature circle')} */}
-                                            <Feature
-                                                coordinates={this.state.map.geoData ? this.state.map.geoData.features[0].center : this.state.map.initialPosition} />
-                                        </Layer>
-                                        : null
-                                    )
-                                    : null}
-                                <Marker
-                                    coordinates={this.state.map.geoData ?
-                                    (
-                                        this.state.map.geoData.features.length > 0 ?
-                                            this.state.map.geoData.features[0].center
-                                            : [0,0]
-                                    )
-                                    : this.state.map.initialPosition}
-                                    anchor="bottom">
-                                    <SVG svg='location-pin' />
-                                </Marker>
-                                {this.state.map.geoData ?
-                                (
-                                    this.state.map.geoData.features.length === 0 ?
-                                        <Popup
-                                            coordinates={[0,0]}
-                                            offset={{
-                                                'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
-                                            }}>
-                                            <h2>Not found.</h2>
-                                        </Popup>
-                                        : null
-                                )
-                                : null}
-                                <ZoomControl/>
-                                <ScaleControl position="top-left" />
-                            </Map>
+                            <Map map={this.state.map} />
                         </div>
                         <Button type='primary' disabled={!this.state.formIsValid}>Next</Button>
                     </form>

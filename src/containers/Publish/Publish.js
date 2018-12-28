@@ -22,7 +22,7 @@ class Publish extends Component {
     render() {
         return (
             <div className={classes.Wrapper}>
-                <Slider activeSlide={3}>
+                <Slider>
                     <Slide>
                         <StepOne checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>

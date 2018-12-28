@@ -1,0 +1,130 @@
+import React from 'react';
+import geo from 'mapbox-geocoding';
+// JSX
+import ReactMapboxGl, { Layer, Feature, Marker , ZoomControl, ScaleControl, Popup } from "react-mapbox-gl";
+import SVG from '../../SVG/SVG';
+
+const mapboxPKey = "pk.eyJ1Ijoicm9iZXJ0MDMxMCIsImEiOiJjam5mZjlzZnQwazhuM3BwN283b3Q0ZDFqIn0.xxJ6Db0UXKmKp3_Z6I_low";
+
+// Mapbox Geocoding
+export const setMapboxAccessToken = () => {
+    geo.setAccessToken(mapboxPKey);
+}
+
+// Set Initial Position
+export const setInitialMapboxPosition = (address, fn) => {
+    return (
+        geo.geocode('mapbox.places', address, (err, geoData) => {
+            const map = {
+                geoData: geoData,
+                initialPosition: geoData.features[0].center
+            }
+            fn(map);
+        })
+    );
+}
+
+// Get Address
+export const setAddress = (address, fn) => {
+    return (
+        geo.geocode('mapbox.places', address, (err, geoData) => {
+            const map = {
+                geoData: geoData
+            }
+            fn(map);
+        })
+    );
+}
+
+
+// Mapbox Component
+const Map = ReactMapboxGl({
+    accessToken: mapboxPKey,
+    dragRotate: false,
+    interactive: true
+});
+
+const metersToPixelsAtMaxZoom = (meters, latitude) => {
+    const milesToMeters = 1609.34;
+    return meters*milesToMeters / 0.075 / Math.cos(latitude * Math.PI / 180);
+}
+
+const map = (props) => {
+    return (
+        <Map style="mapbox://styles/mapbox/streets-v9"
+            center={props.map.geoData ?
+                (
+                    props.map.geoData.features.length > 0 ?
+                        props.map.geoData.features[0].center
+                        : [0,0]
+                )
+                : props.map.initialPosition}
+            containerStyle={{
+                height: "100%",
+                width: "100%"
+            }}
+            zoom={[11]}
+            flyToOptions={{
+                zoom: 9,
+                speed: 1.5,
+                curve: 1,
+                easing: (t) => {
+                    return t;
+                }
+            }}>
+            {props.map.geoData ?
+                (
+                props.map.geoData.features.length > 0 ?
+                    <Layer
+                        type="circle" 
+                        id="marker" 
+                        paint={{
+                            'circle-color': "transparent",
+                            'circle-radius': {
+                                stops: [
+                                    [0, 0],
+                                    [20, metersToPixelsAtMaxZoom(props.map.radiusInMiles, props.map.geoData.features[0].center[1])]
+                                ],
+                                base: 2
+                            },
+                            'circle-stroke-width': 2,
+                            'circle-stroke-color': '#484848',
+                            'circle-stroke-opacity': 1
+                        }}>
+                        <Feature
+                            coordinates={props.map.geoData ? props.map.geoData.features[0].center : props.map.initialPosition} />
+                    </Layer>
+                    : null
+                )
+                : null}
+            <Marker
+                coordinates={props.map.geoData ?
+                (
+                    props.map.geoData.features.length > 0 ?
+                        props.map.geoData.features[0].center
+                        : [0,0]
+                )
+                : props.map.initialPosition}
+                anchor="bottom">
+                <SVG svg='location-pin' />
+            </Marker>
+            {props.map.geoData ?
+            (
+                props.map.geoData.features.length === 0 ?
+                    <Popup
+                        coordinates={[0,0]}
+                        offset={{
+                            'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
+                        }}>
+                        <h2>Not found.</h2>
+                    </Popup>
+                    : null
+            )
+            : null}
+            <ZoomControl/>
+            <ScaleControl position="top-left" />
+        </Map>
+    );
+}
+
+export default map;

@@ -13,7 +13,7 @@ const inputSlider = (props) => {
                 onChange={(event) => props.onChange(event)}
                 step="1"
                 min="1" 
-                max="300"
+                max={props.maxValue}
                 value={props.value} />
         </div>
     );

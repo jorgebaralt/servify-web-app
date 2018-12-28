@@ -116,5 +116,5 @@
 }
 
 .Thumbnail.active img {
-    box-shadow: 1px 1px 10px rgba(255, 112, 67,1), -1px -1px 10px rgba(255, 112, 67,1);
+    box-shadow: 1px 1px 10px rgba(30,163,204,1), -1px -1px 10px rgba(30,163,204,1);
 }
