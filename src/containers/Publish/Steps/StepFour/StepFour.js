@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import axios from 'axios';
 // CSS
 import classes from '../../Publish.module.css';
@@ -7,12 +7,11 @@ import Separator from '../../../../components/UI/Separator/Separator';
 import Map, { setMapboxAccessToken, setInitialMapboxPosition, setAddress } from '../../../../components/UI/Map/Map';
 import Input from '../../../../components/UI/Input/Input';
 import InputSlider from '../../../../components/UI/Input/InputSlider/InputSlider';
-import Button from '../../../../components/UI/Button/Button';
 
 // Mapbox Geocoding
 setMapboxAccessToken();
 
-class StepFour extends Component {
+class StepFour extends PureComponent {
     constructor(props) {
         super(props);
         this.myTimer = null;
@@ -30,7 +29,7 @@ class StepFour extends Component {
                     spellCheck:"false"
                 },
                 value: '',
-                valueType: 'text',
+                valueType: 'address',
                 validation: {
                     required: true,
                 },
@@ -119,6 +118,20 @@ class StepFour extends Component {
         );
     }
 
+    componentDidUpdate = () => {
+        const data = {};
+        for (let key in this.state.controls) {
+            data[key] = this.state.controls[key].value;
+        }
+        // Pointer protection
+        if (this.state.map.geoData) {
+            data.coordinates = this.state.map.geoData.features[0];
+        }
+        data.distance = this.state.map.radiusInMiles;
+        const formIsValid = this.state.formIsValid;
+        this.props.updateData(this.props.stepKey, data, formIsValid);
+    }
+
     render () {
         const formElementsArray = Object.entries(this.state.controls);
         return (
@@ -126,8 +139,9 @@ class StepFour extends Component {
                 <div className={classes.Form}>
                     <div className={classes.Step}><span>S</span>tep 4</div>
                     <h2>
-                        Finally we need to get your address. This is to let customers know where you are located.
-                        Type your address and the distance you cover into the input box, then wait for the map to update.
+                        Finally we need to wrtie down your address. This is to let customers know where you are located.
+                        Type your address into the field and set the distance you're able to cover, then wait for the map 
+                        to update.
                     </h2>
                     <Separator />
                     <form style={{userSelect: 'none'}} onSubmit={this.onSubmitHandler}>
@@ -163,8 +177,6 @@ class StepFour extends Component {
                             maxValue={this.state.map.maxRadius} 
                             valueType='miles (approx)' />
                         <Map height='300px' map={this.state.map} />
-                        {/* <Button style={{marginRight: '24px'}} type='primary' disabled={!this.state.formIsValid}>Go back</Button>
-                        <Button type='primary' disabled={!this.state.formIsValid}>Next</Button> */}
                     </form>
                 </div>
             </div>

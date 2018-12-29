@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 // CSS
 import classes from '../../Publish.module.css';
 // JSX
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 
-class StepOne extends Component {
+class StepOne extends PureComponent {
     state = {
         controls: {
             category: {
@@ -49,6 +49,15 @@ class StepOne extends Component {
         });
     }
 
+    componentDidUpdate = () => {
+        const data = {};
+        for (let key in this.state.controls) {
+            data[key] = this.state.controls[key].value;
+        }
+        const formIsValid = this.state.formIsValid;
+        this.props.updateData(this.props.stepKey, data, formIsValid);
+    }
+
     render () {
         const formElementsArray = Object.entries(this.state.controls);
         return (
@@ -64,7 +73,9 @@ class StepOne extends Component {
                     </h2>
                     <form style={{userSelect: 'none'}} onSubmit={this.onSubmitHandler}>
                         {formElementsArray.map( (input) => {
-                                return <Input 
+                            return (
+                                <Input 
+                                    style={input[1].style}
                                     key={input[0]} 
                                     elementType={input[1].elementType} 
                                     elementConfig={this.state.controls[input[1].valueType] ? this.state.controls[input[1].valueType].elementConfig : input[1].elementConfig} // Referenced to state to mutate
@@ -73,9 +84,9 @@ class StepOne extends Component {
                                     shouldValidate={input[1].validation}
                                     touched={input[1].touched}
                                     value={input[1].value} 
-                                    valueType={input[1].valueType} />;
-                            })}
-                        {/* <Button type='primary' disabled={!this.state.formIsValid}>Next</Button> */}
+                                    valueType={input[1].valueType} />
+                            );
+                        })}
                     </form>
                 </div>
             </div>

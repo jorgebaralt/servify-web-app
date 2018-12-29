@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import categories from '../../shared/categories';
-// Input Validity
+// Input validity & Number clamp
 import { checkValidity } from '../../shared/checkValidity';
+import { Clamp } from '../../shared/clamp';
 // CSS
 import classes from './Publish.module.css';
 // JSX
@@ -54,15 +55,31 @@ class Publish extends Component {
         }
     }
 
-    updateData = (key) => {
-
+    updateData = (key, data, formIsValid) => {
+        const updatedData = data;
+        const updatedForm = formIsValid;
+        this.setState( (prevState) => {
+            return {
+                ...prevState,
+                steps: {
+                    ...prevState.steps,
+                    [key]: {
+                        ...prevState.steps[key],
+                        data: updatedData,
+                        formIsValid: updatedForm
+                    }
+                },
+                formIsValid: updatedForm
+            }
+        });
     }
 
     onPrevHandler = () => {
         setTimeout( () => { // Delay to wait for slider transition
             this.setState( (prevState) => {
+                const step = Clamp(prevState.step - 1, 1, 4);
                 return {
-                    step: prevState.step - 1
+                    step: step
                 }
             });
         }, 100);
@@ -71,17 +88,23 @@ class Publish extends Component {
     onNextHandler = () => {
         setTimeout( () => { // Delay to wait for slider transition
             this.setState( (prevState) => {
+                const step = Clamp(prevState.step + 1, 1, 4);
                 return {
-                    step: prevState.step + 1
+                    step: step
                 }
             });
         }, 100);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextState !== this.state || nextProps.children !== this.props.children;
+    }
+
     render() {
+        console.log(this.state);
         const buttons = {
             prev: this.state.step > 1 ? <Button  style={{marginLeft: 0}} className={classes.Button} type='primary'>Go back</Button> : <></>,
-            next: <Button style={this.state.step > 1 ? null : {marginLeft: 0}} className={classes.Button} type='primary'>Next</Button>,
+            next: <Button disabled={!this.state.formIsValid} style={this.state.step > 1 ? null : {marginLeft: 0}} className={classes.Button} type='primary'>Next</Button>,
             onClick: {
                 prev: this.onPrevHandler,
                 next: this.onNextHandler
@@ -92,16 +115,16 @@ class Publish extends Component {
             <div className={classes.Wrapper}>
                 <Slider disableNav buttons={buttons} >
                     <Slide>
-                        <StepOne checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
+                        <StepOne activeStep={this.state.step} stepKey={1} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>
                     <Slide>
-                        <StepTwo checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
+                        <StepTwo activeStep={this.state.step} stepKey={2} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>
                     <Slide>
-                        <StepThree checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
+                        <StepThree activeStep={this.state.step} stepKey={3} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>
                     <Slide>
-                        <StepFour checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
+                        <StepFour activeStep={this.state.step} stepKey={4} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>
                 </Slider>
             </div>

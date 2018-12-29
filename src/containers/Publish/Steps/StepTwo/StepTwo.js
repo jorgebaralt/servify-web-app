@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 // CSS
 import classes from '../../Publish.module.css';
 // JSX
@@ -6,7 +6,7 @@ import Separator from '../../../../components/UI/Separator/Separator';
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 
-class StepTwo extends Component {
+class StepTwo extends PureComponent {
     state = {
         controls: {
             companyName: {
@@ -110,6 +110,15 @@ class StepTwo extends Component {
         });
     }
 
+    componentDidUpdate = () => {
+        const data = {};
+        for (let key in this.state.controls) {
+            data[key] = this.state.controls[key].value;
+        }
+        const formIsValid = this.state.formIsValid;
+        this.props.updateData(this.props.stepKey, data, formIsValid);
+    }
+
     render () {
         const formElementsArray = Object.entries(this.state.controls);
         return (
@@ -122,8 +131,9 @@ class StepTwo extends Component {
                     </h2>
                     <Separator />
                     <form style={{userSelect: 'none'}} onSubmit={this.onSubmitHandler}>
-                            {formElementsArray.map( (input) => {
-                                return <Input 
+                        {formElementsArray.map( (input) => {
+                            return (
+                                <Input 
                                     style={input[1].style}
                                     key={input[0]} 
                                     elementType={input[1].elementType} 
@@ -133,10 +143,9 @@ class StepTwo extends Component {
                                     shouldValidate={input[1].validation}
                                     touched={input[1].touched}
                                     value={input[1].value} 
-                                    valueType={input[1].valueType} />;
-                            })}
-                        {/* <Button style={{marginRight: '24px'}} type='primary' disabled={!this.state.formIsValid}>Go back</Button>
-                        <Button type='primary' disabled={!this.state.formIsValid}>Next</Button> */}
+                                    valueType={input[1].valueType} />
+                            );
+                        })}
                     </form>
                 </div>
             </div>

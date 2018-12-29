@@ -69,7 +69,7 @@ const map = (props) => {
                         (
                             props.map.geoData.features.length > 0 ?
                                 props.map.geoData.features[0].center
-                                : [0,0]
+                                : props.map.initialPosition
                         )
                         : props.map.initialPosition}
                     containerStyle={{
@@ -115,7 +115,7 @@ const map = (props) => {
                         (
                             props.map.geoData.features.length > 0 ?
                                 props.map.geoData.features[0].center
-                                : [0,0]
+                                : props.map.initialPosition
                         )
                         : props.map.initialPosition}
                         anchor="bottom">
@@ -125,7 +125,7 @@ const map = (props) => {
                     (
                         props.map.geoData.features.length === 0 ?
                             <Popup
-                                coordinates={[0,0]}
+                                coordinates={props.map.initialPosition}
                                 offset={{
                                     'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
                                 }}>
