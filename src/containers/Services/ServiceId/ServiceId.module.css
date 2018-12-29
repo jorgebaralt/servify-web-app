@@ -300,3 +300,8 @@
     margin-top: -24px;
     margin-bottom: -48px;
 }
+
+.MapWrapper {
+    height: 60vh;
+    margin: -12px 0;
+}

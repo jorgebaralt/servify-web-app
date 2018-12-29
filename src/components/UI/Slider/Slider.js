@@ -114,24 +114,76 @@ class Slider extends Component {
     }
 
     render() {
+        let PrevButton;
+        let NextButton;
+        if (this.props.buttons) {
+            PrevButton = this.props.buttons.prev;
+            NextButton = this.props.buttons.next;
+            // let PrevButton = React.cloneElement(
+            //     prevButton, 
+            //     {
+            //         onClick: () => this.onTranslateHandler('prev'),
+            //         totalSlides: this.props.children.length,
+            //         activeSlide: this.state.activeSlide
+            //     }
+            // );
+            // let NextButton = React.cloneElement(
+            //     nextButton, 
+            //     {
+            //         onClick: () => this.onTranslateHandler('next'),
+            //         totalSlides: this.props.children.length,
+            //         activeSlide: this.state.activeSlide
+            //     }
+            // );
+        }
         const children = Object.keys(this.props.children).map( children => {
             return (
                 <SlideContainer key={children} style={this.state.style}>
                     {this.props.children[children]}
+                    {this.props.buttons ?
+                        <div className={this.props.buttons.className}>
+                            {React.cloneElement( // Cloning buttons to pass onTranslateHandler
+                                PrevButton, 
+                                {
+                                    clicked: () => {
+                                        this.props.buttons.onClick.prev();
+                                        this.onTranslateHandler('prev')
+                                    },
+                                    totalSlides: this.props.children.length,
+                                    activeSlide: this.state.activeSlide
+                                }
+                            )}
+                            {React.cloneElement( // Cloning buttons to pass onTranslateHandler
+                                NextButton, 
+                                {
+                                    clicked: () => {
+                                        this.props.buttons.onClick.next();
+                                        this.onTranslateHandler('next')
+                                    },
+                                    totalSlides: this.props.children.length,
+                                    activeSlide: this.state.activeSlide
+                                }
+                            )}
+                        </div>
+                    : null}
                 </SlideContainer>
             );
         });
         return (
             <div ref={this.mySlider} className={classes.Wrapper}>
                 {children}
-                <SliderButtons 
-                    totalSlides={this.props.children.length}
-                    activeSlide={this.state.activeSlide} 
-                    onClick={this.onTranslateHandler} />
-                <SliderNav 
-                    activeSlide={this.state.activeSlide}
-                    slides={Object.keys(this.props.children)} 
-                    onClick={this.onTranslateHandler} />
+                {this.props.buttons ? 
+                    null :
+                    <SliderButtons 
+                        totalSlides={this.props.children.length}
+                        activeSlide={this.state.activeSlide} 
+                        onClick={this.onTranslateHandler} />}
+                {this.props.disableNav ? 
+                    null :
+                    <SliderNav
+                        activeSlide={this.state.activeSlide}
+                        slides={Object.keys(this.props.children)} 
+                        onClick={this.onTranslateHandler} />}
             </div>
         );
     }

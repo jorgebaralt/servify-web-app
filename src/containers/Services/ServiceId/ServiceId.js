@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 // CSS
 import classes from './ServiceId.module.css'
 // JSX
 import PhotosCarousel from '../../../components/UI/PhotosCarousel/PhotosCarousel';
+import Map, { setMapboxAccessToken, setInitialMapboxPosition } from '../../../components/UI/Map/Map';
 import SVG from '../../../components/SVG/SVG';
 import InfoPoint from './InfoPoint/InfoPoint';
 import InfoSection from './InfoSection/InfoSection';
@@ -10,6 +12,9 @@ import Rating from '../../../components/UI/Rating/Rating';
 import Review from './Review/Review';
 import Carousel from '../../../components/UI/Carousel/Carousel';
 import Service from '../../../components/Services/Service/Service'
+
+// Mapbox Geocoding
+setMapboxAccessToken();
 
 class ServiceId extends Component {
 
@@ -22,6 +27,11 @@ class ServiceId extends Component {
         imageSizes: {
             width: null,
             height: null
+        },
+        map: {
+            initialPosition: null,
+            geoData: null,
+            radiusInMiles: 20
         }
     }
 
@@ -36,6 +46,26 @@ class ServiceId extends Component {
         });
     }
 
+    setInitialPosition = (position) => {
+        const address = [position.data.city, position.data.postal, position.data.region, position.data.country].join(' ');
+        setInitialMapboxPosition(address, (nextMapState) => {
+            this.setState( (prevState) => {
+                return {
+                    map: {
+                        ...prevState.map,
+                        ...nextMapState
+                    }
+                }
+            })
+        });
+    }
+
+    componentWillMount () {
+        axios.get('http://ipinfo.io').then(
+            (response) => this.setInitialPosition(response)
+        );
+    }
+
     componentDidMount () {
         this.setGalleryDimensions();
         window.onresize = () => {
@@ -43,7 +73,7 @@ class ServiceId extends Component {
         }
     }
 
-    componentWillMount () {
+    componentWillUnmount () {
         window.onresize = () => {
             return;
         }
@@ -114,6 +144,8 @@ class ServiceId extends Component {
                         </InfoSection>
                     </div>
                 </div>
+                <div className={classes.SectionSeparator}><div className={classes.SectionSeparatorLine}><div/></div></div>
+                <Map className={classes.MapWrapper} map={this.state.map} />
                 <div className={classes.SectionSeparator}><div className={classes.SectionSeparatorLine}><div/></div></div>
                 <div className={classes.ReviewsWrapper}>
                     <div className={classes.ReviewsContainer}>

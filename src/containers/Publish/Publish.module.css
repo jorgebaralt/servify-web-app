@@ -1,9 +1,10 @@
 .Wrapper {
     display: flex;
     flex-flow: row;
-    margin-bottom: -30px;
-    height: 100vh;
-    height: calc(100vh - 70px);
+    /* height: 100vh;
+    height: calc(100vh + 70px);
+    min-height: 800px; */
+    /* min-height: 100vh; */
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
@@ -12,16 +13,27 @@
 .Container {
     position: relative;
     flex:0 0 auto;
-    padding: 28px 96px;
+    padding: 28px 96px 0;
     margin: 0 auto;
     background-color: transparent;
     width: 100vw;
     height: 100%;
 }
 
+.ButtonsWrapper {
+    padding: 0 96px;
+}
+
+.Button {
+    margin: 0 6px;
+}
+
 @media (max-width: 744px) {
     .Container {
         padding: 24px;
+    }
+    .ButtonsWrapper {
+        padding: 0 24px;
     }
 }
 

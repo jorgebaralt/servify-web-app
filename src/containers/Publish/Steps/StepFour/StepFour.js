@@ -19,7 +19,7 @@ class StepFour extends Component {
     }
     state = {
         controls: {
-            title: {
+            address: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
@@ -40,9 +40,9 @@ class StepFour extends Component {
             }
         },
         map: {
-            initialPosition: [0,0], // Initialize value, can't be null
+            initialPosition: null,
             geoData: null,
-            radiusInMiles: 30,
+            radiusInMiles: 4, // Initial value
             maxRadius: 60 // For the input slider
         },
         formIsValid: false
@@ -79,6 +79,18 @@ class StepFour extends Component {
         }, 1500);
     }
 
+    inputSliderHandler = (event) => {
+        const miles = event.target.value;
+        this.setState( (prevState) => {
+            return {
+                map: {
+                    ...prevState.map,
+                    radiusInMiles: miles
+                }
+            }
+        });
+    }
+
     inputChangeHandler = (event, inputIdentifier) => {
         const updatedOrderForm = {
             ...this.state.controls,
@@ -101,18 +113,6 @@ class StepFour extends Component {
         this.debouncedSearch(updatedFormElement.value);
     }
 
-    onInputSliderHandler = (event) => {
-        const miles = event.target.value;
-        this.setState( (prevState) => {
-            return {
-                map: {
-                    ...prevState.map,
-                    radiusInMiles: miles
-                }
-            }
-        });
-    }
-
     componentWillMount () {
         axios.get('http://ipinfo.io').then(
             (response) => this.setInitialPosition(response)
@@ -120,15 +120,14 @@ class StepFour extends Component {
     }
 
     render () {
-        console.log(this.state.map.initialPosition.join() !== "0,0", this.state.map.initialPosition)
         const formElementsArray = Object.entries(this.state.controls);
         return (
             <div style={{backgroundColor: 'lightorange'}} className={classes.Container}>
                 <div className={classes.Form}>
                     <div className={classes.Step}><span>S</span>tep 4</div>
                     <h2>
-                        Finally we need to get your address. This is to let customers now where you are located.
-                        Type your address into the input box, then wait for the map to update.
+                        Finally we need to get your address. This is to let customers know where you are located.
+                        Type your address and the distance you cover into the input box, then wait for the map to update.
                     </h2>
                     <Separator />
                     <form style={{userSelect: 'none'}} onSubmit={this.onSubmitHandler}>
@@ -158,13 +157,14 @@ class StepFour extends Component {
                                     valueType={input[1].valueType} />
                             );
                         })}
-                        <InputSlider onChange={this.onInputSliderHandler} 
+                        <InputSlider onChange={this.inputSliderHandler} 
                             header='Distance' 
                             value={this.state.map.radiusInMiles}
                             maxValue={this.state.map.maxRadius} 
                             valueType='miles (approx)' />
-                        <Map height='250px' map={this.state.map} />
-                        <Button type='primary' disabled={!this.state.formIsValid}>Next</Button>
+                        <Map height='300px' map={this.state.map} />
+                        {/* <Button style={{marginRight: '24px'}} type='primary' disabled={!this.state.formIsValid}>Go back</Button>
+                        <Button type='primary' disabled={!this.state.formIsValid}>Next</Button> */}
                     </form>
                 </div>
             </div>

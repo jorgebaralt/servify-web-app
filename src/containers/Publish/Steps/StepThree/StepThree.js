@@ -13,7 +13,7 @@ class StepThree extends Component {
                 elementType: 'textarea',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Information about the provider.',
+                    placeholder: 'Information about the provider',
                 },
                 value: '',
                 valueType: 'text',
@@ -28,7 +28,7 @@ class StepThree extends Component {
                 elementType: 'textarea',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Information about the service.',
+                    placeholder: 'Information about the service',
                 },
                 value: '',
                 valueType: 'text',
@@ -88,7 +88,8 @@ class StepThree extends Component {
                                     value={input[1].value} 
                                     valueType={input[1].valueType} />;
                             })}
-                        <Button type='primary' disabled={!this.state.formIsValid}>Next</Button>
+                        {/* <Button style={{marginRight: '24px'}} type='primary' disabled={!this.state.formIsValid}>Go back</Button>
+                        <Button type='primary' disabled={!this.state.formIsValid}>Next</Button> */}
                     </form>
                 </div>
             </div>

@@ -37,6 +37,7 @@ const inputSelect = (props) => {
     }
     const inputId = [props.elementConfig.id, 'Input_Select_Input'].join('_');
     const listId = [props.elementConfig.id, 'Input_Select_List'].join('_');
+    props.inputClasses.push(classes.InputSelect);
     return (
             <div className={classes.Wrapper}>
                 <div className={classes.InputSelectType}><strong>{props.elementConfig.label}</strong></div>

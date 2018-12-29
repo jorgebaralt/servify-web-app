@@ -9,7 +9,26 @@ import Button from '../../../../components/UI/Button/Button';
 class StepTwo extends Component {
     state = {
         controls: {
-            title: {
+            companyName: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    autoComplete: 'company name',
+                    placeholder: 'Company name',
+                    autoCorrect:"off",
+                    autoCapitalize:"off",
+                    spellCheck:"false"
+                },
+                value: '',
+                valueType: 'text',
+                validation: {
+                    required: true,
+                },
+                valid: false,
+                touched: false,
+                style: {marginTop: '22px'}
+            },
+            serviceTitle: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
@@ -116,7 +135,8 @@ class StepTwo extends Component {
                                     value={input[1].value} 
                                     valueType={input[1].valueType} />;
                             })}
-                        <Button type='primary' disabled={!this.state.formIsValid}>Next</Button>
+                        {/* <Button style={{marginRight: '24px'}} type='primary' disabled={!this.state.formIsValid}>Go back</Button>
+                        <Button type='primary' disabled={!this.state.formIsValid}>Next</Button> */}
                     </form>
                 </div>
             </div>

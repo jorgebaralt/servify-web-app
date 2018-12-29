@@ -8,7 +8,7 @@ import Button from '../../../../components/UI/Button/Button';
 class StepOne extends Component {
     state = {
         controls: {
-            categories: {
+            category: {
                 elementType: 'select',
                 elementConfig: {
                     id: 'Publish_Select',
@@ -28,7 +28,7 @@ class StepOne extends Component {
         formIsValid: false,
     }
 
-    inputSelectChangeHandler = (value, inputIdentifier = 'categories') => {
+    inputSelectChangeHandler = (value, inputIdentifier) => {
         const updatedOrderForm = {
             ...this.state.controls,
         };
@@ -50,6 +50,7 @@ class StepOne extends Component {
     }
 
     render () {
+        const formElementsArray = Object.entries(this.state.controls);
         return (
             <div style={{backgroundColor: 'lightorange'}} className={classes.Container}>
                 <div className={classes.Form}>
@@ -62,16 +63,19 @@ class StepOne extends Component {
                         What type of service do you provide?
                     </h2>
                     <form style={{userSelect: 'none'}} onSubmit={this.onSubmitHandler}>
-                        <Input 
-                            elementType={this.state.controls.categories.elementType} 
-                            elementConfig={this.state.controls.categories.elementConfig}
-                            changed={this.inputSelectChangeHandler}
-                            invalid={!this.state.controls.categories.valid}
-                            shouldValidate={this.state.controls.categories.validation}
-                            touched={this.state.controls.categories.touched}
-                            value={this.state.controls.categories.value} 
-                            valueType={this.state.controls.categories.valueType} />
-                        <Button type='primary' disabled={!this.state.formIsValid}>Next</Button>
+                        {formElementsArray.map( (input) => {
+                                return <Input 
+                                    key={input[0]} 
+                                    elementType={input[1].elementType} 
+                                    elementConfig={this.state.controls[input[1].valueType] ? this.state.controls[input[1].valueType].elementConfig : input[1].elementConfig} // Referenced to state to mutate
+                                    changed={(event) => this.inputSelectChangeHandler(event, input[0])}
+                                    invalid={!input[1].valid}
+                                    shouldValidate={input[1].validation}
+                                    touched={input[1].touched}
+                                    value={input[1].value} 
+                                    valueType={input[1].valueType} />;
+                            })}
+                        {/* <Button type='primary' disabled={!this.state.formIsValid}>Next</Button> */}
                     </form>
                 </div>
             </div>

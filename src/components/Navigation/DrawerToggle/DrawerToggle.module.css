@@ -18,7 +18,7 @@
 .Transparent div,
 .Transparent div:after,
 .Transparent div:before {
-    height: 2.5px !important;
+    height: 3px !important;
     background-color: #FFF !important;
 }
 
@@ -33,7 +33,7 @@
     content: '';
     display: block;
     transform:translateY(-12px);
-    height: 3px;
+    height: 100%;
     background-color: #484848;
     transition: all 0.25s ease-out;
 }
@@ -42,7 +42,7 @@
     content: '';
     display: block;
     transform:translateY(10px);
-    height: 2px;
+    height: 100%;
     background-color: #484848;
     transition: all 0.25s ease-out;
 }
@@ -53,7 +53,7 @@
 
 .Open div {
     width: 90%;
-    height: 2px;
+    height: 3px;
     background-color: transparent;
 }
 
@@ -61,7 +61,7 @@
     content: '';
     display: block;
     transform: translateY(-3px) rotate(225deg);
-    height: 3px;
+    height: 100%;
     background-color: #484848 !important;
 }
 
@@ -69,7 +69,7 @@
     content: '';
     display: block;
     transform: rotate(-45deg);
-    height: 3px;
+    height: 100%;
     background-color: #484848 !important;
 }
 

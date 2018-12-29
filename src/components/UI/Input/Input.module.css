@@ -134,6 +134,9 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
 
 /* Input Select */
 
+.InputSelectLabel {
+    display: none;
+}
 .Wrapper {
     position: relative;
     width: 100%;
@@ -172,9 +175,7 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
     outline: 0 !important;
 }
 
-.InputSelectLabel {
-    display: none;
-}
+
 
 .ValidSelectLabel {
     display: none;

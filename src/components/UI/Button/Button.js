@@ -7,7 +7,7 @@ import SVG from '../../SVG/SVG';
 // TODO Refactor ButtonFilled and Button into one
 
 const button = (props) => {
-
+    console.log(props.onClick)
     // Success/Danger classes
     let logo = null;
     const buttonClass = [props.className];

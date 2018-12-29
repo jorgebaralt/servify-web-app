@@ -38,12 +38,11 @@ const input = (props) => {
                 />;
             break;
         case('select'):
-            inputClasses.push(classes.InputSelect);
             labelClasses.push(classes.InputSelectLabel);
             inputElement = (
                 <InputSelect
                     inputClasses={inputClasses}
-                    labelClasses={labelClasses}
+                    labelClasses={[classes.Label]}
                     {...props} />
             );
             break;

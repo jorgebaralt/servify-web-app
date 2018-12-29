@@ -61,9 +61,9 @@ const map = (props) => {
         height: props.height
     }
     return (
-        <div style={style} className={classes.Wrapper}>
+        <div style={style} className={mapClasses.join(' ')}>
             {/* Prevent Map from loading until the initial position */}
-            {props.map.initialPosition.join() !== "0,0" ? 
+            {props.map.initialPosition !== null ? 
                 <Map style="mapbox://styles/mapbox/streets-v9"
                     center={props.map.geoData ?
                         (
@@ -92,7 +92,7 @@ const map = (props) => {
                                 type="circle" 
                                 id="marker" 
                                 paint={{
-                                    'circle-color': "transparent",
+                                    'circle-color': 'rgba(30,163,204, 0.1)',
                                     'circle-radius': {
                                         stops: [
                                             [0, 0],
