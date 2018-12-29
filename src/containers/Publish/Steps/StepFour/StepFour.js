@@ -136,7 +136,7 @@ class StepFour extends PureComponent {
         const formElementsArray = Object.entries(this.state.controls);
         return (
             <div style={{backgroundColor: 'lightorange'}} className={classes.Container}>
-                <div className={classes.Form}>
+                <div className={classes.FormWrapper}>
                     <div className={classes.Step}><span>S</span>tep 4</div>
                     <h2>
                         Finally we need to wrtie down your address. This is to let customers know where you are located.

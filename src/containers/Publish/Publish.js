@@ -52,7 +52,8 @@ class Publish extends Component {
                 },
                 formIsValid: false
             }
-        }
+        },
+        dataIsValid: false
     }
 
     updateData = (key, data, formIsValid) => {
@@ -69,7 +70,7 @@ class Publish extends Component {
                         formIsValid: updatedForm
                     }
                 },
-                formIsValid: updatedForm
+                dataIsValid: updatedForm
             }
         });
     }
@@ -79,7 +80,10 @@ class Publish extends Component {
             this.setState( (prevState) => {
                 const step = Clamp(prevState.step - 1, 1, 4);
                 return {
-                    step: step
+                    step: step,
+                    steps: {
+                        ...prevState.steps,
+                    }
                 }
             });
         }, 100);
@@ -102,9 +106,10 @@ class Publish extends Component {
 
     render() {
         console.log(this.state);
+        const activeStep = this.state.step;
         const buttons = {
             prev: this.state.step > 1 ? <Button  style={{marginLeft: 0}} className={classes.Button} type='primary'>Go back</Button> : <></>,
-            next: <Button disabled={!this.state.formIsValid} style={this.state.step > 1 ? null : {marginLeft: 0}} className={classes.Button} type='primary'>Next</Button>,
+            next: <Button disabled={!this.state.steps[activeStep].formIsValid} style={this.state.step > 1 ? null : {marginLeft: 0}} className={classes.Button} type='primary'>Next</Button>,
             onClick: {
                 prev: this.onPrevHandler,
                 next: this.onNextHandler
@@ -115,16 +120,16 @@ class Publish extends Component {
             <div className={classes.Wrapper}>
                 <Slider disableNav buttons={buttons} >
                     <Slide>
-                        <StepOne activeStep={this.state.step} stepKey={1} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
+                        <StepOne activeStep={activeStep} stepKey={1} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>
                     <Slide>
-                        <StepTwo activeStep={this.state.step} stepKey={2} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
+                        <StepTwo activeStep={activeStep} stepKey={2} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>
                     <Slide>
-                        <StepThree activeStep={this.state.step} stepKey={3} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
+                        <StepThree activeStep={activeStep} stepKey={3} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>
                     <Slide>
-                        <StepFour activeStep={this.state.step} stepKey={4} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
+                        <StepFour activeStep={activeStep} stepKey={4} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>
                 </Slider>
             </div>
