@@ -21,19 +21,19 @@
 
 .ListItem:focus,
 .ListItem:hover {
-    border-color: rgb(255, 112, 67);
+    border-color: rgb(35, 189, 153);
 }
 
 
 .ListItem:focus {
     box-shadow: rgb(232, 232, 232) 0px 0px 7px;
-    border-color: rgb(255, 112, 67);
+    border-color: rgb(35, 189, 153);
 }
 
 .ListItemActive {
     color: #FFF;
-    background: rgb(255, 112, 67);
-    border-color: rgb(255, 112, 67);
+    background: rgb(35, 189, 153);
+    border-color: rgb(35, 189, 153);
 }
 
 .ListItemContainer {

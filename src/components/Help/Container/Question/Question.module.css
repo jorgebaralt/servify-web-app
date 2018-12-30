@@ -4,7 +4,7 @@
     width: 95%;
     margin: 48px 0;
     border-radius: 15px;
-    border: 1px solid rgba(255, 112, 67, .25);
+    border: 1px solid rgba(78, 78, 78, .25);
     transition: border ease 100ms, box-shadow ease 300ms,
 }
 
@@ -15,11 +15,11 @@
 }
 
 .QuestionContainer:hover {
-    border: 1px solid rgba(255, 112, 67, .5);
+    border: 1px solid rgba(35, 189, 153, .5);
 }
 
 .QuestionContainer.Open {
-    border: 1px solid rgba(255, 112, 67, 1);
+    border: 1px solid rgba(35, 189, 153, 1);
 }
 
 .Question {
@@ -32,7 +32,7 @@
     font-weight: 300;
     margin: 0;
     padding: 24px 72px 24px 24px;
-    color: rgb(255, 112, 67);
+    color: #484848;
 }
 
 @media (max-width: 744px) {
@@ -50,7 +50,7 @@
     top: 50%;
     height: 2px;
     width: 13px;
-    background: rgb(255, 112, 67);
+    background: rgb(35, 189, 153);
     transition: transform ease 150ms;
 }
 

@@ -41,7 +41,7 @@ class SearchBar extends Component {
     inputChangeHandler = (event) => {
         event.preventDefault();
         const updatedSearchBar = {
-            ...this.state.searchBar,
+            ...this.props.searchBar,
             value: event.target.value
         };
         this.setState({
@@ -59,7 +59,7 @@ class SearchBar extends Component {
             RecentSearchesWrapperClasses.push(classes.Show);
         }
         return (
-            <div>
+            <div className={classes.GlobalWrapper}>
                 <div className={classes.SearchBarAnchor}>
                     <div ref={this.mySearchBar}
                         className={classes.SearchBarWrapper}>
@@ -70,7 +70,7 @@ class SearchBar extends Component {
                                         // dir means direction of text for languages (ltr = left to right)
                                         dir="ltr">
                                         <div className={classes.WidescreenContainer}>
-                                            <label htmlFor={this.state.searchBar.inputId} className={classes.LabelWrapper}>
+                                            <label htmlFor={this.props.searchBar.inputId} className={classes.LabelWrapper}>
                                                 <span className={classes.SearchBarSpan}>Search</span>
                                                 <div className={classes.QuestionMark}>
                                                     <svg
@@ -87,21 +87,21 @@ class SearchBar extends Component {
                                                         <input
                                                             onFocus={() => this.applyFocusWithin()}
                                                             onBlur={() => this.removeFocusWithin()}
-                                                            onChange={(event) => this.inputChangeHandler(event)}
+                                                            onChange={(event) => this.props.inputChangeHandler(event)}
                                                             type="text" 
                                                             className={classes.Input}
                                                             role="combobox"
                                                             aria-autocomplete="list" 
-                                                            aria-describedby={this.state.searchBar.description}
-                                                            aria-controls={this.state.searchBar.listId}
+                                                            aria-describedby={this.props.searchBar.description}
+                                                            aria-controls={this.props.searchBar.listId}
                                                             aria-expanded="false" 
                                                             autoComplete="off" 
                                                             autoCorrect="off" 
                                                             spellCheck="false" 
-                                                            id={this.state.searchBar.inputId} 
+                                                            id={this.props.searchBar.inputId} 
                                                             name="services_query" 
                                                             placeholder="Search" 
-                                                            value={this.state.searchBar.value}  />
+                                                            value={this.props.searchBar.value}  />
                                                     </div>
                                                 </div>
                                             </label>
@@ -117,7 +117,7 @@ class SearchBar extends Component {
                 </div>
                 {this.state.bIsFocused ? 
                     <ul ref={this.myList}
-                        id={this.state.searchBar.listId}
+                        id={this.props.searchBar.listId}
                         role="listbox" 
                         style={{
                             maxWidth: '100vw',
@@ -137,16 +137,13 @@ class SearchBar extends Component {
                                     {/* TODO REMOVE PLACEHOLDERS */}
                                     <SearchResult 
                                         service='Servify'
-                                        location='Florida'
-                                    />
+                                        location='Florida' />
                                     <SearchResult 
                                         service='Servify'
-                                        location='Florida'
-                                    />
+                                        location='Florida' />
                                     <SearchResult 
                                         service='Servify'
-                                        location='Florida'
-                                    />
+                                        location='Florida' />
                                 </ul>
                             </li>
                         </div>

@@ -5,12 +5,15 @@ import classes from './InputSelect.module.css';
 const inputSelect = (props) => {
     const listHandler = (id, handler) => { 
         const list = document.getElementById(id); 
+        console.log('ping', list)
         switch (handler) {
             case 'open': 
-                list.style.display = 'inherit';
+                console.log('open', list)
+                list.style.display = 'block';
                 list.style.opacity = 1;
                 break;
             case 'close': 
+                console.log('close', list)
                 list.style.display = 'none';
                 list.style.opacity = 0;
                 break;
@@ -32,7 +35,7 @@ const inputSelect = (props) => {
                 // do nothing
         }
         listHandler(listId, 'close'); // After selecting a category, close the list.
-        if (document.addEventListener) { document.activeElement.blur(); } // Blurs (removes focus) out of the list.
+        if (document.addEventListener) { document.activeElement.blur(); } // Blurs (removes focus) from the list.
         changed(value); // props.changed passed from stateful container to change its state.
     }
     const inputId = [props.elementConfig.id, 'Input_Select_Input'].join('_');

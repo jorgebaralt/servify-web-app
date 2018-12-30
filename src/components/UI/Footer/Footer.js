@@ -36,7 +36,7 @@ const footer = (props) => {
                     </NavLink>
                     <div className={classes.NavLinks}>
                         <NavLink exact activeClassName={classes.active} className={classes.NavLink} to='/'><span className={classes.Link}>Homepage</span></NavLink>
-                        <NavLink activeClassName={classes.active} className={classes.NavLink} to='/publish/overview'><span className={classes.Link}>Post</span></NavLink>
+                        <NavLink activeClassName={classes.active} className={classes.NavLink} to='/publish/overview'><span className={classes.Link}>Publish</span></NavLink>
                         <NavLink activeClassName={classes.active} className={classes.NavLink} to='/services'><span className={classes.Link}>Services</span></NavLink>
                         <NavLink activeClassName={classes.active} className={classes.NavLink} to='/help'><span className={classes.Link}>Help</span></NavLink>
                         <NavLink activeClassName={classes.active} className={classes.NavLink} to='/contact'><span className={classes.Link}>Contact</span></NavLink>

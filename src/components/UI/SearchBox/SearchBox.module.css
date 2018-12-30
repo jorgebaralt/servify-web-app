@@ -50,7 +50,8 @@
 }
 
 .SearchBox small {
-    margin: 0px;
+    display: block;
+    margin: 0 0 6px;
     word-wrap: break-word;
     font-size: 12px;
     line-height: 16px;
@@ -61,10 +62,10 @@
 }
 
 .InputWrapper {
+    position: relative;
     height: 48px;
     display: flex;
     align-items: center;
-    padding: 0 10px 0 10px;
     background-color: #FFFFFF;
     border: 1px solid #EBEBEB;
     border-top-color: rgb(205, 205, 205);
@@ -119,9 +120,12 @@
     outline: none;
 }
 
+.Button {
+    margin: -10px 0 20px;
+}
+
 @media (max-width: 960px) {
     .Button {
-        margin: 20px 0;
         color: #FFF !important;
         background-color: #FF7043 !important;
         width: 100% !important;

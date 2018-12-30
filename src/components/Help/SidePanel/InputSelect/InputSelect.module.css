@@ -70,7 +70,7 @@
 
 .Container:hover,
 .Container:focus-within {
-    border: 1px solid rgba(255, 112, 67);
+    border: 1px solid rgba(35, 189, 153);
 }
 
 .Container:focus-within .Arrow {
@@ -81,8 +81,8 @@
 
 .Container:hover .ArrowWrapper,
 .Container:focus-within .ArrowWrapper {
-    background-color: rgba(255, 112, 67);
-    border-left: 1px solid rgba(255, 112, 67);
+    background-color: rgba(35, 189, 153);
+    border-left: 1px solid rgba(35, 189, 153);
 }
 
 @media (min-width: 1024px) {

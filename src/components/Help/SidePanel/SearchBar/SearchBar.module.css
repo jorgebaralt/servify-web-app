@@ -28,13 +28,13 @@
 
 .BarWrapper:hover,
 .BarWrapper:focus-within {
-    border: 1px solid rgba(255, 112, 67);
+    border: 1px solid rgba(35, 189, 153);
 }
 
 .BarWrapper:hover .QuestionMark,
 .BarWrapper:focus-within .QuestionMark {
-    border-left: 1px solid rgba(255, 112, 67);
-    background-color: rgba(255, 112, 67);
+    border-left: 1px solid rgba(35, 189, 153);
+    background-color: rgba(35, 189, 153);
 }
 
 @media (min-width: 1024px) {
@@ -131,5 +131,5 @@
 
 .InputSelect:hover,
 .InputSelect:focus-within {
-    border: 1px solid rgba(255, 112, 67);
+    border: 1px solid rgba(35, 189, 153);
 }

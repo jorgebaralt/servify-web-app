@@ -22,6 +22,13 @@ import Featured from '../../components/Services/Featured/Featured';
 import AnchorLink from '../../components/UI/AnchorLink/AnchorLink';
 import LearnMore from '../../components/Landing/LearnMore/LearnMore';
 
+const categoriesDatalist = categories.map( (category) => {
+    return {
+        value: category.title,
+        displayValue: category.title,
+    };
+});
+
 class Landing extends Component {
 
     state = {
@@ -52,10 +59,6 @@ class Landing extends Component {
     }
 
     render() {
-        // Array that holds the JSX option elements containing the category titles for a datalist
-        const categoriesDatalist = categories.map( (category, index) => {
-            return <option value={category.title} key={index} />
-        });
         // Array that holds the JSX list elements containing the category titles for an unordered list
         const categoriesList = categories.map( (category) => {
             return (

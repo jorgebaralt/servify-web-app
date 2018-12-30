@@ -48,7 +48,8 @@ class Publish extends Component {
             },
             4: {
                 data: {
-                    address: null
+                    address: null,
+                    coordinates: null
                 },
                 formIsValid: false
             }
