@@ -7,5 +7,7 @@ export const AUTH_MODE_HANDLER = 'auth_mode_handler';
 // SERVICES
 export const SERVICES_INIT = 'services_init';
 export const SERVICES_INIT_FILTERED_CATEGORIES = 'services_init_filtered_categories';
+export const SERVICES_INIT_RESET_FILTERED_CATEGORIES = 'services_init_reset_filtered_categories';
+export const SERVICES_RESET_FILTERED_CATEGORIES = 'services_reset_filtered_categories';
 export const SERVICES_SET_FILTERED_CATEGORIES = 'services_set_filtered_categories';
 export const SERVICES_SET_BISDEFAULT = 'services_set_bisdefault';

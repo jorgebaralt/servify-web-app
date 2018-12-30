@@ -55,12 +55,12 @@
     background-color: transparent;
     padding-left: 24px;
     padding-right: 24px;
-    max-width: 1080px;
+    max-width: 1240px;
     min-height: 400px;
 }
 
 .Container h1 {
-    color: rgb(72, 72, 72);
+    color: rgb(103, 88, 88);
     user-select: none;
     margin-bottom: 40px;
 }

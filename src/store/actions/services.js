@@ -10,6 +10,11 @@ export const toggleFileredCategories = (prevState, key) => {
 }
 
 export const servicesActions = {
+    resetCategories: () => {
+        return {
+            type: actionTypes.SERVICES_RESET_FILTERED_CATEGORIES
+        }
+    },
     setFilteredCategories: (filteredCategories) => {
         return {
             type: actionTypes.SERVICES_SET_FILTERED_CATEGORIES,
@@ -25,6 +30,11 @@ export const servicesActions = {
 }
 
 export const servicesCreator = {
+    resetCategoriesHandler: () => {
+        return {
+            type: actionTypes.SERVICES_INIT_RESET_FILTERED_CATEGORIES
+        }
+    },
     filteredCategoriesHandler: (prevState, key) => {
         return {
             type: actionTypes.SERVICES_INIT_FILTERED_CATEGORIES,

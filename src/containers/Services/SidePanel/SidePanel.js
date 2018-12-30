@@ -143,6 +143,12 @@ class SidePanel extends Component {
         });
     }
 
+    componentDidMount() {
+        if (this.props.activeCategory) {
+            this.props.onToggleCategoryFilter(this.props.categories, this.props.activeCategory);
+        }
+    }
+
     shouldComponentUpdate(nextProps, nextState) {
         return nextProps !== this.props || nextState !== this.state || nextProps.children !== this.props.children;
     }

@@ -30,7 +30,6 @@ class Landing extends Component {
     }
 
     savePosition = (position) => {
-        console.log(position)
         const city = position.data.city;
         const state = position.data.region;
         this.setState( () => {
@@ -61,7 +60,10 @@ class Landing extends Component {
         const categoriesList = categories.map( (category) => {
             return (
                 <li className={classes.Category} key={category.title}>
-                    <Link to="/services">
+                    <Link to={{ 
+                            pathname: '/services',
+                            state: { activeCategory: category.title }
+                        }}>
                         {/* Category.icon pointer protection */}
                         {category.icon ? <category.icon /> : null}{category.title}&nbsp;<SVG svg='right-arrow' />
                     </Link>
