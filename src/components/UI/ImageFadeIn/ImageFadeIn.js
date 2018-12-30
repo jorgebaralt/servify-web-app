@@ -51,7 +51,7 @@ class ImageFadeIn extends Component {
         }
     }
 
-    componentWillMount () {
+    componentDidMount () {
         this.setImage();
     }
 

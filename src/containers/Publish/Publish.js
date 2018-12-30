@@ -105,7 +105,6 @@ class Publish extends Component {
     }
 
     render() {
-        console.log(this.state);
         const activeStep = this.state.step;
         const buttons = {
             prev: this.state.step > 1 ? <Button  style={{marginLeft: 0}} className={classes.Button} type='primary'>Go back</Button> : <></>,

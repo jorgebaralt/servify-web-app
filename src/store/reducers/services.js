@@ -21,7 +21,6 @@ const initialState = {
 const servicesReducer = (state = initialState, action) => {
     switch(action.type) {
         case types.SERVICES_RESET_FILTERED_CATEGORIES:
-            console.log('categories reset');
             return updateObject(state, {categories: {...categoriesObj}, bIsLoading: false});
         case types.SERVICES_SET_FILTERED_CATEGORIES:
             return updateObject(state, {categories: action.filteredCategories, bIsLoading: true});

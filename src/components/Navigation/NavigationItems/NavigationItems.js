@@ -36,7 +36,7 @@ const renderNavigationItems = (props) => {
 					}
 				</>
 			);
-		case 'PublishNavbar':
+		case 'PublishOverviewNavbar':
 			return (
 				<>
 					<div className={classes.SpacingSmall} />
@@ -68,6 +68,20 @@ const renderNavigationItems = (props) => {
 					}
 				</>
 			);
+		case 'PublishNavbar':
+			return (
+				<>
+					{props.width < 1121 ? 
+						null : 
+						<>
+							<div className={classes.Spacing} />
+							<NavigationItem className={props.className} onClick={() => props.history.goBack()} {...props} link="/" color="white" >
+								Go back
+							</NavigationItem>
+						</>
+					}
+				</>
+			);
 		case 'SearchNavbar':
 			return (
 				<>
@@ -96,10 +110,10 @@ const renderNavigationItems = (props) => {
 						null : 
 						<>
 							<div className={classes.Spacing} />
-							<NavigationItem className={props.className} {...props} link="/" color="white" >
-								Home
-							</NavigationItem>
 							<NavAuthButtons {...props} color="white" /> 
+							<NavigationItem className={props.className} onClick={() => props.history.goBack()} {...props} link="/" color="white" >
+								Go back
+							</NavigationItem>
 						</>
 					}
 				</>
@@ -130,17 +144,21 @@ const renderNavigationItems = (props) => {
 		default:
 			return (
 				<>
-					<div className={classes.Spacing} />
-					<NavigationItem {...props} link="/publish/overview" color="white">
-						Publish
-					</NavigationItem>
-					<NavigationItem {...props} link="/services" color="white">
-						Services
-					</NavigationItem>
-					<NavigationItem {...props} link="/help" color="white">
-						Help
-					</NavigationItem>
-					<NavAuthButtons {...props} color="white"/>
+					{props.width < 1121 ? 
+						<>
+							<div className={classes.Spacing} />
+							<NavigationItem {...props} link="/publish/overview" color="white">
+								Publish
+							</NavigationItem>
+							<NavigationItem {...props} link="/services" color="white">
+								Services
+							</NavigationItem>
+							<NavigationItem {...props} link="/help" color="white">
+								Help
+							</NavigationItem>
+							<NavAuthButtons {...props} color="white"/>
+						</>
+					: null }
 				</>
 			);
 	}

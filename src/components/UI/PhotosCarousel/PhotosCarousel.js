@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import Slider from 'react-slick';
 // CSS
 import classes from './PhotosCarousel.module.css';
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import ImageFadeIn from '../ImageFadeIn/ImageFadeIn'
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import ImageFadeIn from '../ImageFadeIn/ImageFadeIn';
 
 class Carousel extends Component {
     constructor(props) {
@@ -67,7 +67,7 @@ class Carousel extends Component {
         };
     }
 
-    componentWillMount () {
+    componentWillUnmount () {
         window.onresize = () => {
             return;
         };

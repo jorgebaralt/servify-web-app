@@ -15,6 +15,13 @@ import { ClosedRatingContainer, RatingContainer } from '../../../components/Serv
 import { Toggle, MenuToggle } from '../../../components/Services/SidePanel/Toggle/Toggle';
 
 class SidePanel extends Component {
+    constructor(props) {
+        super(props);
+        if (props.activeCategory) {
+            props.onToggleCategoryFilter(props.categories, props.activeCategory);
+        }
+    }
+    
     state = {
         filter: {
             searchBar: {
@@ -141,12 +148,6 @@ class SidePanel extends Component {
                 }
             }
         });
-    }
-
-    componentDidMount() {
-        if (this.props.activeCategory) {
-            this.props.onToggleCategoryFilter(this.props.categories, this.props.activeCategory);
-        }
     }
 
     shouldComponentUpdate(nextProps, nextState) {

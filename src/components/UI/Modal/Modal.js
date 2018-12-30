@@ -11,6 +11,11 @@ class Modal extends Component {
         super(props);
         this.myModal = React.createRef();
         this.escFunction = this.escFunction.bind(this);
+        // If on mobile drawer then don't do anything
+        if (document.body.clientWidth < 1121) {
+            return;
+        }
+        document.body.style.overflow = null;
     }
 
     escFunction(e){
@@ -37,14 +42,6 @@ class Modal extends Component {
             document.removeEventListener("keydown", () => this.escFunction(), false);
             document.body.style.overflow = null;
         }
-    }
-
-    componentWillMount () {
-        // If on mobile drawer then don't do anything
-        if (document.body.clientWidth < 1121) {
-            return;
-        }
-        document.body.style.overflow = null;
     }
 
     render() {

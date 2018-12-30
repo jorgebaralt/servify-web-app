@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import isElementInViewport from '../../shared/isInViewport';
 // CSS
 import classes from './Help.module.css'
@@ -44,7 +44,7 @@ const contactObj =  {
         }
 }
 
-class Help extends Component {
+class Help extends PureComponent {
     constructor (props) {
         super(props);
         this.myCategories = contactObj;

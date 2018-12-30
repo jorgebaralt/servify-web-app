@@ -131,7 +131,7 @@ class Navbar extends PureComponent {
 	/**
 	 * Sets Navbar Settings && Add Event Listener
 	 */
-	componentWillMount () {
+	componentDidMount () {
 		this.setNavbar();
 		window.addEventListener('resize', this.handleResize);
 		window.addEventListener('scroll', this.changeNavbarOnWindowScroll);
@@ -186,14 +186,24 @@ class Navbar extends PureComponent {
 					isDrawerTransparent: false
 				}
 				break;
-			case this.props.location.pathname.includes('/publish'):
+			case this.props.location.pathname.includes('/publish/overview'):
 				settings = {
 					className: classes.Navbar,
-					navbarType: 'PublishNavbar', // pass navbarType prop to select respective navigation items
+					navbarType: 'PublishOverviewNavbar', // pass navbarType prop to select respective navigation items
 					toggleAuthModal: this.props.toggleAuthModal, // Toggle Auth Modal
 					toggleMobileDrawer: this.toggleMobileDrawer,
 					isNavbarTransparent: false,
 					isDrawerTransparent: false
+				}
+				break;
+			case this.props.location.pathname.includes('/publish'):
+				settings = {
+					className: classes.PublishNavbar,
+					navbarType: 'PublishNavbar', // pass navbarType prop to select respective navigation items
+					toggleAuthModal: this.props.toggleAuthModal,
+					toggleMobileDrawer: this.toggleMobileDrawer,
+					isNavbarTransparent: false,
+					isDrawerTransparent: true
 				}
 				break;
 			case this.props.location.pathname.includes('/help') || this.props.location.pathname.includes('/contact'):

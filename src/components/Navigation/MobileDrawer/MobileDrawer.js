@@ -6,6 +6,11 @@ import NagivationItems from '../NavigationItems/NavigationItems';
 import { withRouter } from 'react-router-dom';
 
 class MobileDrawer extends Component {
+    constructor(props) {
+        super(props);
+        document.body.style.overflow = null;
+    }
+    
     componentDidUpdate () {
         if (this.props.isOpen) {
             document.body.style.overflow = 'hidden';
@@ -14,19 +19,12 @@ class MobileDrawer extends Component {
         }
     }
 
-    componentWillMount () {
-        document.body.style.overflow = null;
-    }
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return nextProps.isOpen !== this.props.isOpen || nextProps.children !== this.props.children;
-    // }
-
     render () {
     let attachedClasses = [classes.Wrapper, classes.Close];
     if (this.props.isOpen) {
         attachedClasses = [classes.Wrapper, classes.Open];
     }
+    
     return (
         <div className={attachedClasses.join(' ')}>
             <div className={classes.Container}>

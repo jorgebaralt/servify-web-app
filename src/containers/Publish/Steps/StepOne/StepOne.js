@@ -95,7 +95,7 @@ class StepOne extends PureComponent {
                 </div>
                 <div className={classes.ImageWrapper}>
                     <div className={classes.ImageContainer}>
-                        <ImageFadeIn src={logo} />
+                        <ImageFadeIn draggable={false} src={logo} />
                     </div>
                 </div>
             </div>

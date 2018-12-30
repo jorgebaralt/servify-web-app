@@ -20,11 +20,11 @@
 }
 
 .ButtonsWrapper {
-    padding: 0 96px;
+    padding: 12px 96px;
 }
 
 .Button {
-    margin: 0 6px;
+    margin: 0 8px;
 }
 
 @media (max-width: 744px) {
@@ -65,6 +65,7 @@
 }
 
 .ImageWrapper {
+    user-select: none;
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: auto;
@@ -75,6 +76,7 @@
 }
 
 .ImageContainer {
+    user-select: none;
     width: 259px;
     height: 331px;
 }

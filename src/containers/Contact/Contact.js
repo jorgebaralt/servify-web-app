@@ -139,7 +139,6 @@ class Contact extends Component {
             case this.state.bIsFormActive:
                 ActiveRender = (
                     <Form activeReason={this.state.activeReason}
-
                         onSubmitHandler={this.onSubmitHandler}
                         inputChangeHandler={this.inputChangeHandler}
                         toggleIsFormSelected={this.toggleIsFormSelected}

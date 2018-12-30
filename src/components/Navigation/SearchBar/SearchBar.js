@@ -38,18 +38,6 @@ class SearchBar extends Component {
         });
     }
 
-    // setListDimensions () {
-    //     this.setState( () => {
-    //         return { 
-    //             myList: {
-    //                 width: this.mySearchBar.current.offsetWidth,
-    //                 top: this.mySearchBar.current.offsetHeight + this.mySearchBar.current.offsetTop,
-    //                 right: document.body.getBoundingClientRect().right - this.mySearchBar.current.getBoundingClientRect().right,
-    //             } 
-    //         }
-    //     });
-    // }
-
     inputChangeHandler = (event) => {
         event.preventDefault();
         const updatedSearchBar = {

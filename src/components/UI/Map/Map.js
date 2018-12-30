@@ -38,7 +38,6 @@ export const setAddress = (address, fn) => {
     );
 }
 
-
 // Mapbox Component
 const Map = ReactMapboxGl({
     accessToken: mapboxPKey,

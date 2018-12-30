@@ -88,11 +88,8 @@ class Slider extends Component {
         })
     }
 
-    componentWillMount () {
-        window.addEventListener("orientationchange", this.setOrientationChanged);
-    }
-
     componentDidMount () {
+        window.addEventListener("orientationchange", this.setOrientationChanged);
         /**
          * The carousel needs an initial setup in case there is an active slide from the props higher than 0
          */
@@ -119,22 +116,6 @@ class Slider extends Component {
         if (this.props.buttons) {
             PrevButton = this.props.buttons.prev;
             NextButton = this.props.buttons.next;
-            // let PrevButton = React.cloneElement(
-            //     prevButton, 
-            //     {
-            //         onClick: () => this.onTranslateHandler('prev'),
-            //         totalSlides: this.props.children.length,
-            //         activeSlide: this.state.activeSlide
-            //     }
-            // );
-            // let NextButton = React.cloneElement(
-            //     nextButton, 
-            //     {
-            //         onClick: () => this.onTranslateHandler('next'),
-            //         totalSlides: this.props.children.length,
-            //         activeSlide: this.state.activeSlide
-            //     }
-            // );
         }
         const children = Object.keys(this.props.children).map( children => {
             return (

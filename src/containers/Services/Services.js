@@ -12,7 +12,6 @@ import SidePanel from './SidePanel/SidePanel';
 class Services extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         props.onResetCategoriesFilter();
     }
 
@@ -21,8 +20,6 @@ class Services extends Component {
         if (this.props.location.state) {
             activeCategory = this.props.location.state.activeCategory
         }
-        console.log(activeCategory);
-
         return (
             <div className={classes.Wrapper}>
                 <SidePanel activeCategory={activeCategory} />
