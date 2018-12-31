@@ -1,0 +1,22 @@
+.Panel {
+    border: 1px solid #E0E0E0;
+    background-color: #FFF;
+    border-radius: 0;
+    widows: 100%;
+}
+
+.Header {
+    user-select: none;
+    background-color: #EDEFED;
+    color: #484848;
+    font-size: 18px;
+    padding: 12px 24px;
+    border-bottom: 1px solid #DCE0E0;
+}
+
+.Body {
+    padding: 8px 16px;
+    border: 0;
+    background-color: #FFF;
+    border-radius: 0;
+}

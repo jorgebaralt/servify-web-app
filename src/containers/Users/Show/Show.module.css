@@ -1,0 +1,15 @@
+.Title {
+    color: #484848 !important;
+    margin: 6px 0 !important;
+    font-size: 62px;
+    font-weight: normal;
+}
+
+.JoinDate {
+    color: #484848 !important;
+    margin: 6px 0;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.1;
+    text-rendering: optimizelegibility;
+}

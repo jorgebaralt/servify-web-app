@@ -14,7 +14,6 @@ class Services extends Component {
         super(props);
         props.onResetCategoriesFilter();
     }
-
     render () {
         let activeCategory = null;
         if (this.props.location.state) {

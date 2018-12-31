@@ -1,0 +1,19 @@
+.Container {
+    display: flex;
+    margin: 0 auto;
+    background-color: transparent;
+    padding: 28px 24px 18px;
+    max-width: 1080px;
+    min-height: 400px;
+}
+
+.Container h1 {
+    color: rgb(103, 88, 88);
+    user-select: none;
+    margin-bottom: 40px;
+}
+
+.ContentWrapper {
+    flex: auto;
+    padding: 20px 12px;
+}

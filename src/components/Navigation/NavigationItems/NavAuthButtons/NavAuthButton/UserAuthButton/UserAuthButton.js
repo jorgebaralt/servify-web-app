@@ -39,26 +39,27 @@ class UserButton extends Component {
     }
 
     render () {
+        console.log(this.props)
         const list = (
             <li>
                 <ul className={classes.ListWrapper}>
-                    <Link onClick={() => this.props.onClick()} to="/users/show">
-                        <li className={classes.ListItem}>View Profile</li>
+                    <Link to="/users/show">
+                        <li onClick={this.props.onClick} className={classes.ListItem}>View Profile</li>
                     </Link>
-                    <Link onClick={() => this.props.onClick()} to="/users/publications">
-                        <li className={classes.ListItem}>Check Publications</li>
+                    <Link to="/users/publications">
+                        <li onClick={this.props.onClick} className={classes.ListItem}>Check Publications</li>
                     </Link>
-                    <Link onClick={() => this.props.onClick()} to="/users/edit">
-                        <li className={classes.ListItem}>Edit Profile</li>
+                    <Link to="/users/edit">
+                        <li onClick={this.props.onClick} className={classes.ListItem}>Edit Profile</li>
                     </Link>
-                    <Link onClick={() => this.props.onClick()} to="/users/settings">
-                        <li className={classes.ListItem}>Account Settings</li>
+                    <Link to="/users/settings">
+                        <li onClick={this.props.onClick} className={classes.ListItem}>Account Settings</li>
                     </Link>
-                    <Link onClick={() => this.props.onClick()} to="/users/invite">
-                        <li className={classes.ListItem}>Invite Friends</li>
+                    <Link to="/users/invite">
+                        <li onClick={this.props.onClick} className={classes.ListItem}>Invite Friends</li>
                     </Link>
-                    <Link onClick={() => this.props.onClick()} to="/users/signout">
-                        <li className={classes.ListItem}>Sign out</li>
+                    <Link to="/users/signout">
+                        <li onClick={this.props.onClick} className={classes.ListItem}>Sign out</li>
                     </Link>
                 </ul>
             </li>
@@ -73,7 +74,6 @@ class UserButton extends Component {
                     : null}
             </li>
         )
-        console.log(this.props)
         return (
             !this.props.width ? // Width is passed as a prop to determine breakpoint, if it's null it means the breakpoint was reached.
                 list :

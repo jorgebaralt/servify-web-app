@@ -15,6 +15,7 @@ import PublishOverview from './containers/Publish/PublishOverview/PublishOvervie
 import Services from './containers/Services/Services';
 import Users from './containers/Users/Users';
 import ServiceId from './containers/Services/ServiceId/ServiceId';
+import NoMatch from './containers/NoMatch/NoMatch';
 
 class App extends Component {
 	
@@ -37,8 +38,9 @@ class App extends Component {
 					<Route exact path="/publish/overview" component={PublishOverview} />
 					<Route exact path="/services/:id" component={ServiceId} />
 					<Route exact path="/services" component={Services} />
-					<Route exact path="/users/show" component={Users} />
+					<Route path="/users" component={Users} />
 					<Route exact path="/" component={Landing} />
+                    <Route path="*" component={NoMatch} />
 				</Switch>
 			</Layout>
 		);
