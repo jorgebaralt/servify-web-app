@@ -23,7 +23,6 @@ class Container extends Component {
                 elementType: 'select',
                 elementConfig: {
                     id: [this.props.id, 'Landing_Select'].join(' '),
-                    // label: 'Choose a category type',
                     placeholder: 'Select a category',
                     options: this.props.categoriesDatalist
                 },
@@ -105,7 +104,7 @@ class Container extends Component {
                     <div className={classes.MakeMoneyContainer}>
                         <span className={classes.MakeMoney}>
                             <SVG className={classes.Tools} svg="tools" />&nbsp;
-                            <span>Gain money by publishing your services on Servify</span>
+                            <span>Earn money by publishing your services on Servify</span>
                             <SVG className={classes.RightArrow} svg="right-arrow" />
                         </span>
                     </div>

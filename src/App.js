@@ -13,6 +13,7 @@ import Contact from './containers/Contact/Contact';
 import Publish from './containers/Publish/Publish';
 import PublishOverview from './containers/Publish/PublishOverview/PublishOverview';
 import Services from './containers/Services/Services';
+import Users from './containers/Users/Users';
 import ServiceId from './containers/Services/ServiceId/ServiceId';
 
 class App extends Component {
@@ -36,6 +37,7 @@ class App extends Component {
 					<Route exact path="/publish/overview" component={PublishOverview} />
 					<Route exact path="/services/:id" component={ServiceId} />
 					<Route exact path="/services" component={Services} />
+					<Route exact path="/users/show" component={Users} />
 					<Route exact path="/" component={Landing} />
 				</Switch>
 			</Layout>

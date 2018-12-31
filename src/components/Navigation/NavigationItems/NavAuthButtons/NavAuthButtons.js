@@ -5,6 +5,7 @@ import classes from './NavAuthButtons.module.css';
 import NavAuthButton from './NavAuthButton/NavAuthButton';
 
 const navAuthButtons = (props) => {
+    console.log('navAuthButtons', props)
 	const buttonClass = [classes.Button];
 	//if white respective css
 	if (props.color === 'white') {
@@ -21,9 +22,10 @@ const navAuthButtons = (props) => {
                 className={buttonClass.join(' ')} 
                 onClick={props.toggleAuthModal}/>
             <NavAuthButton
+                width={props.width}
                 button='User'
                 className={buttonClass.join(' ')} 
-                onClick={props.toggleAuthModal}/>
+                onClick={props.onClick}/>
         </>
     );
 }

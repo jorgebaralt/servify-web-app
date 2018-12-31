@@ -1,0 +1,47 @@
+.Anchor {
+    position: relative;
+}
+
+.ListWrapper {
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 5px;
+    min-width: 282px;
+    max-width: 950px;
+    min-height: 60px;
+    padding: 6px 12px;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    border: 1px 1px 1px none solid solid rgb(229, 229, 229) rgb(229, 229, 229) rgb(229, 229, 229);
+}
+
+.ListItem {
+    cursor: pointer;
+    display: table;
+    color: #686868;
+    width: 100%;
+    padding: 16px 0px !important;
+    font-weight: 600;
+    border-bottom: 1px solid rgb(229, 229, 229);
+    border-color: rgb(229, 229, 229);
+    padding: 0px 16px;
+    transition: border-bottom ease 200ms;
+}
+
+@media (max-width: 1121px) {
+    .ListWrapper {
+        position: relative;
+        padding: 0 !important;
+        border: none;
+        box-shadow: none;
+
+    }
+    .ListItem {
+        border-bottom: none;
+        padding: 10px 22.5px !important;
+    }
+}
+
+.ListItem:hover {
+    border-bottom: 1px solid rgb(30, 164, 202);
+}
