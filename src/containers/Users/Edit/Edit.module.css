@@ -1,0 +1,50 @@
+.Title {
+    color: #484848 !important;
+    margin: 6px 0 !important;
+    font-size: 62px;
+    font-weight: normal;
+}
+
+.JoinDate {
+    user-select: none;
+    color: #484848 !important;
+    margin: 6px 0;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.1;
+    text-rendering: optimizelegibility;
+}
+
+.InputContainer {
+    display: flex;
+    align-items: center;
+}
+
+.InputTitle {
+    color: #585858;
+    flex: 0 0 20%;
+    text-align: right;
+    padding: 0 21px;
+    user-select: none;
+}
+
+.Input {
+    flex: auto;
+}
+
+.Private {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin-left: auto;
+    color: #989898;
+}
+
+.Icon {
+    margin-right: 6px;
+}
+
+.Icon svg {
+    width: 18px;
+    height: 18px;
+}

@@ -14,6 +14,7 @@ import Cancel from './cancel';
 import CheckmarkNoBg from './checkmark-nobg';
 import Menu from './menu';
 import User from './user';
+import Private from './private';
 
 import BlackBorderlessLogo from '../images/servify-logos/blackborder-nobg';
 
@@ -35,5 +36,6 @@ export {
     Cancel,
     CheckmarkNoBg,
     Menu,
-    User
+    User,
+    Private
 };
