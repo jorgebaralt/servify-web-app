@@ -69,13 +69,14 @@ const renderNavigationItems = (props) => {
 				</>
 			);
 		case 'PublishNavbar':
+			console.log(props.history);
 			return (
 				<>
 					{props.width < 1121 ? 
 						null : 
 						<>
 							<div className={classes.Spacing} />
-							<NavigationItem className={props.className} onClick={() => props.history.goBack()} {...props} link="/" color="white" >
+							<NavigationItem className={props.className} onClick={props.history.goBack} {...props} link="/" color="white" >
 								Go back
 							</NavigationItem>
 						</>
@@ -111,7 +112,7 @@ const renderNavigationItems = (props) => {
 						<>
 							<div className={classes.Spacing} />
 							<NavAuthButtons {...props} color="white" /> 
-							<NavigationItem className={props.className} onClick={() => props.history.goBack()} {...props} link="/" color="white" >
+							<NavigationItem className={props.className} onClick={props.history.goBack} {...props} link="/" color="white" >
 								Go back
 							</NavigationItem>
 						</>

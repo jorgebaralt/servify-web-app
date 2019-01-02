@@ -14,8 +14,7 @@ const service = (props) => {
             <Link draggable="false" to={props.href ? props.href : '/services/notfound'} className={classes.Wrapper} target="_blank">
                 <div className={classes.ThumbnailWrapper}>
                     <div className={classes.ThumbnailContainer}>
-                        {/* <div className={classes.Thumbnail} style={{backgroundImage: `url(${props.image})`}} /> */}
-                        <ImageFadeIn className={classes.Thumbnail} src={props.image} />
+                        <ImageFadeIn draggable="false" className={classes.Thumbnail} src={props.image} />
                     </div>
                 </div>
             </Link>

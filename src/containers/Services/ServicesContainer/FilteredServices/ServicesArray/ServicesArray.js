@@ -6,7 +6,7 @@ import Service from '../../../../../components/Services/Service/Service';
 
 const services = () => {
     const services = [];
-    // PLACEHOLDER
+    // TODO DEAL WITH LACEHOLDER
     for (let i = 0; i < 20; i++) {
         services.push(i);
     }

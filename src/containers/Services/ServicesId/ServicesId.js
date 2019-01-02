@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 // CSS
-import classes from './ServiceId.module.css'
+import classes from './ServicesId.module.css'
 // JSX
 import PhotosCarousel from '../../../components/UI/PhotosCarousel/PhotosCarousel';
 import Map, { setMapboxAccessToken, setInitialMapboxPosition } from '../../../components/UI/Map/Map';
 import SVG from '../../../components/SVG/SVG';
-import InfoPoint from './InfoPoint/InfoPoint';
-import InfoSection from './InfoSection/InfoSection';
-import Rating from '../../../components/UI/Rating/Rating';
-import Review from './Review/Review';
+import Review from '../../../components/Services//Review/Review';
 import Carousel from '../../../components/UI/Carousel/Carousel';
 import Service from '../../../components/Services/Service/Service'
+import Rating from '../../../components/UI/Rating/Rating';
+import InfoPoint from '../../../components/Services/InfoPoint/InfoPoint';
+import InfoSection from '../../../components/Services//InfoSection/InfoSection';
 
 // Mapbox Geocoding
 setMapboxAccessToken();
 
-class ServiceId extends Component {
+class ServicesId extends Component {
 
     constructor (props) {
         super(props);
@@ -179,40 +179,40 @@ class ServiceId extends Component {
                         <div className={classes.CarouselContainer}>
                             <Carousel>
                                 <Service
-                                            header='Plumbing'
-                                            title='A Toilet'
-                                            priceRating='0.75'
-                                            ratingAvg={0.17}
-                                            ratingAmount='1537'
-                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                    header='Plumbing'
+                                    title='A Toilet'
+                                    priceRating='0.75'
+                                    ratingAvg={0.17}
+                                    ratingAmount='1537'
+                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                                 <Service
-                                            header='Plumbing'
-                                            title='A Toilet'
-                                            priceRating='0.75'
-                                            ratingAvg={0.17}
-                                            ratingAmount='1537'
-                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                    header='Plumbing'
+                                    title='A Toilet'
+                                    priceRating='0.75'
+                                    ratingAvg={0.17}
+                                    ratingAmount='1537'
+                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                                 <Service
-                                            header='Plumbing'
-                                            title='A Toilet'
-                                            priceRating='0.75'
-                                            ratingAvg={0.17}
-                                            ratingAmount='1537'
-                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                    header='Plumbing'
+                                    title='A Toilet'
+                                    priceRating='0.75'
+                                    ratingAvg={0.17}
+                                    ratingAmount='1537'
+                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                                 <Service
-                                            header='Plumbing'
-                                            title='A Toilet'
-                                            priceRating='0.75'
-                                            ratingAvg={0.17}
-                                            ratingAmount='1537'
-                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                    header='Plumbing'
+                                    title='A Toilet'
+                                    priceRating='0.75'
+                                    ratingAvg={0.17}
+                                    ratingAmount='1537'
+                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                                 <Service
-                                            header='Plumbing'
-                                            title='A Toilet'
-                                            priceRating='0.75'
-                                            ratingAvg={0.17}
-                                            ratingAmount='1537'
-                                            image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                    header='Plumbing'
+                                    title='A Toilet'
+                                    priceRating='0.75'
+                                    ratingAvg={0.17}
+                                    ratingAmount='1537'
+                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                             </Carousel>
                         </div>
                     </div>
@@ -222,4 +222,4 @@ class ServiceId extends Component {
     }
 }
 
-export default ServiceId;
+export default ServicesId;

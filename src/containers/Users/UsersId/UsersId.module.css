@@ -1,0 +1,118 @@
+.Container {
+    display: flex;
+    margin: 0 auto;
+    background-color: transparent;
+    padding: 28px 24px 18px;
+    max-width: 1220px;
+}
+
+.Container h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #484848;
+    user-select: none;
+    margin-bottom: 26px;
+}
+
+.ProfileWrapper {
+    flex: 0 0 25%;
+    padding: 20px 12px;
+    position: relative;
+}
+
+.ProfileContainer {
+    position: sticky;
+    top: 24px;
+    left: 0;
+}
+
+.ProfilePhoto {
+    user-select: none;
+    width: 100%;
+    height: 250px;
+    border: 1px solid #E0E0E0;
+    background-color: #EDEFED;
+}
+
+.ContentWrapper {
+    flex: auto;
+    padding: 20px 12px;
+    margin: 0 36px;
+}
+
+.Title {
+    user-select: none;
+    color: #484848;
+    margin: 6px 0;
+    font-size: 62px;
+    font-weight: normal;
+}
+
+.JoinDate {
+    user-select: none;
+    color: #484848;
+    margin: 6px 0;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+.ReviewsWrapper {
+    margin: 0 auto;
+}
+
+.ReviewsContainer {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    margin-top: auto;   
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.ReviewsContainer span {
+    margin: 0 1ch;
+    font-size: 22px;
+    font-weight: 400;
+    color: #484848;
+}
+
+.Reviews {
+    user-select: none;  
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 600;
+    background: linear-gradient(-135deg, #339f85 55%, #23bd99 55%, #23bd99 100%);
+    border-radius: 6px;
+    padding: 4px 8px;
+    min-width: 48px;
+}
+
+.ServicesWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.ServicesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: left;
+}
+
+.Service {
+    flex: 1 0 22.5%;
+    margin: 0 5px;
+    height: 100%;
+    flex-grow: 0;
+}
+
+@media (max-width: 460px) {
+    .Service {
+        flex: 1 0 46.5%;
+    }
+}

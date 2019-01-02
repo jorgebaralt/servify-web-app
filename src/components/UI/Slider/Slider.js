@@ -111,55 +111,63 @@ class Slider extends Component {
     }
 
     render() {
+        console.log(!this.props.children.length)
         let PrevButton;
         let NextButton;
         if (this.props.buttons) {
             PrevButton = this.props.buttons.prev;
             NextButton = this.props.buttons.next;
         }
-        const children = Object.keys(this.props.children).map( children => {
-            return (
-                <SlideContainer key={children} style={this.state.style}>
-                    {this.props.children[children]}
-                    {this.props.buttons ?
-                        <div className={this.props.buttons.className}>
-                            {React.cloneElement( // Cloning buttons to pass onTranslateHandler
-                                PrevButton, 
-                                {
-                                    clicked: () => {
-                                        this.props.buttons.onClick.prev();
-                                        this.onTranslateHandler('prev')
-                                    },
-                                    totalSlides: this.props.children.length,
-                                    activeSlide: this.state.activeSlide
-                                }
-                            )}
-                            {React.cloneElement( // Cloning buttons to pass onTranslateHandler
-                                NextButton, 
-                                {
-                                    clicked: () => {
-                                        this.props.buttons.onClick.next();
-                                        this.onTranslateHandler('next')
-                                    },
-                                    totalSlides: this.props.children.length,
-                                    activeSlide: this.state.activeSlide
-                                }
-                            )}
-                        </div>
-                    : null}
+        const children = (
+            this.props.children.length ? 
+                Object.keys(this.props.children).map( children => {
+                    return (
+                        <SlideContainer key={children} style={this.state.style}>
+                            {this.props.children[children]}
+                            {this.props.buttons ?
+                                <div className={this.props.buttons.className}>
+                                    {React.cloneElement( // Cloning buttons to pass onTranslateHandler
+                                        PrevButton, 
+                                        {
+                                            clicked: () => {
+                                                this.props.buttons.onClick.prev();
+                                                this.onTranslateHandler('prev')
+                                            },
+                                            totalSlides: this.props.children.length,
+                                            activeSlide: this.state.activeSlide
+                                        }
+                                    )}
+                                    {React.cloneElement( // Cloning buttons to pass onTranslateHandler
+                                        NextButton, 
+                                        {
+                                            clicked: () => {
+                                                this.props.buttons.onClick.next();
+                                                this.onTranslateHandler('next')
+                                            },
+                                            totalSlides: this.props.children.length,
+                                            activeSlide: this.state.activeSlide
+                                        }
+                                    )}
+                                </div>
+                            : null}
+                        </SlideContainer>
+                    );
+                })
+                : 
+                <SlideContainer style={this.state.style}>
+                    {this.props.children}
                 </SlideContainer>
-            );
-        });
+        );
         return (
             <div ref={this.mySlider} className={classes.Wrapper}>
                 {children}
-                {this.props.buttons ? 
+                {this.props.buttons || !this.props.children.length ? 
                     null :
                     <SliderButtons 
                         totalSlides={this.props.children.length}
                         activeSlide={this.state.activeSlide} 
                         onClick={this.onTranslateHandler} />}
-                {this.props.disableNav ? 
+                {this.props.disableNav || !this.props.children.length ? 
                     null :
                     <SliderNav
                         activeSlide={this.state.activeSlide}

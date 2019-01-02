@@ -3,9 +3,9 @@ import React from 'react';
 import classes from './Review.module.css';
 // JSX
 import { NavLink } from 'react-router-dom';
-import Rating from '../../../../components/UI/Rating/Rating';
+import Rating from '../../../components/UI/Rating/Rating';
 // Default Image
-import defaultImage from '../../../../assets/favicon/android-icon-48x48.png'
+import defaultImage from '../../../assets/favicon/android-icon-48x48.png';
 
 const review = (props) => {
     return (

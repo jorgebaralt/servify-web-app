@@ -13,9 +13,10 @@ import Contact from './containers/Contact/Contact';
 import Publish from './containers/Publish/Publish';
 import PublishOverview from './containers/Publish/PublishOverview/PublishOverview';
 import Services from './containers/Services/Services';
-import Users from './containers/Users/Users';
-import ServiceId from './containers/Services/ServiceId/ServiceId';
+import Edit from './containers/Users/Edit/Edit';
+import ServicesId from './containers/Services/ServicesId/ServicesId';
 import NoMatch from './containers/NoMatch/NoMatch';
+import UsersId from './containers/Users/UsersId/UsersId';
 
 class App extends Component {
 	
@@ -36,9 +37,10 @@ class App extends Component {
 					<Route exact path="/contact" component={Contact} />
 					<Route exact path="/publish" component={Publish} />
 					<Route exact path="/publish/overview" component={PublishOverview} />
-					<Route exact path="/services/:id" component={ServiceId} />
 					<Route exact path="/services" component={Services} />
-					<Route path="/users" component={Users} />
+					<Route exact path="/services/:id" component={ServicesId} />
+					<Route exact path="/users/edit" component={Edit} />
+					<Route exact path="/users/:id" component={UsersId} />
 					<Route exact path="/" component={Landing} />
                     <Route path="*" component={NoMatch} />
 				</Switch>

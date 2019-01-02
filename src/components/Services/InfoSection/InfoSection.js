@@ -2,7 +2,7 @@ import React from 'react';
 // CSS
 import classes from './InfoSection.module.css';
 // Logo
-import defaultLogo from '../../../../assets/favicon/apple-icon-72x72.png'
+import defaultLogo from '../../../assets/favicon/android-icon-72x72.png'
 
 const infoSection = (props) => {
     return (

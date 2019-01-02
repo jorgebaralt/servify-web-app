@@ -4,6 +4,7 @@ import { checkValidity } from '../../../shared/checkValidity';
 // CSS
 import classes from './Edit.module.css';
 // JSX
+import Layout from '../../../hoc/Users/Layout/Layout';
 import Input from '../../../components/UI/Input/Input';
 import Panel from '../../../components/UI/Panel/Panel';
 import Button from '../../../components/UI/Button/Button';
@@ -106,7 +107,7 @@ class Edit extends Component {
     render () {
         const formElementsArray = Object.entries(this.state.controls);
         return (
-            <>
+            <Layout>
                 <Panel header='Account Details'>
                     <div className={classes.JoinDate}>
                         Member since: <span>December 2018</span>
@@ -145,7 +146,7 @@ class Edit extends Component {
                     <Button style={{fontSize: '21px'}} disabled={!this.state.formIsValid} type='primary' blockButton={true}>Save</Button>
                     </form>
                 </Panel>
-            </>
+            </Layout>
         );
     }
 }
