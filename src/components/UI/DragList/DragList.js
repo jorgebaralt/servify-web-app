@@ -46,6 +46,8 @@ class DragList extends PureComponent {
 
     getListStyle = isDraggingOver => ({
         display: 'flex',
+        position: this.props.direction === 'vertical' ? 'sticky' : null,
+        top: this.props.direction === 'vertical' ? '48px' : null,
         flex: this.props.direction === 'vertical' ? 'auto' : null,
         flexFlow: this.props.direction === 'vertical' ? 'column' : 'row',
         order: this.props.direction === 'vertical' ? '-1' : null,

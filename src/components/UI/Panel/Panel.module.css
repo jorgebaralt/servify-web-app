@@ -20,3 +20,9 @@
     background-color: #FFF;
     border-radius: 0;
 }
+
+@media (max-width: 744px) {
+    .Body {
+        padding: 3px 8px;
+    }
+}

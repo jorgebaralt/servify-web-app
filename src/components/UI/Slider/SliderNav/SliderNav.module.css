@@ -4,6 +4,12 @@
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    margin: 30px auto;
+    margin: 12px auto;
     bottom: 0;
+}
+
+@media (min-width: 744px) {
+    .SliderNavWrapper {
+        margin: 30px auto;
+    }
 }

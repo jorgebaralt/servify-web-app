@@ -44,13 +44,25 @@
 .SliderContainer {
     height: 100%;
     width: 100%;
-    padding: 10px 16px;
+    padding: 10px 0px 10px 16px;
+}
+
+@media screen and (orientation:portrait) {
+    .SliderContainer {
+        padding: 10px 0 10px 8px;
+    }
 }
 
 .Slider {
     min-height: 125px;
     height: 66.6666vh;
     width: 100%;
+}
+
+@media screen and (orientation:portrait) {
+    .Slider {
+        height: 125px;
+    }
 }
 
 .Instructions {
