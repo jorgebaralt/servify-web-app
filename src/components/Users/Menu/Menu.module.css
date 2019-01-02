@@ -19,6 +19,12 @@
     background-color: #EDEFED;
 }
 
+@media (max-width: 866px) {
+    .ProfilePhoto img {
+        object-fit: fill !important;
+    }
+}
+
 .Nav {
     width: 100%;
     margin: 0;

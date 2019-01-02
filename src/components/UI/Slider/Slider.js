@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactResizeDetector from 'react-resize-detector';
 // CSS
 import classes from './Slider.module.css';
 // JSX
@@ -111,7 +112,6 @@ class Slider extends Component {
     }
 
     render() {
-        console.log(!this.props.children.length)
         let PrevButton;
         let NextButton;
         if (this.props.buttons) {
@@ -159,7 +159,8 @@ class Slider extends Component {
                 </SlideContainer>
         );
         return (
-            <div ref={this.mySlider} className={classes.Wrapper}>
+            <div ref={this.mySlider} className={classes.Wrapper} style={this.props.style}>
+                <ReactResizeDetector handleWidth handleHeight onResize={this.setupWidth} />
                 {children}
                 {this.props.buttons || !this.props.children.length ? 
                     null :

@@ -17,3 +17,18 @@
     flex: auto;
     padding: 20px 12px;
 }
+
+@media (max-width: 866px) {
+    .Container {
+        flex-flow: column;
+    }
+}
+
+@media (max-width: 744px) {
+    .ContentWrapper {
+        padding: 20px 4px;
+    }
+    .Container {
+        padding: 28px 4px 18px;
+    }
+}

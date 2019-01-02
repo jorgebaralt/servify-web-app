@@ -5,7 +5,7 @@
     background-color: unset;
     width: 17px;
     height: 17px;
-    margin: 0 17px;
+    margin: 0 auto;
     transition: background-color ease 200ms;
 }
 
