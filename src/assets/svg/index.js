@@ -15,6 +15,9 @@ import CheckmarkNoBg from './checkmark-nobg';
 import Menu from './menu';
 import User from './user';
 import Private from './private';
+import SingleImage from './single-image';
+import MultiImage from './multi-image';
+import Delete from './delete';
 
 import BlackBorderlessLogo from '../images/servify-logos/blackborder-nobg';
 
@@ -37,5 +40,8 @@ export {
     CheckmarkNoBg,
     Menu,
     User,
-    Private
+    Private,
+    SingleImage,
+    MultiImage,
+    Delete
 };

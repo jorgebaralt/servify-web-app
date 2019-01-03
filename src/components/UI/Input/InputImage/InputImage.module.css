@@ -1,0 +1,89 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 500px;
+    position: relative;
+}
+
+.Buttons {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+input[type=file].Input {
+    display: none;
+    visibility: hidden;
+    position: absolute;
+}
+
+.Delete {
+    position: relative;
+    top: 6px;
+    right: 12px;
+    color: #484848;
+}
+
+.Delete,
+.Delete path {
+    font-size: 1.5em !important;
+}
+
+.Delete svg {
+    filter: drop-shadow(1px 1px 1px #999)
+}
+
+.Button svg, .Delete svg {
+    filter: drop-shadow(3px 3px 3px #999);
+    transition: 0.3s;
+    transform: rotate(-0.2deg)
+}
+
+.Button svg:hover, .Delete svg:hover {
+    filter: drop-shadow(4px 4px 4px #999);
+    transform: rotate(-0.6deg);
+    cursor: pointer
+}
+
+.Image {
+    user-select: none;
+    max-height: 420px;
+    max-width: 420px;
+    padding: 10px;
+    border: 1px dashed #999;
+}
+
+.Icon {
+    cursor: pointer;
+    display: inline-block;
+    font-size: inherit;
+    height: 1em;
+    width: 1em;
+    overflow: visible;
+    vertical-align: -.125em;
+    font-size: 10em;
+}
+
+.Icon path {
+    font-size: 10em;
+}
+
+.FadeIn {
+    animation: FadeIn ease 500ms;
+}
+
+@keyframes FadeIn {
+    0% {
+        opacity: 0;
+    }
+    66% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1
+    }
+}

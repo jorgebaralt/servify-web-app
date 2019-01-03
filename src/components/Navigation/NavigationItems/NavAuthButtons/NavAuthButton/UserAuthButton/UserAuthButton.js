@@ -40,25 +40,23 @@ class UserButton extends Component {
 
     render () {
         const list = (
-            <li>
-                <ul className={classes.ListWrapper}>
-                    <Link to="/users/show">
-                        <li onClick={this.props.onClick} className={classes.ListItem}>View Profile</li>
-                    </Link>
-                    <Link to="/users/publications">
-                        <li onClick={this.props.onClick} className={classes.ListItem}>Check Publications</li>
-                    </Link>
-                    <Link to="/users/edit">
-                        <li onClick={this.props.onClick} className={classes.ListItem}>Edit Profile</li>
-                    </Link>
-                    <Link to="/users/settings">
-                        <li onClick={this.props.onClick} className={classes.ListItem}>Give us some feedback</li>
-                    </Link>
-                    <Link to="/users/signout">
-                        <li onClick={this.props.onClick} className={classes.ListItem}>Sign out</li>
-                    </Link>
-                </ul>
-            </li>
+            <ul className={classes.ListWrapper}>
+                <Link to="/users/show">
+                    <li onClick={this.props.onClick} className={classes.ListItem}>View Profile</li>
+                </Link>
+                <Link to="/users/publications">
+                    <li onClick={this.props.onClick} className={classes.ListItem}>Check Publications</li>
+                </Link>
+                <Link to="/users/edit">
+                    <li onClick={this.props.onClick} className={classes.ListItem}>Edit Profile</li>
+                </Link>
+                <Link to="/users/settings">
+                    <li onClick={this.props.onClick} className={classes.ListItem}>Give us some feedback</li>
+                </Link>
+                <Link to="/users/signout">
+                    <li onClick={this.props.onClick} className={classes.ListItem}>Sign out</li>
+                </Link>
+            </ul>
         );
         const widescreen = (
             <li className={[this.props.className, classes.Anchor].join(' ')} >

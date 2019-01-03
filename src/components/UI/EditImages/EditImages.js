@@ -41,7 +41,7 @@ const editImages = (props) => {
             <div className={classes.Instructions}>
                 You can move the image thumbnails above 
                 {props.direction === 'horizontal' ? ' left or right ' : ' up or down '} 
-                to change the order on which they will be displayed.
+                to change the order on which the images will be displayed.
                 <span className={classes.MobileInstructions}>If on mobile, leave your finger on the thumbnail to change the position.</span>
             </div>
         </div>

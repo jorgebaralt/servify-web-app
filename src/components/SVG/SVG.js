@@ -71,6 +71,15 @@ class SVGComponent extends PureComponent {
             case 'private':
                 svg = <SVG.Private {...this.props} />;
                 break;
+            case 'single-image':
+                svg = <SVG.SingleImage {...this.props} />;
+                break;
+            case 'multi-image':
+                svg = <SVG.MultiImage {...this.props} />;
+                break;
+            case 'delete':
+                svg = <SVG.Delete {...this.props} />;
+                break;
             case 'underline':
                 svg = <div style={this.props.style}>
                         {this.randomUnderline(Underlines)(this.props)}

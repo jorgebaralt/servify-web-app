@@ -12,7 +12,7 @@ import Separator from '../../../components/UI/Separator/Separator';
 import EditImages, { setItems } from '../../../components/UI/EditImages/EditImages';
 import SVG from '../../../components/SVG/SVG';
 import ImageFadeIn from '../../../components/UI/ImageFadeIn/ImageFadeIn';
-import { Slider, Slide } from '../../../components/UI/Slider/';
+import InputImage from '../../../components/UI/Input/InputImage/InputImage';
 
 class Edit extends Component {
     constructor(props) {
@@ -169,6 +169,7 @@ class Edit extends Component {
                         <Button style={{fontSize: '21px'}} disabled={!this.state.formIsValid} type='primary' blockButton={true}>Save</Button>
                     </form>
                 </Panel>
+                <InputImage />
             </Layout>
         );
     }
