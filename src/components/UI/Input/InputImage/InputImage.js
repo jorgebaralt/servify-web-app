@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 // CSS
 import classes from './InputImage.module.css';
 // JSX
@@ -40,7 +40,7 @@ const Images = (props) => {
     );
 }
 
-class InputImage extends Component {
+class InputImage extends PureComponent {
     constructor(props) {
         super(props);
         this.mySingleFile = React.createRef();
@@ -91,6 +91,10 @@ class InputImage extends Component {
         })
         return formData;
     }
+
+    componentDidUpdate () {
+        this.props.onChange(this.getFormData());
+    }
     
     render() {
         const { uploading, images } = this.state;
@@ -109,11 +113,16 @@ class InputImage extends Component {
             }
         }
         return (
-            <div className={classes.Container}>
-                <div className={classes.Buttons}>
-                    {render()}
+            <>
+                <div className={classes.Title}>
+                    <div>Image Upload</div>
                 </div>
-            </div>
+                <div className={classes.Container}>
+                    <div className={classes.Buttons}>
+                        {render()}
+                    </div>
+                </div>
+            </>
         );
     }
 }

@@ -1,9 +1,32 @@
+.Title {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.Title div {
+    width: 20%;
+    color: #585858;
+    text-align: right;
+    padding: 0 21px;
+    margin: 18px 0;
+    user-select: none;
+}
+
 .Container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     min-height: 500px;
+    padding: 12px 24px;
+    border-radius: 4px;
+    border: 1px solid rgba(72,72,72,0.3333);
     position: relative;
+    margin: 0 0 18px;
+}
+
+.Container:focus-within {
+    border: 1px solid #1ea3cc;
 }
 
 .Buttons {
@@ -34,12 +57,13 @@ input[type=file].Input {
 }
 
 .Delete svg {
-    filter: drop-shadow(1px 1px 1px #999)
+    filter: drop-shadow(1px 1px 1px #999);
+    transition: filter ease 300ms;
 }
 
 .Button svg, .Delete svg {
     filter: drop-shadow(3px 3px 3px #999);
-    transition: 0.3s;
+    transition: filter ease 300ms;
     transform: rotate(-0.2deg)
 }
 
@@ -55,6 +79,20 @@ input[type=file].Input {
     max-width: 420px;
     padding: 10px;
     border: 1px dashed #999;
+}
+
+@media (max-width: 600px), (max-height: 600px) {
+    .Image {
+        max-height: 320px;
+        max-width: 320px;
+    }
+}
+
+@media (max-width: 480px), (max-height: 480px) {
+    .Image {
+        max-height: 230px;
+        max-width: 230px;
+    }
 }
 
 .Icon {

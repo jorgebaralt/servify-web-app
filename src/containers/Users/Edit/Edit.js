@@ -18,7 +18,7 @@ class Edit extends Component {
     constructor(props) {
         super(props);
         // TODO remove placeholder
-        const listItems = [
+        const listImages = [
             <ImageFadeIn draggable="false" src='https://images.unsplash.com/photo-1531817506236-027915e5b07d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80' />,
             <ImageFadeIn draggable="false" src='https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80' />,
             <ImageFadeIn draggable="false" src='https://images.unsplash.com/photo-1519781542704-957ff19eff00?ixlib=rb-1.2.1&auto=format&fit=crop&w=1146&q=80' />,
@@ -37,7 +37,7 @@ class Edit extends Component {
                         spellCheck:"false"
                     },
                     value: 'First Name', // TODO Fetch data from database
-                    valueType: 'text',
+                    valueType: 'first name',
                     validation: {
                         required: true
                     },
@@ -57,7 +57,7 @@ class Edit extends Component {
                         spellCheck:"false"
                     },
                     value: 'Last Name', // TODO Fetch data from database
-                    valueType: 'text',
+                    valueType: 'last name',
                     validation: {
                         required: true
                     },
@@ -87,9 +87,10 @@ class Edit extends Component {
                     style: {margin: 0}
                 },
             },
+            images: setItems(listImages), // current images
+            imageFiles: null, // to be uploaded
             formIsValid: true,
         };
-        this.state.items = setItems(listItems);
     }
 
     inputChangeHandler = (event, inputIdentifier) => {
@@ -113,10 +114,16 @@ class Edit extends Component {
         });
     }
 
-    updateItems = (items) => {
+    inputImageChangeHandler = (files) => {
+        this.setState({
+            imageFiles: files, 
+        });
+    }
+
+    updateImages = (images) => {
         this.setState( () => {
             return {
-                items: items
+                images: images
             }
         })
     }
@@ -164,12 +171,13 @@ class Edit extends Component {
                                 </div>
                             );
                         })}
-                        <EditImages direction='vertical' updateItems={this.updateItems} items={this.state.items} />
+                        <EditImages direction='vertical' updateItems={this.updateImages} items={this.state.images} />
+                        <Separator />
+                        <InputImage onChange={this.inputImageChangeHandler} onSubmit={this.onSubmitHandler} />
                         <Separator />
                         <Button style={{fontSize: '21px'}} disabled={!this.state.formIsValid} type='primary' blockButton={true}>Save</Button>
                     </form>
                 </Panel>
-                <InputImage />
             </Layout>
         );
     }

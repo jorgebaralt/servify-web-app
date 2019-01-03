@@ -98,10 +98,29 @@
 }
 
 .ServicesContainer {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: left;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+    grid-column-gap: 30px;
+    grid-row-gap: 20px;
+}
+
+@media (max-width: 920px) {
+    .ServicesContainer {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 744px) {
+    .ServicesContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .ServicesContainer {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
 
 .Service {
