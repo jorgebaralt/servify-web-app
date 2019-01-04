@@ -28,7 +28,7 @@ class LearnMore extends Component {
 
     render () {
         const earnMoney = <span key='price'>Earn money</span>;
-        let offer = [earnMoney, ' by hosting your services in Servify!'];
+        let offer = [earnMoney, ' by hosting your services on Servify!'];
         if (this.props.state && this.props.city) {
             offer = [earnMoney, ` by hosting your services near ${this.props.city},  ${this.props.state}`];
         }

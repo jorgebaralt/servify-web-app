@@ -33,7 +33,7 @@ const Buttons = (props) => {
 const Images = (props) => {
     return (
         props.images.map((image, i) =>
-            <div key={i} className={classes.FadeIn}>
+            <div key={i} className={[classes.ImageWrapper,classes.FadeIn].join(' ')}>
                 <div onClick={() => props.removeImage(image.public_id)} 
                     className={classes.Delete}>
                     <SVG svg='delete' className={[classes.Icon, classes.Delete].join(' ')} size='2x' />
@@ -63,7 +63,6 @@ class InputImage extends Component {
     }
 
     onChange = (e) => {
-        console.log('onChange');
         // #1 There are too many files!
         if (e.target.files.length > 5) {
             const msg = 'Only 5 images can be uploaded at a time';
@@ -132,7 +131,6 @@ class InputImage extends Component {
     }
     
     render() {
-        console.log('render')
         const { uploading, images } = this.state;
         const render = () => {
             switch(true) {
@@ -150,20 +148,20 @@ class InputImage extends Component {
         }
         return (
             <>
-                <ToastContainer
-                position="bottom-left"
-                autoClose={6000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl
-                pauseOnVisibilityChange
-                draggable
-                pauseOnHover />
                 <div className={classes.Title}>
                     <div>Image Upload</div>
                 </div>
                 <div className={classes.Container}>
+                    <ToastContainer
+                        position="top-left"
+                        autoClose={6000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl
+                        pauseOnVisibilityChange
+                        draggable
+                        pauseOnHover />
                     <div className={classes.Buttons}>
                         {render()}
                     </div>

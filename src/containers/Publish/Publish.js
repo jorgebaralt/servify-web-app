@@ -12,6 +12,7 @@ import StepOne from './Steps/StepOne/StepOne';
 import StepTwo from './Steps/StepTwo/StepTwo';
 import StepThree from './Steps/StepThree/StepThree';
 import StepFour from './Steps/StepFour/StepFour';
+import StepFive from './Steps/StepFive/StepFive';
 
 const categoriesDatalist = categories.map( (category) => {
     return {
@@ -118,7 +119,7 @@ class Publish extends Component {
         }
         return (
             <div className={classes.Wrapper}>
-                <Slider disableNav buttons={buttons} >
+                <Slider disableNav buttons={buttons}>
                     <Slide>
                         <StepOne activeStep={activeStep} stepKey={1} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>
@@ -130,6 +131,9 @@ class Publish extends Component {
                     </Slide>
                     <Slide>
                         <StepFour activeStep={activeStep} stepKey={4} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
+                    </Slide>
+                    <Slide>
+                        <StepFive activeStep={activeStep} stepKey={5} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>
                 </Slider>
             </div>

@@ -3,20 +3,27 @@ import geo from 'mapbox-geocoding';
 // CSS
 import classes from './Map.module.css';
 // JSX
+import { ToastContainer, toast } from 'react-toastify';
 import ReactMapboxGl, { Layer, Feature, Marker , ZoomControl, ScaleControl, Popup } from "react-mapbox-gl";
 import SVG from '../../SVG/SVG';
 
-const mapboxPKey = "pk.eyJ1Ijoicm9iZXJ0MDMxMCIsImEiOiJjam5mZjlzZnQwazhuM3BwN283b3Q0ZDFqIn0.xxJ6Db0UXKmKp3_Z6I_low";
+const mapboxPKey = "pk.eyJ1Ijoicm9iZXJ0MDMxMCIsImEiOiJjanFpZjNmZnMwZzFqNDJyMGdmaTJwYWtpIn0.bUv0BRK5nRmmYMp61buDUg";
 
 // Mapbox Geocoding
 export const setMapboxAccessToken = () => {
     geo.setAccessToken(mapboxPKey);
 }
 
+export const defaultAddress = 'Orlando 32810 Florida USA';
+
 // Set Initial Position
 export const setInitialMapboxPosition = (address, fn) => {
     return (
         geo.geocode('mapbox.places', address, (err, geoData) => {
+            if (err) {
+                console.log('ping', err)
+                toast.error(err);
+            }
             const map = {
                 geoData: geoData,
                 initialPosition: geoData.features[0].center
@@ -30,6 +37,15 @@ export const setInitialMapboxPosition = (address, fn) => {
 export const setAddress = (address, fn) => {
     return (
         geo.geocode('mapbox.places', address, (err, geoData) => {
+            if (err) {
+                console.log('ping', err);
+                toast.error(err);
+            }
+            if (geoData) {
+                if (!geoData.features.length > 0) {
+                    toast.error('No address was found');
+                }
+            }
             const map = {
                 geoData: geoData
             }
@@ -61,6 +77,16 @@ const map = (props) => {
     }
     return (
         <div style={style} className={mapClasses.join(' ')}>
+            <ToastContainer
+                position="top-left"
+                autoClose={6000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl
+                pauseOnVisibilityChange
+                draggable
+                pauseOnHover />
             {/* Prevent Map from loading until the initial position */}
             {props.map.initialPosition !== null ? 
                 <Map style="mapbox://styles/mapbox/streets-v9"

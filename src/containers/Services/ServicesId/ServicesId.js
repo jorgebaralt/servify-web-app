@@ -4,7 +4,7 @@ import axios from 'axios';
 import classes from './ServicesId.module.css'
 // JSX
 import PhotosCarousel from '../../../components/UI/PhotosCarousel/PhotosCarousel';
-import Map, { setMapboxAccessToken, setInitialMapboxPosition } from '../../../components/UI/Map/Map';
+import Map, { setMapboxAccessToken, setInitialMapboxPosition, defaultAddress } from '../../../components/UI/Map/Map';
 import SVG from '../../../components/SVG/SVG';
 import Review from '../../../components/Services//Review/Review';
 import Carousel from '../../../components/UI/Carousel/Carousel';
@@ -13,14 +13,12 @@ import Rating from '../../../components/UI/Rating/Rating';
 import InfoPoint from '../../../components/Services/InfoPoint/InfoPoint';
 import InfoSection from '../../../components/Services//InfoSection/InfoSection';
 
-// Mapbox Geocoding
-setMapboxAccessToken();
-
 class ServicesId extends Component {
-
     constructor (props) {
         super(props);
         this.myGallery = React.createRef();
+        // Mapbox Geocoding
+        setMapboxAccessToken();
     }
 
     state = {
@@ -47,7 +45,12 @@ class ServicesId extends Component {
     }
 
     setInitialPosition = (position) => {
-        const address = [position.data.city, position.data.postal, position.data.region, position.data.country].join(' ');
+        let address;
+        if (position) {
+            address = [position.data.city, position.data.postal, position.data.region, position.data.country].join(' ');
+        } else {
+            address = defaultAddress;
+        }
         setInitialMapboxPosition(address, (nextMapState) => {
             this.setState( (prevState) => {
                 return {
@@ -59,14 +62,13 @@ class ServicesId extends Component {
             })
         });
     }
-
-    componentWillMount () {
+    
+    componentDidMount () {
         axios.get('http://ipinfo.io').then(
             (response) => this.setInitialPosition(response)
+        ).catch(
+            () => this.setInitialPosition()
         );
-    }
-
-    componentDidMount () {
         this.setGalleryDimensions();
         window.onresize = () => {
             this.setGalleryDimensions();

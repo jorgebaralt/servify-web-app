@@ -38,9 +38,12 @@ class App extends Component {
 					<Route exact path="/publish" component={Publish} />
 					<Route exact path="/publish/overview" component={PublishOverview} />
 					<Route exact path="/services" component={Services} />
+					<Route exact path="/services/edit/:id" component={ServicesId} />
 					<Route exact path="/services/:id" component={ServicesId} />
+					<Route exact path="/users/feedback" component={Edit} />
+					<Route exact path="/users/publications" component={Edit} />
 					<Route exact path="/users/edit" component={Edit} />
-					<Route exact path="/users/:id" component={UsersId} />
+					<Route exact path="/users/show" component={UsersId} />
 					<Route exact path="/" component={Landing} />
                     <Route path="*" component={NoMatch} />
 				</Switch>

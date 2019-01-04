@@ -29,6 +29,7 @@
 }
 
 @media (max-width: 1121px) {
+
     .ListWrapper {
         position: relative;
         padding: 0 !important;
@@ -36,9 +37,13 @@
         box-shadow: none;
 
     }
+    .ListItem:hover {
+        border: 0 !important;
+    }
     .ListItem {
+        font-weight: normal;
         border-bottom: none;
-        padding: 10px 22.5px !important;
+        padding: 18px 22.5px !important;
     }
 }
 

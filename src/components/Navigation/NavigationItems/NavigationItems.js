@@ -69,7 +69,6 @@ const renderNavigationItems = (props) => {
 				</>
 			);
 		case 'PublishNavbar':
-			console.log(props.history);
 			return (
 				<>
 					{props.width < 1121 ? 
