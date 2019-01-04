@@ -45,9 +45,9 @@ const Map = ReactMapboxGl({
     interactive: true
 });
 
-const metersToPixelsAtMaxZoom = (meters, latitude) => {
+const metersToPixelsAtMaxZoom = (miles, latitude) => {
     const milesToMeters = 1609.34;
-    return meters*milesToMeters / 0.075 / Math.cos(latitude * Math.PI / 180);
+    return miles*milesToMeters / 0.075 / Math.cos(latitude * Math.PI / 180);
 }
 
 const map = (props) => {

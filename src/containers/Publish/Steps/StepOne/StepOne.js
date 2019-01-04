@@ -13,7 +13,6 @@ class StepOne extends PureComponent {
             category: {
                 elementType: 'select',
                 elementConfig: {
-                    id: 'Publish_Select',
                     label: 'Choose a category type',
                     placeholder: 'Select a category',
                     options: this.props.categoriesDatalist

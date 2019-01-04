@@ -22,7 +22,6 @@ class Container extends Component {
             category: {
                 elementType: 'select',
                 elementConfig: {
-                    id: [this.props.id, 'Landing_Select'].join(' '),
                     placeholder: 'Select a category',
                     options: this.props.categoriesDatalist
                 },

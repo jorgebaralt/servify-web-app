@@ -16,6 +16,7 @@
     "react-scripts": "^2.1.2",
     "react-slick": "^0.23.2",
     "react-swipe": "^6.0.3",
+    "react-toastify": "^4.5.2",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2",
     "slick-carousel": "^1.8.1",

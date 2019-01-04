@@ -1,10 +1,14 @@
 
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+// toast
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // CSS
 import classes from './InputImage.module.css';
 // JSX
 import Spinner from '../../LoadingBounce/LoadingBounce';
 import SVG from '../../../SVG/SVG';
+// import Notifications, { toastCreator, toastInit } from '../../Toast/';
 
 const Buttons = (props) => {
     const buttonsClasses = [classes.Buttons, classes.FadeIn];
@@ -40,7 +44,7 @@ const Images = (props) => {
     );
 }
 
-class InputImage extends PureComponent {
+class InputImage extends Component {
     constructor(props) {
         super(props);
         this.mySingleFile = React.createRef();
@@ -59,6 +63,31 @@ class InputImage extends PureComponent {
     }
 
     onChange = (e) => {
+        console.log('onChange');
+        // #1 There are too many files!
+        if (e.target.files.length > 5) {
+            const msg = 'Only 5 images can be uploaded at a time';
+            e.target.files = null;
+            return toast.error(msg);
+        }
+
+        const errormsg = [];
+        const types = ['image/png', 'image/jpeg', 'image/gif'];
+        Array.from(e.target.files).forEach( (file) => {
+            // #2 Catching wrong file types on the client
+            if (types.every(type => file.type !== type)) {
+                errormsg.push(`'${file.type}' is not a supported format.`)
+            }
+            // #3 Catching files that are too large on the client
+            if (file.size > 500000) {
+                errormsg.push(`'${file.name}' is too large, please pick a smaller file.`)
+            }
+        });
+
+        if (errormsg.length) {
+            return errormsg.forEach(err => toast.error(err));
+        }
+
         const files = Array.from(e.target.files)
             .map( (file, index) => {
                 return {
@@ -67,6 +96,7 @@ class InputImage extends PureComponent {
                 }
             }
         );
+
         this.setState({ 
             images: files,
             files: e.target.files
@@ -92,11 +122,17 @@ class InputImage extends PureComponent {
         return formData;
     }
 
+
     componentDidUpdate () {
         this.props.onChange(this.getFormData());
     }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextState !== this.state || nextProps.children !== this.props.children;
+    }
     
     render() {
+        console.log('render')
         const { uploading, images } = this.state;
         const render = () => {
             switch(true) {
@@ -114,6 +150,16 @@ class InputImage extends PureComponent {
         }
         return (
             <>
+                <ToastContainer
+                position="bottom-left"
+                autoClose={6000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl
+                pauseOnVisibilityChange
+                draggable
+                pauseOnHover />
                 <div className={classes.Title}>
                     <div>Image Upload</div>
                 </div>

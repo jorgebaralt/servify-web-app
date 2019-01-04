@@ -115,6 +115,7 @@ class Edit extends Component {
     }
 
     inputImageChangeHandler = (files) => {
+        console.log('inside inputImageChangeHandler', Array.from(files))
         this.setState({
             imageFiles: files, 
         });
