@@ -41,7 +41,7 @@ class UserButton extends Component {
     render () {
         const list = (
             <ul className={classes.ListWrapper}>
-                <Link to="/users/show">
+                <Link to="/users/show/">
                     <li onClick={this.props.onClick} className={classes.ListItem}>View Profile</li>
                 </Link>
                 <Link to="/users/publications">
@@ -50,7 +50,7 @@ class UserButton extends Component {
                 <Link to="/users/edit">
                     <li onClick={this.props.onClick} className={classes.ListItem}>Edit Profile</li>
                 </Link>
-                <Link to="/users/settings">
+                <Link to="/users/feedback">
                     <li onClick={this.props.onClick} className={classes.ListItem}>Give us some feedback</li>
                 </Link>
                 <Link to="/users/signout">

@@ -75,11 +75,11 @@ class InputImage extends Component {
         Array.from(e.target.files).forEach( (file) => {
             // #2 Catching wrong file types on the client
             if (types.every(type => file.type !== type)) {
-                errormsg.push(`'${file.type}' is not a supported format.`)
+                errormsg.push(`${file.type} is not a supported format.`)
             }
             // #3 Catching files that are too large on the client
             if (file.size > 500000) {
-                errormsg.push(`'${file.name}' is too large, please pick a smaller file.`)
+                errormsg.push(`${file.name} is too large, please pick a smaller file.`)
             }
         });
 

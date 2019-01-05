@@ -48,9 +48,13 @@ class Landing extends Component {
         );
     }
 
-    componentWillMount () {
+    componentDidMount () {
         axios.get('http://ipinfo.io').then(
-            (response) => this.savePosition(response)
+            (response) => {
+                // TODO REMOVE C.LOG
+                console.log(response)
+                this.savePosition(response)
+            }
         );
     }
 

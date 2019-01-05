@@ -13,13 +13,14 @@ import Contact from './containers/Contact/Contact';
 import Publish from './containers/Publish/Publish';
 import PublishOverview from './containers/Publish/PublishOverview/PublishOverview';
 import Services from './containers/Services/Services';
-import Edit from './containers/Users/Edit/Edit';
 import ServicesId from './containers/Services/ServicesId/ServicesId';
-import NoMatch from './containers/NoMatch/NoMatch';
+import Edit from './containers/Users/Edit/Edit';
+import Feedback from './containers/Users/Feedback/Feedback';
+import Publications from './containers/Users/Publications/Publications';
 import UsersId from './containers/Users/UsersId/UsersId';
+import NoMatch from './containers/NoMatch/NoMatch';
 
 class App extends Component {
-	
 	componentWillMount() {
 		this.props.onIsMobile();
 		// TODO fetch popular categories global
@@ -39,9 +40,9 @@ class App extends Component {
 					<Route exact path="/publish/overview" component={PublishOverview} />
 					<Route exact path="/services" component={Services} />
 					<Route exact path="/services/edit/:id" component={ServicesId} />
-					<Route exact path="/services/:id" component={ServicesId} />
-					<Route exact path="/users/feedback" component={Edit} />
-					<Route exact path="/users/publications" component={Edit} />
+					<Route exact path="/services/show/:id" component={ServicesId} />
+					<Route exact path="/users/feedback" component={Feedback} />
+					<Route exact path="/users/publications" component={Publications} />
 					<Route exact path="/users/edit" component={Edit} />
 					<Route exact path="/users/show" component={UsersId} />
 					<Route exact path="/" component={Landing} />

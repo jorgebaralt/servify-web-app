@@ -1,0 +1,116 @@
+.Service {
+    user-select: none;
+    width: 100%;
+    height: 100%;
+    padding-top: 8px;
+    padding-bottom: 12px;
+}
+
+.Wrapper {
+    user-select: none;
+    width: 100%;
+    height: auto;
+    padding-left: 8px;
+    padding-right: 8px;
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    color: rgb(72, 72, 72);
+    text-decoration: none;
+    font-family: inherit;
+}
+
+.ThumbnailWrapper {
+    user-select: none;
+    padding-top: 66.6667%;
+    background-size: 100% 100%;
+    /* Google Chrome */
+    contain: strict;
+    position: relative;
+    width: 100%;
+    z-index: 0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.ThumbnailContainer {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+.Thumbnail {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgb(229, 229, 229);
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    animation-name: FadeIn;
+    animation-duration: 300ms;
+    animation-timing-function: ease-out;
+}
+
+.Details {
+    text-decoration: none;
+    padding: 8px;
+    display: block;
+    color: rgb(72, 72, 72);
+    font-weight: inherit;
+}
+
+.Header {
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: normal;
+    font-family: inherit;
+    text-transform: uppercase;
+    color: rgb(255, 112, 67);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 2px;
+    overflow: hidden;
+}
+
+.Title {
+    font-weight: 800;
+    font-size: 17px;
+    line-height: 21px;
+    max-height: 42px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-bottom: 4px;
+    overflow: hidden;
+}
+
+.Links {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.Link {
+    text-decoration: none;
+    color: #484848;
+    border: 1px solid #989898;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin: 0 6px 12px 0;
+    box-shadow: 1px 1px 2px #DCE0E0;
+    transition: all ease 200ms;
+}
+
+.Link:hover {
+    border-color: rgb(255, 112, 67);
+    color: rgb(255, 112, 67);
+}

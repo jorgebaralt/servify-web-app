@@ -8,7 +8,7 @@ import Map, { setMapboxAccessToken, setInitialMapboxPosition, setAddress, defaul
 import Input from '../../../../components/UI/Input/Input';
 import InputSlider from '../../../../components/UI/Input/InputSlider/InputSlider';
 
-class StepFour extends PureComponent {
+class StepFive extends PureComponent {
     constructor(props) {
         super(props);
         this.myTimer = null;
@@ -192,4 +192,4 @@ class StepFour extends PureComponent {
     }
 }
 
-export default StepFour;
+export default StepFive;
