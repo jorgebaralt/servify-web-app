@@ -140,7 +140,6 @@ class StepFive extends PureComponent {
     }
 
     render () {
-        console.log('this.state.map', this.state.map)
         const formElementsArray = Object.entries(this.state.controls);
         return (
             <div style={{backgroundColor: 'lightorange'}} className={classes.Container}>

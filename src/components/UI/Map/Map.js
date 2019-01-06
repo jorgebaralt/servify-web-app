@@ -75,6 +75,78 @@ const map = (props) => {
         width: props.width,
         height: props.height
     }
+
+    let myMap = (
+        <Map style="mapbox://styles/mapbox/streets-v9"
+            center={props.map.geoData ?
+                (
+                    props.map.geoData.features.length ?
+                        props.map.geoData.features[0].center
+                        : props.map.initialPosition
+                )
+                : props.map.initialPosition}
+            containerStyle={{
+                height: "100%",
+                width: "100%"
+            }}
+            zoom={[11]}
+            flyToOptions={{
+                zoom: 9,
+                speed: 1.5,
+                curve: 1,
+                easing: (t) => {
+                    return t;
+                }
+            }}>
+            {props.map.geoData ?
+                (
+                props.map.geoData.features.length ?
+                    <Layer
+                        type="circle" 
+                        id="marker" 
+                        paint={{
+                            'circle-color': 'rgba(30,163,204, 0.1)',
+                            'circle-radius': {
+                                stops: [
+                                    [0, 0],
+                                    [20, metersToPixelsAtMaxZoom(props.map.radiusInMiles, props.map.geoData.features[0].center[1])]
+                                ],
+                                base: 2
+                            },
+                            'circle-stroke-width': 2,
+                            'circle-stroke-color': '#484848',
+                            'circle-stroke-opacity': 1
+                        }}>
+                        <Feature
+                            coordinates={props.map.geoData ? props.map.geoData.features[0].center : props.map.initialPosition} />
+                    </Layer>
+                    : null
+                )
+                : null}
+            <Marker
+                coordinates={props.map.geoData ?
+                (
+                    props.map.geoData.features.length ?
+                        props.map.geoData.features[0].center
+                        : props.map.initialPosition
+                )
+                : props.map.initialPosition}
+                anchor="bottom">
+                <SVG svg='location-pin' />
+            </Marker>
+            <ZoomControl/>
+            <ScaleControl position="top-left" />
+        </Map>
+    )
+
+    if (props.map.geoData) {
+        if (!Array.isArray(props.map.geoData.features) || !props.map.geoData.features.length) {
+            myMap = null;
+        }
+    } else if (!Array.isArray(props.map.initialPosition) || !props.map.initialPosition.length) {
+        myMap = null;
+    }
+
     return (
         <div style={style} className={mapClasses.join(' ')}>
             <ToastContainer
@@ -86,82 +158,8 @@ const map = (props) => {
                 pauseOnVisibilityChange
                 draggable
                 pauseOnHover />
-            {/* Prevent Map from loading until the initial position */}
-            {props.map.initialPosition !== null ? 
-                <Map style="mapbox://styles/mapbox/streets-v9"
-                    center={props.map.geoData ?
-                        (
-                            props.map.geoData.features.length > 0 ?
-                                props.map.geoData.features[0].center
-                                : props.map.initialPosition
-                        )
-                        : props.map.initialPosition}
-                    containerStyle={{
-                        height: "100%",
-                        width: "100%"
-                    }}
-                    zoom={[11]}
-                    flyToOptions={{
-                        zoom: 9,
-                        speed: 1.5,
-                        curve: 1,
-                        easing: (t) => {
-                            return t;
-                        }
-                    }}>
-                    {props.map.geoData ?
-                        (
-                        props.map.geoData.features.length > 0 ?
-                            <Layer
-                                type="circle" 
-                                id="marker" 
-                                paint={{
-                                    'circle-color': 'rgba(30,163,204, 0.1)',
-                                    'circle-radius': {
-                                        stops: [
-                                            [0, 0],
-                                            [20, metersToPixelsAtMaxZoom(props.map.radiusInMiles, props.map.geoData.features[0].center[1])]
-                                        ],
-                                        base: 2
-                                    },
-                                    'circle-stroke-width': 2,
-                                    'circle-stroke-color': '#484848',
-                                    'circle-stroke-opacity': 1
-                                }}>
-                                <Feature
-                                    coordinates={props.map.geoData ? props.map.geoData.features[0].center : props.map.initialPosition} />
-                            </Layer>
-                            : null
-                        )
-                        : null}
-                    <Marker
-                        coordinates={props.map.geoData ?
-                        (
-                            props.map.geoData.features.length > 0 ?
-                                props.map.geoData.features[0].center
-                                : props.map.initialPosition
-                        )
-                        : props.map.initialPosition}
-                        anchor="bottom">
-                        <SVG svg='location-pin' />
-                    </Marker>
-                    {props.map.geoData ?
-                    (
-                        props.map.geoData.features.length === 0 ?
-                            <Popup
-                                coordinates={props.map.initialPosition}
-                                offset={{
-                                    'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
-                                }}>
-                                <h2>Not found.</h2>
-                            </Popup>
-                            : null
-                    )
-                    : null}
-                    <ZoomControl/>
-                    <ScaleControl position="top-left" />
-                </Map>
-            : null}
+            {/* Map won't load unless there is an initial position or geoData */}
+            {myMap}
         </div>
     );
 }

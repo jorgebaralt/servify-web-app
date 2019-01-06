@@ -6,9 +6,11 @@ import { checkValidity } from '../../../../../shared/checkValidity';
 import classes from './Edit.module.css';
 // JSX
 import { ToastContainer } from 'react-toastify';
+import Map, { setInitialMapboxPosition, setAddress, defaultAddress } from '../../../../../components/UI/Map/Map';
 import Separator from '../../../../../components/UI/Separator/Separator';
 import Image from '../../../../../components/UI/Image/Image';
 import Input from '../../../../../components/UI/Input/Input';
+import InputSlider from '../../../../../components/UI/Input/InputSlider/InputSlider';
 import EditImages, { setItems } from '../../../../../components/UI/EditImages/EditImages';
 
 const categoriesDatalist = categories.map( (category) => {
@@ -147,6 +149,31 @@ class Edit extends PureComponent {
                     touched: false,
                     style: {marginTop:  '50px 0'}
                 },
+                address: {
+                    elementType: 'input',
+                    elementConfig: {
+                        type: 'text',
+                        autoComplete: 'address',
+                        placeholder: 'Service address',
+                        autoCorrect:"off",
+                        autoCapitalize:"off",
+                        spellCheck:"false"
+                    },
+                    value: '',
+                    valueType: 'address',
+                    validation: {
+                        required: true,
+                    },
+                    valid: false,
+                    touched: false,
+                    style: {marginTop: 0}
+                }
+            },
+            map: {
+                initialPosition: null,
+                geoData: null,
+                radiusInMiles: 4, // Initial value
+                maxRadius: 60 // For the input slider
             },
             images: images,
             items: setItems(listImages), // current images
@@ -208,6 +235,58 @@ class Edit extends PureComponent {
             controls: updatedOrderForm, 
             formIsValid: formIsValid
         });
+        if (inputIdentifier === 'address') { 
+            this.debouncedSearch(updatedFormElement.value);
+        }
+    }
+
+    setInitialPosition = (position) => {
+        let address;
+        if (position) {
+            address = [position.data.city, position.data.postal, position.data.region, position.data.country].join(' ');
+        } else {
+            address = defaultAddress;
+        }
+        setInitialMapboxPosition(address, (nextMapState) => {
+            this.setState( (prevState) => {
+                return {
+                    map: {
+                        ...prevState.map,
+                        ...nextMapState
+                    }
+                }
+            })
+        });
+    }
+
+    // Mapbox coordinate update based on input's value field
+    debouncedSearch = (address) => {
+        clearTimeout(this.myTimer);
+        this.myTimer = setTimeout( () =>  {
+            setAddress(address, (nextMapState) => {
+                console.log('18239128391829312', nextMapState)
+                this.setState( (prevState) => {
+                    return {
+                        map: {
+                            ...prevState.map,
+                            ...nextMapState
+                        }
+                    }
+                })
+            })
+        }, 1500);
+    }
+
+    inputSliderHandler = (event) => {
+        const miles = event.target.value;
+        this.setState( (prevState) => {
+            return {
+                map: {
+                    ...prevState.map,
+                    radiusInMiles: miles
+                }
+            }
+        });
     }
 
     componentDidMount() {
@@ -240,6 +319,7 @@ class Edit extends PureComponent {
     }
 
     render() {
+        console.log('QJWEIQJWEIJQIWEJIQWJEQW', this.state.map)
         const formElementsArray = Object.entries(this.state.controls);
         return (
             <>
@@ -264,12 +344,12 @@ class Edit extends PureComponent {
                                 <h1 tabIndex="-1">Your Service Information</h1>
                             </div>
                         </div>
-                        <Separator/>
                         {formElementsArray.map( (input) => {
                             let inputHandler = this.inputChangeHandler;
                             if (input[1].elementType === 'select') {
-                                inputHandler = this.inputSelectChangeHandler
+                                inputHandler = this.inputSelectChangeHandler;
                             }
+                            if (input[0] === 'address') { return null; }
                             return (
                                 <div className={classes.InputWrapper} key={input[0]}>
                                     <div className={classes.InputContainer}>
@@ -291,6 +371,36 @@ class Edit extends PureComponent {
                     </div>
                 </div>
                 <Separator/>
+                <div className={classes.MapContainer}>
+                    <div className={classes.TitleContainer}>
+                        <div className={classes.Title}>
+                            <h1 tabIndex="-1">Your Service Address</h1>
+                        </div>
+                    </div>
+                    <Input 
+                        style={this.state.controls.address.style}
+                        elementType={this.state.controls.address.elementType} 
+                        elementConfig={this.state.controls.address.elementConfig} // Referenced to state to mutate
+                        changed={(event) => this.inputChangeHandler(event, 'address')}
+                        invalid={!this.state.controls.address.valid}
+                        shouldValidate={this.state.controls.address.validation}
+                        touched={this.state.controls.address.touched}
+                        value={this.state.controls.address.value} 
+                        valueType={this.state.controls.address.valueType} />
+                    <InputSlider onChange={this.inputSliderHandler} 
+                        header='Distance' 
+                        value={this.state.map.radiusInMiles}
+                        maxValue={this.state.map.maxRadius} 
+                        valueType='miles (approx)' />
+                    <Map height='300px' map={this.state.map} />
+                </div>
+
+
+
+
+
+
+
             </>
         );
     }
