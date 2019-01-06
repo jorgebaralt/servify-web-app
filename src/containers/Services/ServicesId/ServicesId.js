@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import axios from 'axios';
 // CSS
-import classes from './ServicesId.module.css'
+import classes from './ServicesId.module.css';
 // JSX
+import ReactResizeDetector from 'react-resize-detector';
 import PhotosCarousel from '../../../components/UI/PhotosCarousel/PhotosCarousel';
 import Map, { setMapboxAccessToken, setInitialMapboxPosition, defaultAddress } from '../../../components/UI/Map/Map';
 import SVG from '../../../components/SVG/SVG';
@@ -33,7 +34,7 @@ class ServicesId extends Component {
         }
     }
 
-    setGalleryDimensions () {
+    setGalleryDimensions = () => {
         this.setState(() => {
             return {
                 imageSizes: {
@@ -69,16 +70,6 @@ class ServicesId extends Component {
         ).catch(
             () => this.setInitialPosition()
         );
-        this.setGalleryDimensions();
-        window.onresize = () => {
-            this.setGalleryDimensions();
-        }
-    }
-
-    componentWillUnmount () {
-        window.onresize = () => {
-            return;
-        }
     }
 
     render () {
@@ -88,6 +79,7 @@ class ServicesId extends Component {
                     <div className={classes.GalleryWrapper}>
                         <div ref={this.myGallery}
                             className={classes.GalleryContainer}>
+                            <ReactResizeDetector handleWidth handleHeight onResize={this.setGalleryDimensions} />
                             <PhotosCarousel 
                                 dimensions={this.state.imageSizes}
                                 images={[
@@ -159,7 +151,7 @@ class ServicesId extends Component {
                                         <h1 tabIndex='-1' className={classes.Reviews}>8 total reviews from people who used this service</h1>
                                     </div>
                                 </section>
-                                <span className={classes.RatingAvg}>5.0</span>
+                                <span className={classes.RatingAvg}>{(5).toFixed(1)}</span>
                                 <Rating height={'17.5px'} width={'17.5px'} type='stars' />
                             </div>
                         </div>

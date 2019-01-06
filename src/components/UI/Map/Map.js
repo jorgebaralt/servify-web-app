@@ -78,12 +78,11 @@ const map = (props) => {
     return (
         <div style={style} className={mapClasses.join(' ')}>
             <ToastContainer
-                position="top-left"
+                position="top-right"
                 autoClose={6000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
-                rtl
                 pauseOnVisibilityChange
                 draggable
                 pauseOnHover />

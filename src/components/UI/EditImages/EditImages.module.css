@@ -12,6 +12,7 @@
 
 .Title div {
     width: 20%;
+    min-width: 135px;
     color: #585858;
     text-align: right;
     padding: 0 21px;
@@ -23,12 +24,13 @@
     display: flex;
     flex-flow: column;
     width: 100%;
-    padding: 4px 8px;
+    padding: 5px;
     border-radius: 4px;
-    border: 1px solid rgba(72,72,72,0.3333);
+    border: 1px solid #EBEBEB;
 }
 
 .VerticalContainer {
+    padding: 4px 8px;
     flex-flow: row !important;
 }
 
@@ -36,15 +38,17 @@
     border: 1px solid #1ea3cc;
 }
 
-.VerticalSliderContainer {
-    position: sticky;
-    top: 42px;
-}
-
 .SliderContainer {
     height: 100%;
     width: 100%;
+    width: calc(100% - 1px);
+}
+
+.VerticalSliderContainer {
+    margin: 0px;
+    position: sticky;
     padding: 10px 0px 10px 16px;
+    top: 42px;
 }
 
 @media screen and (orientation:portrait) {

@@ -5,6 +5,9 @@
     width: 100%;
     overflow-x: hidden;
     position: relative;
+}
+
+.FadeIn {
     animation: FadeIn ease 250ms;
 }
 

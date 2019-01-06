@@ -17,16 +17,14 @@ import ServicesId from './containers/Services/ServicesId/ServicesId';
 import Edit from './containers/Users/Edit/Edit';
 import Feedback from './containers/Users/Feedback/Feedback';
 import Publications from './containers/Users/Publications/Publications';
+import PublicationsId from './containers/Users/Publications/Edit/PublicationsId';
 import UsersId from './containers/Users/UsersId/UsersId';
 import NoMatch from './containers/NoMatch/NoMatch';
 
 class App extends Component {
-	componentWillMount() {
-		this.props.onIsMobile();
-		// TODO fetch popular categories global
-		// TODO last viewed services --> landing
-		// TODO fetch new services near you --> landing
-		// TODO popular near services --> landing
+	constructor(props) {
+		super(props);
+		props.onIsMobile();
 	}
 
 	render() {
@@ -39,10 +37,10 @@ class App extends Component {
 					<Route exact path="/publish" component={Publish} />
 					<Route exact path="/publish/overview" component={PublishOverview} />
 					<Route exact path="/services" component={Services} />
-					<Route exact path="/services/edit/:id" component={ServicesId} />
-					<Route exact path="/services/show/:id" component={ServicesId} />
+					<Route exact path="/services/:id" component={ServicesId} />
 					<Route exact path="/users/feedback" component={Feedback} />
 					<Route exact path="/users/publications" component={Publications} />
+					<Route exact path="/users/publications/edit/:id" component={PublicationsId} />
 					<Route exact path="/users/edit" component={Edit} />
 					<Route exact path="/users/show" component={UsersId} />
 					<Route exact path="/" component={Landing} />

@@ -90,25 +90,12 @@ class Slider extends Component {
     }
 
     componentDidMount () {
-        window.addEventListener("orientationchange", this.setOrientationChanged);
         /**
          * The carousel needs an initial setup in case there is an active slide from the props higher than 0
          */
         if (this.props.activeSlide > 0 && this.props.activeSlide < this.props.children.length) {
             this.setupSlider();
         }
-    }
-
-    componentDidUpdate () {
-        if (this.state.bOrientationChanged) {
-            setTimeout(() => { // To force asynchronous callback in order to let the slider container resize
-                this.setupWidth()
-            }, 0);
-        }
-    }
-
-    componentWillUnmount () {
-        window.removeEventListener("orientationchange", this.setOrientationChanged);
     }
 
     render() {
@@ -158,8 +145,12 @@ class Slider extends Component {
                     {this.props.children}
                 </SlideContainer>
         );
+        const wrapperClasses = [classes.Wrapper];
+        if (this.props.fadeIn) {
+            wrapperClasses.push(classes.FadeIn);
+        }
         return (
-            <div ref={this.mySlider} className={classes.Wrapper} style={this.props.style}>
+            <div ref={this.mySlider} className={wrapperClasses.join(' ')} style={this.props.style}>
                 <ReactResizeDetector handleWidth handleHeight onResize={this.setupWidth} />
                 {children}
                 {this.props.buttons || !this.props.children.length ? 

@@ -114,6 +114,7 @@ class Carousel extends Component {
                                 <ImageFadeIn
                                     loading={true}
                                     bShouldUpdate={false}
+                                    timeout={this.props.fadeTimeout}
                                     style={{
                                             width: this.props.dimensions ? this.props.dimensions.width : null,
                                             height: this.props.dimensions ? this.props.dimensions.height : null,

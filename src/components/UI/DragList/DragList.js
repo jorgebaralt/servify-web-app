@@ -25,7 +25,7 @@ class DragList extends PureComponent {
         // some basic styles to make the items look a bit nicer
         userSelect: 'none',
         padding: '2px',
-        margin: `10px`,
+        margin: this.props.direction === 'vertical' ? '10px' : '5px 1px 0',
         width: this.props.direction === 'vertical' ? '100%' : `${100/this.state.items.length}%`,
         maxWidth: '130px',
         height: '100px',
@@ -54,8 +54,8 @@ class DragList extends PureComponent {
         alignItems: 'center',
         justifyContent: 'center',
         background: isDraggingOver ? 'lightblue' : 'transparent',
-        margin: this.props.direction === 'horizontal' ? '5px 0' : null,
-        padding: this.props.direction === 'horizontal' ? '15px' : null,
+        margin: '0',
+        padding: '0',
         width: this.props.direction === 'horizontal' ? '100%' : 'auto',
         minWidth: '125px',
         height: this.props.direction === 'vertical' ? '100%' : null

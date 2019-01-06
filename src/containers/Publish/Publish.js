@@ -119,7 +119,7 @@ class Publish extends Component {
         }
         return (
             <div className={classes.Wrapper}>
-                <Slider disableNav buttons={buttons}>
+                <Slider fadeIn disableNav buttons={buttons}>
                     <Slide>
                         <StepOne activeStep={activeStep} stepKey={1} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>

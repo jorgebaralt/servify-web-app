@@ -8,6 +8,7 @@ import DragList, { getItems } from '../DragList/DragList';
 export const setItems = getItems;
 
 const editImages = (props) => {
+    if (!props.items) { return null; } // Pointer protection
     const slides = props.items.map( (item) => {
         return (
             <Slide key={item.id}>
@@ -23,11 +24,14 @@ const editImages = (props) => {
     }
     return (
         <div className={classes.Wrapper}>
-            <div className={classes.Title}>
-                <div>
-                    Edit Pictures
+            {props.title ?
+                <div className={classes.Title}>
+                    <div>
+                        Edit Pictures
+                    </div>
                 </div>
-            </div>
+                : null
+            }
             <div className={containerClasses.join(' ')}>
                 <div className={sliderContainerClasses.join(' ')}>
                     <div className={classes.Slider}>

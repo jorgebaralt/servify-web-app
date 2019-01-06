@@ -6,7 +6,7 @@ import Layout from '../../../hoc/Users/Layout/Layout';
 import Panel from '../../../components/UI/Panel/Panel';
 import ReadyToGrow from '../../../components/Publish/ReadyToGrow/ReadyToGrow';
 import Carousel from '../../../components/UI/Carousel/Carousel';
-import Service from '../../../components/Users/Publications/Service/Service';
+import Publication from '../../../components/Users/Publications/Publication/Publication';
 import Separator from '../../../components/UI/Separator/Separator';
 
 class Publications extends Component {
@@ -54,7 +54,7 @@ class Publications extends Component {
                     {Object.values(this.state.services).map( (service, index) => {
                         return (
                             <div className={classes.Service}>
-                                <Service
+                                <Publication
                                     header={service.header}
                                     title={service.title}
                                     priceRating={service.priceRating}

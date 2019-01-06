@@ -57,6 +57,7 @@ class InputSelect extends Component {
                             required
                             style={this.props.style}
                             ref={this.myInput}
+                            value={this.props.value}
                             placeholder={this.props.elementConfig.placeholder}
                             className={this.props.inputClasses.join(' ')} >
                         </input>

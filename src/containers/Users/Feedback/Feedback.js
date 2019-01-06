@@ -119,7 +119,7 @@ class Feedback extends Component {
                                 </div>
                             );
                         })}
-                        <Button style={{fontSize: '21px'}} disabled={!this.state.formIsValid} type='primary' blockButton={true}>Save</Button>
+                        <Button style={{fontSize: '21px'}} disabled={!this.state.formIsValid} type='primary' blockButton={true}>Submit</Button>
                     </form>
                 </Panel>
             </Layout>

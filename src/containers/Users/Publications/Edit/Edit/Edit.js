@@ -1,0 +1,299 @@
+import React, { PureComponent } from 'react';
+import categories from '../../../../../shared/categories';
+// Input Validity
+import { checkValidity } from '../../../../../shared/checkValidity';
+// CSS
+import classes from './Edit.module.css';
+// JSX
+import { ToastContainer } from 'react-toastify';
+import Separator from '../../../../../components/UI/Separator/Separator';
+import Image from '../../../../../components/UI/Image/Image';
+import Input from '../../../../../components/UI/Input/Input';
+import EditImages, { setItems } from '../../../../../components/UI/EditImages/EditImages';
+
+const categoriesDatalist = categories.map( (category) => {
+    return {
+        value: category.title,
+        displayValue: category.title,
+    };
+});
+
+class Edit extends PureComponent {
+    constructor (props) {
+        console.log('constructor inside Edit.js props', props)
+        super(props);
+        const images = props.images;
+        const listImages = images.map( image => {
+            return (
+                <Image draggable="false" src={image} />
+            );
+        });
+        this.state = {
+            controls: {
+                // category: {
+                //     elementType: 'select',
+                //     elementConfig: {
+                //         label: 'Choose a category',
+                //         placeholder: 'Select a category',
+                //         options: categoriesDatalist
+                //     },
+                //     value: props.category,
+                //     valueType: 'category',
+                //     validation: {
+                //         required: true
+                //     },
+                //     valid: true,
+                //     touched: false,
+                // },
+                title: {
+                    elementType: 'input',
+                    elementConfig: {
+                        type: 'text',
+                        placeholder: 'Service Title',
+                        autoCorrect:"off",
+                        autoCapitalize:"off",
+                        spellCheck:"false"
+                    },
+                    value: props.title,
+                    valueType: 'title',
+                    validation: {
+                        required: true,
+                    },
+                    valid: true,
+                    touched: false,
+                    style: {marginTop:  '50px 0'}
+                },
+                state: {
+                    elementType: 'input',
+                    elementConfig: {
+                        type: 'text',
+                        placeholder: 'State',
+                        autoCorrect:"off",
+                        autoCapitalize:"off",
+                        spellCheck:"false"
+                    },
+                    value: props.infoPoints.state,
+                    valueType: 'state',
+                    validation: {
+                        required: true,
+                    },
+                    valid: true,
+                    touched: false,
+                    style: {marginTop:  '50px 0'}
+                },
+                website: {
+                    elementType: 'input',
+                    elementConfig: {
+                        type: 'text',
+                        placeholder: 'Website',
+                        autoCorrect:"off",
+                        autoCapitalize:"off",
+                        spellCheck:"false"
+                    },
+                    value: props.infoPoints.website,
+                    valueType: 'website',
+                    valid: true,
+                    touched: false,
+                    style: {marginTop:  '50px 0'}
+                },
+                languages: {
+                    elementType: 'input',
+                    elementConfig: {
+                        type: 'text',
+                        placeholder: 'Languages ',
+                        autoCorrect:"off",
+                        autoCapitalize:"off",
+                        spellCheck:"false"
+                    },
+                    value: props.infoPoints.languages,
+                    valueType: 'language',
+                    valid: true,
+                    touched: false,
+                    style: {marginTop:  '50px 0'}
+                },
+                aboutService: {
+                    elementType: 'textarea',
+                    elementConfig: {
+                        type: 'text',
+                        placeholder: 'About your service',
+                        autoCorrect:"off",
+                        autoCapitalize:"off",
+                        spellCheck:"false"
+                    },
+                    value: props.infoSections.service.info,
+                    valueType: 'text',
+                    validation: {
+                        required: true,
+                    },
+                    valid: true,
+                    touched: false,
+                    style: {marginTop:  '50px 0'}
+                },
+                aboutProvider: {
+                    elementType: 'textarea',
+                    elementConfig: {
+                        type: 'text',
+                        placeholder: 'About the provider',
+                        autoCorrect:"off",
+                        autoCapitalize:"off",
+                        spellCheck:"false"
+                    },
+                    value: props.infoSections.provider.info,
+                    valueType: 'text',
+                    validation: {
+                        required: true,
+                    },
+                    valid: true,
+                    touched: false,
+                    style: {marginTop:  '50px 0'}
+                },
+            },
+            images: images,
+            items: setItems(listImages), // current images
+            formIsValid: true,
+        }
+    }
+
+    updateImages = (items) => {
+        const newImages = [];
+        items.forEach( (item) => {
+            newImages.push(item.content.props.src);
+        })
+        this.setState( (prevState) => {
+            return {
+                ...prevState,
+                images: newImages,
+                items: items
+            }
+        });
+    }
+    
+    inputSelectChangeHandler = (value, inputIdentifier) => {
+        const updatedOrderForm = {
+            ...this.state.controls,
+        };
+        const updatedFormElement = {
+            ...updatedOrderForm[inputIdentifier]
+        };
+        updatedFormElement.value = value;
+        updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.touched = true;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+        let formIsValid = true;
+        for (let inputIdentifier in updatedOrderForm) {
+            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+        }
+        this.setState({
+            controls: updatedOrderForm, 
+            formIsValid: formIsValid
+        });
+    }
+
+    inputChangeHandler = (event, inputIdentifier) => {
+        const updatedOrderForm = {
+            ...this.state.controls
+        };
+        const updatedFormElement = {
+            ...updatedOrderForm[inputIdentifier]
+        };
+        updatedFormElement.value = event.target.value;
+        updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.touched = true;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+        let formIsValid = true;
+        for (let inputIdentifier in updatedOrderForm) {
+            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+        }
+        this.setState({
+            controls: updatedOrderForm, 
+            formIsValid: formIsValid
+        });
+    }
+
+    componentDidMount() {
+        window.scrollTo(0,0);
+    }
+    
+    componentWillUnmount() {
+        const newState = {
+            // category: this.state.controls.category.value,
+            title: this.state.controls.title.value,
+            images: this.state.images,
+            infoPoints: {
+                state: this.state.controls.state.value,
+                website: this.state.controls.website.value,
+                languages: this.state.controls.languages.value
+            },
+            infoSections: {
+                service: {
+                    ...this.props.infoSections.service,
+                    info: this.state.controls.aboutService.value
+                },
+                provider: {
+                    ...this.props.infoSections.provider,
+                    info: this.state.controls.aboutProvider.value
+                }
+            },
+            formIsValid: this.state.formIsValid
+        };
+        this.props.updateState(newState);
+    }
+
+    render() {
+        const formElementsArray = Object.entries(this.state.controls);
+        return (
+            <>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={6000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    pauseOnVisibilityChange
+                    draggable
+                    pauseOnHover />
+                <div className={classes.ServiceContainer}>
+                    <div className={classes.GalleryWrapper}>
+                        <div ref={this.myGallery} className={classes.GalleryContainer}>
+                            <EditImages direction='horizontal' updateItems={this.updateImages} items={this.state.items} />
+                        </div>
+                    </div>
+                    <div className={classes.DescriptionContainer}>
+                        <div className={classes.TitleContainer}>
+                            <div className={classes.Title}>
+                                <h1 tabIndex="-1">Your Service Information</h1>
+                            </div>
+                        </div>
+                        <Separator/>
+                        {formElementsArray.map( (input) => {
+                            let inputHandler = this.inputChangeHandler;
+                            if (input[1].elementType === 'select') {
+                                inputHandler = this.inputSelectChangeHandler
+                            }
+                            return (
+                                <div className={classes.InputWrapper} key={input[0]}>
+                                    <div className={classes.InputContainer}>
+                                        <Input 
+                                            style={input[1].style}
+                                            elementType={input[1].elementType} 
+                                            elementConfig={this.state.controls[input[1].valueType] ? this.state.controls[input[1].valueType].elementConfig : input[1].elementConfig} // Referenced to state to mutate
+                                            changed={(event) => inputHandler(event, input[0])}
+                                            invalid={!input[1].valid}
+                                            shouldValidate={input[1].validation}
+                                            touched={input[1].touched}
+                                            value={input[1].value} 
+                                            valueType={input[1].valueType} />
+                                        <Separator/>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+                <Separator/>
+            </>
+        );
+    }
+}
+
+export default Edit;

@@ -171,7 +171,7 @@ class Edit extends Component {
                                 </div>
                             );
                         })}
-                        <EditImages direction='vertical' updateItems={this.updateImages} items={this.state.images} />
+                        <EditImages title direction='vertical' updateItems={this.updateImages} items={this.state.images} />
                         <Separator />
                         <InputImage onChange={this.inputImageChangeHandler} onSubmit={this.onSubmitHandler} />
                         <Separator />

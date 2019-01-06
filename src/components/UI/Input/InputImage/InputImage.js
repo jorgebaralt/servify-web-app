@@ -158,7 +158,6 @@ class InputImage extends Component {
                         hideProgressBar={false}
                         newestOnTop={false}
                         closeOnClick
-                        rtl
                         pauseOnVisibilityChange
                         draggable
                         pauseOnHover />
