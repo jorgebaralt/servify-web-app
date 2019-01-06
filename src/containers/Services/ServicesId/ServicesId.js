@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import isString from '../../../shared/isString';
+import isObject from '../../../shared/isObject';
 // CSS
 import classes from './ServicesId.module.css';
 // JSX
@@ -47,9 +49,12 @@ class ServicesId extends Component {
 
     setInitialPosition = (position) => {
         let address;
-        if (position) {
+        if (isObject(position)) {
             address = [position.data.city, position.data.postal, position.data.region, position.data.country].join(' ');
-        } else {
+        } else if (isString(position)) { // checks if it's a string
+            address = position;
+        }
+        else {
             address = defaultAddress;
         }
         setInitialMapboxPosition(address, (nextMapState) => {

@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import categories from '../../../../../shared/categories';
 // Input Validity
 import { checkValidity } from '../../../../../shared/checkValidity';
 // CSS
@@ -13,16 +12,8 @@ import Input from '../../../../../components/UI/Input/Input';
 import InputSlider from '../../../../../components/UI/Input/InputSlider/InputSlider';
 import EditImages, { setItems } from '../../../../../components/UI/EditImages/EditImages';
 
-const categoriesDatalist = categories.map( (category) => {
-    return {
-        value: category.title,
-        displayValue: category.title,
-    };
-});
-
 class Edit extends PureComponent {
     constructor (props) {
-        console.log('constructor inside Edit.js props', props)
         super(props);
         const images = props.images;
         const listImages = images.map( image => {
@@ -30,23 +21,9 @@ class Edit extends PureComponent {
                 <Image draggable="false" src={image} />
             );
         });
+        console.log('inside constructor in Edit.js', props.map)
         this.state = {
             controls: {
-                // category: {
-                //     elementType: 'select',
-                //     elementConfig: {
-                //         label: 'Choose a category',
-                //         placeholder: 'Select a category',
-                //         options: categoriesDatalist
-                //     },
-                //     value: props.category,
-                //     valueType: 'category',
-                //     validation: {
-                //         required: true
-                //     },
-                //     valid: true,
-                //     touched: false,
-                // },
                 title: {
                     elementType: 'input',
                     elementConfig: {
@@ -159,7 +136,7 @@ class Edit extends PureComponent {
                         autoCapitalize:"off",
                         spellCheck:"false"
                     },
-                    value: '',
+                    value: props.address,
                     valueType: 'address',
                     validation: {
                         required: true,
@@ -169,12 +146,7 @@ class Edit extends PureComponent {
                     style: {marginTop: 0}
                 }
             },
-            map: {
-                initialPosition: null,
-                geoData: null,
-                radiusInMiles: 4, // Initial value
-                maxRadius: 60 // For the input slider
-            },
+            map: props.map,
             images: images,
             items: setItems(listImages), // current images
             formIsValid: true,
@@ -192,27 +164,6 @@ class Edit extends PureComponent {
                 images: newImages,
                 items: items
             }
-        });
-    }
-    
-    inputSelectChangeHandler = (value, inputIdentifier) => {
-        const updatedOrderForm = {
-            ...this.state.controls,
-        };
-        const updatedFormElement = {
-            ...updatedOrderForm[inputIdentifier]
-        };
-        updatedFormElement.value = value;
-        updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
-        updatedFormElement.touched = true;
-        updatedOrderForm[inputIdentifier] = updatedFormElement;
-        let formIsValid = true;
-        for (let inputIdentifier in updatedOrderForm) {
-            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
-        }
-        this.setState({
-            controls: updatedOrderForm, 
-            formIsValid: formIsValid
         });
     }
 
@@ -264,7 +215,6 @@ class Edit extends PureComponent {
         clearTimeout(this.myTimer);
         this.myTimer = setTimeout( () =>  {
             setAddress(address, (nextMapState) => {
-                console.log('18239128391829312', nextMapState)
                 this.setState( (prevState) => {
                     return {
                         map: {
@@ -294,6 +244,7 @@ class Edit extends PureComponent {
     }
     
     componentWillUnmount() {
+        console.log('inside componentWillUnmount in Edit.js');
         const newState = {
             // category: this.state.controls.category.value,
             title: this.state.controls.title.value,
@@ -313,13 +264,15 @@ class Edit extends PureComponent {
                     info: this.state.controls.aboutProvider.value
                 }
             },
+            address: this.state.controls.address.value,
+            map: this.state.map,
             formIsValid: this.state.formIsValid
         };
         this.props.updateState(newState);
     }
 
     render() {
-        console.log('QJWEIQJWEIJQIWEJIQWJEQW', this.state.map)
+        console.log('inside render in Edit.js', this.state)
         const formElementsArray = Object.entries(this.state.controls);
         return (
             <>
@@ -345,10 +298,6 @@ class Edit extends PureComponent {
                             </div>
                         </div>
                         {formElementsArray.map( (input) => {
-                            let inputHandler = this.inputChangeHandler;
-                            if (input[1].elementType === 'select') {
-                                inputHandler = this.inputSelectChangeHandler;
-                            }
                             if (input[0] === 'address') { return null; }
                             return (
                                 <div className={classes.InputWrapper} key={input[0]}>
@@ -357,7 +306,7 @@ class Edit extends PureComponent {
                                             style={input[1].style}
                                             elementType={input[1].elementType} 
                                             elementConfig={this.state.controls[input[1].valueType] ? this.state.controls[input[1].valueType].elementConfig : input[1].elementConfig} // Referenced to state to mutate
-                                            changed={(event) => inputHandler(event, input[0])}
+                                            changed={(event) => this.inputChangeHandler(event, input[0])}
                                             invalid={!input[1].valid}
                                             shouldValidate={input[1].validation}
                                             touched={input[1].touched}
@@ -374,7 +323,7 @@ class Edit extends PureComponent {
                 <div className={classes.MapContainer}>
                     <div className={classes.TitleContainer}>
                         <div className={classes.Title}>
-                            <h1 tabIndex="-1">Your Service Address</h1>
+                            <h1>Your Service Address</h1>
                         </div>
                     </div>
                     <Input 
@@ -392,15 +341,8 @@ class Edit extends PureComponent {
                         value={this.state.map.radiusInMiles}
                         maxValue={this.state.map.maxRadius} 
                         valueType='miles (approx)' />
-                    <Map height='300px' map={this.state.map} />
+                    <Map height='350px' map={this.state.map} />
                 </div>
-
-
-
-
-
-
-
             </>
         );
     }

@@ -176,8 +176,8 @@
 }
 
 .SectionSeparatorLine {
-    margin-top: 55px;
-    margin-bottom: 55px;
+    margin-top: 36px;
+    margin-bottom: 36px;
 }
 
 .SectionSeparatorLine div {
@@ -303,7 +303,18 @@
 
 .MapWrapper {
     height: 60vh;
-    margin: -12px 0;
+}
+
+.MapContainer {
+    display: flex;
+    position: relative;
+    flex-flow: column;
+    flex: 0 0 auto;
+    padding: 0px 96px 0;
+    margin-bottom: 36px;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
 }
 
 .Error {

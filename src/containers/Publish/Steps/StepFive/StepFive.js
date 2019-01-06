@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import axios from 'axios';
+import isString from '../../../../shared/isString';
+import isObject from '../../../../shared/isObject';
 // CSS
 import classes from '../../Publish.module.css';
 // JSX
@@ -49,9 +51,12 @@ class StepFive extends PureComponent {
 
     setInitialPosition = (position) => {
         let address;
-        if (position) {
+        if (isObject(position)) {
             address = [position.data.city, position.data.postal, position.data.region, position.data.country].join(' ');
-        } else {
+        } else if (isString(position)) { // checks if it's a string
+            address = position;
+        }
+        else {
             address = defaultAddress;
         }
         setInitialMapboxPosition(address, (nextMapState) => {
@@ -118,10 +123,10 @@ class StepFive extends PureComponent {
     }
 
     componentDidMount () {
-        axios.get('http://ipinfo.io').then(
+        axios.get('https://ipinfo.io').then(
             (response) => this.setInitialPosition(response)
         ).catch(
-            () => this.setInitialPosition()
+            this.setInitialPosition()
         );
     }
 

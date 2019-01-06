@@ -10,6 +10,7 @@ import Review from '../../../../../components/Services/Review/Review';
 import Rating from '../../../../../components/UI/Rating/Rating';
 import InfoPoint from '../../../../../components/Services/InfoPoint/InfoPoint';
 import InfoSection from '../../../../../components/Services/InfoSection/InfoSection';
+import Separator from '../../../../../components/UI/Separator/Separator';
 
 class Preview extends Component {
     constructor (props) {
@@ -89,10 +90,12 @@ class Preview extends Component {
                         {this.props.infoPoints.languages ? 
                             <InfoPoint symbol={<SVG svg='chat' />} info={this.props.infoPoints.languages}/> 
                             : null}
-                        <div className={classes.SeparatorWrapper}><div  className={classes.Separator}/></div>
-                        {Object.values(this.props.infoSections).map( section => {
+                        {/* <div className={classes.SeparatorWrapper}><div  className={classes.Separator}/></div> */}
+                        <Separator />
+                        {Object.values(this.props.infoSections).map( (section, index) => {
                             return (
-                                <InfoSection 
+                                <InfoSection
+                                    key={index}
                                     title={section.title}
                                     contact={section.contact}
                                     header={section.header}>
@@ -108,9 +111,26 @@ class Preview extends Component {
                         })}
                     </div>
                 </div>
-                <div className={classes.SectionSeparator}><div className={classes.SectionSeparatorLine}><div/></div></div>
+                <Separator />
+                <div className={classes.MapContainer}>
+                    <div className={classes.TitleContainer}>
+                        <div className={classes.Title}>
+                            <h1>
+                                Service Address
+                            </h1>
+                        </div>
+                    </div>
+                    <div className={classes.DescriptionContainer}>
+                        <InfoPoint symbol={<SVG svg='location-pin' />} 
+                                location={
+                                    this.props.address ? 
+                                        this.props.address 
+                                        : <span className={classes.Error}>Address can't be empty.</span>} 
+                        />
+                    </div>
+                </div>
                 <Map className={classes.MapWrapper} map={this.props.map} />
-                <div className={classes.SectionSeparator}><div className={classes.SectionSeparatorLine}><div/></div></div>
+                <Separator />
                 <div className={classes.ReviewsWrapper}>
                     <div className={classes.ReviewsContainer}>
                         <div className={classes.RatingsWrapper}>

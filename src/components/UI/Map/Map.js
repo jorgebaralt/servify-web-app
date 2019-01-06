@@ -75,7 +75,19 @@ const map = (props) => {
         width: props.width,
         height: props.height
     }
-
+    let flyToSettings;
+    if (props.flyToSettings) {
+        flyToSettings = props.flyToSettings
+    }
+    flyToSettings = {
+        zoom: 13,
+        speed: 15,
+        curve: 1,
+        easing: (t) => {
+            return t;
+        }
+    }
+    console.log('flyToSettings', flyToSettings)
     let myMap = (
         <Map style="mapbox://styles/mapbox/streets-v9"
             center={props.map.geoData ?
@@ -90,14 +102,7 @@ const map = (props) => {
                 width: "100%"
             }}
             zoom={[11]}
-            flyToOptions={{
-                zoom: 9,
-                speed: 1.5,
-                curve: 1,
-                easing: (t) => {
-                    return t;
-                }
-            }}>
+            flyToOptions={flyToSettings}>
             {props.map.geoData ?
                 (
                 props.map.geoData.features.length ?
