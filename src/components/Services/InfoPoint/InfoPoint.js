@@ -8,9 +8,9 @@ const infoPoint = (props) => {
         point = (
             <button type='button' 
                 aria-busy='false'
-                className={classes.LinkContainer}>
+                className={classes.Link}>
                 <span className={classes.SeoTool}>Location:</span>
-                <span className={classes.Link}>{props.location}</span>
+                <span>{props.location}</span>
                 <span className={classes.SeoTool}>Show on map</span>
             </button>
         );
@@ -32,9 +32,9 @@ const infoPoint = (props) => {
                 href={url.join('')}
                 target='_blank'
                 rel="noopener noreferrer"
-                className={classes.LinkContainer}>
+                className={classes.Link}>
                 <span className={classes.SeoTool}>Website:</span>
-                <span className={classes.Link}>Company website</span>
+                <span>Company website</span>
                 <span className={classes.SeoTool}>{props.website}</span>
             </a>
         );

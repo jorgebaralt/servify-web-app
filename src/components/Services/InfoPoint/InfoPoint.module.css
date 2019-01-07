@@ -11,25 +11,30 @@
     transform: translateY(-50%);
 }
 
-.IconContainer {
-    margin: 0px;
-    word-wrap: break-word;
-    font-size: 22px;
-    line-height: 26px;
-    letter-spacing: normal;
-    color: #484848;
-    font-weight: normal;
-}
-
-.InfoWrapper {
-    padding-left: 24px;
+.Icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .Icon svg {
     width: 15px;
 }
 
-.LinkContainer {
+.InfoWrapper {
+    padding-left: 24px;
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 17px;
+    line-height: 26px;
+    letter-spacing: normal;
+    font-weight: normal;
+}
+
+.IconContainer {
+    color: #484848;
+}
+.Link {
     color: rgb(255, 112, 67);
     font: inherit;
     text-decoration: none;
@@ -43,11 +48,7 @@
     text-align: left;
 }
 
-.Link {
-    font-size: 18px;
-}
-
-.LinkContainer:hover {
+.Link:hover {
     text-decoration: underline;
 }
 
@@ -61,14 +62,4 @@
     width: 1px;
     clip: rect(0, 0, 0, 0);
     overflow: hidden;
-}
-
-.InfoContainer {
-    margin: 0px;
-    word-wrap: break-word;
-    font-size: 18px;
-    line-height: 26px;
-    letter-spacing: normal;
-    color: #484848;
-    font-weight: normal;
 }

@@ -4,7 +4,7 @@ import anonUser from '../../../assets/svg/source/user-nobg.svg';
 // CSS
 import classes from './UsersId.module.css';
 // JSX
-import Review from '../../../components/Services/Review/Review';
+import Review from '../../../components/Services/Reviews/Review/Review';
 import Service from '../../../components/Services/Service/Service';
 import ImageFadeIn from '../../../components/UI/ImageFadeIn/ImageFadeIn';
 import Separator from '../../../components/UI/Separator/Separator';

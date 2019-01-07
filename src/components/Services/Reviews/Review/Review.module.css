@@ -103,13 +103,12 @@
 
 .DescriptionContainer {
     margin-top: 12px;
-    margin-right: 5%;
 }
 
 .Description {
     margin: 0px;
     word-wrap: break-word;
-    font-size: 17px;
+    font-size: 16px;
     line-height: 24px;
     letter-spacing: normal;
     color: #484848;

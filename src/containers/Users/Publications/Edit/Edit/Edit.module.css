@@ -106,10 +106,15 @@
     display: flex;
     position: relative;
     flex-flow: column;
-    flex:0 0 auto;
-    padding: 0px 96px 0;
-    margin: 0 auto;
+    flex: 0 0 auto;
     background-color: transparent;
-    width: 100%;
+    margin: 36px auto 18px;
+    width: 90%;
     height: 100%;
+}
+
+@media (max-width: 744px) {
+    .MapContainer {
+        margin: 0px auto 18px;
+    }
 }

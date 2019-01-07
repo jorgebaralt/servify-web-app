@@ -27,7 +27,7 @@ const publication = (props) => {
                 {/* Links */}
                 <div className={classes.Links}>
                     {/* TODO setup links */}
-                    <Link draggable="false" to={props.href ? props.href : '/services/show/1'} className={classes.Link} target="_blank">
+                    <Link draggable="false" to={props.href ? props.href : '/services/1'} className={classes.Link} target="_blank">
                         View
                     </Link>
                     <Link draggable="false" to={props.href ? props.href : '/users/publications/edit/1'} className={classes.Link}>

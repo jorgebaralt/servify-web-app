@@ -1,80 +1,21 @@
-.ServiceContainer {
+.Container {
     display: flex;
     flex-direction: row;
     margin-top: 40px;
 }
 
 @media (max-width: 744px) {
-    .ServiceContainer {
+    .Container {
         flex-direction: column;
+        padding: 0 12px;
     }
-    .GalleryWrapper {
-        width: 100% !important;
-        margin: 0 auto;
-        padding-left: 5% !important;
-        padding-right: 5% !important;
-        padding-bottom: 25px !important;
-        margin-bottom: 25px !important;
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
-        border-bottom-color: #EBEBEB;
-        border-bottom-width: var(--border-rule-border-width, 1px);
-        border-bottom-color: var(--color-divider, #EBEBEB);
-    }
-    .DescriptionContainer {
+    .Description {
         width: 90% !important;
         margin: 0 auto !important;
     }
-    .ServicesWrapper {
-        padding-left: 12px !important;
-    }
 }
 
-@media (max-width: 580px) {
-    .ReviewsContainer {
-        flex-direction: column !important;
-    }
-    .RatingsWrapper {
-        width: 90% !important;
-        margin: 0 auto;
-        padding-bottom: 30px;
-        margin-bottom: 30px;
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
-        border-bottom-color: #EBEBEB;
-        border-bottom-width: var(--border-rule-border-width, 1px);
-        border-bottom-color: var(--color-divider, #EBEBEB);
-    }
-    .SimilarServices {
-        flex-direction: column !important;
-    }
-    .ServicesWrapper {
-        width: 90% !important;
-        justify-content: flex-start !important;
-        margin-left: 24px;
-    }
-}
-
-.GalleryWrapper {
-    align-items: center;
-    width: calc(42.2222% - 5.333333333333333px);
-    flex: none;
-    /* padding-right: 24px; */
-    padding-right: 36px;
-    display: block;
-    padding: 0px;
-}
-
-.GalleryContainer {
-    position: sticky;
-    max-width: 100%;
-    top: 12px;
-    /* margin-top: 12px; */
-    margin-left: 24px;
-    margin-right: 24px;
-}
-
-.DescriptionContainer {
+.Description {
     position: relative;
     min-width: 0px;
     width: 100%;
@@ -82,7 +23,7 @@
     margin-right: 12px;
 }
 
-.HeaderContent {
+.Header {
     width: 80%;
 }
 
@@ -101,158 +42,33 @@
     font-weight: 600;
 }
 
-.TitleContainer {
-    margin-bottom: 14px;
-}
-
-.Title {
-    font-weight: 600;
-    margin: 0px;
-    word-wrap: break-word;
-    font-size: 46px;
-    line-height: 52px;
-    letter-spacing: normal;
-    color: #484848;
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-
-.Title h1 {
-    color: inherit;
-    font-size: 1em;
-    font-weight: inherit;
-    line-height: inherit;
-    margin: 0px;
-    padding: 0px;
-}
-
-.ShareButtons {
-    position: absolute;
-    top: 0px;
-    right: 0px;
+.MapContainer {
     display: flex;
-    flex-direction: row;
-}
-
-.Share {
-    margin-right: 6px;
-}
-
-.ShareButton {
-    cursor: pointer;
-    background-color: transparent;
-    display: block;
-    border-width: 0px;
-    border-style: initial;
-    border-color: initial;
-    border-image: initial;
-}
-
-.SeparatorWrapper {
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-.Separator {
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: #EBEBEB;
-    border-bottom-width: var(--border-rule-border-width, 1px);
-    border-bottom-color: var(--color-divider, #EBEBEB);
-}
-
-.ReviewsWrapper {
     position: relative;
-    width: 90%;
-    margin: 0 auto;
-}
-
-.SectionSeparator {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.SectionSeparatorLine {
-    margin-top: 55px;
-    margin-bottom: 55px;
-}
-
-.SectionSeparatorLine div {
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: #EBEBEB;
-    border-bottom-width: var(--border-rule-border-width, 1px);
-    border-bottom-color: var(--color-divider, #EBEBEB);
-}
-
-.ReviewsContainer {
-    display: flex;
-    flex-direction: row;
-}
-
-.RatingsWrapper {
-    -webkit-box-align: center;
-    align-items: center;
-    position: relative;
-    width: calc(33.3333% - 5.33333px);
-    padding-right: 24px;
-    display: block;
+    flex-flow: column;
     flex: 0 0 auto;
+    background-color: transparent;
+    margin: 36px auto 18px;
+    width: 90%;
+    height: 100%;
 }
 
-.RatingsContainer {
-    max-width: 360px;
-    position: sticky;
-    top: 48px;
+@media (max-width: 744px) {
+    .MapContainer {
+        margin: 0px auto 18px;
+    }
 }
 
-.RatingsContainer section {
-    max-width: 100%;
-}
-
-.RatingsHeader {
-    font-weight: 600;
-    margin: 0px;
-    word-wrap: break-word;
-    font-size: 32px;
-    line-height: 36px;
-    letter-spacing: normal;
-    color: #484848;
-    padding-top: 6px;
-    padding-bottom: 6px;
-}
-
-.Reviews {
-    color: inherit;
-    font-size: 1em;
-    font-weight: inherit;
-    line-height: inherit;
-    margin: 0px;
-    padding: 0px;
-}
-
-.RatingAvg {
-    overflow-wrap: break-word;
-    font-size: 18px;
-    line-height: 30px;
-    letter-spacing: normal;
-    color: rgb(72, 72, 72);
-    font-weight: 600;
-    margin: 0px;
-    margin-right: 10px;
-}
-
-.ReviewsWrapper {
-    position: relative;
+.MapWrapper {
+    height: 60vh;
 }
 
 .SimilarServices {
     display: flex;
     flex-direction: row;
     margin-bottom: 25px;
+    width: 90%;
+    margin: 36px auto;
 }
 
 .ServicesWrapper {
@@ -260,7 +76,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    width: calc(33.3333% - 5.3333px);
+    width: 30%;
     flex: none;
     padding-left: 24px;
     padding-right: 12px;
@@ -272,7 +88,7 @@
     font-weight: 600;
     margin: 0px;
     word-wrap: break-word;
-    font-size: 34px;
+    font-size: 28px;
     line-height: 39px;
     letter-spacing: normal;
     color: #484848;
@@ -280,13 +96,21 @@
     padding-bottom: 6px;
 }
 
-.ServicesContainer h1 {
-    color: inherit;
-    font-size: 1em;
-    font-weight: inherit;
-    line-height: inherit;
-    margin: 0px;
-    padding: 0px;
+@media (max-width: 744px) {
+    .ServicesWrapper {
+        padding-left: 12px !important;
+    }
+}
+
+@media (max-width: 580px) {
+    .SimilarServices {
+        flex-direction: column !important;
+    }
+    .ServicesWrapper {
+        width: 90% !important;
+        justify-content: flex-start !important;
+        margin-left: 24px;
+    }
 }
 
 .CarouselWrapper {
@@ -296,12 +120,19 @@
     height: 100%;
 }
 
+@media (max-width: 744px) {
+    .CarouselWrapper {
+        padding: 30px 0;
+    }
+}
+
 .CarouselContainer {
     margin-top: -24px;
     margin-bottom: -48px;
 }
 
-.MapWrapper {
-    height: 60vh;
-    margin: -12px 0;
+.Error {
+    font-weight: 600 !important;
+    color: #f14c4c !important;
+    font-size: 22px;
 }

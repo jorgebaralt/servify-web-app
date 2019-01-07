@@ -1,0 +1,30 @@
+.Wrapper {
+    align-items: center;
+    width: calc(42.2222% - 5.333333333333333px);
+    flex: none;
+    padding-right: 36px;
+    display: block;
+    padding: 0px;
+}
+
+.Container {
+    position: sticky;
+    max-width: 100%;
+    top: 96px;
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+@media (max-width: 744px) {
+    .Wrapper {
+        width: 100% !important;
+        margin: 0 auto;
+        padding: 0 0 25px !important;
+        margin-bottom: 25px !important;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #EBEBEB;
+        border-bottom-width: var(--border-rule-border-width, 1px);
+        border-bottom-color: var(--color-divider, #EBEBEB);
+    }
+}

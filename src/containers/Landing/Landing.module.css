@@ -65,7 +65,7 @@
     margin-bottom: 40px;
 }
 
-.HeaderSubheader {
+.Subheader {
     text-align: left;
     display: table;
     table-layout: fixed;
@@ -78,7 +78,7 @@
     padding: 0px;
 }
 
-.HeaderSubheader h1 {
+.Subheader h1 {
     font-weight: 600;
     margin-bottom: 0px;
     line-height: 30px;
@@ -88,7 +88,7 @@
     padding-bottom: 2px;
 }
 
-.HeaderSubheader h4 {
+.Subheader h4 {
     user-select: none;
     font-size: 16px;
     line-height: 22px;
@@ -96,6 +96,16 @@
     color: rgb(72, 72, 72);
     font-weight: normal;
     margin-top: 5px;
+}
+
+.LearnMore {
+    padding: 0px;
+}
+
+@media (min-width: 960px) { 
+    .LearnMore {
+        padding: 0 36px;
+    }
 }
 
 .Categories {
@@ -172,4 +182,3 @@ space for a fifth item. Meaning, 4 categories per row.*/
     /* For SVG */
     fill: #FF7043;
 }
-

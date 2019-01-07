@@ -14,6 +14,13 @@
     padding-bottom: 8px;
 }
 
+@media (max-width: 744px) {
+    .Title {
+        font-size: 24px;
+        line-height: 26px;
+}
+}
+
 .Title h1 {
     color: inherit;
     font-size: 1em;

@@ -4,16 +4,6 @@
     min-height: 200px;
 }
 
-@media (max-width: 744px) {
-    .Container {
-        flex-direction: column;
-    }
-    .LogoWrapper {
-        margin-top: 30px;
-        margin: 0 auto;
-    }
-}
-
 .InfoWrapper {
     min-width: 0px;
     -webkit-flex: 3;
@@ -47,8 +37,9 @@
 
 .Info {
     margin: 0px;
+    text-align: justify;
     word-wrap: break-word;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 26px;
     letter-spacing: normal;
     color: #484848;
@@ -117,4 +108,20 @@
 .Contact:hover {
     text-decoration: underline;
     color: var(--color-text-link-hover, rgb(255, 112, 67));
+}
+
+@media (max-width: 744px) {
+    .Container {
+        flex-direction: column;
+    }
+    .LogoWrapper {
+        order: 1;
+        margin: 8px 0 16px;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    .InfoWrapper {
+        order: 2;
+        margin-right: 0;
+    }
 }

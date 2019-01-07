@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 // CSS
-import classes from './Preview.module.css';
+import classes from '../../../../Services/ServicesId/ServicesId.module.css';
 // JSX
 import ReactResizeDetector from 'react-resize-detector';
-import PhotosCarousel from '../../../../../components/UI/PhotosCarousel/PhotosCarousel';
-import Map from '../../../../../components/UI/Map/Map';
-import SVG from '../../../../../components/SVG/SVG';
-import Review from '../../../../../components/Services/Review/Review';
-import Rating from '../../../../../components/UI/Rating/Rating';
+import Title from '../../../../../components/Services/Title/Title';
+import Gallery from '../../../../../components/Services/Gallery/Gallery';
+import Reviews from '../../../../../components/Services/Reviews/Reviews';
 import InfoPoint from '../../../../../components/Services/InfoPoint/InfoPoint';
 import InfoSection from '../../../../../components/Services/InfoSection/InfoSection';
+import SocialButtons from '../../../../../components/Services/SocialButtons/SocialButtons';
+import PhotosCarousel from '../../../../../components/UI/PhotosCarousel/PhotosCarousel';
+import Map from '../../../../../components/UI/Map/Map';
 import Separator from '../../../../../components/UI/Separator/Separator';
+import SVG from '../../../../../components/SVG/SVG';
 
 class Preview extends Component {
     constructor (props) {
@@ -43,42 +45,26 @@ class Preview extends Component {
     render() {
         return (
             <>
-                <div className={classes.ServiceContainer}>
-                    <div className={classes.GalleryWrapper}>
-                        <div ref={this.myGallery}
-                            className={classes.GalleryContainer}>
-                            <ReactResizeDetector handleWidth handleHeight onResize={this.setGalleryDimensions} />
-                            <PhotosCarousel
-                                fadeTimeout={0}
-                                dimensions={this.state.imageSizes}
-                                images={this.props.images} />
-                        </div>
-                    </div>
-                    <div className={classes.DescriptionContainer}>
-                        <div className={classes.HeaderContent}>
+                <div className={classes.Container}>
+                    <Gallery reference={this.myGallery}>
+                        <ReactResizeDetector handleWidth handleHeight onResize={this.setGalleryDimensions} />
+                        <PhotosCarousel
+                            fadeTimeout={0}
+                            dimensions={this.state.imageSizes}
+                            images={this.props.images} />
+                    </Gallery>
+                    <div className={classes.Description}>
+                        <div className={classes.Header}>
                             <div className={classes.CategoryContainer}>
                                 <small className={classes.Category}>{this.props.category}</small>
                             </div>
-                            <div className={classes.TitleContainer}>
-                                <div className={classes.Title}>
-                                    <h1>
-                                        {this.props.title ?
-                                                this.props.title
-                                                : <span className={classes.Error}>Service title is missing.</span>}
-                                    </h1>
-                                </div>
-                            </div>
+                            <Title>
+                                {this.props.title ?
+                                        this.props.title
+                                        : <span className={classes.Error}>Service title is missing.</span>}
+                            </Title>
                         </div>
-                        <div className={classes.ShareButtons}>
-                            <div className={classes.Share}>
-                                <button className={classes.ShareButton}>
-                                    <SVG svg='share' />
-                                </button>
-                            </div>
-                            <button className={classes.ShareButton}>
-                                <SVG svg='favorite' />
-                            </button>
-                        </div>
+                        <SocialButtons />
                         <InfoPoint symbol={<SVG svg='location-pin' />} 
                             location={
                                 this.props.infoPoints.state ? 
@@ -90,37 +76,32 @@ class Preview extends Component {
                         {this.props.infoPoints.languages ? 
                             <InfoPoint symbol={<SVG svg='chat' />} info={this.props.infoPoints.languages}/> 
                             : null}
-                        {/* <div className={classes.SeparatorWrapper}><div  className={classes.Separator}/></div> */}
                         <Separator />
                         {Object.values(this.props.infoSections).map( (section, index) => {
                             return (
-                                <InfoSection
-                                    key={index}
-                                    title={section.title}
-                                    contact={section.contact}
-                                    header={section.header}>
-                                    <div>
-                                        <p>
-                                            {section.info ?
-                                                section.info
-                                                : <span className={classes.Error}>Please provide the necessary information.</span>}
-                                        </p>
-                                    </div>
-                                </InfoSection>
+                                <>
+                                    <InfoSection
+                                        key={index}
+                                        title={section.title}
+                                        contact={section.contact}
+                                        header={section.header}>
+                                        <div>
+                                            <p>
+                                                {section.info ?
+                                                    section.info
+                                                    : <span className={classes.Error}>Please provide the necessary information.</span>}
+                                            </p>
+                                        </div>
+                                    </InfoSection>
+                                    <Separator />
+                                </>
                             );
                         })}
                     </div>
                 </div>
-                <Separator />
                 <div className={classes.MapContainer}>
-                    <div className={classes.TitleContainer}>
-                        <div className={classes.Title}>
-                            <h1>
-                                Service Address
-                            </h1>
-                        </div>
-                    </div>
-                    <div className={classes.DescriptionContainer}>
+                    <Title>Service Address</Title>
+                    <div className={classes.Description}>
                         <InfoPoint symbol={<SVG svg='location-pin' />} 
                                 location={
                                     this.props.address ? 
@@ -128,30 +109,10 @@ class Preview extends Component {
                                         : <span className={classes.Error}>Address can't be empty.</span>} 
                         />
                     </div>
+                    <Map className={classes.MapWrapper} map={this.props.map} />
                 </div>
-                <Map className={classes.MapWrapper} map={this.props.map} />
                 <Separator />
-                <div className={classes.ReviewsWrapper}>
-                    <div className={classes.ReviewsContainer}>
-                        <div className={classes.RatingsWrapper}>
-                            <div className={classes.RatingsContainer}>
-                                <section>
-                                    <div className={classes.RatingsHeader}> 
-                                        {/* TODO Make dynamic */}
-                                        <h1 tabIndex='-1' className={classes.Reviews}>{this.props.rating.totalReviews} total reviews from people who used this service</h1>
-                                    </div>
-                                </section>
-                                <span className={classes.RatingAvg}>{this.props.rating.avg.toFixed(1)}</span>
-                                <Rating height={'17.5px'} width={'17.5px'} type='stars' />
-                            </div>
-                        </div>
-                        <div className={classes.ReviewsWrapper}>
-                            <Review />
-                            <Review />
-                            <Review />
-                        </div>
-                    </div>
-                </div>
+                <Reviews rating={this.props.rating} />
             </>
         );
     }

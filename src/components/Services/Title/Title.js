@@ -6,7 +6,7 @@ const title = (props) => {
     return (
         <div className={classes.Container}>
             <div className={classes.Title}>
-                <h1>
+                <h1 tabIndex="-1">
                     {props.children}
                 </h1>
             </div>

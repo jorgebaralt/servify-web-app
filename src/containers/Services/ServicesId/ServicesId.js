@@ -6,15 +6,19 @@ import isObject from '../../../shared/isObject';
 import classes from './ServicesId.module.css';
 // JSX
 import ReactResizeDetector from 'react-resize-detector';
+
+import Title from '../../../components/Services/Title/Title';
+import Gallery from '../../../components/Services/Gallery/Gallery';
+import Reviews from '../../../components/Services/Reviews/Reviews';
+import InfoPoint from '../../../components/Services/InfoPoint/InfoPoint';
+import InfoSection from '../../../components/Services/InfoSection/InfoSection';
+import SocialButtons from '../../../components/Services/SocialButtons/SocialButtons';
+import Service from '../../../components/Services/Service/Service';
+import Carousel from '../../../components/UI/Carousel/Carousel';
 import PhotosCarousel from '../../../components/UI/PhotosCarousel/PhotosCarousel';
 import Map, { setMapboxAccessToken, setInitialMapboxPosition, defaultAddress } from '../../../components/UI/Map/Map';
+import Separator from '../../../components/UI/Separator/Separator';
 import SVG from '../../../components/SVG/SVG';
-import Review from '../../../components/Services//Review/Review';
-import Carousel from '../../../components/UI/Carousel/Carousel';
-import Service from '../../../components/Services/Service/Service'
-import Rating from '../../../components/UI/Rating/Rating';
-import InfoPoint from '../../../components/Services/InfoPoint/InfoPoint';
-import InfoSection from '../../../components/Services//InfoSection/InfoSection';
 
 class ServicesId extends Component {
     constructor (props) {
@@ -29,11 +33,17 @@ class ServicesId extends Component {
             width: null,
             height: null
         },
+        address: defaultAddress,
         map: {
             initialPosition: null,
             geoData: null,
-            radiusInMiles: 20
-        }
+            radiusInMiles: 4, // Initial value
+            maxRadius: 60 // For the input slider
+        },
+        rating: {
+            totalReviews: 3,
+            avg: 5
+        },
     }
 
     setGalleryDimensions = () => {
@@ -80,99 +90,63 @@ class ServicesId extends Component {
     render () {
         return (
             <>
-                <div className={classes.ServiceContainer}>
-                    <div className={classes.GalleryWrapper}>
-                        <div ref={this.myGallery}
-                            className={classes.GalleryContainer}>
-                            <ReactResizeDetector handleWidth handleHeight onResize={this.setGalleryDimensions} />
-                            <PhotosCarousel 
-                                dimensions={this.state.imageSizes}
-                                images={[
+                <div className={classes.Container}>
+                    <Gallery reference={this.myGallery}>
+                        <ReactResizeDetector handleWidth handleHeight onResize={this.setGalleryDimensions} />
+                        <PhotosCarousel
+                            dimensions={this.state.imageSizes}
+                            images={[
                                     'https://images.unsplash.com/photo-1531817506236-027915e5b07d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
                                     'https://images.unsplash.com/photo-1516788875874-c5912cae7b43?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80',
                                     'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
                                     'https://images.unsplash.com/photo-1519781542704-957ff19eff00?ixlib=rb-1.2.1&auto=format&fit=crop&w=1146&q=80',
                                     'https://images.unsplash.com/reserve/oIpwxeeSPy1cnwYpqJ1w_Dufer%20Collateral%20test.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=916&q=80',
                                 ]} />
-                        </div>
-                    </div>
+                    </Gallery>
                     <div className={classes.DescriptionContainer}>
-                        <div className={classes.HeaderContent}>
+                        <div className={classes.Header}>
                             <div className={classes.CategoryContainer}>
                                 <small className={classes.Category}>Home Service</small>
                             </div>
-                            <div className={classes.TitleContainer}>
-                                <div className={classes.Title}>
-                                    <h1 tabIndex="-1">Service Title</h1>
-                                </div>
-                            </div>
+                            <Title>Service Title</Title>
                         </div>
-                        <div className={classes.ShareButtons}>
-                            <div className={classes.Share}>
-                                <button className={classes.ShareButton}>
-                                    <SVG svg='share' />
-                                </button>
-                            </div>
-                            <button className={classes.ShareButton}>
-                                <SVG svg='favorite' />
-                            </button>
-                        </div>
+                        <SocialButtons />
                         <InfoPoint symbol={<SVG svg='location-pin' />} location='Florida'/>
                         <InfoPoint symbol={<SVG svg='location-pin' />} website='bonpreufoods.com'/>
                         <InfoPoint symbol={<SVG svg='chat' />} info='Services offered in English and Spanish'/>
-                        <div className={classes.SeparatorWrapper}><div  className={classes.Separator}/></div>
+                        <Separator />
                         <InfoSection 
                             title='Service'
                             contact={true}
                             header='About the service'>
                             <div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                                <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                             </div>
                         </InfoSection>
-                        <div className={classes.SeparatorWrapper}><div  className={classes.Separator}/></div>
+                        <Separator />
                         <InfoSection
                             title='Servify'
                             header='About the provider'>
                             <div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                                <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                             </div>
                         </InfoSection>
+                        <Separator />
                     </div>
                 </div>
-                <div className={classes.SectionSeparator}><div className={classes.SectionSeparatorLine}><div/></div></div>
-                <Map className={classes.MapWrapper} map={this.state.map} />
-                <div className={classes.SectionSeparator}><div className={classes.SectionSeparatorLine}><div/></div></div>
-                <div className={classes.ReviewsWrapper}>
-                    <div className={classes.ReviewsContainer}>
-                        <div className={classes.RatingsWrapper}>
-                            <div className={classes.RatingsContainer}>
-                                <section>
-                                    <div className={classes.RatingsHeader}> 
-                                        {/* TODO Make dynamic */}
-                                        <h1 tabIndex='-1' className={classes.Reviews}>8 total reviews from people who used this service</h1>
-                                    </div>
-                                </section>
-                                <span className={classes.RatingAvg}>{(5).toFixed(1)}</span>
-                                <Rating height={'17.5px'} width={'17.5px'} type='stars' />
-                            </div>
-                        </div>
-                        <div className={classes.ReviewsWrapper}>
-                            <Review />
-                            <Review />
-                            <Review />
-                        </div>
+                <div className={classes.MapContainer}>
+                    <Title>Service Address</Title>
+                    <div className={classes.Description}>
+                        <InfoPoint symbol={<SVG svg='location-pin' />} location={this.state.address}/>
                     </div>
+                    <Map className={classes.MapWrapper} map={this.state.map} />
                 </div>
-                <div className={classes.SectionSeparator}><div className={classes.SectionSeparatorLine}><div/></div></div>
+                <Separator />
+                <Reviews rating={this.state.rating} />
+                <Separator />
                 <div className={classes.SimilarServices}>
                     <div className={classes.ServicesWrapper}>
-                        <div className={classes.ServicesContainer}>
-                            <h1 tabIndex='-1'>Similar services near you</h1>
-                        </div>
+                        <Title>Similar services near you</Title>
                     </div>
                     <div className={classes.CarouselWrapper}>
                         <div className={classes.CarouselContainer}>

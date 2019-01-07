@@ -1,11 +1,11 @@
 import React from 'react';
+// Default Image
+import defaultImage from '../../../../assets/favicon/android-icon-48x48.png';
 // CSS
 import classes from './Review.module.css';
 // JSX
 import { NavLink } from 'react-router-dom';
-import Rating from '../../../components/UI/Rating/Rating';
-// Default Image
-import defaultImage from '../../../assets/favicon/android-icon-48x48.png';
+import Rating from '../../../../components/UI/Rating/Rating';
 
 const review = (props) => {
     return (
@@ -15,7 +15,7 @@ const review = (props) => {
                 <div className={classes.HeaderItem}>
                     <div className={classes.ImageContainer}>
                         <NavLink 
-                            to={['../   users/', props.userId].join(' ')}
+                            to={['../users/show/', props.userId].join('')}
                             aria-label={props.user}
                             aria-busy="false">
                             <img 
@@ -42,9 +42,9 @@ const review = (props) => {
                     </div>
                 </div>
             </div>
+            {/* TODO remove placeholders */}
             <div className={classes.DescriptionContainer}>
                 <div dir='ltr' className={classes.Description}>
-                    {/* TODO remove placeholder lorem ipsum */}
                     {props.description ? props.description : 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.'}
                 </div>
             </div>

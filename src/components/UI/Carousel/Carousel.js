@@ -127,10 +127,12 @@ class Carousel extends Component {
             settings = this.props.settings;
         }
         return (
-            <div className={classes.Carousel}>
-                <Slider  ref={ref => (this.mySlider = ref)} {...settings}>
-                    {this.props.children} 
-                </Slider>
+            <div className={classes.Wrapper}>
+                <div className={classes.Container}>
+                    <Slider  ref={ref => (this.mySlider = ref)} {...settings}>
+                        {this.props.children} 
+                    </Slider>
+                </div>
                 {/* PrevButton */}
                 {this.state.activeSlide === 0 ? 
                     null : 
@@ -141,7 +143,7 @@ class Carousel extends Component {
                 }
                 {/* NextButton */}
                 {(this.state.activeSlide + this.state.slidesToShow)*settings.rows >= this.props.children.length || this.state.slidesToShow >= this.props.children.length  ? 
-                    null : 
+                    null :  
                     <div className={classes.NextButton}>
                         <button onClick={this.next}>
                         </button>

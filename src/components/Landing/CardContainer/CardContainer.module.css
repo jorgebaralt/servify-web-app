@@ -1,8 +1,15 @@
-.CardWrapper {
+.Wrapper {
     overflow: hidden;
+    padding: 0 36px;
 }
 
-.CardContainer {
+@media (max-width: 744px) {
+    .Wrapper {
+        padding: 0 8px;
+    }
+}
+
+.Container {
     height: 100%;
     overflow-y: auto;
     white-space: nowrap;
@@ -13,7 +20,7 @@
     overflow:auto;
 }
 
-.CardContainer a {
+.Container a {
     display: inline-block !important;
     margin: 5px;
     width: 66%;
@@ -23,7 +30,7 @@
 } 
 
 @media (min-width: 650px) {
-    .CardContainer {
+    .Container {
         display: flex;
         flex-flow: row;
         flex-wrap: wrap;
@@ -33,7 +40,7 @@
         padding: 0px;
         overflow: visible;
     } 
-    .CardContainer a {
+    .Container a {
         margin: 5px;
         width: 27.5%;
     } 

@@ -51,8 +51,6 @@ class Landing extends Component {
     componentDidMount () {
         axios.get('http://ipinfo.io').then(
             (response) => {
-                // TODO REMOVE C.LOG
-                console.log(response)
                 this.savePosition(response)
             }
         );
@@ -165,11 +163,10 @@ class Landing extends Component {
                         </Carousel>
                     </div>
                     <br />
-                    <div className={classes.HeaderSubheader}>
+                    <div className={classes.Subheader}>
                         <h1>Featured Servify services</h1>
                         <h4>Browse from our featured services that stand out for their excellence</h4>
                         <Carousel slidesToShow={3}>
-                            <Featured image='https://a0.muscache.com/4ea/air/v2/pictures/a728b050-9512-48a7-ab9c-858e9b291cc0.jpg?t=r:w654-h400-sfit,e:fjpg-c90'/>
                             <Featured image='https://a0.muscache.com/4ea/air/v2/pictures/a728b050-9512-48a7-ab9c-858e9b291cc0.jpg?t=r:w654-h400-sfit,e:fjpg-c90'/>
                             <Featured image='https://a0.muscache.com/4ea/air/v2/pictures/a728b050-9512-48a7-ab9c-858e9b291cc0.jpg?t=r:w654-h400-sfit,e:fjpg-c90'/>
                             <Featured image='https://a0.muscache.com/4ea/air/v2/pictures/a728b050-9512-48a7-ab9c-858e9b291cc0.jpg?t=r:w654-h400-sfit,e:fjpg-c90'/>
@@ -220,9 +217,11 @@ class Landing extends Component {
                                 image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
                         </Carousel>
                     </div>
-                    <LearnMore 
-                        city={this.state.city}
-                        state={this.state.state} />
+                    <div className={classes.LearnMore}>
+                        <LearnMore 
+                            city={this.state.city}
+                            state={this.state.state} />
+                    </div>
                     <br />
                     <h1>All Categories</h1>
                     <ul className={classes.Categories}>

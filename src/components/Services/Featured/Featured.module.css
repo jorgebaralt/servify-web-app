@@ -2,26 +2,10 @@
     display: inline-block;
     vertical-align: top;
     white-space: normal;
-    width: 95%;
-    padding-left: 8px;
-    padding-right: 8px;
-    margin-top: 8px;
-    margin-bottom: 12px;
+    width: 100%;
+    padding: 0 8px;
+    margin: 8px auto 12px;
 }
-
-/* @media (min-width: 744px)
-{
-    .Wrapper {
-        width: 50%;
-    }
-    
-}
-@media (min-width: 1128px)
-{
-    .Wrapper {
-        width: 33.3333%;
-    }
-} */
 
 .Anchor {
     color: rgb(72, 72, 72);

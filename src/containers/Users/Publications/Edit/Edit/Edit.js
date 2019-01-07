@@ -6,11 +6,11 @@ import classes from './Edit.module.css';
 // JSX
 import { ToastContainer } from 'react-toastify';
 import Map, { setInitialMapboxPosition, setAddress, defaultAddress } from '../../../../../components/UI/Map/Map';
-import Separator from '../../../../../components/UI/Separator/Separator';
 import Image from '../../../../../components/UI/Image/Image';
 import Input from '../../../../../components/UI/Input/Input';
 import InputSlider from '../../../../../components/UI/Input/InputSlider/InputSlider';
 import EditImages, { setItems } from '../../../../../components/UI/EditImages/EditImages';
+import Title from '../../../../../components/Services/Title/Title';
 
 class Edit extends PureComponent {
     constructor (props) {
@@ -21,7 +21,6 @@ class Edit extends PureComponent {
                 <Image draggable="false" src={image} />
             );
         });
-        console.log('inside constructor in Edit.js', props.map)
         this.state = {
             controls: {
                 title: {
@@ -143,7 +142,6 @@ class Edit extends PureComponent {
                     },
                     valid: false,
                     touched: false,
-                    style: {marginTop: 0}
                 }
             },
             map: props.map,
@@ -244,7 +242,6 @@ class Edit extends PureComponent {
     }
     
     componentWillUnmount() {
-        console.log('inside componentWillUnmount in Edit.js');
         const newState = {
             // category: this.state.controls.category.value,
             title: this.state.controls.title.value,
@@ -272,7 +269,6 @@ class Edit extends PureComponent {
     }
 
     render() {
-        console.log('inside render in Edit.js', this.state)
         const formElementsArray = Object.entries(this.state.controls);
         return (
             <>
@@ -292,11 +288,7 @@ class Edit extends PureComponent {
                         </div>
                     </div>
                     <div className={classes.DescriptionContainer}>
-                        <div className={classes.TitleContainer}>
-                            <div className={classes.Title}>
-                                <h1 tabIndex="-1">Your Service Information</h1>
-                            </div>
-                        </div>
+                        <Title>Your Service Information</Title>
                         {formElementsArray.map( (input) => {
                             if (input[0] === 'address') { return null; }
                             return (
@@ -312,20 +304,14 @@ class Edit extends PureComponent {
                                             touched={input[1].touched}
                                             value={input[1].value} 
                                             valueType={input[1].valueType} />
-                                        <Separator/>
                                     </div>
                                 </div>
                             );
                         })}
                     </div>
                 </div>
-                <Separator/>
                 <div className={classes.MapContainer}>
-                    <div className={classes.TitleContainer}>
-                        <div className={classes.Title}>
-                            <h1>Your Service Address</h1>
-                        </div>
-                    </div>
+                    <Title>Your Service Address</Title>
                     <Input 
                         style={this.state.controls.address.style}
                         elementType={this.state.controls.address.elementType} 
