@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 // CSS
 import classes from './Layout.module.css';
 // JSX
-import AuthModal from '../../containers/Auth/AuthModal/AuthModal';
+import AuthModes from '../../containers/Auth/AuthModes/AuthModes';
 import Navbar from '../../containers/Navbar/Navbar';
 import Footer from '../../components/UI/Footer/Footer';
 
 /**
  * Modal functionality and context. The provider and consumer is inside the layout render method
  */
-const MyAuthModalContext = React.createContext();
-class MyAuthModalProvider extends Component {
+const HeaderContext = React.createContext();
+class HeaderProvider extends Component {
 	state ={
 		bShowAuthModal: false,
 		authModalType: null
@@ -43,7 +43,7 @@ class MyAuthModalProvider extends Component {
 
 	render () {
 		return (
-			<MyAuthModalContext.Provider value={{
+			<HeaderContext.Provider value={{
 					switchAuthModalHandler: this.switchAuthModalHandler, // switches modal without closing
 					toggleAuthModal: this.toggleAuthModal, // switches modal and closes
 					closeAuthModal: this.closeAuthModal, // closes modal
@@ -51,7 +51,7 @@ class MyAuthModalProvider extends Component {
 					bShowAuthModal: this.state.bShowAuthModal
 				}}>
 				{this.props.children}
-			</MyAuthModalContext.Provider>
+			</HeaderContext.Provider>
 		)
 	}
 }
@@ -61,12 +61,12 @@ class Layout extends Component {
 	render() {
 		return (
 			<>
-				<MyAuthModalProvider>
-					<MyAuthModalContext.Consumer>
+				<HeaderProvider>
+					<HeaderContext.Consumer>
 						{(context) => {
 							return(
 								<>
-									<AuthModal
+									<AuthModes
 										switchAuthModalHandler={context.switchAuthModalHandler}
 										toggleModal={context.toggleAuthModal}
 										closeModal={context.closeAuthModal}
@@ -76,8 +76,8 @@ class Layout extends Component {
 								</>
 							);
 						}}
-					</MyAuthModalContext.Consumer>
-				</MyAuthModalProvider>
+					</HeaderContext.Consumer>
+				</HeaderProvider>
 				<main className={classes.Layout}>
 					{this.props.children}
 				</main>

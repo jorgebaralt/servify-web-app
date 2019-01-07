@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // JSX
-import SignUpModal from './SignUpModal/SignUpModal';
-import SignInModal from './SignInModal/SignInModal';
+import SignUp from './SignUp/SignUp';
+import SignIn from './SignIn/SignIn';
 import Modal from '../../../components/UI/Modal/Modal';
 
 
@@ -10,9 +10,9 @@ class AuthModal extends Component {
     switchAuthModeHandler = () => {
         switch (this.props.authModalType) {
             case 'sign up':
-                return <SignUpModal switchAuthModalHandler={this.props.switchAuthModalHandler} />
+                return <SignUp switchAuthModalHandler={this.props.switchAuthModalHandler} />
             case 'sign in':
-                return <SignInModal switchAuthModalHandler={this.props.switchAuthModalHandler} />
+                return <SignIn switchAuthModalHandler={this.props.switchAuthModalHandler} />
             default:
                 // do nothing
                 return;

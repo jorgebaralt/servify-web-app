@@ -8,6 +8,7 @@ import { mobileCreator } from './store/actions';
 import Layout from './hoc/Layout/Layout';
 import RouterScrollToTop from './hoc/RouterScrollToTop/RouterScrollToTop';
 import Landing from './containers/Landing/Landing';
+import Auth from './containers/Auth/Auth';
 import Help from './containers/Help/Help';
 import Contact from './containers/Contact/Contact';
 import Publish from './containers/Publish/Publish';
@@ -19,7 +20,7 @@ import Feedback from './containers/Users/Feedback/Feedback';
 import Publications from './containers/Users/Publications/Publications';
 import PublicationsId from './containers/Users/Publications/Edit/PublicationsId';
 import UsersId from './containers/Users/UsersId/UsersId';
-import NoMatch from './containers/NoMatch/NoMatch';
+import NotFound from './containers/NotFound/NotFound';
 
 class App extends Component {
 	constructor(props) {
@@ -32,6 +33,7 @@ class App extends Component {
 			<Layout>
 				<RouterScrollToTop />
 				<Switch>
+					<Route exact path="/authenticate" component={Auth} />
 					<Route exact path="/help" component={Help} />
 					<Route exact path="/contact" component={Contact} />
 					<Route exact path="/publish" component={Publish} />
@@ -44,7 +46,7 @@ class App extends Component {
 					<Route exact path="/users/edit" component={Edit} />
 					<Route exact path="/users/show" component={UsersId} />
 					<Route exact path="/" component={Landing} />
-                    <Route path="*" component={NoMatch} />
+                    <Route path="*" component={NotFound} />
 				</Switch>
 			</Layout>
 		);
