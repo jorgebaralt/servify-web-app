@@ -4,8 +4,6 @@ import classes from './Button.module.css';
 // JSX
 import SVG from '../../SVG/SVG';
 
-// TODO Refactor ButtonFilled and Button into one
-
 const button = (props) => {
     // Success/Danger classes
     let logo = null;

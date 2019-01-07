@@ -253,7 +253,6 @@ class Navbar extends PureComponent {
 	}
 }
 
-// TODO determine if to disconnect or not
 const mapStateToProps = (state) => {
 	return {
 		isMobile: state.mobileReducer.isMobile,

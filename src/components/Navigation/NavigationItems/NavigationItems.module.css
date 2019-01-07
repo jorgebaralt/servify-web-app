@@ -31,8 +31,6 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    /* TODO determine if overflow is needed */
-    /* overflow: hidden; */
 }
 
 .MobileHomeLink,

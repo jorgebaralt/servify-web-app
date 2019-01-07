@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom';
 import HeaderImage from '../../components/UI/HeaderImage/HeaderImage';
 import Carousel from '../../components/UI/Carousel/Carousel';
 import SearchBox from '../../components/UI/SearchBox/SearchBox';
-import Banner from '../../components/UI/Banner/Banner';
 import CardContainer from '../../components/Landing/CardContainer/CardContainer';
 import Card from '../../components/Landing/Card/Card';
 import Service from '../../components/Services/Service/Service';

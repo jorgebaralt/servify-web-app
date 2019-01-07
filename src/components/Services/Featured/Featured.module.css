@@ -90,14 +90,13 @@
 }
 
 .ServifyLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     width: 100%;
     top: -26px;
     margin: 0px auto;
-    /* TODO May be placeholder */
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .Text {
