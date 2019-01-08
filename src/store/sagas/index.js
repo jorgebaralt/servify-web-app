@@ -1,7 +1,9 @@
-import { takeEvery } from 'redux-saga/effects';
-
+// Redux Saga
+import { takeEvery, all } from 'redux-saga/effects';
+// Sagas
 import { mobileSagas } from './mobile';
 import { servicesSagas } from './services';
+import { authSagas } from './auth';
 
 import * as actionTypes from '../actions/types';
 
@@ -10,6 +12,15 @@ export function* watchMobile () {
 }
 
 export function* watchServices () {
-    yield takeEvery(actionTypes.SERVICES_INIT_FILTERED_CATEGORIES, servicesSagas.setFilteredCategories);
-    yield takeEvery(actionTypes.SERVICES_INIT_RESET_FILTERED_CATEGORIES, servicesSagas.resetFilteredCategories);
+    yield all([
+        takeEvery(actionTypes.SERVICES_INIT_FILTERED_CATEGORIES, servicesSagas.setFilteredCategories),
+        takeEvery(actionTypes.SERVICES_INIT_RESET_FILTERED_CATEGORIES, servicesSagas.resetFilteredCategories)
+    ]);
+}
+
+export function* watchAuth () {
+    yield all([
+        takeEvery(actionTypes.AUTH_INIT_SIGN_UP, authSagas.authSignUp),
+        takeEvery(actionTypes.AUTH_INIT_SIGN_IN, authSagas.authSignIn)
+    ]);
 }

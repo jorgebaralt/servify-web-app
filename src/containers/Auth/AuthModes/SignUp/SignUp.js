@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// Redux & Sagas Creator
+import { connect } from 'react-redux'
+import { authCreator } from '../../../../store/actions/';
 // Input Validity
 import { checkValidity } from '../../../../shared/checkValidity';
 // JSX
@@ -165,7 +168,8 @@ class SignUpModal extends Component {
 
     onSubmitHandler = (event) => {
         event.preventDefault();
-        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.bRememberMe);
+        console.log('onSubmitHandler')
+        this.props.onSignUpHandler(this.state.controls.email.value, this.state.controls.password.value, this.state.bRememberMe);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -201,7 +205,7 @@ class SignUpModal extends Component {
                             toggleRememberMe={this.toggleRememberMe}
                             bRememberMe={this.state.bRememberMe} />
                         <Marketing />
-                        <Button disabled={!this.state.formIsValid} type='auth' blockButton={true}>Sign up</Button>
+                        <Button submit disabled={!this.state.formIsValid} type='auth' blockButton={true}>Sign up</Button>
                         <MarketingPrompt  
                             toggleMarketingPrompt={this.toggleMarketingPrompt}
                             bMarketingPrompt={this.state.bMarketingPrompt} />
@@ -218,4 +222,10 @@ class SignUpModal extends Component {
     }
 };
 
-export default React.memo(SignUpModal);
+const mapDispatchToProps = (dispatch) => {
+    return {
+		onSignUpHandler: (email, password, bRememberMe) => dispatch(authCreator.authSignUpInit(email, password, bRememberMe))
+	};
+}
+
+export default connect(null, mapDispatchToProps)(SignUpModal);

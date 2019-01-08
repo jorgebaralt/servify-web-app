@@ -25,6 +25,7 @@ import NotFound from './containers/NotFound/NotFound';
 class App extends Component {
 	constructor(props) {
 		super(props);
+		props.onInit();
 		props.onIsMobile();
 	}
 
