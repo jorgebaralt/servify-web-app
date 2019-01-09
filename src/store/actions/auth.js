@@ -1,7 +1,29 @@
 import * as actionTypes from './types';
 
 export const authActions = {
-    
+    authSuccess: (userId) => {
+        return {
+            type: actionTypes.AUTH_SUCCESS,
+            userId: userId
+        }
+    },
+    authFail: (error) => {
+        return {
+            type: actionTypes.AUTH_FAIL,
+            error: error
+        }
+    },
+    authLogout: () => {
+        return {
+            type: actionTypes.AUTH_LOGOUT
+        }
+    },
+    // ,checkAuthTimeout: (expirationTime) => {
+    //     return {
+    //         type: actionTypes.AUTH_CHECK_TIMEOUT,
+    //         expirationTime: expirationTime
+    //     }
+    // },
 }
 
 export const authCreator = {
@@ -11,7 +33,6 @@ export const authCreator = {
     //     }
     // },
     authSignUpInit: (email, password, bRememberMe) => {
-        console.log('authSignUpInit');
         return {
             type: actionTypes.AUTH_INIT_SIGN_UP,
             email: email,
@@ -27,6 +48,11 @@ export const authCreator = {
             bRememberMe: bRememberMe
         }
     },
+    authLogoutInit: () => {
+        return {
+            type: actionTypes.AUTH_INIT_SAGA_LOGOUT
+        }
+    }
 }
 
 export const parseErrorMessage = (isSignUp, errorCode) => {

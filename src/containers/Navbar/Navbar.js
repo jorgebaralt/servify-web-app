@@ -17,6 +17,7 @@ const NavbarContainer = (props) => {
 					width={props.width}
 					navbarType={props.navbarType} 
 					isNavbarTransparent={props.isNavbarTransparent} 
+					isAuthenticated={props.isAuthenticated}
 					toggleAuthModal={props.toggleAuthModal} />
 			</nav>
 			{props.width < 1121 ? 
@@ -29,6 +30,7 @@ const NavbarContainer = (props) => {
 					drawerClass={classes.MobileOnly}
 					isOpen={props.bIsDrawerOpen}
 					onClick={props.toggleMobileDrawer}
+					isAuthenticated={props.isAuthenticated}
 					// NavItems props
 					isNavbarTransparent={props.navbarTransparent} 
 					toggleAuthModal={props.toggleAuthModal} />
@@ -235,6 +237,7 @@ class Navbar extends PureComponent {
 	};
 
 	render () {
+		console.log(this.props.isAuthenticated)
 		const navbarClasses = [this.state.className];
 		if (this.state.isNavbarTransparent) {
 			navbarClasses.push(classes.NavbarTransparent);
@@ -243,6 +246,7 @@ class Navbar extends PureComponent {
 			<header className={navbarClasses.join(' ')} ref={this.myNavbar}>
 				<NavbarContainer
 					isMobile={this.props.isMobile} 
+					isAuthenticated={this.props.isAuthenticated} 
 					{...this.state} />
 				{/* ScrollToTopButton after scrolling */}
 				{this.state.showScrollToTop ? (
@@ -256,6 +260,7 @@ class Navbar extends PureComponent {
 const mapStateToProps = (state) => {
 	return {
 		isMobile: state.mobileReducer.isMobile,
+		isAuthenticated: state.authReducer.userId !== null
 	};
 };
 

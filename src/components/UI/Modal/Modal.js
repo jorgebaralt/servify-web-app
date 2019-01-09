@@ -44,6 +44,11 @@ class Modal extends Component {
         }
     }
 
+    componentWillUnmount() {
+        document.removeEventListener("keydown", () => this.escFunction(), false);
+        document.body.style.overflow = null;
+    }
+
     render() {
         return (
             <div className={this.props.show ? classes.BodyOverlay : classes.Null}> 

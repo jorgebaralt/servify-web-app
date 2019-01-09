@@ -95,7 +95,7 @@ class SignUpModal extends Component {
                 style: {marginBottom: '22px'}
             },
         },
-        bRememberMe: false,
+        bRememberMe: true,
         bMarketingPrompt: false,
         bShowPassword: false,
         bSignUpWithEmail: false,

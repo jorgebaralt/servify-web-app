@@ -55,7 +55,7 @@ class SignInModal extends Component {
                 style: null
             },
         },
-        bRememberMe: false,
+        bRememberMe: true,
         bShowPassword: false,
         formIsValid: false,
     }

@@ -21,6 +21,7 @@ export function* watchServices () {
 export function* watchAuth () {
     yield all([
         takeEvery(actionTypes.AUTH_INIT_SIGN_UP, authSagas.authSignUp),
-        takeEvery(actionTypes.AUTH_INIT_SIGN_IN, authSagas.authSignIn)
+        takeEvery(actionTypes.AUTH_INIT_SIGN_IN, authSagas.authSignIn),
+        takeEvery(actionTypes.AUTH_INIT_SAGA_LOGOUT, authSagas.authLogout)
     ]);
 }

@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 // JSX
 import SignUp from './SignUp/SignUp';
 import SignIn from './SignIn/SignIn';
 import Modal from '../../../components/UI/Modal/Modal';
 
-
-class AuthModal extends Component {
-    
+class AuthModal extends PureComponent {
     switchAuthModeHandler = () => {
         switch (this.props.authModalType) {
             case 'sign up':
@@ -19,20 +18,29 @@ class AuthModal extends Component {
         }
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps !== this.props || nextState !== this.state || nextProps.children !== this.props.children;
+    componentWillUnmount() {
+        document.body.style.overflow = null;
     }
 
     render() {
+        if (this.props.isAuthenticated) { return null; }
         return (
-            <Modal
-                closeModal={this.props.closeModal}
-                toggleModal={this.props.toggleModal}
-                show={this.props.show}>  
-                {this.switchAuthModeHandler()}
-            </Modal>
+            !this.props.isAuthenticated ? 
+                <Modal
+                    closeModal={this.props.closeModal}
+                    toggleModal={this.props.toggleModal}
+                    show={this.props.show}>  
+                    {this.switchAuthModeHandler()}
+                </Modal>
+                : null
         );
     }
 };
 
-export default React.memo(AuthModal);
+const mapStateToProps = (state) => {
+	return {
+		isAuthenticated: state.authReducer.userId !== null
+	};
+};
+
+export default connect(mapStateToProps)(AuthModal);

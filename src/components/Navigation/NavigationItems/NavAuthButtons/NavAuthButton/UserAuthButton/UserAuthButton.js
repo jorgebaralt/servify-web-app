@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// redux-sagas
+import { connect } from 'react-redux';
+import { authCreator } from '../../../../../../store/actions';
 // CSS
 import classes from './UserAuthButton.module.css';
 // JSX
@@ -30,6 +33,11 @@ class UserButton extends Component {
         });
     }
 
+    logoutHandler = () => {
+        this.props.onClick();
+        this.props.onLogoutHandler();
+    }
+
     componentDidMount() {
         document.body.addEventListener("click", this.closeList);
     }
@@ -53,9 +61,7 @@ class UserButton extends Component {
                 <Link to="/users/feedback">
                     <li onClick={this.props.onClick} className={classes.ListItem}>Give us some feedback</li>
                 </Link>
-                <Link to="/users/signout">
-                    <li onClick={this.props.onClick} className={classes.ListItem}>Sign out</li>
-                </Link>
+                <li onClick={this.props.onLogoutHandler} className={classes.ListItem}>Sign out</li>
             </ul>
         );
         const widescreen = (
@@ -76,4 +82,10 @@ class UserButton extends Component {
     }
 }
 
-export default UserButton;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onLogoutHandler: () => dispatch(authCreator.authLogoutInit()),
+	};
+};
+
+export default connect(null, mapDispatchToProps)(UserButton);

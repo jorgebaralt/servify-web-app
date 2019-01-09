@@ -2,59 +2,60 @@ import React, { Component } from 'react';
 // CSS
 import classes from './Layout.module.css';
 // JSX
+import HeaderProvider, { HeaderContext } from './Header/Header';
 import AuthModes from '../../containers/Auth/AuthModes/AuthModes';
 import Navbar from '../../containers/Navbar/Navbar';
 import Footer from '../../components/UI/Footer/Footer';
 
-/**
- * Modal functionality and context. The provider and consumer is inside the layout render method
- */
-const HeaderContext = React.createContext();
-class HeaderProvider extends Component {
-	state ={
-		bShowAuthModal: false,
-		authModalType: null
-	}
+// /**
+//  * Modal functionality and context. The provider and consumer is inside the layout render method
+//  */
+// const HeaderContext = React.createContext();
+// class HeaderProvider extends Component {
+// 	state ={
+// 		bShowAuthModal: false,
+// 		authModalType: null
+// 	}
 
-	switchAuthModalHandler = (type) => {
-		this.setState( () => {
-			return { 
-				authModalType: type
-			};
-		});
-	}
+// 	switchAuthModalHandler = (type) => {
+// 		this.setState( () => {
+// 			return { 
+// 				authModalType: type
+// 			};
+// 		});
+// 	}
 
-	toggleAuthModal = (type) => {
-		this.setState( (prevState) => {
-			return { 
-				bShowAuthModal: !prevState.bShowAuthModal,
-				authModalType: type
-			};
-		});
-	}
+// 	toggleAuthModal = (type) => {
+// 		this.setState( (prevState) => {
+// 			return { 
+// 				bShowAuthModal: !prevState.bShowAuthModal,
+// 				authModalType: type
+// 			};
+// 		});
+// 	}
 
-	closeAuthModal = () => {
-		this.setState( () => {
-			return { 
-				bShowAuthModal: false,
-			};
-		});
-	}
+// 	closeAuthModal = () => {
+// 		this.setState( () => {
+// 			return { 
+// 				bShowAuthModal: false,
+// 			};
+// 		});
+// 	}
 
-	render () {
-		return (
-			<HeaderContext.Provider value={{
-					switchAuthModalHandler: this.switchAuthModalHandler, // switches modal without closing
-					toggleAuthModal: this.toggleAuthModal, // switches modal and closes
-					closeAuthModal: this.closeAuthModal, // closes modal
-					authModalType: this.state.authModalType,
-					bShowAuthModal: this.state.bShowAuthModal
-				}}>
-				{this.props.children}
-			</HeaderContext.Provider>
-		)
-	}
-}
+// 	render () {
+// 		return (
+// 			<HeaderContext.Provider value={{
+// 					switchAuthModalHandler: this.switchAuthModalHandler, // switches modal without closing
+// 					toggleAuthModal: this.toggleAuthModal, // switches modal and closes
+// 					closeAuthModal: this.closeAuthModal, // closes modal
+// 					authModalType: this.state.authModalType,
+// 					bShowAuthModal: this.state.bShowAuthModal
+// 				}}>
+// 				{this.props.children}
+// 			</HeaderContext.Provider>
+// 		)
+// 	}
+// }
 
 class Layout extends Component {
 

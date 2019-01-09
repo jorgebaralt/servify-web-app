@@ -5,12 +5,13 @@ import classes from './NavAuthButtons.module.css';
 import NavAuthButton from './NavAuthButton/NavAuthButton';
 
 const navAuthButtons = (props) => {
+    console.log('props.isAuthenticated', props.isAuthenticated)
 	const buttonClass = [classes.Button];
 	//if white respective css
 	if (props.color === 'white') {
 		buttonClass.push(classes.ButtonWhite);
-	}
-    return (
+    }
+    let authButtons = (
         <>
             <NavAuthButton
                 button='Sign in'
@@ -20,12 +21,19 @@ const navAuthButtons = (props) => {
                 button='Sign up'
                 className={buttonClass.join(' ')} 
                 onClick={props.toggleAuthModal}/>
+        </>
+    );
+    if (props.isAuthenticated) { 
+        authButtons = (
             <NavAuthButton
                 width={props.width}
                 button='User'
                 className={buttonClass.join(' ')} 
                 onClick={props.onClick}/>
-        </>
+        );
+    }
+    return (
+        authButtons
     );
 }
 
