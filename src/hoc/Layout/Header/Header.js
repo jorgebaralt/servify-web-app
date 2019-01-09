@@ -46,7 +46,6 @@ class HeaderProvider extends Component {
     }
 
 	render () {
-        console.log('this.props', this.props)
 		return (
 			<HeaderContext.Provider value={{
 					switchAuthModalHandler: this.switchAuthModalHandler, // switches modal without closing

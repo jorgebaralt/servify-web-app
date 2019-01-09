@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
 // redux-sagas
 import { connect } from 'react-redux';
-import { mobileCreator } from './store/actions';
+import { mobileCreator, authCreator } from './store/actions';
 // JSX
 import Layout from './hoc/Layout/Layout';
 import RouterScrollToTop from './hoc/RouterScrollToTop/RouterScrollToTop';
@@ -26,7 +26,11 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		props.onInit();
-		props.onIsMobile();
+		props.onIsMobile(); // Firebase init
+	}
+
+	componentDidMount () {
+		this.props.onAuthCheckState();
 	}
 
 	render() {
@@ -63,6 +67,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onIsMobile: () => dispatch(mobileCreator.isMobileInit()),
+		onAuthCheckState: () => dispatch(authCreator.authCheckStateInit())
 	};
 };
 

@@ -1,24 +1,39 @@
 // Redux Saga
 import { put, call } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
-// Callbacks
+// Firebase methods
 import firebase from 'firebase';
 // Actions
 import { authActions, parseErrorMessage } from '../actions';
 
+/**
+ * TODO store userId in local storage. If the stored userId token matches 
+ * the one returned by firebase keep user logged in, else log him out.
+ */
+const onAuthStateChanged = () => {
+    return new Promise((resolve, reject) => {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                resolve(user);
+            } else {
+                reject(new Error('No user logged in.'));
+            }
+        });
+    });
+}
+
 export const authSagas = {
     authCheckState: function* () {
-        const token = yield localStorage.getItem('token');
-        if (!token) {
-            yield put(authActions.authLogout());
-        } else {
-            const userId = yield localStorage.getItem('userId');
-            const expirationDate = yield new Date(localStorage.getItem('expirationDate'));
-            if (expirationDate <= new Date()) {
+        try {
+            const currentUser = yield call(onAuthStateChanged);
+            if (!currentUser.uid) {
+                yield firebase.auth().signOut();
                 yield put(authActions.authLogout());
+            } else {
+                yield put(authActions.authSuccess(currentUser.uid));
             }
-            yield put(authActions.authSuccess(token, userId));
-            yield put(authActions.checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000));
+        } catch (error) {
+            console.error(error);
         }
     },
     authSignUp: function* (action) {
@@ -30,13 +45,11 @@ export const authSagas = {
         // }
         try {
             // const response = yield axios.post(url, authData);
+            yield firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
             const response = yield firebase.auth().createUserWithEmailAndPassword(action.email, action.password);
             console.log('response', response);
             if (action.bRememberMe) {
                 yield localStorage.setItem('token', response.user.refreshToken);
-                yield firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-            } else {
-                yield firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
             }
             yield put(authActions.authSuccess(response.user.uid));
             // const expirationDate = yield new Date(new Date().getTime() + response.data.expiresIn * 1000);
@@ -51,13 +64,11 @@ export const authSagas = {
     },
     authSignIn: function* (action) {
         try {
+            yield firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
             const response = yield firebase.auth().signInWithEmailAndPassword(action.email, action.password);
             console.log('response', response);
             if (action.bRememberMe) {
                 yield localStorage.setItem('token', response.user.refreshToken);
-                yield firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-            } else {
-                yield firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
             }
             yield put(authActions.authSuccess(response.user.uid));
             // const expirationDate = yield new Date(new Date().getTime() + response.data.expiresIn * 1000);

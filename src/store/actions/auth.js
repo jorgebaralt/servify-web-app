@@ -27,11 +27,11 @@ export const authActions = {
 }
 
 export const authCreator = {
-    // authInit: () => {
-    //     return {
-    //         type: actionTypes.AUTH_SAGA_INIT
-    //     }
-    // },
+    authCheckStateInit: () => {
+        return {
+            type: actionTypes.AUTH_INIT_SAGA
+        }
+    },
     authSignUpInit: (email, password, bRememberMe) => {
         return {
             type: actionTypes.AUTH_INIT_SIGN_UP,
