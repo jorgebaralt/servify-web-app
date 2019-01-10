@@ -28,7 +28,7 @@ const form = (props) => {
                         invalid={!input[1].valid}
                         shouldValidate={input[1].validation}
                         touched={input[1].touched}
-                        value={input[1].value} 
+                        value={input[0] === 'name' ? props.value : input[1].value} 
                         valueType={input[1].valueType} />;
                 })}
                 <Button style={{marginTop: '20px'}} disabled={!props.formIsValid} type='success' blockButton={true}>Submit</Button>

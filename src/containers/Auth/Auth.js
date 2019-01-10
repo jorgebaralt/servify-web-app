@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 // redux-sagas
 import { connect } from 'react-redux';
-import { authActions } from '../../store/actions';
 // CSS
 import classes from './Auth.module.css';
 // JSX
@@ -44,7 +43,9 @@ class Auth extends Component {
     }
 
     componentWillUnmount() {
-        this.props.authResetRedirectPath();
+        this.props.history.push({
+            pathname: this.props.authRedirectPath
+        });
     }
 
     render() {
@@ -65,10 +66,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		authResetRedirectPath: () => dispatch(authActions.authResetRedirectPath())
-	};
-};
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Auth));
+export default withRouter(connect(mapStateToProps)(Auth));

@@ -7,10 +7,11 @@ export const authActions = {
             userId: userId
         }
     },
-    authSuccess: (userId) => {
+    authSuccess: (userId, userEmail) => {
         return {
             type: actionTypes.AUTH_SUCCESS,
-            userId: userId
+            userId: userId,
+            userEmail: userEmail
         }
     },
     authFail: (error) => {

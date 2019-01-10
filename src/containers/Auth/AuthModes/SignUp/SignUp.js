@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 // CSS
 import classes from '../../Auth.module.css';
 // Redux & Sagas Creator
@@ -15,8 +15,9 @@ import UtilContainer from '../../../../components/UI/AuthModal/UtilContainer/Uti
 import AuthModalSwitch from '../../../../components/UI/AuthModal/AuthModalSwitch/AuthModalSwitch';
 import Button from '../../../../components/UI/Button/Button';
 import Input from '../../../../components/UI/Input/Input';
+import Loading from '../../../../components/UI/LoadingDots/LoadingDots';
 
-class SignUpModal extends Component {
+class SignUpModal extends PureComponent {
 
     state = {
         controls: {
@@ -102,6 +103,7 @@ class SignUpModal extends Component {
         bShowPassword: false,
         bSignUpWithEmail: false,
         formIsValid: false,
+        loading: false
     }
 
     toggleRememberMe = () => {
@@ -167,14 +169,19 @@ class SignUpModal extends Component {
             formIsValid: formIsValid
         });
     }
-
-    onSubmitHandler = (event) => {
-        event.preventDefault();
-        this.props.onSignUpHandler(this.state.controls.email.value, this.state.controls.password.value, this.state.bRememberMe);
+    
+    setLoading = () => {
+        this.setState({
+            loading: false
+        });
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps !== this.props || nextState !== this.state || nextProps.children !== this.props.children;
+    componentDidUpdate() {
+        if (this.state.loading && this.props.errorMessage) {
+            this.setState({
+                loading: false
+            });
+        }
     }
 
     componentWillUnmount() {
@@ -215,7 +222,9 @@ class SignUpModal extends Component {
                             toggleRememberMe={this.toggleRememberMe}
                             bRememberMe={this.state.bRememberMe} />
                         <Marketing />
-                        <Button submit disabled={!this.state.formIsValid} type='auth' blockButton={true}>Sign up</Button>
+                        <Button style={{minHeight: '46px'}} clicked={this.setLoading} submit disabled={!this.state.formIsValid} type='auth' blockButton={true}>
+                            {this.state.loading ? <div className={classes.Loading}><Loading /></div> : 'Sign up'}
+                        </Button>
                         <MarketingPrompt  
                             toggleMarketingPrompt={this.toggleMarketingPrompt}
                             bMarketingPrompt={this.state.bMarketingPrompt} />

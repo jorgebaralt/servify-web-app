@@ -5,7 +5,7 @@ import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { mobileCreator, authCreator, authActions } from './store/actions';
 // JSX
-import Loading from './components/UI/LoadingBounce/LoadingBounce';
+import Loading from './components/UI/LoadingPage/LoadingPage';
 import Layout from './hoc/Layout/Layout';
 import RouterScrollToTop from './hoc/RouterScrollToTop/RouterScrollToTop';
 import Landing from './containers/Landing/Landing';
@@ -16,13 +16,6 @@ import Services from './containers/Services/Services';
 import ServicesId from './containers/Services/ServicesId/ServicesId';
 import PublishOverview from './containers/Publish/PublishOverview/PublishOverview';
 import NotFound from './containers/NotFound/NotFound';
-
-// import Publish from './containers/Publish/Publish';
-// import Edit from './containers/Users/Edit/Edit';
-// import Feedback from './containers/Users/Feedback/Feedback';
-// import Publications from './containers/Users/Publications/Publications';
-// import PublicationsId from './containers/Users/Publications/Edit/PublicationsId';
-// import UsersId from './containers/Users/UsersId/UsersId';
 
 const Publish = React.lazy(() => import('./containers/Publish/Publish'));
 const Edit = React.lazy(() => import('./containers/Users/Edit/Edit'));

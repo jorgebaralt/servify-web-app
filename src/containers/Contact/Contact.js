@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+// react-router-dom
+import { withRouter, Redirect } from 'react-router-dom';
+// redux-sagas
+import { connect } from 'react-redux';
+import { authActions } from '../../store/actions';
 // Input Validity
 import { checkValidity } from '../../shared/checkValidity';
 // JSX
@@ -42,7 +47,6 @@ class Contact extends Component {
                         disabled: true,
                         type: 'text',
                         autoComplete: 'first name',
-                        placeholder: 'Account name here', // TODO account name displayed here
                         autoCorrect:"off",
                         autoCapitalize:"on",
                         spellCheck:"false"
@@ -85,7 +89,6 @@ class Contact extends Component {
     }
 
     toggleIsFormSelected = (index) => {
-        console.log(index, this.state.activeReason.options[index])
         window.scrollTo(0,0); // Scrolls to top
         this.setState( (prevState) => {
             return {
@@ -129,19 +132,26 @@ class Contact extends Component {
         this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.bRememberMe);
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextState !== this.state || nextProps.children !== this.props.children;
+    componentWillUnmount() {
+        if (this.state.bIsReasonSelected && !this.props.userEmail) {
+            this.props.authSetRedirectPath('/contact');
+        }
     }
 
 	render () {
+        console.log(this.props.userEmail)
         let ActiveRender = <Reasons reasons={this.state.reasons} toggleIsReasonSelected={this.toggleIsReasonSelected}/>
         switch (true) {
+            case this.state.bIsReasonSelected && !this.props.userEmail:
+                ActiveRender = <Redirect to='/authenticate' />;
+                break;
             case this.state.bIsFormActive:
                 ActiveRender = (
                     <Form activeReason={this.state.activeReason}
                         onSubmitHandler={this.onSubmitHandler}
                         inputChangeHandler={this.inputChangeHandler}
                         toggleIsFormSelected={this.toggleIsFormSelected}
+                        value={this.props.userEmail}
                         {...this.state.contactForm} />
                 );
                 break;
@@ -161,4 +171,16 @@ class Contact extends Component {
 	}
 }
 
-export default Contact;
+const mapStateToProps = (state) => {
+	return {
+		userEmail: state.authReducer.userEmail,
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		authSetRedirectPath: (path) => dispatch(authActions.authSetRedirectPath(path))
+	};
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Contact));

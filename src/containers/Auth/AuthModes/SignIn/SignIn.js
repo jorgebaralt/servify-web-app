@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 // CSS
 import classes from '../../Auth.module.css';
 // Redux & Sagas Creator
@@ -14,8 +14,9 @@ import UtilContainer from '../../../../components/UI/AuthModal/UtilContainer/Uti
 import AuthModalSwitch from '../../../../components/UI/AuthModal/AuthModalSwitch/AuthModalSwitch';
 import Button from '../../../../components/UI/Button/Button';
 import Input from '../../../../components/UI/Input/Input';
+import Loading from '../../../../components/UI/LoadingDots/LoadingDots';
 
-class SignInModal extends Component {
+class SignInModal extends PureComponent {
 
     state = {
         controls: {
@@ -60,6 +61,7 @@ class SignInModal extends Component {
         bRememberMe: true,
         bShowPassword: false,
         formIsValid: false,
+        loading: false
     }
 
     toggleRememberMe = () => {
@@ -115,8 +117,18 @@ class SignInModal extends Component {
         this.props.onSignInHandler(this.state.controls.email.value, this.state.controls.password.value, this.state.bRememberMe);
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps !== this.props || nextState !== this.state || nextProps.children !== this.props.children;
+    setLoading = () => {
+        this.setState({
+            loading: false
+        });
+    }
+
+    componentDidUpdate() {
+        if (this.state.loading && this.props.errorMessage) {
+            this.setState({
+                loading: false
+            });
+        }
     }
 
     componentWillUnmount() {
@@ -154,7 +166,9 @@ class SignInModal extends Component {
                         bShowPassword={this.state.bShowPassword}
                         toggleRememberMe={this.toggleRememberMe}
                         bRememberMe={this.state.bRememberMe} />
-                    <Button submit disabled={!this.state.formIsValid} type='auth' blockButton={true}>Sign in</Button>
+                    <Button style={{minHeight: '46px'}} clicked={this.setLoading} submit disabled={!this.state.formIsValid} type='auth' blockButton={true}>
+                        {this.state.loading ? <div className={classes.Loading}><Loading /></div> : 'Sign in'}
+                    </Button>
                     <ForgotPassword />
                 </form>
                 <Separator />

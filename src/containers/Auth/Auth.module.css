@@ -20,6 +20,13 @@
     justify-content: flex-start;
 }
 
+.Loading {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .Error {
     overflow-wrap: break-word;
     text-align: center;

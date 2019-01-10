@@ -87,7 +87,6 @@ const map = (props) => {
             return t;
         }
     }
-    console.log('flyToSettings', flyToSettings)
     let myMap = (
         <Map style="mapbox://styles/mapbox/streets-v9"
             center={props.map.geoData ?
