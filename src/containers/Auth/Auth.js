@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+// react-router-dom
+import { withRouter } from 'react-router-dom';
+// redux-sagas
+import { connect } from 'react-redux';
+import { authActions } from '../../store/actions';
 // CSS
 import classes from './Auth.module.css';
 // JSX
@@ -30,6 +35,18 @@ class Auth extends Component {
         }
     }
 
+    componentDidUpdate() {
+        if (this.props.isAuthenticated) {
+            this.props.history.push({
+                pathname: this.props.authRedirectPath
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        this.props.authResetRedirectPath();
+    }
+
     render() {
         return (
             <div className={classes.Container}>
@@ -41,4 +58,17 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+const mapStateToProps = (state) => {
+	return {
+		isAuthenticated: state.authReducer.userId !== null,
+		authRedirectPath: state.authReducer.authRedirectPath,
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		authResetRedirectPath: () => dispatch(authActions.authResetRedirectPath())
+	};
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Auth));

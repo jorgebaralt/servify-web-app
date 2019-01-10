@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+// CSS
+import classes from '../../Auth.module.css';
 // Redux & Sagas Creator
 import { connect } from 'react-redux'
-import { authCreator } from '../../../../store/actions/';
+import { authCreator, authActions } from '../../../../store/actions/';
 // Input Validity
 import { checkValidity } from '../../../../shared/checkValidity';
 // JSX
@@ -117,6 +119,12 @@ class SignInModal extends Component {
         return nextProps !== this.props || nextState !== this.state || nextProps.children !== this.props.children;
     }
 
+    componentWillUnmount() {
+        if (this.props.errorMessage) {
+            this.props.resetErrorMessage();
+        }
+    }
+
     render() {
         const formElementsArray = Object.entries(this.state.controls);
         return (
@@ -124,6 +132,9 @@ class SignInModal extends Component {
                 <Button type='facebook' blockButton={true}>Sign in with Facebook</Button>
                 <Button type='google' blockButton={true}>Sign in with Google</Button>
                 <OrSeparator />
+                {this.props.errorMessage ? 
+                    <div className={classes.Error}>{this.props.errorMessage}</div> 
+                    : null}
                 <form style={{userSelect: 'none'}} onSubmit={this.onSubmitHandler}>
                     {formElementsArray.map( (input) => {
                         return <Input 
@@ -156,10 +167,17 @@ class SignInModal extends Component {
     }
 };
 
+const mapStateToProps = (state) => {
+    return {
+		errorMessage: state.authReducer.error,
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
-		onSignInHandler: (email, password, bRememberMe) => dispatch(authCreator.authSignInInit(email, password, bRememberMe))
+		onSignInHandler: (email, password, bRememberMe) => dispatch(authCreator.authSignInInit(email, password, bRememberMe)),
+		resetErrorMessage: () => dispatch(authActions.authResetErrorMessage())
 	};
 }
 
-export default connect(null, mapDispatchToProps)(SignInModal);
+export default connect(mapStateToProps, mapDispatchToProps)(SignInModal);

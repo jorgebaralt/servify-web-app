@@ -5,7 +5,6 @@ import classes from './NavAuthButtons.module.css';
 import NavAuthButton from './NavAuthButton/NavAuthButton';
 
 const navAuthButtons = (props) => {
-    console.log('props.isAuthenticated', props.isAuthenticated)
 	const buttonClass = [classes.Button];
 	//if white respective css
 	if (props.color === 'white') {

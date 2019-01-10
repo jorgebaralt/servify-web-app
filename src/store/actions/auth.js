@@ -1,6 +1,12 @@
 import * as actionTypes from './types';
 
 export const authActions = {
+    authInit: (userId) => {
+        return {
+            type: actionTypes.AUTH_INIT,
+            userId: userId
+        }
+    },
     authSuccess: (userId) => {
         return {
             type: actionTypes.AUTH_SUCCESS,
@@ -18,12 +24,23 @@ export const authActions = {
             type: actionTypes.AUTH_LOGOUT
         }
     },
-    // ,checkAuthTimeout: (expirationTime) => {
-    //     return {
-    //         type: actionTypes.AUTH_CHECK_TIMEOUT,
-    //         expirationTime: expirationTime
-    //     }
-    // },
+    authSetRedirectPath: (path) => {
+        return {
+            type: actionTypes.AUTH_SET_REDIRECT_PATH,
+            path: path
+        }
+    },
+    authResetRedirectPath: () => {
+        return {
+            type: actionTypes.AUTH_SET_REDIRECT_PATH,
+            path: null
+        }
+    },
+    authResetErrorMessage: () => {
+        return {
+            type: actionTypes.AUTH_RESET_ERROR_MESSAGE,
+        }
+    },
 }
 
 export const authCreator = {
@@ -53,38 +70,4 @@ export const authCreator = {
             type: actionTypes.AUTH_INIT_SAGA_LOGOUT
         }
     }
-}
-
-export const parseErrorMessage = (isSignUp, errorCode) => {
-    let errorMessage = null;
-    if (isSignUp) {
-        switch(errorCode) {
-            case 'auth/email-already-in-use':
-                errorMessage = 'The email address is already in use by another account.'
-                break;
-            case 'auth/invalid-email':
-                errorMessage = 'The entered email address is not valid.'
-                break;
-            case 'auth/operation-not-allowed':
-                errorMessage = 'Password sign-in is disabled for this website.'
-                break;
-            default:
-            // do nothing
-        }
-    } else {
-        switch(errorCode) {
-            case 'EMAIL_NOT_FOUND':
-                errorMessage = 'There is no user record corresponding to this identifier. The user may have been deleted.'
-                break;
-            case 'auth/wrong-password':
-                errorMessage = 'The password is invalid or the user does not have a password.'
-                break;
-            case 'USER_DISABLED':
-                errorMessage = 'The user account has been disabled by an administrator.'
-                break;
-            default:
-            // do nothing
-        }
-    }
-    return errorMessage;
 }

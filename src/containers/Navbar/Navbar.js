@@ -237,7 +237,6 @@ class Navbar extends PureComponent {
 	};
 
 	render () {
-		console.log(this.props.isAuthenticated)
 		const navbarClasses = [this.state.className];
 		if (this.state.isNavbarTransparent) {
 			navbarClasses.push(classes.NavbarTransparent);

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+// CSS
+import classes from '../../Auth.module.css';
 // Redux & Sagas Creator
 import { connect } from 'react-redux'
-import { authCreator } from '../../../../store/actions/';
+import { authCreator, authActions } from '../../../../store/actions/';
 // Input Validity
 import { checkValidity } from '../../../../shared/checkValidity';
 // JSX
@@ -168,12 +170,17 @@ class SignUpModal extends Component {
 
     onSubmitHandler = (event) => {
         event.preventDefault();
-        console.log('onSubmitHandler')
         this.props.onSignUpHandler(this.state.controls.email.value, this.state.controls.password.value, this.state.bRememberMe);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
         return nextProps !== this.props || nextState !== this.state || nextProps.children !== this.props.children;
+    }
+
+    componentWillUnmount() {
+        if (this.props.errorMessage) {
+            this.props.resetErrorMessage();
+        }
     }
 
     render() {
@@ -184,6 +191,9 @@ class SignUpModal extends Component {
                 <Button type='google' blockButton={true}>Sign up with Google</Button>
                 <OrSeparator />
                 <Button type='auth' clicked={this.toggleSignUpWithEmail} blockButton={true}>Sign up with Email</Button>
+                {this.props.errorMessage ? 
+                    <div className={classes.Error}>{this.props.errorMessage}</div> 
+                    : null}
                 {this.state.bSignUpWithEmail ? 
                     <form style={{userSelect: 'none'}} onSubmit={this.onSubmitHandler}>
                         {formElementsArray.map( (input) => {
@@ -222,10 +232,17 @@ class SignUpModal extends Component {
     }
 };
 
+const mapStateToProps = (state) => {
+    return {
+		errorMessage: state.authReducer.error,
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
-		onSignUpHandler: (email, password, bRememberMe) => dispatch(authCreator.authSignUpInit(email, password, bRememberMe))
+        onSignUpHandler: (email, password, bRememberMe) => dispatch(authCreator.authSignUpInit(email, password, bRememberMe)),
+		resetErrorMessage: () => dispatch(authActions.authResetErrorMessage())
 	};
 }
 
-export default connect(null, mapDispatchToProps)(SignUpModal);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpModal);
