@@ -19,6 +19,11 @@ export const AUTH_SET_REDIRECT_PATH = 'auth_set_redirect_path';
 
 // SERVICES
 export const SERVICES_INIT = 'services_init';
+export const SERVICES_SET_COORDINATES = 'services_set_coordinates';
+export const SERVICES_SET_SERVICES = 'services_set_services';
+export const SERVICES_SET_TOP_CATEGORIES = 'services_set_top_categories';
+export const SERVICES_INIT_TOP_SERVICES_BY_CATEGORIES = 'services_init_top_services_by_categories';
+export const SERVICES_TOP_SERVICES_BY_CATEGORIES = 'services_top_services_by_categories';
 export const SERVICES_INIT_FILTERED_CATEGORIES = 'services_init_filtered_categories';
 export const SERVICES_INIT_RESET_FILTERED_CATEGORIES = 'services_init_reset_filtered_categories';
 export const SERVICES_RESET_FILTERED_CATEGORIES = 'services_reset_filtered_categories';

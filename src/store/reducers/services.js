@@ -11,8 +11,15 @@ categories.map( (category) => {
 });
 
 const initialState = {
+    coordinates: null,
+    topCategories: null,
     categories: {
         ...categoriesObj
+    },
+    services: {
+        byCategories: null,
+        topServices: null,
+        nearServices: null
     },
     bIsLoading: false,
     bIsDefault: true
@@ -20,6 +27,13 @@ const initialState = {
 
 const servicesReducer = (state = initialState, action) => {
     switch(action.type) {
+        case types.SERVICES_SET_COORDINATES:
+            return updateObject(state, {coordinates: action.coordinates});
+        case types.SERVICES_SET_SERVICES:
+            const services = updateObject(state.services, {...action});
+            return updateObject(state, {services: services});
+        case types.SERVICES_SET_TOP_CATEGORIES:
+            return updateObject(state, {topCategories: action.topCategories});
         case types.SERVICES_RESET_FILTERED_CATEGORIES:
             return updateObject(state, {categories: {...categoriesObj}, bIsLoading: false});
         case types.SERVICES_SET_FILTERED_CATEGORIES:

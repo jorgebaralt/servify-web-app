@@ -13,6 +13,8 @@ export function* watchMobile () {
 
 export function* watchServices () {
     yield all([
+        takeEvery(actionTypes.SERVICES_INIT, servicesSagas.servicesInit),
+        takeEvery(actionTypes.SERVICES_INIT_TOP_SERVICES_BY_CATEGORIES, servicesSagas.setTopServicesByCategories),
         takeEvery(actionTypes.SERVICES_INIT_FILTERED_CATEGORIES, servicesSagas.setFilteredCategories),
         takeEvery(actionTypes.SERVICES_INIT_RESET_FILTERED_CATEGORIES, servicesSagas.resetFilteredCategories)
     ]);

@@ -10,9 +10,27 @@ export const toggleFileredCategories = (prevState, key) => {
 }
 
 export const servicesActions = {
+    setTopCategories: (categories) => {
+        return {
+            type: actionTypes.SERVICES_SET_TOP_CATEGORIES,
+            topCategories: categories
+        }
+    },
+    setServices: (services) => {
+        return {
+            type: actionTypes.SERVICES_SET_SERVICES,
+            ...services,
+        }
+    },
     resetCategories: () => {
         return {
             type: actionTypes.SERVICES_RESET_FILTERED_CATEGORIES
+        }
+    },
+    setCoordinates: (coordinates) => {
+        return {
+            type: actionTypes.SERVICES_SET_COORDINATES,
+            coordinates: coordinates
         }
     },
     setFilteredCategories: (filteredCategories) => {
@@ -30,6 +48,17 @@ export const servicesActions = {
 }
 
 export const servicesCreator = {
+    servicesInitHandler: () => {
+        return {
+            type: actionTypes.SERVICES_INIT
+        }
+    },
+    topServicesByCategoriesHandler: (topCategories) => {
+        return {
+            type: actionTypes.SERVICES_INIT_TOP_SERVICES_BY_CATEGORIES,
+            topCategories: topCategories
+        }
+    },
     resetCategoriesHandler: () => {
         return {
             type: actionTypes.SERVICES_INIT_RESET_FILTERED_CATEGORIES

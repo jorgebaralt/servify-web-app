@@ -6,6 +6,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Carousels */
+.slick-track {
+  margin-left: 0 !important;
+}
+
 /* Common */
 
 input, button, select, textarea {

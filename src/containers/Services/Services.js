@@ -12,6 +12,7 @@ import SidePanel from './SidePanel/SidePanel';
 class Services extends Component {
     constructor(props) {
         super(props);
+        props.servicesInit();
         props.onResetCategoriesFilter();
     }
     render () {
@@ -23,16 +24,25 @@ class Services extends Component {
             <div className={classes.Wrapper}>
                 <SidePanel activeCategory={activeCategory} />
                 {/* Default and Filtered Services */}
-                <ServicesContainer />
+                <ServicesContainer topCategories={this.props.topCategories} services={this.props.services} />
             </div>
         )
     }
 }
 
+const mapStateToProps = (state) => {
+	return {
+        isMobile: state.mobileReducer.isMobile,
+        services: state.servicesReducer.services,
+        topCategories: state.servicesReducer.topCategories
+	};
+};
+
 const mapDispatchToProps = (dispatch) => {
 	return {
+		servicesInit: () => dispatch(servicesCreator.servicesInitHandler()),
 		onResetCategoriesFilter: () => dispatch(servicesCreator.resetCategoriesHandler())
 	};
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(Services));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Services));

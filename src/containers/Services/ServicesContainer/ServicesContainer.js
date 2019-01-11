@@ -47,16 +47,15 @@ class Services extends Component {
     }
 
     render () {
-        
-        // bIsDefault bool to decide which container to load
-        // const bIsDefault = !Object.values(this.state.categories).includes(true);
         return (
             <div className={classes.ServicesWrapper}>
                 <div className={classes.ServicesContainer}>
                 { this.props.bIsLoading ? 
                     <LoadingBounce /> :   
                     this.props.bIsDefault ? 
-                        <DefaultServices 
+                        <DefaultServices
+                            topCategories={this.props.topCategories}
+                            services={this.props.services}
                             city={this.state.location.city} 
                             state={this.state.location.state} /> :
                         <FilteredServices /> }

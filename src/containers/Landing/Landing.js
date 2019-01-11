@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import categories from '../../shared/categories';
-// Redux
+// Redux & Saga
 import { connect } from 'react-redux';
+import { servicesCreator } from '../../store/actions';
 // CSS
 import classes from './Landing.module.css';
 // Images
@@ -29,6 +30,10 @@ const categoriesDatalist = categories.map( (category) => {
 });
 
 class Landing extends Component {
+    constructor(props) {
+        super(props);
+        props.servicesInit();
+    }
 
     state = {
         city: null,
@@ -47,10 +52,16 @@ class Landing extends Component {
         );
     }
 
+    setCoordinates = (coordinates) => {
+        this.setState({
+            coordinates: coordinates
+        });
+    }
+
     componentDidMount () {
         axios.get('http://ipinfo.io').then(
             (response) => {
-                this.savePosition(response)
+                this.savePosition(response);
             }
         );
     }
@@ -74,7 +85,75 @@ class Landing extends Component {
                 </li>
             );
         });
-
+        let topCategories = (
+            <CardContainer>
+                <Card title='' />
+                <Card title='' />
+                <Card title='' />
+            </CardContainer>
+        )
+        if (this.props.topCategories) {
+            topCategories = (
+                <CardContainer>
+                    {this.props.topCategories.map( category => {
+                        return (
+                            <Card 
+                                key={category.title}
+                                title={category.title} 
+                                image='https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large'/>
+                        );
+                    })}
+                </CardContainer>
+            )
+        }
+        let nearServices = null;
+        if (this.props.services.nearServices) {
+            nearServices = (
+                <>
+                    <h1>New services near {this.state.city && this.state.state ? `${this.state.city},  ${this.state.state}` : 'you'}</h1>
+                    <div>
+                        <Carousel>
+                            {this.props.services.nearServices.map( (service, index) => {
+                                return (
+                                    <Service
+                                        key={index}
+                                        header={service.category.replace("_", " ")}
+                                        title={service.title}
+                                        priceRating='0.05'
+                                        ratingAvg={service.rating/5}
+                                        ratingAmount={service.ratingCount}
+                                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                );
+                            } )}
+                        </Carousel>
+                    </div>
+                </>
+            );
+        }
+        let topServices = null;
+        if (this.props.services.topServices) {
+            topServices = (
+                <>
+                    <h1>Top rated services</h1>
+                    <div>
+                        <Carousel>
+                            {this.props.services.topServices.map( (service, index) => {
+                                return (
+                                    <Service
+                                        key={index}
+                                        header={service.category.replace("_", " ")}
+                                        title={service.title}
+                                        priceRating='0.05'
+                                        ratingAvg={service.rating/5}
+                                        ratingAmount={service.ratingCount}
+                                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                );
+                            } )}
+                        </Carousel>
+                    </div>
+                </>
+            );
+        }
         return (
             <>
                 {/* Header */}
@@ -99,68 +178,10 @@ class Landing extends Component {
                         </> : null }
                     <h1 style={{marginBottom: 20}}>Top Categories</h1>
                     {/* TODO category images */}
-                    <CardContainer>
-                        {/* PLACEHOLDER Categories */}
-                        <Card title='Home Services' image='https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large'/>
-                        <Card title='Plumbing' image='https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large'/>
-                        <Card title='Beauty' image='https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large'/>
-                    </CardContainer>
+                    {topCategories}
                     <br />
-                    <h1>Top-rated services near you</h1>
-                    <div>
-                        <Carousel>
-                            {/* PLACEHOLDERS */}
-                            <Service
-                                header='Home Services'
-                                title='A Random Service'
-                                priceRating='0.05'
-                                ratingAvg={0.97}
-                                ratingAmount='1293'
-                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                            <Service
-                                header='Plumbing'
-                                title='A Toilet'
-                                priceRating='0.66'
-                                ratingAvg={0.52}
-                                ratingAmount='1537'
-                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                            <Service
-                                header='Plumbing'
-                                title='A Toilet'
-                                priceRating='0.23'
-                                ratingAvg={0.31}
-                                ratingAmount='1537'
-                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                            <Service
-                                header='Plumbing'
-                                title='A Toilet'
-                                priceRating='0.88'
-                                ratingAvg={0.65}
-                                ratingAmount='1537'
-                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                            <Service
-                                header='Plumbing'
-                                title='A Toilet'
-                                priceRating='0.35'
-                                ratingAvg={0.17}
-                                ratingAmount='1537'
-                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                            <Service
-                                header='Plumbing'
-                                title='A Toilet'
-                                priceRating='0.57'
-                                ratingAvg={0.17}
-                                ratingAmount='1537'
-                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                            <Service
-                                header='Plumbing'
-                                title='A Toilet'
-                                priceRating='0.75'
-                                ratingAvg={0.17}
-                                ratingAmount='1537'
-                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                        </Carousel>
-                    </div>
+                    {nearServices}
+                    {topServices}
                     <br />
                     <div className={classes.Subheader}>
                         <h1>Featured Servify services</h1>
@@ -182,40 +203,6 @@ class Landing extends Component {
                         </div>
                     </div>
                     <br />
-                    <h1>New services near {this.state.city && this.state.state ? `${this.state.city},  ${this.state.state}` : 'you'}</h1>
-                    <div>
-                        <Carousel>
-                            {/* PLACEHOLDERS */}
-                            <Service
-                                header='Home Services'
-                                title='A Random Service'
-                                priceRating='0.05'
-                                ratingAvg={0.97}
-                                ratingAmount='1293'
-                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                            <Service
-                                header='Plumbing'
-                                title='A Toilet'
-                                priceRating='0.66'
-                                ratingAvg={0.52}
-                                ratingAmount='1537'
-                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                            <Service
-                                header='Plumbing'
-                                title='A Toilet'
-                                priceRating='0.23'
-                                ratingAvg={0.31}
-                                ratingAmount='1537'
-                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                            <Service
-                                header='Plumbing'
-                                title='A Toilet'
-                                priceRating='0.23'
-                                ratingAvg={0.31}
-                                ratingAmount='1537'
-                                image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                        </Carousel>
-                    </div>
                     <div className={classes.LearnMore}>
                         <LearnMore 
                             city={this.state.city}
@@ -235,8 +222,16 @@ class Landing extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		isMobile: state.mobileReducer.isMobile,
+        isMobile: state.mobileReducer.isMobile,
+        services: state.servicesReducer.services,
+        topCategories: state.servicesReducer.topCategories
 	};
 };
 
-export default connect(mapStateToProps)(Landing);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		servicesInit: () => dispatch(servicesCreator.servicesInitHandler())
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);

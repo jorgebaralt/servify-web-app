@@ -17,31 +17,30 @@ export const setMapboxAccessToken = () => {
 export const defaultAddress = 'Orlando 32810 Florida USA';
 
 // Set Initial Position
-export const setInitialMapboxPosition = (address, fn) => {
+export const setInitialMapboxPosition = (address, fn, bNotifyToast = true) => {
     return (
         geo.geocode('mapbox.places', address, (err, geoData) => {
-            if (err) {
-                console.log('ping', err)
+            if (err && bNotifyToast) {
                 toast.error(err);
             }
             const map = {
                 geoData: geoData,
                 initialPosition: geoData.features[0].center
             }
+            if (!fn) { return map; }
             fn(map);
         })
     );
 }
 
 // Get Address
-export const setAddress = (address, fn) => {
+export const setAddress = (address, fn, bNotifyToast = true) => {
     return (
         geo.geocode('mapbox.places', address, (err, geoData) => {
-            if (err) {
-                console.log('ping', err);
+            if (err && bNotifyToast) {
                 toast.error(err);
             }
-            if (geoData) {
+            if (geoData && bNotifyToast) {
                 if (!geoData.features.length > 0) {
                     toast.error('No address was found');
                 }
@@ -49,6 +48,7 @@ export const setAddress = (address, fn) => {
             const map = {
                 geoData: geoData
             }
+            if (!fn) { return map; }
             fn(map);
         })
     );
