@@ -1,4 +1,6 @@
 import React, { Component, lazy, Suspense } from 'react';
+// redux-sagas
+import { connect } from 'react-redux';
 // CSS
 import classes from './FilteredServices.module.css';
 // JSX
@@ -10,11 +12,19 @@ class DefaultServices extends Component {
         return (
             <div className={classes.Container}>
                 <Suspense fallback={<LoadingBounce />}>
-                    <ServicesArray />
+                    <ServicesArray services={this.props.services} />
                 </Suspense>
             </div>
         );
     }
 }
 
-export default DefaultServices;
+const mapStateToProps = (state) => {
+	return {
+        services: state.servicesReducer.services,
+        topCategories: state.servicesReducer.topCategories,
+        categories: state.servicesReducer.categories
+	};
+};
+
+export default connect(mapStateToProps)(DefaultServices);

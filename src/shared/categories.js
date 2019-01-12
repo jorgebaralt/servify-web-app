@@ -392,7 +392,7 @@ const categories = [
 	},
 	{
 		id: 16,
-		title: 'Insurance ',
+		title: 'Insurance',
 		description: 'Insurance description',
 		dbReference: 'insurance',
 		keyWords: ['insurance', 'health', 'car', 'auto', 'policy', 'claim'],

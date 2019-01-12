@@ -15,6 +15,7 @@ class Services extends Component {
         props.servicesInit();
         props.onResetCategoriesFilter();
     }
+
     render () {
         let activeCategory = null;
         if (this.props.location.state) {
@@ -24,19 +25,11 @@ class Services extends Component {
             <div className={classes.Wrapper}>
                 <SidePanel activeCategory={activeCategory} />
                 {/* Default and Filtered Services */}
-                <ServicesContainer topCategories={this.props.topCategories} services={this.props.services} />
+                <ServicesContainer/>
             </div>
-        )
+        );
     }
 }
-
-const mapStateToProps = (state) => {
-	return {
-        isMobile: state.mobileReducer.isMobile,
-        services: state.servicesReducer.services,
-        topCategories: state.servicesReducer.topCategories
-	};
-};
 
 const mapDispatchToProps = (dispatch) => {
 	return {
@@ -45,4 +38,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Services));
+export default withRouter(connect(null, mapDispatchToProps)(Services));

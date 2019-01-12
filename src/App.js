@@ -5,6 +5,7 @@ import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { mobileCreator, authCreator, authActions } from './store/actions';
 // JSX
+import { ToastContainer } from 'react-toastify';
 import Loading from './components/UI/LoadingPage/LoadingPage';
 import Layout from './hoc/Layout/Layout';
 import RouterScrollToTop from './hoc/RouterScrollToTop/RouterScrollToTop';
@@ -121,6 +122,15 @@ class App extends Component {
 	return (
 			<Layout>
 				<RouterScrollToTop /> {/* After every route change, scroll to top */}
+				<ToastContainer
+					position="top-right"
+					autoClose={6000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					pauseOnVisibilityChange
+					draggable
+					pauseOnHover />
 				{routes}
 			</Layout>
 		);

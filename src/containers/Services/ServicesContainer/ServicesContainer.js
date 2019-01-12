@@ -39,11 +39,9 @@ class Services extends Component {
     }
 
     componentDidMount () {
-        if (navigator.geolocation) {
-            axios.get('http://ipinfo.io').then(
-                (response) => this.savePosition(response)
-            );
-        }
+        axios.get('http://ipinfo.io').then(
+            (response) => this.savePosition(response)
+        );
     }
 
     render () {
@@ -68,7 +66,9 @@ class Services extends Component {
 const mapStateToProps = (state) => {
 	return {
         bIsLoading: state.servicesReducer.bIsLoading,
-		bIsDefault: state.servicesReducer.bIsDefault
+        bIsDefault: state.servicesReducer.bIsDefault,
+        services: state.servicesReducer.services,
+        topCategories: state.servicesReducer.topCategories
 	};
 };
 

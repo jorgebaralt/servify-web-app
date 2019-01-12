@@ -26,11 +26,12 @@ const initialState = {
 }
 
 const servicesReducer = (state = initialState, action) => {
+    let services;
     switch(action.type) {
         case types.SERVICES_SET_COORDINATES:
             return updateObject(state, {coordinates: action.coordinates});
         case types.SERVICES_SET_SERVICES:
-            const services = updateObject(state.services, {...action});
+            services = updateObject(state.services, {...action});
             return updateObject(state, {services: services});
         case types.SERVICES_SET_TOP_CATEGORIES:
             return updateObject(state, {topCategories: action.topCategories});
@@ -38,7 +39,10 @@ const servicesReducer = (state = initialState, action) => {
             return updateObject(state, {categories: {...categoriesObj}, bIsLoading: false});
         case types.SERVICES_SET_FILTERED_CATEGORIES:
             return updateObject(state, {categories: action.filteredCategories, bIsLoading: true});
-        case types.SERVICES_SET_BISDEFAULT:
+        case types.SERVICES_SET_FILTERED_SERVICES:
+            services = updateObject(state.services, {...action});
+            return updateObject(state, {services: services});
+            case types.SERVICES_SET_BISDEFAULT:
             return updateObject(state, {bIsLoading: false, bIsDefault: action.bIsDefault});
         default:
             // do nothing

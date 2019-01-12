@@ -22,7 +22,8 @@ class DefaultServices extends Component {
 const mapStateToProps = (state) => {
 	return {
         services: state.servicesReducer.services,
-        topCategories: state.servicesReducer.topCategories
+        topCategories: state.servicesReducer.topCategories,
+        categories: state.servicesReducer.categories
 	};
 };
 

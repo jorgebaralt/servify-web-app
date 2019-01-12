@@ -1,31 +1,46 @@
+
 import React from 'react';
 // CSS
 import classes from '../FilteredServices.module.css';
 // JSX
 import Service from '../../../../../components/Services/Service/Service';
 
-const services = () => {
-    const services = [];
+const services = (props) => {
+    let services;
     // TODO DEAL WITH LACEHOLDER
-    for (let i = 0; i < 20; i++) {
-        services.push(i);
-    }
-    return (
-        services.map( (service) => {
+    if (props.services.filteredServices) {
+        services = props.services.filteredServices.map( (service, index) => {
             return (
-                <div key={service} 
-                    className={classes.Service}>
+                <div key={index} className={classes.Service}>
                     <Service
-                        header='Home Services'
-                        title='A Random Service'
-                        priceRating='0.05'
-                        ratingAvg={0.97}
-                        ratingAmount='1293'
-                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'
-                        href='/services/1' />
+                        header={service.category}
+                        title={service.title}
+                        priceRating={service.priceRating}
+                        ratingAvg={service.rating/5}
+                        ratingAmount={service.ratingCount}
+                        image={service.image}
+                        href={service.link} />
                 </div>
             );
-        })
+        });
+    } else if (props.services.topServices) {
+        services = props.services.topServices.map( (service, index) => {
+            return (
+                <div key={index} className={classes.Service}>
+                    <Service
+                        header={service.category}
+                        title={service.title}
+                        priceRating={service.priceRating}
+                        ratingAvg={service.rating/5}
+                        ratingAmount={service.ratingCount}
+                        image={service.image}
+                        href={service.link} />
+                </div>
+            );
+        });
+    }
+    return (
+        services
     )
 }
 

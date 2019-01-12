@@ -59,7 +59,7 @@ class Landing extends Component {
     }
 
     componentDidMount () {
-        axios.get('http://ipinfo.io').then(
+        axios.get('https://api.ipify.org/?format=json').then(
             (response) => {
                 this.savePosition(response);
             }
@@ -122,7 +122,7 @@ class Landing extends Component {
                                         priceRating='0.05'
                                         ratingAvg={service.rating/5}
                                         ratingAmount={service.ratingCount}
-                                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                        image={service.image}/>
                                 );
                             } )}
                         </Carousel>
@@ -146,7 +146,7 @@ class Landing extends Component {
                                         priceRating='0.05'
                                         ratingAvg={service.rating/5}
                                         ratingAmount={service.ratingCount}
-                                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
+                                        image={service.image}/>
                                 );
                             } )}
                         </Carousel>
@@ -182,7 +182,7 @@ class Landing extends Component {
                     <br />
                     {nearServices}
                     {topServices}
-                    <br />
+                    {/* <br />
                     <div className={classes.Subheader}>
                         <h1>Featured Servify services</h1>
                         <h4>Browse from our featured services that stand out for their excellence</h4>
@@ -201,7 +201,7 @@ class Landing extends Component {
                         <div>
                             <AnchorLink text='Show more Servify featured services' href='/services/featured' />
                         </div>
-                    </div>
+                    </div> */}
                     <br />
                     <div className={classes.LearnMore}>
                         <LearnMore 

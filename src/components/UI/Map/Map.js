@@ -3,7 +3,7 @@ import geo from 'mapbox-geocoding';
 // CSS
 import classes from './Map.module.css';
 // JSX
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import ReactMapboxGl, { Layer, Feature, Marker , ZoomControl, ScaleControl, Popup } from "react-mapbox-gl";
 import SVG from '../../SVG/SVG';
 
@@ -153,15 +153,6 @@ const map = (props) => {
 
     return (
         <div style={style} className={mapClasses.join(' ')}>
-            <ToastContainer
-                position="top-right"
-                autoClose={6000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                pauseOnVisibilityChange
-                draggable
-                pauseOnHover />
             {/* Map won't load unless there is an initial position or geoData */}
             {myMap}
         </div>

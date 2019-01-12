@@ -1,13 +1,14 @@
+// axios
 import axios from 'axios';
 import axiosServices from '../../axios-services';
+// Sagas
 import { put } from 'redux-saga/effects';
-import { delay } from 'redux-saga'
 import { servicesActions, servicesCreator } from '../actions';
 
 export const servicesSagas = {
     servicesInit: function* () {
         try {
-            let response = yield axios.get('http://ipinfo.io');
+            let response = yield axios.get('https://ipinfo.io');
             const coordinates = yield response.data.loc.split(",");
             const currentLocation = yield { 
                 latitude: Number(coordinates[0]),
@@ -19,18 +20,17 @@ export const servicesSagas = {
             response = yield axiosServices.get('/getNearService', { params: { currentLocation, distance: 500 } });
             services.topServices = response.data;
             yield put(servicesActions.setServices(services));
-            response = yield axiosServices.get('/getPopularCategories');
-            const topCategories = response.data;
-            yield put(servicesActions.setTopCategories(topCategories));
-            yield put(servicesCreator.topServicesByCategoriesHandler(topCategories));
         } catch (err) {
             console.log(err);
         }
+        const response = yield axiosServices.get('/getPopularCategories');
+        const topCategories = response.data;
+        yield put(servicesActions.setTopCategories(topCategories));
+        yield put(servicesCreator.topServicesByCategoriesHandler(topCategories));
     },
     setTopServicesByCategories: function* (action) {
         const topCategories = action.topCategories;
         const byCategories = {};
-        yield console.log(topCategories);
         for (let i = 0; i < topCategories.length; i++) {
             const dbReference = topCategories[i].dbReference;
             const { data } = yield axiosServices.get('/getServices', { params: { category: dbReference } });
@@ -39,12 +39,23 @@ export const servicesSagas = {
         yield put(servicesActions.setServices( { byCategories: byCategories } ));
     },
     setFilteredCategories: function* (action) {
-        const categories = {
+        const categories = yield {
             ...action.prevCategories,
             [action.toggledCategory]: !action.prevCategories[action.toggledCategory]
         }
         yield put(servicesActions.setFilteredCategories(categories));
-        yield delay(250); // To force asynchronous loading, 250ms. TODO This might be replaced by axios call to fetch services later on.
+        let filteredServices = yield [];
+        for (let category in categories) {
+            if (categories[category]) {
+                const dbReference = yield category.toLocaleLowerCase().replace(" ", "_");
+                const response = yield axiosServices.get('/getServices', { params: { category: dbReference } });
+                if (response.data.length) {
+                    yield filteredServices.push(response.data);
+                }
+            }
+        }
+        yield filteredServices = [].concat.apply([], filteredServices);
+        yield put(servicesActions.setFilteredServices(filteredServices));
         yield put(servicesActions.setBIsDefault(!Object.values(categories).includes(true)));
     },
     resetFilteredCategories: function* () {
