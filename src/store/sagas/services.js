@@ -4,6 +4,9 @@ import axiosServices from '../../axios-services';
 // Sagas
 import { put } from 'redux-saga/effects';
 import { servicesActions, servicesCreator } from '../actions';
+// Arry sorting
+import sort from '../../shared/sortArrayByKey';
+import isArray from '../../shared/isArray';
 
 export const servicesSagas = {
     servicesInit: function* () {
@@ -16,9 +19,9 @@ export const servicesSagas = {
             };
             const services = {};
             response = yield axiosServices.get('/getNearService', { params: { currentLocation, distance: 30 } });
-            services.nearServices = response.data;
+            services.nearServices = yield sort(response.data, 'rating');
             response = yield axiosServices.get('/getNearService', { params: { currentLocation, distance: 500 } });
-            services.topServices = response.data;
+            services.topServices = yield sort(response.data, 'rating');
             yield put(servicesActions.setServices(services));
         } catch (err) {
             console.log(err);
@@ -34,9 +37,19 @@ export const servicesSagas = {
         for (let i = 0; i < topCategories.length; i++) {
             const dbReference = topCategories[i].dbReference;
             const { data } = yield axiosServices.get('/getServices', { params: { category: dbReference } });
-            byCategories[topCategories[i].title] = data;
+            byCategories[topCategories[i].title] = yield sort(data, 'rating');
         }
         yield put(servicesActions.setServices( { byCategories: byCategories } ));
+    },
+    sortServices: function* (action) {
+        yield console.log(action);
+        const key = yield action.key;
+        const services = yield action.services;
+        for (let service in services) {
+            if (!isArray(services[services])) { continue; }
+            services[service] = yield sort(services[service], key);
+        }
+        yield put(servicesActions.setServices(services));
     },
     setFilteredCategories: function* (action) {
         const categories = yield {
@@ -54,7 +67,8 @@ export const servicesSagas = {
                 }
             }
         }
-        yield filteredServices = [].concat.apply([], filteredServices);
+        filteredServices = yield [].concat.apply([], filteredServices);
+        filteredServices = yield sort(filteredServices, 'rating')
         yield put(servicesActions.setFilteredServices(filteredServices));
         yield put(servicesActions.setBIsDefault(!Object.values(categories).includes(true)));
     },

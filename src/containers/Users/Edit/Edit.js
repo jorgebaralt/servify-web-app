@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 // Input Validity
 import { checkValidity } from '../../../shared/checkValidity';
 // CSS
@@ -130,6 +131,15 @@ class Edit extends Component {
 
     onSubmitHandler = (event) => {
         event.preventDefault();
+        console.log(this.state.imageFiles.values())
+        axios.post('https://us-central1-servify-716c6.cloudfunctions.net/uploadFile', this.state.imageFiles)
+            .then(
+                res => {
+                    console.log(res);
+                }
+            ).catch(err => {
+                console.log(err);
+            });
     }
 
     render () {
@@ -175,7 +185,7 @@ class Edit extends Component {
                         <Separator />
                         <InputImage onChange={this.inputImageChangeHandler} onSubmit={this.onSubmitHandler} />
                         <Separator />
-                        <Button style={{fontSize: '21px'}} disabled={!this.state.formIsValid} type='primary' blockButton={true}>Save</Button>
+                        <Button submit style={{fontSize: '21px'}} disabled={!this.state.formIsValid} type='primary' blockButton={true}>Save</Button>
                     </form>
                 </Panel>
             </Layout>

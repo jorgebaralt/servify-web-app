@@ -5,6 +5,7 @@ import { updateObject } from '../../shared/updateObject';
 const initialState = {
     userId: null,
     userEmail: null,
+    userDetails: null,
     error: null,
     loading: true,
     authRedirectPath: "/",
@@ -15,7 +16,7 @@ const authReducer = (state = initialState, action) => {
         case types.AUTH_INIT:
             return updateObject(state, {userId: action.userId, userEmail: action.userEmail, error: null, loading: true});
         case types.AUTH_SUCCESS:
-            return updateObject(state, {userId: action.userId, userEmail: action.userEmail, error: null, loading: false});
+            return updateObject(state, {userId: action.userId, userEmail: action.userEmail, userDetails: action.userDetails, error: null, loading: false});
         case types.AUTH_FAIL:
             return updateObject(state, {userId: null, userEmail: null, error: action.error, loading: false});
         case types.AUTH_LOGOUT: 

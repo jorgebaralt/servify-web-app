@@ -41,6 +41,7 @@ const searchBar = (props) => {
                                         </div>
                                     </div>
                                     <button className={classes.QuestionMark}>
+                                        {/* REPLACE TO AVOID COPYRIGHT */}
                                         <svg
                                             viewBox="0 0 16 16" 
                                             role="presentation" 

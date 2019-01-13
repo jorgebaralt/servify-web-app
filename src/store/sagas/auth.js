@@ -36,7 +36,7 @@ export const authSagas = {
             if (!currentUser.uid || bIsExpired) {
                 yield put(authActions.authLogout()); // If no user or rejected promise, logout & set auth loading state to false.
             } else {
-                yield put(authActions.authSuccess(currentUser.uid, currentUser.email));
+                yield put(authActions.authSuccess(currentUser.uid, currentUser.email, currentUser));
             }
         } catch (error) {
             yield put(authActions.authLogout()); // If no user or rejected promise, logout & set auth loading state to false.
@@ -61,7 +61,7 @@ export const authSagas = {
                 yield localStorage.setItem('expirationDate', null);
             }
             yield localStorage.setItem('userId', response.user.uid);
-            yield put(authActions.authSuccess(response.user.uid, response.user.email));
+            yield put(authActions.authSuccess(response.user.uid, response.user.email, response.user));
             yield put(authActions.authResetRedirectPath());
         } catch (error) {
             yield put(authActions.authFail(error.message));
@@ -86,7 +86,7 @@ export const authSagas = {
                 yield localStorage.setItem('expirationDate', null);
             }
             yield localStorage.setItem('userId', response.user.uid);
-            yield put(authActions.authSuccess(response.user.uid, response.user.email));
+            yield put(authActions.authSuccess(response.user.uid, response.user.email, response.user));
             yield put(authActions.authResetRedirectPath());
         } catch (error) {
             yield put(authActions.authFail(error.message));

@@ -70,6 +70,13 @@ export const servicesCreator = {
             type: actionTypes.SERVICES_INIT_RESET_FILTERED_CATEGORIES
         }
     },
+    sortServicesHandler: (services, key) => {
+        return {
+            type: actionTypes.SERVICES_SORT_INIT,
+            services: services,
+            key: key
+        }
+    },
     filteredCategoriesHandler: (prevState, key) => {
         return {
             type: actionTypes.SERVICES_INIT_FILTERED_CATEGORIES,

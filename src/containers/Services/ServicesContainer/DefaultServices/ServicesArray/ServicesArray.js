@@ -1,4 +1,6 @@
 import React from 'react';
+// CSS
+import classes from './ServicesArray.module.css';
 // JSX
 import Carousel from '../../../../../components/UI/Carousel/Carousel';
 import Service from '../../../../../components/Services/Service/Service';
@@ -6,25 +8,20 @@ import Featured from '../../../../../components/Services/Featured/Featured';
 
 const services = (props) => {
     // TODO remove placeholders
+    const placeholders = [];
+    for (let i = 0; i < 12; i++) {
+        placeholders.push(
+            <Service
+                key={i}
+                priceRating={1}
+                ratingAvg={1}
+                image={'/'} />
+        );
+    }
     const loadingServicesCarousel = (
-        <Carousel>
-            <Service
-                priceRating={1}
-                ratingAvg={1}
-                image={'/'} />
-            <Service
-                priceRating={1}
-                ratingAvg={1}
-                image={'/'} />
-            <Service
-                priceRating={1}
-                ratingAvg={1}
-                image={'/'} />
-            <Service
-                priceRating={1}
-                ratingAvg={1}
-                image={'/'} />
-        </Carousel>
+        <div className={classes.Container}>
+            {placeholders}
+        </div>
     );
     let topServicesByCategories = loadingServicesCarousel,
         topServices = null,

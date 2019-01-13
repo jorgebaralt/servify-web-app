@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 // toast
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // CSS
 import classes from './InputImage.module.css';
@@ -152,15 +152,6 @@ class InputImage extends Component {
                     <div>Image Upload</div>
                 </div>
                 <div className={classes.Container}>
-                    <ToastContainer
-                        position="top-left"
-                        autoClose={6000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        pauseOnVisibilityChange
-                        draggable
-                        pauseOnHover />
                     <div className={classes.Buttons}>
                         {render()}
                     </div>

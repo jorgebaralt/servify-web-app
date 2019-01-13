@@ -9,26 +9,32 @@ const services = (props) => {
     let services;
     // TODO DEAL WITH LACEHOLDER
     if (props.services.filteredServices) {
-        services = props.services.filteredServices.map( (service, index) => {
-            return (
-                <div key={index} className={classes.Service}>
-                    <Service
-                        header={service.category}
-                        title={service.title}
-                        priceRating={service.priceRating}
-                        ratingAvg={service.rating/5}
-                        ratingAmount={service.ratingCount}
-                        image={service.image}
-                        href={service.link} />
-                </div>
+        if (props.services.filteredServices.length) {
+            services = props.services.filteredServices.map( (service, index) => {
+                return (
+                    <div key={index} className={classes.Service}>
+                        <Service
+                            header={service.category.replace("_", " ")}
+                            title={service.title}
+                            priceRating={service.priceRating}
+                            ratingAvg={service.rating/5}
+                            ratingAmount={service.ratingCount}
+                            image={service.image}
+                            href={service.link} />
+                    </div>
+                );
+            });
+        } else {
+            services = (
+                <h1>Sorry! We couldn't find any services that matches what you were looking for. You may try a different category.</h1>
             );
-        });
+        }
     } else if (props.services.topServices) {
         services = props.services.topServices.map( (service, index) => {
             return (
                 <div key={index} className={classes.Service}>
                     <Service
-                        header={service.category}
+                        header={service.category.replace("_", " ")}
                         title={service.title}
                         priceRating={service.priceRating}
                         ratingAvg={service.rating/5}

@@ -7,12 +7,12 @@ const sliderButtons = (props) => {
             {/* Prev */}
             {props.activeSlide < 1 ? 
                 null :
-                <button className={classes.Prev} onClick={ () => props.onClick('prev') }></button>
+                <button type='button' className={classes.Prev} onClick={ () => props.onClick('prev') }></button>
             }
             {/* Next */}
             {props.activeSlide === props.totalSlides - 1 ? 
                 null :
-                <button className={classes.Next} onClick={ () => props.onClick('next') }></button>
+                <button type='button' className={classes.Next} onClick={ () => props.onClick('next') }></button>
             }
         </>
     )

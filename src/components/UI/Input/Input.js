@@ -58,8 +58,13 @@ const input = (props) => {
             className={classes.Input}>
             {inputElement}
             {validationMessage}
-            <span className={classes.Bar}></span>
-            <label className={labelClasses.join(' ')}>{props.elementConfig.placeholder}</label>
+            {props.elementType === 'select' ? 
+                null :
+                <>
+                    <span className={classes.Bar}></span>
+                    <label className={labelClasses.join(' ')}>{props.elementConfig.placeholder}</label>
+                </>
+            }
         </div>
     );
 }

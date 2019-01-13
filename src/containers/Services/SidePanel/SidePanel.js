@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+// Categories
 import categories from '../../../shared/categories';
+import camelize from '../../../shared/camelize';
 // redux-sagas
 import { connect } from 'react-redux';
 import { servicesCreator } from '../../../store/actions';
@@ -7,12 +9,26 @@ import { servicesCreator } from '../../../store/actions';
 import classes from './SidePanel.module.css'
 // JSX
 import Filter from '../../../components/Services/SidePanel/Filter/Filter';
-import SearchBar from '../../../components/Services/SidePanel/SearchBar/SearchBar';
-import InputSelect from '../../../components/Services/SidePanel/InputSelect/InputSelect';
+import Input from '../../../components/UI/Input/Input';
 import List from '../../../components/Services/SidePanel/List/List';
 import ListItem from '../../../components/Services/SidePanel/ListItem/ListItem';
 import { ClosedRatingContainer, RatingContainer } from '../../../components/Services/SidePanel/RatingContainer/RatingContainer';
 import { Toggle, MenuToggle } from '../../../components/Services/SidePanel/Toggle/Toggle';
+
+const sortDatalist = [
+    {
+        value: 'Rating',
+        displayValue: 'Rating'
+    },
+    {
+        value: 'Price Rating',
+        displayValue: 'Price Rating'
+    },
+    {
+        value: 'Distance',
+        displayValue: 'Distance'
+    },
+];
 
 class SidePanel extends Component {
     constructor(props) {
@@ -23,17 +39,18 @@ class SidePanel extends Component {
     }
     
     state = {
-        filter: {
-            searchBar: {
-                inputId: 'Filter_SearchBar_Input',
-                description: 'Filter_SearchBar_Description',
-                listId: 'Filter_SearchBar_List',
-                name: 'services_filter_query',
-                placeholder: 'Name',
-                value: '',
-                bIsFocused: false
-            },
-            sortBy: 'distance' // Default
+        sortBy: {
+            controls: {
+                category: {
+                    elementType: 'select',
+                    elementConfig: {
+                        options: sortDatalist
+                    },
+                    value: sortDatalist[0].value,
+                    valueType: 'text',
+                    style: {margin: 0}
+                },
+            }
         },
         categories: {
             list: {
@@ -61,48 +78,27 @@ class SidePanel extends Component {
         });
     }
 
-    applyFocusWithin () {
-        this.setState( (prevState) => {
-            return {
-                filter: {
-                    ...prevState.filter,
-                    searchBar: {
-                        ...prevState.filter.searchBar,
-                        bIsFocused: true
-                    }
-                }
-            }
-        });
-    }
-
-    removeFocusWithin () {
-        this.setState( (prevState) => {
-            return {
-                filter: {
-                    ...prevState.filter,
-                    searchBar: {
-                        ...prevState.filter.searchBar,
-                        bIsFocused: false
-                    }
-                }
-            }
-        });
-    }
-
-    inputChangeHandler = (e) => {
-        e.preventDefault();
-        const updatedSearchBar = {
-            ...this.state.filter.searchBar,
-            value: e.target.value
+    inputSelectChangeHandler = (value, inputIdentifier) => {
+        const updatedOrderForm = {
+            ...this.state.sortBy.controls,
         };
+        const updatedFormElement = {
+            ...updatedOrderForm[inputIdentifier]
+        };
+        updatedFormElement.value = value;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
         this.setState( (prevState) => {
-                return {
-                    filter: {
-                        ...prevState.filter,
-                        searchBar: updatedSearchBar
-                    }
+            return {
+                ...prevState,
+                sortBy: {
+                    controls: updatedOrderForm
                 }
+            }
         });
+        // const key = updatedFormElement.value;
+        const key = camelize(value);
+        console.log(key)
+        this.props.onSortServicesHandler(this.props.services, key);
     }
 
     selectInputHandler = (e) => {
@@ -150,6 +146,10 @@ class SidePanel extends Component {
         });
     }
 
+    componentWillUnmount() {
+        this.props.onSortServicesHandler(this.props.services, 'rating');
+    }
+
     shouldComponentUpdate(nextProps, nextState) {
         return nextProps !== this.props || nextState !== this.state || nextProps.children !== this.props.children;
     }
@@ -176,17 +176,25 @@ class SidePanel extends Component {
                 <div className={WrapperClasses.join(' ')}>
                     <div className={classes.Container}>
                         <MenuToggle onClick={this.toggleSidePanel} />
-                        <Filter title='Service'>
-                            <SearchBar
-                                applyFocusWithin={() => this.applyFocusWithin}
-                                removeFocusWithin={() => this.removeFocusWithin}
-                                inputChangeHandler={this.inputChangeHandler}
-                                {...this.state.filter.searchBar}/>
-                        </Filter>
                         <Filter title='Sort by'>
-                            <InputSelect action='/services/all'
-                                onChange={this.selectInputHandler}
-                                value={this.state.filter.sortBy} />
+                            <div style={{marginTop: '-18px'}}>
+                                {Object.entries(this.state.sortBy.controls).map( (input) => {
+                                        return (
+                                            <Input 
+                                                style={input[1].style}
+                                                key={input[0]} 
+                                                elementType={input[1].elementType} 
+                                                elementConfig={input[1].elementConfig} // Referenced to state to mutate
+                                                changed={(event) => this.inputSelectChangeHandler(event, input[0])}
+                                                invalid={!input[1].valid}
+                                                shouldValidate={input[1].validation}
+                                                touched={input[1].touched}
+                                                value={input[1].value} 
+                                                valueType={input[1].valueType} />
+                                        );
+                                    })
+                                }
+                            </div>
                         </Filter>
                         <List title='Categories'
                             onClick={() => this.toggleListHandler(listKeys[1])}
@@ -194,7 +202,7 @@ class SidePanel extends Component {
                             closedChildren={`Home Services, Health, +${categories.length - 2} more`}>
                             {categoriesList}
                         </List>
-                        <List title='Price rating'
+                        <List title='Filter by price rating'
                             onClick={() => this.toggleListHandler(listKeys[2])}
                             bIsClosed={this.state.prices.list.bIsClosed}
                             closedChildren={<ClosedRatingContainer rating={this.state.prices.rating} />}>
@@ -211,13 +219,15 @@ class SidePanel extends Component {
 const mapStateToProps = (state) => {
 	return {
         categories: state.servicesReducer.categories,
-        isMobile: state.mobileReducer.isMobile
+        isMobile: state.mobileReducer.isMobile,
+        services: state.servicesReducer.services
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onToggleCategoryFilter: (prevState, key) => dispatch(servicesCreator.filteredCategoriesHandler(prevState, key))
+		onToggleCategoryFilter: (prevState, key) => dispatch(servicesCreator.filteredCategoriesHandler(prevState, key)),
+		onSortServicesHandler: (services, key) => dispatch(servicesCreator.sortServicesHandler(services, key))
 	};
 };
 
