@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// Redux Saga
+import  { connect } from 'react-redux';
 // Input Validity
 import { checkValidity } from '../../../shared/checkValidity';
+import isArray from '../../../shared/isArray';
 // CSS
 import classes from './Edit.module.css';
 // JSX
@@ -18,70 +20,32 @@ import InputImage from '../../../components/UI/Input/InputImage/InputImage';
 class Edit extends Component {
     constructor(props) {
         super(props);
+        console.log(props)
         // TODO remove placeholder
-        const listImages = [
-            <ImageFadeIn draggable="false" src='https://images.unsplash.com/photo-1531817506236-027915e5b07d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80' />,
-            <ImageFadeIn draggable="false" src='https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80' />,
-            <ImageFadeIn draggable="false" src='https://images.unsplash.com/photo-1519781542704-957ff19eff00?ixlib=rb-1.2.1&auto=format&fit=crop&w=1146&q=80' />,
-            <ImageFadeIn draggable="false" src='https://images.unsplash.com/reserve/oIpwxeeSPy1cnwYpqJ1w_Dufer%20Collateral%20test.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=916&q=80' />,
-        ];
+        const listImages = [];
+        if (isArray(props.userDetails.photoURL)) {
+            props.userDetails.photoURL.forEach( photo => {
+                listImages.push(photo);
+            })
+        } else {
+            listImages.push(props.userDetails.photoURL);
+        }
         this.state={
             controls: {
-                firstName: {
-                    title: 'First Name',
+                displayName: {
+                    title: 'Display Name',
                     elementType: 'input',
                     elementConfig: {
                         type: 'text',
-                        autoComplete: 'first name',
+                        autoComplete: 'name',
                         autoCorrect:"off",
                         autoCapitalize:"on",
                         spellCheck:"false"
                     },
-                    value: 'First Name', // TODO Fetch data from database
-                    valueType: 'first name',
+                    value: props.userDetails.displayName ? props.userDetails.displayName : '', // TODO Fetch data from database
+                    valueType: 'display name',
                     validation: {
-                        required: true
-                    },
-                    valid: false,
-                    touched: false,
-                    style: {margin: 0}
-                },
-                lastName: {
-                    title: 'Last Name',
-                    private: 'Your public profile only shows your first name.',
-                    elementType: 'input',
-                    elementConfig: {
-                        type: 'text',
-                        autoComplete: 'last name',
-                        autoCorrect:"off",
-                        autoCapitalize:"on",
-                        spellCheck:"false"
-                    },
-                    value: 'Last Name', // TODO Fetch data from database
-                    valueType: 'last name',
-                    validation: {
-                        required: true
-                    },
-                    valid: false,
-                    touched: false,
-                    style: {margin: 0}
-                },
-                email: {
-                    title: 'Email',
-                    private: 'We won’t share your email address with anyone else.',
-                    elementType: 'input',
-                    elementConfig: {
-                        type: 'text',
-                        autoComplete: 'email',
-                        autoCorrect:"off",
-                        autoCapitalize:"off",
-                        spellCheck:"false"
-                    },
-                    value: 'Email',
-                    valueType: 'email', // TODO Fetch data from database
-                    validation: {
-                        required: true,
-                        email: true
+                        required: false
                     },
                     valid: false,
                     touched: false,
@@ -131,15 +95,14 @@ class Edit extends Component {
 
     onSubmitHandler = (event) => {
         event.preventDefault();
-        console.log(this.state.imageFiles.values())
-        axios.post('https://us-central1-servify-716c6.cloudfunctions.net/uploadFile', this.state.imageFiles)
-            .then(
-                res => {
-                    console.log(res);
-                }
-            ).catch(err => {
-                console.log(err);
-            });
+        // axios.post('https://us-central1-servify-716c6.cloudfunctions.net/uploadFile', this.state.imageFiles)
+        //     .then(
+        //         res => {
+        //             console.log(res);
+        //         }
+        //     ).catch(err => {
+        //         console.log(err);
+        //     });
     }
 
     render () {
@@ -181,7 +144,10 @@ class Edit extends Component {
                                 </div>
                             );
                         })}
-                        <EditImages title direction='vertical' updateItems={this.updateImages} items={this.state.images} />
+                        {console.log(this.state.images[0].content)}
+                        { this.state.images[0].content ? 
+                            <EditImages title direction='vertical' updateItems={this.updateImages} items={this.state.images} />
+                            : null}
                         <Separator />
                         <InputImage onChange={this.inputImageChangeHandler} onSubmit={this.onSubmitHandler} />
                         <Separator />
@@ -193,4 +159,10 @@ class Edit extends Component {
     }
 }
 
-export default Edit;
+const mapStateToProps = (state) => {
+	return {
+        userDetails: state.authReducer.userDetails,
+	};
+};
+
+export default connect(mapStateToProps)(Edit);

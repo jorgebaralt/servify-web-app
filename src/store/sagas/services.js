@@ -2,7 +2,7 @@
 import axios from 'axios';
 import axiosServices from '../../axios-services';
 // Sagas
-import { put } from 'redux-saga/effects';
+import { put, call } from 'redux-saga/effects';
 import { servicesActions, servicesCreator } from '../actions';
 // Arry sorting
 import sort from '../../shared/sortArrayByKey';
@@ -10,6 +10,10 @@ import isArray from '../../shared/isArray';
 
 export const servicesSagas = {
     servicesInit: function* () {
+        const response = yield axiosServices.get('/getPopularCategories');
+        const topCategories = response.data;
+        yield put(servicesActions.setTopCategories(topCategories));
+        yield put(servicesCreator.topServicesByCategoriesHandler(topCategories));
         try {
             let response = yield axios.get('https://ipinfo.io');
             const coordinates = yield response.data.loc.split(",");
@@ -24,12 +28,26 @@ export const servicesSagas = {
             services.topServices = yield sort(response.data, 'rating');
             yield put(servicesActions.setServices(services));
         } catch (err) {
-            console.log(err);
+            if (navigator.geolocation) {
+                if (navigator.geolocation) {
+                    const getCurrentPosition = () => new Promise(
+                        (resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject)
+                    )
+                    const position = yield call(getCurrentPosition);
+                    const currentLocation = { 
+                        latitude: Number(position.coords.latitude),
+                        longitude: Number(position.coords.longitude)
+                    };
+                    let response;
+                    const services = {};
+                    response = yield axiosServices.get('/getNearService', { params: { currentLocation, distance: 30 } });
+                    services.nearServices =  sort(response.data, 'rating');
+                    response = yield axiosServices.get('/getNearService', { params: { currentLocation, distance: 500 } });
+                    services.topServices =  sort(response.data, 'rating');
+                    yield put(servicesActions.setServices(services));
+                }
+            }
         }
-        const response = yield axiosServices.get('/getPopularCategories');
-        const topCategories = response.data;
-        yield put(servicesActions.setTopCategories(topCategories));
-        yield put(servicesCreator.topServicesByCategoriesHandler(topCategories));
     },
     setTopServicesByCategories: function* (action) {
         const topCategories = action.topCategories;
@@ -42,7 +60,6 @@ export const servicesSagas = {
         yield put(servicesActions.setServices( { byCategories: byCategories } ));
     },
     sortServices: function* (action) {
-        yield console.log(action);
         const key = yield action.key;
         const services = yield action.services;
         for (let service in services) {

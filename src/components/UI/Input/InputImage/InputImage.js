@@ -78,8 +78,8 @@ class InputImage extends Component {
                 errormsg.push(`${file.type} is not a supported format.`)
             }
             // #3 Catching files that are too large on the client
-            if (file.size > 500000) {
-                errormsg.push(`${file.name} is too large, please pick a smaller file.`)
+            if (file.size > 600000) {
+                errormsg.push(`${file.name} is too large, please pick a smaller file that is less than 600 KB.`)
             }
         });
 

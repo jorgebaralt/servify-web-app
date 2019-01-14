@@ -18,8 +18,8 @@ import SearchBox from '../../components/UI/SearchBox/SearchBox';
 import CardContainer from '../../components/Landing/CardContainer/CardContainer';
 import Card from '../../components/Landing/Card/Card';
 import Service from '../../components/Services/Service/Service';
-import Featured from '../../components/Services/Featured/Featured';
-import AnchorLink from '../../components/UI/AnchorLink/AnchorLink';
+// import Featured from '../../components/Services/Featured/Featured';
+// import AnchorLink from '../../components/UI/AnchorLink/AnchorLink';
 import LearnMore from '../../components/Landing/LearnMore/LearnMore';
 
 const categoriesDatalist = categories.map( (category) => {
@@ -59,7 +59,7 @@ class Landing extends Component {
     }
 
     componentDidMount () {
-        axios.get('https://api.ipify.org/?format=json').then(
+        axios.get('https://ipinfo.io/json').then(
             (response) => {
                 this.savePosition(response);
             }

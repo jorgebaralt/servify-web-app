@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// Redux Saga
+import  { connect } from 'react-redux';
 // CSS
 import classes from './SearchBar.module.css'
 // JSX
@@ -157,4 +159,10 @@ class SearchBar extends Component {
     };
 }
 
-export default SearchBar;
+const mapStateToProps = (state) => {
+	return {
+        searchBar: state.servicesReducer.searchBar,
+	};
+};
+
+export default connect(mapStateToProps)(SearchBar);
