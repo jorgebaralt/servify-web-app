@@ -67,6 +67,18 @@ export const authCreator = {
             bRememberMe: bRememberMe
         }
     },
+    authFacebookSignInInit: (bRememberMe) => {
+        return {
+            type: actionTypes.AUTH_INIT_FACEBOOK_SIGN_IN,
+            bRememberMe: bRememberMe
+        }
+    },
+    authGoogleSignInInit: (bRememberMe) => {
+        return {
+            type: actionTypes.AUTH_INIT_GOOGLE_SIGN_IN,
+            bRememberMe: bRememberMe
+        }
+    },
     authLogoutInit: () => {
         return {
             type: actionTypes.AUTH_INIT_SAGA_LOGOUT

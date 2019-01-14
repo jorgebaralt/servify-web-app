@@ -194,8 +194,10 @@ class SignUpModal extends PureComponent {
         const formElementsArray = Object.entries(this.state.controls);
         return (
             <>  
-                <Button type='facebook' blockButton={true}>Sign up with Facebook</Button>
-                <Button type='google' blockButton={true}>Sign up with Google</Button>
+                <Button clicked={() => this.props.onFacebookSignInHandler(this.state.bRememberMe)} 
+                    type='facebook' blockButton={true}>Sign up with Facebook</Button>
+                <Button clicked={() => this.props.onGoogleSignInHandler(this.state.bRememberMe)} 
+                    type='google' blockButton={true}>Sign up with Google</Button>
                 <OrSeparator />
                 <Button type='auth' clicked={this.toggleSignUpWithEmail} blockButton={true}>Sign up with Email</Button>
                 {this.props.errorMessage ? 
@@ -250,6 +252,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSignUpHandler: (email, password, bRememberMe) => dispatch(authCreator.authSignUpInit(email, password, bRememberMe)),
+		onFacebookSignInHandler: (bRememberMe) => dispatch(authCreator.authFacebookSignInInit(bRememberMe)),
+		onGoogleSignInHandler: (bRememberMe) => dispatch(authCreator.authGoogleSignInInit(bRememberMe)),
 		resetErrorMessage: () => dispatch(authActions.authResetErrorMessage())
 	};
 }

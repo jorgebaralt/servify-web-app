@@ -6,6 +6,7 @@ import { authCreator } from '../../../../../../store/actions';
 import classes from './UserAuthButton.module.css';
 // JSX
 import { Link } from 'react-router-dom';
+import ImageFadeIn from '../../../../../UI/ImageFadeIn/ImageFadeIn';
 import SVG from '../../../../../SVG/SVG';
 
 class UserButton extends Component {
@@ -67,13 +68,15 @@ class UserButton extends Component {
         const widescreen = (
             <li className={[this.props.className, classes.Anchor].join(' ')} >
                 <button onClick={this.toggleList}>
-                    <SVG svg='user' />
+                    {this.props.userDetails ? 
+                        <div className={classes.User}><ImageFadeIn draggable='false' src={this.props.userDetails.photoURL} /></div>
+                        : <SVG svg='user' />}
                 </button>
                 {this.state.bIsListOpen ? 
                     list
                     : null}
             </li>
-        )
+        );
         return (
             !this.props.width ? // Width is passed as a prop to determine breakpoint, if it's null it means the breakpoint was reached.
                 list :
@@ -82,10 +85,16 @@ class UserButton extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+	return {
+        userDetails: state.authReducer.userDetails,
+	};
+};
+
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onLogoutHandler: () => dispatch(authCreator.authLogoutInit()),
 	};
 };
 
-export default connect(null, mapDispatchToProps)(UserButton);
+export default connect(mapStateToProps, mapDispatchToProps)(UserButton);

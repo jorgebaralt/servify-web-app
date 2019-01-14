@@ -18,7 +18,7 @@ class UsersId extends Component {
     }
 
     render () {
-        console.log(this.props.userDetails.displayName)
+        console.log(this.props.userDetails)
         const creationDate = (new Date(Number(this.props.userDetails.metadata.a))).toLocaleDateString();
         return (
             <>
@@ -28,7 +28,7 @@ class UsersId extends Component {
                             <Slider>
                                 <Slide>
                                     <div className={classes.ProfilePhoto}>
-                                        <ImageFadeIn draggable={false} src={anonUser} />
+                                        <ImageFadeIn draggable={false} src={this.props.userDetails.photoURL ? this.props.userDetails.photoURL : anonUser} />
                                     </div>
                                 </Slide>
                             </Slider>

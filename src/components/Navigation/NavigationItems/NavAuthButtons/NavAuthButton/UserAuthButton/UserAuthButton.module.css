@@ -50,3 +50,15 @@
 .ListItem:hover {
     border-bottom: 1px solid rgb(30, 164, 202);
 }
+
+.User {
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 50%;
+    background-color: #686868;
+}
+
+.User img {
+    border-radius: 50%;
+}

@@ -13,7 +13,7 @@ const menu = (props) => {
         <div className={classes.Wrapper}>
             <div className={classes.Container}>
                 <div className={classes.ProfilePhoto}>
-                    <ImageFadeIn draggable={false} src={anonUser} />
+                    <ImageFadeIn draggable={false} src={props.photoURL ? props.photoURL : anonUser} />
                 </div>
                 <Panel bold header='Account Menu'>
                     <ul className={classes.Nav}>

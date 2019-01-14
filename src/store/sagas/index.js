@@ -26,6 +26,8 @@ export function* watchAuth () {
         takeEvery(actionTypes.AUTH_INIT_SAGA, authSagas.authCheckState),
         takeEvery(actionTypes.AUTH_INIT_SIGN_UP, authSagas.authSignUp),
         takeEvery(actionTypes.AUTH_INIT_SIGN_IN, authSagas.authSignIn),
+        takeEvery(actionTypes.AUTH_INIT_FACEBOOK_SIGN_IN, authSagas.authFacebookSignIn),
+        takeEvery(actionTypes.AUTH_INIT_GOOGLE_SIGN_IN, authSagas.authGoogleSignIn),
         takeEvery(actionTypes.AUTH_INIT_SAGA_LOGOUT, authSagas.authLogout)
     ]);
 }

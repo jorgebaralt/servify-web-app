@@ -97,7 +97,6 @@ class SidePanel extends Component {
         });
         // const key = updatedFormElement.value;
         const key = camelize(value);
-        console.log(key)
         this.props.onSortServicesHandler(this.props.services, key);
     }
 

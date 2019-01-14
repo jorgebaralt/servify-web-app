@@ -25,10 +25,14 @@ class Edit extends Component {
         const listImages = [];
         if (isArray(props.userDetails.photoURL)) {
             props.userDetails.photoURL.forEach( photo => {
-                listImages.push(photo);
+                listImages.push(
+                    <ImageFadeIn draggable='false' src={photo} />
+                );
             })
         } else {
-            listImages.push(props.userDetails.photoURL);
+            listImages.push(
+                <ImageFadeIn draggable='false' src={props.userDetails.photoURL} />
+            );
         }
         this.state={
             controls: {
