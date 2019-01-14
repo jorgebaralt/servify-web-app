@@ -1,0 +1,15 @@
+.Import {
+    color: #569cd6;
+}
+
+.Import span {
+    color: #fff;
+}
+
+.Brackets {
+    color: yellow !important;
+}
+
+.Import span:not(:last-of-type) {
+    color: #4ec98f;
+}

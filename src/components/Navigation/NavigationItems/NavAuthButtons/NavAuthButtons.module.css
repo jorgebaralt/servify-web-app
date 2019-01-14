@@ -1,0 +1,60 @@
+.Button {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    min-width: 100px;
+}
+
+.Button button {
+    color: #212121;
+    font-weight: 500;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    transition: box-shadow 0.25s ease-out, font-size 0.05s ease-out, color 0.15s ease-out;
+}
+
+.Button button:hover {
+    color: black;
+    box-shadow: 0px 2px #FF7043;
+    height: 95%;
+}
+
+.ButtonWhite button{
+    color: #fff;
+    font-weight: 700;
+} 
+
+.ButtonWhite button:hover,
+.ButtonWhite button:active {
+    color: #fff;
+}
+
+.Transparent {
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+.Button {
+    margin: 0;
+    display: flex;
+    width: 150px;
+    width: fit-content;
+    padding: 10px 22.5px;
+    max-width: 150px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@media (min-width: 744px) {
+    .Button button {
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    .ButtonWhite button:hover {
+        box-shadow: 0px 2px rgb(255, 255, 255);
+    }
+}

@@ -1,0 +1,124 @@
+.Wrapper {
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+.Container {
+    display: flex;
+    position: relative;
+    flex:0 0 auto;
+    padding: 28px 96px 0;
+    margin: 0 auto;
+    background-color: transparent;
+    width: 100vw;
+    height: 100%;
+}
+
+.ButtonsWrapper {
+    padding: 12px 96px;
+}
+
+.Button {
+    margin: 0 8px;
+}
+
+@media (max-width: 744px) {
+    .Container {
+        padding: 24px;
+    }
+    .ButtonsWrapper {
+        padding: 0 24px;
+    }
+}
+
+.Container h1,
+.Container h2 {
+    color: #484848;
+    user-select: none;
+    margin-top: 10px;
+    font-weight: 400;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+.Container h2 {
+    font-size: 18px;
+}
+
+.FormWrapper {
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+}
+
+.FormContainer {
+    position: relative;
+    max-width: 700px;
+}
+
+.ImageWrapper {
+    user-select: none;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0;
+}
+
+.ImageContainer {
+    user-select: none;
+    width: 259px;
+    height: 331px;
+}
+
+@media (max-width: 1200px) {
+    .FormWrapper {
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: auto;
+    }
+    .FormContainer {
+        max-width: unset;
+    }
+    .ImageWrapper {
+        display: none;
+        visibility: hidden;
+    }
+}
+
+.HiddenInput {
+    display: none;
+    height: 0;
+    width: 0;
+    appearance: none;
+}
+
+.Step {
+    user-select: none;
+    font-size: 17px;
+    letter-spacing: 1px;
+    margin: 6px 0;
+    color: #787878;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.Step span {
+    margin: 0 -2px;
+}
+
+@media (max-width: 920px) {
+    .Container {
+        min-width: 100vw;
+    }
+}

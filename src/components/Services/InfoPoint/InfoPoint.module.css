@@ -1,0 +1,65 @@
+.Container {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 4px;
+    position: relative;
+}
+
+.IconWrapper {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.Icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Icon svg {
+    width: 15px;
+}
+
+.InfoWrapper {
+    padding-left: 24px;
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 17px;
+    line-height: 26px;
+    letter-spacing: normal;
+    font-weight: normal;
+}
+
+.IconContainer {
+    color: #484848;
+}
+.Link {
+    color: rgb(255, 112, 67);
+    font: inherit;
+    text-decoration: none;
+    appearance: none;
+    background: transparent;
+    border: 0px;
+    cursor: pointer;
+    margin: 0px;
+    padding: 0px;
+    user-select: auto;
+    text-align: left;
+}
+
+.Link:hover {
+    text-decoration: underline;
+}
+
+.SeoTool {
+    position: absolute;
+    display: block;
+    border: 0px;
+    margin: -1px;
+    padding: 0px;
+    height: 1px;
+    width: 1px;
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+}

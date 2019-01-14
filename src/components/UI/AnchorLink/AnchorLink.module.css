@@ -1,0 +1,63 @@
+.Wrapper {
+    display: inline-block;
+    text-align: left;
+    margin-top: 12px;
+}
+
+.AnchorLink {
+    box-shadow: none;
+    text-align: left;
+    width: auto;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    padding: 4px 0px;
+    border-color: rgb(224, 224, 224);
+    text-decoration: none;
+}
+
+.AnchorLink:hover {
+    text-decoration: underline;
+    text-decoration-color: rgb(255, 112, 67);
+}
+
+.Text {
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 22px;
+    display: inline;
+    margin-right: 6px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    color: rgb(255, 112, 67);
+}
+
+@media (max-width: 745px) {
+    .Wrapper {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        text-decoration-line: none;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        color: rgb(255, 112, 67);
+        background: transparent;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 4px;
+        border-color: rgb(224, 224, 224);
+        padding: 14px;
+    }
+    .Text {
+        font-weight: 600;
+        font-size: 17px;
+        line-height: 22px;
+        margin-right: 6px;
+        letter-spacing: normal;
+        color: rgb(255, 112, 67);
+        cursor: pointer;
+    }
+}

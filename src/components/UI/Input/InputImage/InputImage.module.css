@@ -1,0 +1,133 @@
+.Title {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.Title div {
+    width: 20%;
+    color: #585858;
+    text-align: right;
+    padding: 0 21px;
+    margin: 18px 0;
+    user-select: none;
+}
+
+.Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    max-height: 360px;
+    overflow: auto;
+    padding: 36px 24px 28px;
+    border-radius: 4px;
+    border: 1px solid #EBEBEB;
+    position: relative;
+    margin: 0 0 18px;
+}
+
+.Container:focus-within {
+    border: 1px solid #1ea3cc;
+}
+
+.Buttons {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+input[type=file].Input {
+    display: none;
+    visibility: hidden;
+    position: absolute;
+}
+
+.Delete {
+    position: relative;
+    top: -10px;
+    right: 12px;
+    height: 0;
+    color: #484848;
+}
+
+.Delete,
+.Delete path {
+    font-size: 1.5em !important;
+}
+
+.Delete svg {
+    filter: drop-shadow(1px 1px 1px #999);
+    transition: filter ease 300ms;
+}
+
+.Button svg, .Delete svg {
+    filter: drop-shadow(3px 3px 3px #999);
+    transition: filter ease 300ms;
+    transform: rotate(-0.2deg)
+}
+
+.Button svg:hover, .Delete svg:hover {
+    filter: drop-shadow(4px 4px 4px #999);
+    transform: rotate(-0.6deg);
+    cursor: pointer
+}
+
+.ImageWrapper {
+    margin: 12px;
+}
+
+.Image {
+    user-select: none;
+    max-height: 270px;
+    max-width: 270px;
+    padding: 10px;
+    border: 1px dashed #999;
+}
+
+@media (max-width: 600px), (max-height: 600px) {
+    .Image {
+        max-height: 250px;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px), (max-height: 480px) {
+    .Image {
+        max-height: 230px;
+        max-width: 230px;
+    }
+}
+
+.Icon {
+    cursor: pointer;
+    display: inline-block;
+    font-size: inherit;
+    height: 1em;
+    width: 1em;
+    overflow: visible;
+    vertical-align: -.125em;
+    font-size: 10em;
+}
+
+.Icon path {
+    font-size: 10em;
+}
+
+.FadeIn {
+    animation: FadeIn ease 500ms;
+}
+
+@keyframes FadeIn {
+    0% {
+        opacity: 0;
+    }
+    66% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1
+    }
+}

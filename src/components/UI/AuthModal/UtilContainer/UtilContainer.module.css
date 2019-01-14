@@ -1,0 +1,112 @@
+.UtilContainer {
+    display: table;
+    position: relative;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.RememberPasswordWrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.RememberPasswordContainer {
+    display: table;
+    cursor: pointer;
+    background: transparent;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    padding: 0px;
+}
+
+.RememberPassword {
+    display: table-row;
+}
+
+.RememberPasswordCheckbox {
+    display: table-cell;
+    vertical-align: middle;
+    white-space: normal;
+    position: relative;
+}
+
+.RememberPasswordCheckbox div {
+    display: inline-block;
+    cursor: pointer;
+    padding: 0px;
+}
+
+.RememberPasswordCheckbox input {
+    position: absolute;
+    width: 0px;
+    opacity: 0;
+}
+
+.RememberPasswordCheckbox span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 20px;
+    height: var(--size-check-box-size, 20px);
+    width: var(--size-check-box-size, 20px);
+    text-align: center;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(215, 215, 215);
+    border-radius: 25%;
+    overflow: hidden;
+    position: relative;
+    transition: background-color 0.2s ease;
+}
+
+.Checked {
+    height: 20px !important;
+    width: 20px !important;
+    height: var(--size-check-box-size, 20px) !important;
+    width: var(--size-check-box-size, 20px) !important;
+    color: rgb(255, 255, 255) !important;
+    border-style: 1px solid #1ea5c8 !important;
+    background-color: #1ea5c8 !important;
+    color: #FFF !important;
+}
+
+.RememberMeContainer {
+    display: table-cell;
+    vertical-align: baseline;
+    white-space: normal;
+}
+
+.RememberMe {
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: normal;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: normal;
+    color: #484848;
+    padding-left: 8px;
+}
+
+.ShowPasswordWrapper {
+    display: table-cell;
+    vertical-align: middle;
+    float: right;
+}
+
+.ShowPassword {
+    cursor: pointer;
+    color: #1ea5c8;
+    appearance: none;
+    user-select: auto;
+    text-align: left;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    font-size: 16px;
+    line-height: 16px;
+}

@@ -1,0 +1,46 @@
+.Wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.Container {
+    cursor: pointer;
+    display: inline-block;
+    width: auto;
+    border-radius: 0px 0px 4px 4px;
+    background-color: rgb(80, 80, 80);
+    padding: 10px 30px;
+    pointer-events: all;
+    color: rgb(255, 255, 255);
+    transition: all 300ms ease 0s;
+    transform: translateY(0px);
+}
+
+.SlideDown {
+    animation: SlideDown ease 300ms;
+}
+
+.SlideUp {
+    animation: SlideUp ease 300ms;
+    animation-fill-mode: forwards; 
+}
+
+@keyframes SlideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes SlideUp {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}

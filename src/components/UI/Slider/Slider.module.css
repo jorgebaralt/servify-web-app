@@ -1,0 +1,21 @@
+.Wrapper {
+    display: flex;
+    flex-flow: row;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.FadeIn {
+    animation: FadeIn ease 250ms;
+}
+
+@keyframes FadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

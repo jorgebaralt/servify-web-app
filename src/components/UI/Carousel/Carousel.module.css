@@ -1,0 +1,99 @@
+.Wrapper {
+    position: relative;
+}
+
+.Container {
+    padding: 0 36px;
+}
+
+.PrevButton {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    transform: translateY(-37.5%);
+    z-index: 1;
+}
+
+.NextButton {
+    position: absolute;
+    top: 40%;
+    right: 0;
+    transform: translateY(-37.5%);
+    z-index: 1;
+}
+
+.PrevButton button,
+.NextButton button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 1;
+    touch-action: manipulation;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 1px 1px;
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+    background: rgb(255, 255, 255);
+}
+
+.NextButton button {
+    justify-content: flex-start;
+}
+
+.PrevButton button {
+    justify-content: flex-end;
+}
+
+@media (min-width: 960px) {
+    .PrevButton button,
+    .NextButton button {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.PrevButton button:after,
+.NextButton button:after {
+    position: absolute;
+    top: 25%;
+    right: 37.5%;
+    display: block;
+    content: '';
+    transform: rotate(45deg);
+    width: 12.5px;
+    height: 12.5px;
+    border: 2px solid #FF7043;
+    border-radius: 12.5%;
+    border-left: 0;
+    border-bottom: 0;
+}
+
+.PrevButton button:after {
+    left: 37.5%;
+    transform: rotate(-135deg);
+}
+
+@media (min-width: 960px) { 
+    .PrevButton button:after,
+    .NextButton button:after {
+        width: 12.5px;
+        height: 12.5px;
+    }
+}
+
+.Thumbnail {
+    width: 33.3333%;
+}
+
+.Thumbnail img {
+    border-radius: 10px;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,54 @@
+.Toggle,
+.ToggleWrapper {
+    display: none;
+}
+
+@media (max-width: 920px) {
+    .ToggleWrapper {
+        display: flex;
+        position: sticky;
+        order: 1;
+        margin: 0px 0;
+        top: 0;
+        right: 0;
+        width: 1px;
+        height: 1px;
+        z-index: 5;
+    }
+    .Toggle {
+        user-select: none;
+        cursor: pointer;
+        order: 1;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #FFF;
+        width: 42px;
+        height: 42px;
+        padding: 6px;
+        border: 2px solid rgb(255, 112, 67);
+        border-radius: 25%;
+        box-shadow: 1px 1px 3px rgb(229, 229, 229);
+        transition-delay: 5s;
+        animation: FadeIn .5s;
+    }
+    .MenuToggle {
+        position: absolute;
+        opacity: 1;
+    }
+}
+
+@keyframes FadeIn {
+    0% { 
+        opacity: 0; 
+    }
+    66% { 
+        opacity: 0; 
+    }
+    100% { 
+        opacity: 1; 
+    }
+}

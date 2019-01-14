@@ -1,0 +1,91 @@
+.Wrapper {
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+}
+
+.Title {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.Title div {
+    width: 20%;
+    min-width: 135px;
+    color: #585858;
+    text-align: right;
+    padding: 0 21px;
+    margin: 18px 0;
+    user-select: none;
+}
+
+.Container {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #EBEBEB;
+}
+
+.VerticalContainer {
+    padding: 4px 8px;
+    flex-flow: row !important;
+}
+
+.Container:focus-within {
+    border: 1px solid #1ea3cc;
+}
+
+.SliderContainer {
+    height: 100%;
+    width: 100%;
+    width: calc(100% - 1px);
+}
+
+.VerticalSliderContainer {
+    margin: 0px;
+    position: sticky;
+    padding: 10px 0px 10px 16px;
+    top: 42px;
+}
+
+@media screen and (orientation:portrait) {
+    .SliderContainer {
+        padding: 10px 0 10px 8px;
+    }
+}
+
+.Slider {
+    min-height: 175px;
+    height: 66.6666vh;
+    width: 100%;
+}
+
+@media screen and (orientation:portrait) {
+    .Slider {
+        height: 125px;
+    }
+}
+
+.Instructions {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 12px 0;
+    width: 100%;
+    color: #989898;
+}
+
+.MobileInstructions {
+    display: none;
+}
+
+@media only screen and (max-width: 812px) {
+    .MobileInstructions {
+        display: inline;
+    }
+}

@@ -1,0 +1,120 @@
+.ServiceContainer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+}
+
+@media (max-width: 1080px) {
+    .ServiceContainer {
+        flex-direction: column;
+    }
+    .GalleryWrapper {
+        width: 100% !important;
+        margin: 0 auto;
+        padding-left: 5% !important;
+        padding-right: 5% !important;
+        padding-bottom: 25px !important;
+        margin-bottom: 25px !important;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #EBEBEB;
+        border-bottom-width: var(--border-rule-border-width, 1px);
+        border-bottom-color: var(--color-divider, #EBEBEB);
+    }
+    .DescriptionContainer {
+        width: 90% !important;
+        margin: 0 auto !important;
+    }
+    .ServicesWrapper {
+        padding-left: 12px !important;
+    }
+}
+
+.GalleryWrapper {
+    align-items: center;
+    width: calc(42.2222% - 5.333333333333333px);
+    flex: none;
+    /* padding-right: 24px; */
+    padding-right: 36px;
+    display: block;
+    padding: 0px;
+}
+
+.GalleryContainer {
+    position: sticky;
+    max-width: 100%;
+    top: 96px;
+    /* margin-top: 12px; */
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.DescriptionContainer {
+    position: relative;
+    min-width: 0px;
+    width: 100%;
+    margin-left: 24px;
+    margin-right: 12px;
+}
+
+.TitleContainer {
+    margin-bottom: 12px;
+}
+
+.Title {
+    font-weight: 600;
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 38px;
+    line-height: 52px;
+    letter-spacing: normal;
+    color: #484848;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.Title h1 {
+    color: inherit;
+    font-size: 1em;
+    font-weight: inherit;
+    line-height: inherit;
+    margin: 0px;
+    padding: 0px;
+}
+
+.InputWrapper {
+    display: block;
+}
+
+.InputContainer {
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+}
+
+.InputTitle {
+    color: #686868;
+    margin: 6px 0;
+    user-select: none;
+}
+
+.Input {
+    flex: auto;
+}
+
+.MapContainer {
+    display: flex;
+    position: relative;
+    flex-flow: column;
+    flex: 0 0 auto;
+    background-color: transparent;
+    margin: 36px auto 18px;
+    width: 90%;
+    height: 100%;
+}
+
+@media (max-width: 744px) {
+    .MapContainer {
+        margin: 0px auto 18px;
+    }
+}

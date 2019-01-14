@@ -1,0 +1,12 @@
+
+.Separator {
+    display: block !important;
+    width: 100% !important;
+}
+
+.Separator hr {
+    height: 0px !important;
+    border-width: 1px 0px 0px !important;
+    border-top: 1px solid rgb(229, 229, 229) !important;
+    margin: 16px 0px !important;
+}

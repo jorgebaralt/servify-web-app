@@ -3,14 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "firebase": "^5.7.2",
+    "mapbox-geocoding": "^0.1.5",
+    "mapbox-gl": "^0.52.0",
     "react": "^16.6.3",
+    "react-beautiful-dnd": "^10.0.3",
     "react-dom": "^16.6.3",
+    "react-mapbox-gl": "^4.0.2",
     "react-redux": "^5.1.1",
+    "react-resize-detector": "^3.2.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.1",
+    "react-scripts": "^2.1.3",
+    "react-slick": "^0.23.2",
+    "react-swipe": "^6.0.3",
+    "react-toastify": "^4.5.2",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2",
-    "smoothscroll-polyfill": "^0.4.3"
+    "slick-carousel": "^1.8.1",
+    "smoothscroll-polyfill": "^0.4.3",
+    "swipe-js-iso": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

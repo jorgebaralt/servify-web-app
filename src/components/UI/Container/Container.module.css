@@ -1,0 +1,15 @@
+.Container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 80vw;
+    width: fit-content;
+    margin: auto;
+}
+
+@media (max-width: 350px) {
+    .Container {
+        max-width: 300px;
+    }
+}

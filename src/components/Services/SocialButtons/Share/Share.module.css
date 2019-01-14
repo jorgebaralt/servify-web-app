@@ -1,0 +1,13 @@
+.Container {
+    margin-right: 6px;
+}
+
+.Button {
+    cursor: pointer;
+    background-color: transparent;
+    display: block;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+}

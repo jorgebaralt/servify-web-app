@@ -1,0 +1,203 @@
+.Widescreen {
+    display: none;
+}
+
+.Mobile {
+    display: block;
+    width: 100%;
+}
+
+@media (min-width: 960px) {
+    .Widescreen {
+        display: block;
+    }
+
+    .Mobile {
+        display: none;
+    }
+}
+
+.SearchBox {
+    background: rgba(255,255,255,.95);
+    color: #484848;
+    border-radius: 4px;
+    padding: 32px;
+    padding-bottom: 62px;
+    margin: auto;
+    box-shadow: none;
+}
+
+@media (min-width: 960px) {
+    .SearchBox {
+        margin: 0;
+        margin-right: 20vw;
+        width: 400px;
+        box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+    }
+}
+
+.SearchBox h1 {
+    color: inherit;
+    margin: 0px;
+    padding: 0px;
+    font-size: 24px;
+}
+
+@media (min-width: 960px) {
+    .SearchBox h1 {
+        font-size: inherit;
+    }
+}
+
+.SearchBox small {
+    display: block;
+    margin: 0 0 6px;
+    word-wrap: break-word;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1px;
+    color: #484848;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.InputWrapper {
+    position: relative;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 1px solid #EBEBEB;
+    border-top-color: rgb(205, 205, 205);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-right-color: rgb(205, 205, 205);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-color: rgb(205, 205, 205);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: rgb(205, 205, 205);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-out;
+}
+
+.InputContainer {
+    width: 100%;
+}
+
+.Label {
+    margin: 0px;
+    padding: 0px;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.Input {
+    width: 100%;
+    background-color: transparent;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    text-overflow: ellipsis;
+    font-size: 17px;
+}
+
+.InputWrapper:focus-within, 
+.InputWrapper:hover{
+    border: 1px solid #1fa6c8;
+}
+
+.Input:focus {
+    outline: none;
+}
+
+.Button {
+    margin: -10px 0 20px;
+}
+
+@media (max-width: 960px) {
+    .Button {
+        color: #FFF !important;
+        background-color: #FF7043 !important;
+        width: 100% !important;
+    }
+}
+
+.MakeMoneyContainer {
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    font-weight: 400;
+    width: 100%;
+    margin-top: 12px;
+}
+
+.MakeMoneyContainer svg,
+.MakeMoneyContainer svg path {
+    fill: rgb(72,72,72);
+}
+
+.Tools {
+    width: 17px;
+    height: 12px;
+    margin-right: 2.5px;
+}
+
+.RightArrow {
+    width: 10px;
+    height: 16px;
+}
+
+.MakeMoney {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 13px;
+    color: rgb(72,72,72)
+}
+
+.MakeMoney span {
+    margin: 0 5px 0 0px;
+}
+
+@media (min-width: 960px) {
+    .MakeMoneyContainer {
+        width: 414px;
+        align-items: flex-end;
+        height: 30px;
+    }
+
+    .MakeMoneyContainer svg,
+    .MakeMoneyContainer path {
+        fill: rgb(255,255,255) !important;
+    }
+    
+    .Tools {
+        width: 17px;
+        height: 17px;
+    }
+
+    .RightArrow {
+        width: auto;
+        height: auto;
+    }
+
+    .MakeMoney {
+        color: rgb(255,255,255);
+        font-size: 17px;
+    }
+
+    .MakeMoney span {
+        text-shadow: 3px 3px 5px #333;
+    }
+}

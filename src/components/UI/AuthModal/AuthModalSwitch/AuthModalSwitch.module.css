@@ -1,0 +1,42 @@
+.AuthModalSwitchWrapper {
+    display: table;
+    position: relative;
+    width: 100%;
+}
+
+.AuthModalSwitchContainer {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.Text {
+    cursor: initial;
+    user-select: none;
+    color: #484848;
+} 
+
+.Switch {
+    cursor: pointer;
+    color: #1ea5c8;
+    appearance: none;
+    user-select: auto;
+    text-align: left;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    margin: 0px;
+    margin-left: 1ch;
+    padding: 0px;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+@media (max-width: 350px) {
+    .Util {
+        display: block;
+        text-align: center;
+        margin-left: 0;
+        margin-top: 8px;
+    }
+}

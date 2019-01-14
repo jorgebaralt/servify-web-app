@@ -1,0 +1,98 @@
+.Wrapper {
+    position: relative;
+}
+
+.Navbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: rgb(31, 165, 202) !important;
+    border-bottom: 0.5px solid rgba(51,51,51,0.15);
+    z-index: 150;
+}
+
+.TabsWrapper {
+    flex: 0 0 50%;
+    height: 100%;
+}
+
+.TabsContainer {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-flow: row;
+    background: #FFF;
+    border-radius: 50px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.TabsContainer:after {
+    position: absolute;
+    display: block;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    border: 1px solid #c1c1c1;
+    border-radius: 50px;
+    background-color: rgb(255, 112, 67);
+    transition: transform ease 250ms;
+}
+
+.Edit.TabsContainer:after {
+    transform: translateX(-2.5%);
+}
+
+.Preview.TabsContainer:after {
+    transform: translateX(102.5%);
+}
+
+.Tab {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 85px;
+    text-align: center;
+    background-clip: border-box;
+    z-index: 1;
+    transition-delay: 50ms;
+    transition: color ease 200ms;
+}
+
+.Button {
+    width: 100%;
+    height: 100%;
+}
+
+.Active {
+    color: #FFF;
+}
+
+.Submit {
+    flex: 0 0 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.Spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 75vh;
+    min-height: calc(100vh - 135px);
+}
+
+.Container {
+    position: relative;
+}

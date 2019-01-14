@@ -1,0 +1,52 @@
+.Wrapper {
+    flex: 0 0 25%;
+    padding: 20px 12px;
+    position: relative;
+}
+
+.Container {
+    position: sticky;
+    top: 24px;
+    left: 0;
+}
+
+.ProfilePhoto {
+    user-select: none;
+    margin-bottom: 18px;
+    width: 100%;
+    height: 250px;
+    border: 1px solid #E0E0E0;
+    background-color: #EDEFED;
+}
+
+@media (max-width: 866px) {
+    .ProfilePhoto img {
+        object-fit: fill !important;
+    }
+}
+
+.Nav {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.NavLink {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    font-size: 16px;
+    color: #484848;
+    border-bottom: 1px solid rgb(229, 229, 229);
+    transition: border-color ease 100ms;
+}
+
+.NavLink:hover {
+    border-bottom: 1px solid rgb(30, 164, 202);
+}
+
+.Active {
+    color: #484848;
+    font-weight: bold;
+}

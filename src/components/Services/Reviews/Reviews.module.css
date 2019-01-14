@@ -1,0 +1,20 @@
+.Wrapper {
+    position: relative;
+    width: 90%;
+    margin: 36px auto 0;
+}
+
+.Container {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 580px) {
+    .Wrapper {
+        width: 90% !important;
+        margin: 0 auto;
+    }
+    .Container {
+        flex-direction: column !important;
+    }
+}

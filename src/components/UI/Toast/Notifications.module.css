@@ -1,0 +1,22 @@
+/* .Wrapper {
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+} */
+
+.Wrapper {
+    pointer-events: none;
+    position: absolute;
+    margin: 0px auto;
+    right: 0px;
+    top: 0px;
+    left: 0px;
+    display: inline-block;
+    width: 75%;
+    text-align: center;
+    z-index: 50;
+}

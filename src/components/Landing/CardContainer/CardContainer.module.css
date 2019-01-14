@@ -1,0 +1,53 @@
+.Wrapper {
+    overflow: hidden;
+    padding: 0 36px;
+}
+
+@media (max-width: 744px) {
+    .Wrapper {
+        padding: 0 8px;
+    }
+}
+
+.Container {
+    height: 100%;
+    overflow-y: auto;
+    white-space: nowrap;
+    overflow-x: scroll;
+    padding-bottom: 30px;
+    margin-bottom: -30px;
+    
+    overflow:auto;
+}
+
+.Container a {
+    display: inline-block !important;
+    margin: 5px;
+    width: 66%;
+    padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+    box-sizing: content-box; /* So the width will be 100% + 17px */
+    max-width: 220px;
+} 
+
+@media (min-width: 650px) {
+    .Container {
+        display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 0px;
+        padding: 0px;
+        overflow: visible;
+    } 
+    .Container a {
+        margin: 5px;
+        width: 27.5%;
+    } 
+}
+
+/* With flex-grow: 1 defined in the flex shorthand, there's no need for flex-basis to be 25%, 
+which would actually result in three items per row due to the margins. Since flex-grow will 
+consume free space on the row, flex-basis only needs to be large enough to enforce a wrap. 
+In this case, with flex-basis: 21%, there's plenty of space for the margins, but never enough 
+space for a fifth item. Meaning, 4 categories per row.*/

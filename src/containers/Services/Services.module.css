@@ -1,0 +1,12 @@
+.Wrapper {
+    display: flex;
+    flex-flow: row;
+    margin-bottom: -30px;
+}
+
+@media (max-width: 920px) {
+    .ServicesWrapper {
+        border-left: 0;
+        width: 100%;
+    }
+}

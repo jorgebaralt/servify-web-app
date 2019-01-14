@@ -1,5 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# firebase image upload snippets
+/src/servify-716c6-firebase-adminsdk-a3e7c-2528f47792.json
+/src/storage-upload-snippet.js
+
 # gitignore
 .gitignore
 

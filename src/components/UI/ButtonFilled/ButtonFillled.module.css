@@ -1,0 +1,29 @@
+.ButtonFilled{
+    border: none;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    width: 100px;
+    font-weight: bold;
+    user-select: none;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+
+.Success {
+    background-color: #28a745;
+    background-image: none;
+    border-color: #28a745;
+}
+.Danger {
+    background-color: #dc3545;
+    background-image: none;
+    border-color: #dc3545;
+}
+.Primary {
+    background-color: #FF7043;
+    background-image: none;
+    border-color: #FF7043;
+}

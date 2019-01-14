@@ -1,0 +1,129 @@
+.Header {
+    position: relative;
+    min-height: 48px;
+    margin-bottom: 16px;
+}
+
+.HeaderContainer {
+    display: table;
+    position: relative;
+    height: 100%;
+}
+
+.HeaderItem {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+@media (max-width: 520px) {
+    .HeaderItem {
+        vertical-align: top;
+    }
+}
+
+.ImageContainer {
+    height: 48px;
+    width: 48px;
+    display: inline-block;
+}
+
+.ImageContainer a {
+    background: transparent;
+    appearance: none;
+    border: 0px;
+    cursor: pointer;
+    margin: 0px;
+    padding: 0px;
+    user-select: auto;
+    text-decoration: none;
+}
+
+.Image {
+    background-color: #D8D8D8;
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #FFF;
+    vertical-align: middle;
+    overflow: hidden;
+    background-color: var(--color-accent-light-gray, #D8D8D8);
+    border-radius: var(--border-profile-photo-border-radius, 50%);
+    border-width: var(--border-profile-photo-border-width, 2px);
+    border-color: var(--color-white, #FFF);
+}
+
+.UserContainer {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.User {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@media (max-width: 520px) {
+    .User {
+        flex-flow: column;
+    }
+    .User span:nth-of-type(2) {
+        display: none;
+        visibility: hidden;
+    }
+}
+
+.Username {
+    display: inline-block;
+    margin: 0px;
+    font-weight: 600;
+    overflow-wrap: break-word;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: normal;
+    color: rgb(72, 72, 72);
+}
+
+.Date {
+    display: inline-block;
+    overflow-wrap: break-word;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    letter-spacing: normal;
+    color: rgb(72, 72, 72);
+    margin: 0px;
+}
+
+.Rating {
+    margin: 0;
+    margin-top: 1ch;
+    margin-left: -0.65ch;
+}
+
+.DescriptionContainer {
+    margin-top: 12px;
+}
+
+.Description {
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: normal;
+    color: #484848;
+    font-weight: normal;
+}
+
+.SeparatorWrapper {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.Separator {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #EBEBEB;
+    border-bottom-width: var(--border-rule-border-width, 1px);
+    border-bottom-color: var(--color-divider, #EBEBEB);
+}

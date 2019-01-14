@@ -1,0 +1,192 @@
+.happiness__modal {
+	background: #fff;
+	max-width: 780px;
+	margin: 40px auto;
+	width: 80%;
+	height: 300px;
+	max-height: 0;
+	position: relative;
+	z-index: 2;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.2s ease;
+	transition-delay: 0;
+	max-height: 10000px;
+	pointer-events: auto;
+	opacity: 1;
+}
+
+.happiness__header {
+	height: 150px;
+	background: #cea052;
+	background: linear-gradient(to right, #cea052, #fdcba1);
+	overflow: hidden;
+	color: #fff;
+	transition: max-height 0.2s ease;
+	position: relative;
+}
+
+.happiness__header--label {
+	font-weight: 400;
+	font-size: 1.6em;
+	position: absolute;
+	left: 250px;
+	top: 2.5em;
+}
+
+.happiness__emoji {
+	border-radius: 50%;
+	height: 150px;
+	width: 150px;
+	top: 20px;
+	left: 40px;
+	border: 5px solid #fff;
+	position: relative;
+	direction: ltr;
+	transform-origin: top left;
+	transition: transform 0.2s ease;
+}
+
+.happiness__emoji--eyeR,
+.happiness__emoji--eyeL {
+	width: 8%;
+	height: 8%;
+	border-radius: 50%;
+	background: #fff;
+	position: absolute;
+	top: 38%;
+	left: 33%;
+	margin-left: -4%;
+	margin-top: -4%;
+	display: block;
+	transition: all 0.2s ease;
+}
+
+.happiness__emoji--eyeBrew {
+	width: 200%;
+	position: absolute;
+	height: 30%;
+	top: -75%;
+	border-radius: 6px;
+	background: #fff;
+	opacity: 0;
+	transform: translateX(-25%);
+	transition: all 0.2s ease;
+}
+
+.happiness__emoji--eyeR .happiness__emoji--eyeBrew {
+	transform: translate(-30%, 180%) rotate(-30deg);
+}
+
+.happiness__emoji--eyeL .happiness__emoji--eyeBrew {
+	transform: translate(-20%, 180%) rotate(30deg);
+}
+
+.happiness__emoji--eyeR {
+	left: 66%;
+}
+
+.happiness__emoji--mouth {
+	border: 5px solid #fff;
+	border-top-color: transparent;
+	border-left: transparent;
+	border-right: transparent;
+	border-radius: 0;
+	position: absolute;
+	display: inline-block;
+	bottom: 30%;
+	left: 27%;
+	min-width: 44%;
+	min-height: 40px;
+	transition: all 0.2s ease;
+	transform-origin: bottom center;
+}
+
+.happiness__main {
+	height: 50%;
+	color: #c4c4c4;
+	padding: 30px 0;
+}
+
+.happiness__main--slider {
+	display: flex;
+	align-items: center;
+	padding: 20px;
+}
+
+.happiness__main--slider label {
+	margin: 0 1em;
+	font: 200 2.22222em 'Lato', sans-serif;
+	text-transform: capitalize;
+}
+
+input[type=range] {
+	width: 100%;
+	height: 10px;
+	border-radius: 5px;
+	outline: none !important;
+	background: linear-gradient(to right, #bf7540, #e8d67d);
+	-webkit-appearance: none;
+}
+
+input[type=range]::-ms-track {
+	height: 10px;
+	border: none;
+	color: transparent;
+}
+
+input[type=range]::-ms-fill-upper {
+	background-color: #fff;
+}
+
+input[type=range]::-ms-fill-lower {
+	background-color: #267928;
+}
+
+input[type=range]::-ms-fill-upper,
+input[type=range]::-ms-fill-lower {
+	border: solid 2px #444;
+	border-radius: 8px;
+	-webkit-appearance: none;
+}
+
+input[type=range]::-ms-thumb {
+	border: 8px solid #fff;
+	width: 24px;
+	height: 24px;
+	background: none;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+	border-radius: 50%;
+	box-sizing: border-box;
+	-webkit-appearance: none;
+}
+
+input[type=range]::-moz-range-track {
+	border: solid 2px #fff;
+	background: linear-gradient(to right, #bf4040, #a1e87d);
+	border-radius: 8px;
+	height: 10px;
+	-webkit-appearance: none;
+}
+
+input[type=range]::-moz-range-thumb {
+	border: 8px solid #fff;
+	width: 24px;
+	box-sizing: border-box;
+	height: 24px;
+	background: none;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+	border-radius: 50%;
+	-webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	border: 8px solid #fff;
+	width: 24px;
+	height: 24px;
+	background: none;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+	border-radius: 50%;
+	box-sizing: border-box;
+	-webkit-appearance: none;
+}

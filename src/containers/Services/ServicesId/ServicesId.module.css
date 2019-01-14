@@ -1,0 +1,138 @@
+.Container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+}
+
+@media (max-width: 744px) {
+    .Container {
+        flex-direction: column;
+        padding: 0 12px;
+    }
+    .Description {
+        width: 90% !important;
+        margin: 0 auto !important;
+    }
+}
+
+.Description {
+    position: relative;
+    min-width: 0px;
+    width: 100%;
+    margin-left: 24px;
+    margin-right: 12px;
+}
+
+.Header {
+    width: 80%;
+}
+
+.CategoryContainer {
+    text-transform: uppercase;
+}
+
+.Category {
+    user-select: none;
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: normal;
+    color: #484848;
+    font-weight: 600;
+}
+
+.MapContainer {
+    display: flex;
+    position: relative;
+    flex-flow: column;
+    flex: 0 0 auto;
+    background-color: transparent;
+    margin: 36px auto 18px;
+    width: 90%;
+    height: 100%;
+}
+
+@media (max-width: 744px) {
+    .MapContainer {
+        margin: 0px auto 18px;
+    }
+}
+
+.MapWrapper {
+    height: 60vh;
+}
+
+.SimilarServices {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+    width: 90%;
+    margin: 36px auto;
+}
+
+.ServicesWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 30%;
+    flex: none;
+    padding-left: 24px;
+    padding-right: 12px;
+    margin-right: 12px;
+}
+
+.ServicesContainer {
+    max-width: 320px;
+    font-weight: 600;
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 28px;
+    line-height: 39px;
+    letter-spacing: normal;
+    color: #484848;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+@media (max-width: 744px) {
+    .ServicesWrapper {
+        padding-left: 12px !important;
+    }
+}
+
+@media (max-width: 580px) {
+    .SimilarServices {
+        flex-direction: column !important;
+    }
+    .ServicesWrapper {
+        width: 90% !important;
+        justify-content: flex-start !important;
+        margin-left: 24px;
+    }
+}
+
+.CarouselWrapper {
+    min-width: 0px;
+    width: 100%;
+    padding: 30px;
+    height: 100%;
+}
+
+@media (max-width: 744px) {
+    .CarouselWrapper {
+        padding: 30px 0;
+    }
+}
+
+.CarouselContainer {
+    margin-top: -24px;
+    margin-bottom: -48px;
+}
+
+.Error {
+    font-weight: 600 !important;
+    color: #f14c4c !important;
+    font-size: 22px;
+}

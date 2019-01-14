@@ -1,0 +1,37 @@
+.Wrapper {
+    display: flex;
+    flex-flow: row;
+    margin-bottom: -30px;
+}
+
+.ServicesWrapper {
+    margin: 0 auto;
+    border-left: 1px solid rgb(229, 229, 229);
+    width: calc(100% - 300px);
+    padding-left: 0px;
+    overflow: hidden;
+}
+
+.ServicesContainer {
+    padding: 28px 24px;
+    margin: 0 auto;
+    background-color: transparent;
+    max-width: 1080px;
+    min-height: 400px;
+}
+
+.ServicesContainer h1 {
+    color: rgb(72, 72, 72);
+    user-select: none;
+    margin-bottom: 40px;
+}
+
+@media (max-width: 920px) {
+    .ServicesWrapper {
+        border-left: 0;
+        width: 100%;
+    }
+    .ServicesContainer {
+        min-width: 100vw;
+    }
+}

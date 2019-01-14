@@ -1,0 +1,22 @@
+.CardContainer {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px;
+    padding: 0px;
+    overflow: visible;
+}
+
+.CardContainer a {
+    margin: 0 20px 0 20px;
+    width: 22.5%;
+    flex: 1 0 26%; /* explanation below */
+} 
+
+/* With flex-grow: 1 defined in the flex shorthand, there's no need for flex-basis to be 25%, 
+which would actually result in three items per row due to the margins. Since flex-grow will 
+consume free space on the row, flex-basis only needs to be large enough to enforce a wrap. 
+In this case, with flex-basis: 21%, there's plenty of space for the margins, but never enough 
+space for a fifth item. Meaning, 4 categories per row.*/

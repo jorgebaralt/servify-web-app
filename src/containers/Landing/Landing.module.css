@@ -1,0 +1,184 @@
+.Background {
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    transition: transform .3s ease-out;
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.Header {
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    height: 232px;
+    width: 100%;
+    position: relative;
+}
+
+@media (min-width: 960px) { 
+    .Header {
+        height: 100vh;
+        min-height: 500px;
+    }
+}
+
+.HeaderContent {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.HeaderContent h1:last-child {
+    text-shadow: 3px 3px 5px #333;
+    user-select: none;
+    font-size: 65px;
+    color: #FFF;
+}
+
+@media (min-width: 960px) { 
+    .HeaderContent h1:last-child {
+        font-size: 100px;
+    }
+}
+
+.Container {
+    margin: 0 auto;
+    background-color: transparent;
+    padding-left: 24px;
+    padding-right: 24px;
+    max-width: 1240px;
+    min-height: 400px;
+}
+
+.Container h1 {
+    color: rgb(103, 88, 88);
+    user-select: none;
+    margin-bottom: 40px;
+}
+
+.Subheader {
+    text-align: left;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    background: transparent;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    padding: 0px;
+}
+
+.Subheader h1 {
+    font-weight: 600;
+    margin-bottom: 0px;
+    line-height: 30px;
+    letter-spacing: normal;
+    color: rgb(72, 72, 72);
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.Subheader h4 {
+    user-select: none;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: normal;
+    color: rgb(72, 72, 72);
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+.LearnMore {
+    padding: 0px;
+}
+
+@media (min-width: 960px) { 
+    .LearnMore {
+        padding: 0 36px;
+    }
+}
+
+.Categories {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.Category {
+    flex: 1 0 21%; /* explanation below */
+    flex-grow: 0;
+    margin: 5px;
+    height: 50px;
+    list-style-type: none;
+}
+/* With flex-grow: 1 defined in the flex shorthand, there's no need for flex-basis to be 25%, 
+which would actually result in three items per row due to the margins. Since flex-grow will 
+consume free space on the row, flex-basis only needs to be large enough to enforce a wrap. 
+In this case, with flex-basis: 21%, there's plenty of space for the margins, but never enough 
+space for a fifth item. Meaning, 4 categories per row.*/
+
+@media (max-width: 744px) {
+    .Category {
+        flex-grow: 1;
+    }
+    .Category a {
+        justify-content: flex-start;
+    }
+}
+
+.Category a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(229,229,229);
+    border-radius: 5px;
+    padding: 4px 8px;
+    padding-left: 16px;
+    height: 100%;
+    min-width: 100px;
+    color: rgb(72, 72, 72);
+    text-decoration: none;
+    overflow-wrap: break-word;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: normal;
+    font-weight: 600;
+    margin: 0px;
+    transition: all 0.05s ease-out;
+}
+
+.Category a:hover {
+    border: 1px solid #FF7043;
+}
+
+.Category svg {
+    fill: #484848;
+    margin-right: 10px;
+    transition: fill 0.05s ease-out;
+}
+
+.Category svg path {
+    fill: #484848;
+}
+
+.Category a:hover,
+.Category a:hover svg,
+.Category a:hover svg path {
+    color: #FF7043;
+    /* For SVG */
+    fill: #FF7043;
+}

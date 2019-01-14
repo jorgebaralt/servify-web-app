@@ -1,0 +1,232 @@
+.Container {
+    margin: 0 auto;
+    background-color: transparent;
+    padding-left: 24px;
+    padding-right: 24px;
+    max-width: 1080px;
+	min-height: 400px;
+}
+
+.Container h1 {
+    color: rgb(72, 72, 72);
+    user-select: none;
+    margin-bottom: 40px;
+}
+
+.Header{
+	padding: 0;
+	width: 100%;
+	height: 100vh;
+	height: calc(100vh - 70px);
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	box-shadow: inset 0px 40px 220px -29px rgba(0,0,0,0.75);
+	animation: FadeIn 1s;
+}
+
+.Box{
+	background: rgba(255,255,255,.97);
+    color: #484848;
+    border-radius: 4px;
+    padding: 0px 32px 24px;
+    width: 350px;
+	box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+	top: 30%;
+	float: right;
+	margin-right: 10%;
+	position: relative;
+	z-index: 1;
+}
+
+.MobileBox{
+	background: rgba(255,255,255,.95);
+    color: #484848;
+    border-radius: 4px;
+    padding: 12px 32px 0;
+    margin: auto auto -24px;
+    box-shadow: none;
+}
+
+.MobileBox h1 {
+	margin: 0;
+}
+
+@media (max-width: 960px) {
+    .Button {
+        margin: 20px 0;
+        color: #FFF !important;
+        background-color: #FF7043 !important;
+        width: 100% !important;
+    }
+}
+
+.Description {
+	font-size: 17px;
+	font-weight: 400
+}
+
+.AboutUs {
+	display: grid;
+	overflow: hidden;
+	grid-template-columns: repeat(2, 1fr);
+	grid-auto-rows: 1fr;
+	grid-column-gap: 50px;
+	grid-row-gap: 0px;
+	padding: 36px 36px 12px;
+}
+
+@media (max-width: 650px) {
+	.AboutUs {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
+.Title {
+	margin: 12px 0;
+	user-select: none;
+	color: #424242;
+}
+
+.AboutUsItem {
+	display: flex;
+	align-items: flex-start;
+	flex-flow: column;
+	padding: 4px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.AboutUsDescription {
+	color: #484848;
+	font-size: 17px;
+	text-align: justify;
+	word-break: break-word;
+	overflow-wrap: break-word;
+	hyphens: auto;
+}
+
+.InstructionsContainer{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-auto-rows: 1fr;
+	grid-column-gap: 30px;
+	grid-row-gap: 20px;
+}
+
+.InstructionsContainer div{
+	text-align: center;
+}
+
+.Instruction {
+	color: #484848;
+	font-size: 17px;
+}
+
+.CustomersContainer {
+	display: grid;
+    overflow: hidden;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.ImageWrapper {
+	user-select: none;
+	width: 100%;
+	padding: 20px;
+}
+
+.CustomerImage {
+	height: 450px;
+	width: 100%;
+	object-fit: cover;
+	animation: FadeIn 1s;
+	border-radius: 15px;
+	background-color: #EEE;
+}
+
+.DescriptionContainer{
+	width: 100%;
+	padding: 30px;
+}
+
+.ListContainer{
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch; 
+	justify-content: space-between;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.ListItem{
+	flex: 0 1 auto;
+	display: flex;
+	align-items: flex-start;
+	word-wrap: break-word;
+    font-size: 17px;
+    font-weight: 400;
+	color: #484848;
+}
+
+.ListItem svg {
+	flex-basis: 12.5%;
+    flex-grow: 0;
+	flex-shrink: 0;
+	margin-top: 4px;
+    width: 12px;
+    height: 12px;
+}
+
+.ListItem svg * {
+	fill: rgb(255, 112, 67);
+}
+
+.ListItem span {
+	flex-basis: 87.5%;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+	.Header {
+		height: 50vh;
+	}
+
+	.DescriptionContainer{
+		padding: 2px 0 4px;
+	}
+
+	.ImageWrapper {
+		padding: 2px 4px 4px;
+	}
+}
+
+@media (max-width: 380px) {
+	.InstructionsContainer{
+		grid-template-columns: repeat(1, 1fr);
+	}
+	
+	.CustomersContainer {
+		grid-template-columns: repeat(1, 1fr);
+		grid-row-gap: 25px;
+	}
+	
+	.CustomerImage {
+		width: 100%;
+		height: 225px;
+	}
+}
+
+@keyframes FadeIn {
+	from { 
+		opacity: 0; 
+	}
+    to { 
+		opacity: 1; 
+	}
+}

@@ -1,0 +1,51 @@
+.Spinner {
+    margin: 100px auto 0;
+    width: 100px;
+    text-align: center;
+}
+
+.Spinner > div {
+    width: 18px;
+    height: 18px;
+    margin: 6px;
+    border-radius: 100%;
+    display: inline-block;
+    animation: bounceDelay 1.4s infinite ease-in-out both;
+}
+
+.Spinner .Bounce1 {
+    animation-delay: -0.32s;
+}
+
+.Spinner .Bounce2 {
+    animation-delay: -0.16s;
+}
+
+.Bounce1 {
+    background-color: #FFCC80;
+}
+
+.Bounce2 {
+    background-color: #FFA726;
+}
+
+.Bounce3 {
+    background-color: #FB8C00;
+}
+
+@-webkit-keyframes bounceDelay {
+    0%, 80%, 100% { 
+        transform: scale(0);
+    }
+    40% { 
+        transform: scale(1.0);
+    }
+}
+
+@keyframes bounceDelay {
+    0%, 80%, 100% { 
+        transform: scale(0);
+    } 40% { 
+        transform: scale(1.0);
+    }
+}
