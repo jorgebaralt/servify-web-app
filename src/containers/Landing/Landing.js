@@ -144,6 +144,7 @@ class Landing extends Component {
                                         header={service.category.replace("_", " ")}
                                         title={service.title}
                                         priceRating='0.05'
+                                        href={service.id}
                                         ratingAvg={service.rating/5}
                                         ratingAmount={service.ratingCount}
                                         image={service.image}/>

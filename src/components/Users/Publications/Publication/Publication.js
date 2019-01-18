@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import ImageFadeIn from '../../../UI/ImageFadeIn/ImageFadeIn';
 
 const publication = (props) => {
+    if (!props.href) { return null; }
     return (
         // Total rating amount, defaults to 5
         <div className={classes.Service}>
@@ -27,10 +28,10 @@ const publication = (props) => {
                 {/* Links */}
                 <div className={classes.Links}>
                     {/* TODO setup links */}
-                    <Link draggable="false" to={props.href ? props.href : '/services/1'} className={classes.Link} target="_blank">
+                    <Link draggable="false" to={['/services', props.href].join('/')} className={classes.Link} target="_blank">
                         View
                     </Link>
-                    <Link draggable="false" to={props.href ? props.href : '/users/publications/edit/1'} className={classes.Link}>
+                    <Link draggable="false" to={['/users/publications/edit', props.href].join('/')} className={classes.Link}>
                         Edit
                     </Link>
                 </div>

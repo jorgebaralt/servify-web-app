@@ -43,6 +43,7 @@ const services = (props) => {
                                         key={[index, service.title].join('_')}
                                         header={service.category.replace("_", " ")}
                                         title={service.title}
+                                        href={service.id}
                                         priceRating='0.05'
                                         ratingAvg={service.rating/5}
                                         ratingAmount={service.ratingCount}
@@ -66,6 +67,7 @@ const services = (props) => {
                                 key={index}
                                 header={service.category.replace("_", " ")}
                                 title={service.title}
+                                href={service.id}
                                 priceRating='0.05'
                                 ratingAvg={service.rating/5}
                                 ratingAmount={service.ratingCount}
@@ -91,6 +93,7 @@ const services = (props) => {
                                 key={index}
                                 header={service.category.replace("_", " ")}
                                 title={service.title}
+                                href={service.id}
                                 priceRating='0.05'
                                 ratingAvg={service.rating/5}
                                 ratingAmount={service.ratingCount}

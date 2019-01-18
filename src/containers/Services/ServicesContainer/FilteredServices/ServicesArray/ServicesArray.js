@@ -20,7 +20,7 @@ const services = (props) => {
                             ratingAvg={service.rating/5}
                             ratingAmount={service.ratingCount}
                             image={service.image}
-                            href={service.link} />
+                            href={service.id} />
                     </div>
                 );
             });
