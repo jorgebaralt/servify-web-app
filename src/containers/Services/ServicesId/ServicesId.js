@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+// redux-sagas
+import { connect } from 'react-redux';
+import { servicesCreator } from '../../../store/actions/';
+// Shared
 import isString from '../../../shared/isString';
 import isObject from '../../../shared/isObject';
 // CSS
 import classes from './ServicesId.module.css';
 // JSX
 import ReactResizeDetector from 'react-resize-detector';
-
 import Title from '../../../components/Services/Title/Title';
 import Gallery from '../../../components/Services/Gallery/Gallery';
 import Reviews from '../../../components/Services/Reviews/Reviews';
@@ -26,6 +29,7 @@ class ServicesId extends Component {
         this.myGallery = React.createRef();
         // Mapbox Geocoding
         setMapboxAccessToken();
+        props.servicesInit();
     }
 
     state = {
@@ -143,56 +147,50 @@ class ServicesId extends Component {
                 </div>
                 <Separator />
                 <Reviews rating={this.state.rating} />
-                <Separator />
-                <div className={classes.SimilarServices}>
-                    <div className={classes.ServicesWrapper}>
-                        <Title>Similar services near you</Title>
-                    </div>
-                    <div className={classes.CarouselWrapper}>
-                        <div className={classes.CarouselContainer}>
-                            <Carousel>
-                                <Service
-                                    header='Plumbing'
-                                    title='A Toilet'
-                                    priceRating='0.75'
-                                    ratingAvg={0.17}
-                                    ratingAmount='1537'
-                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                                <Service
-                                    header='Plumbing'
-                                    title='A Toilet'
-                                    priceRating='0.75'
-                                    ratingAvg={0.17}
-                                    ratingAmount='1537'
-                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                                <Service
-                                    header='Plumbing'
-                                    title='A Toilet'
-                                    priceRating='0.75'
-                                    ratingAvg={0.17}
-                                    ratingAmount='1537'
-                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                                <Service
-                                    header='Plumbing'
-                                    title='A Toilet'
-                                    priceRating='0.75'
-                                    ratingAvg={0.17}
-                                    ratingAmount='1537'
-                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                                <Service
-                                    header='Plumbing'
-                                    title='A Toilet'
-                                    priceRating='0.75'
-                                    ratingAvg={0.17}
-                                    ratingAmount='1537'
-                                    image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'/>
-                            </Carousel>
+                { this.props.services.nearServices ? 
+                    <>
+                        <Separator />
+                        <div className={classes.SimilarServices}>
+                            <div className={classes.ServicesWrapper}>
+                                <Title>Similar services near you</Title>
+                            </div>
+                            <div className={classes.CarouselWrapper}>
+                                <div className={classes.CarouselContainer}>
+                                    <Carousel>
+                                        {Object.values(this.props.services.nearServices).map( (service, index) => {
+                                            return (
+                                                <Service
+                                                    key={index}
+                                                    header={service.category.replace("_", " ")}
+                                                    title={service.title}
+                                                    href={service.id}
+                                                    priceRating='0.05'
+                                                    ratingAvg={service.rating/5}
+                                                    ratingAmount={service.ratingCount}
+                                                    image={service.image}/>
+                                            );
+                                        })}
+                                    </Carousel>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </>
+                    : null}
             </>
         );
     }
 }
 
-export default ServicesId;
+const mapStateToProps = (state) => {
+	return {
+        services: state.servicesReducer.services
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		servicesInit: () => dispatch(servicesCreator.servicesInitHandler()),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ServicesId);
