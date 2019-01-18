@@ -69,7 +69,9 @@ class UserButton extends Component {
             <li className={[this.props.className, classes.Anchor].join(' ')} >
                 <button onClick={this.toggleList}>
                     {this.props.userDetails ? 
-                        <div className={classes.User}><ImageFadeIn draggable='false' src={this.props.userDetails.photoURL} /></div>
+                        this.props.userDetails.photoURL ? 
+                            <div className={classes.User}><ImageFadeIn draggable='false' src={this.props.userDetails.photoURL} /></div>
+                            : <SVG svg='user' />
                         : <SVG svg='user' />}
                 </button>
                 {this.state.bIsListOpen ? 

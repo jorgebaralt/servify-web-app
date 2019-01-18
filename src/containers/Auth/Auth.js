@@ -25,9 +25,9 @@ class Auth extends Component {
     switchAuthModeHandler = () => {
         switch (true) {
             case this.state.bIsSignIn:
-                return <SignIn switchAuthHandler={this.toggleAuthMode} />
+                return <SignIn switchAuthModalHandler={this.toggleAuthMode} />
             case !this.state.bIsSignIn:
-                return <SignUp switchAuthHandler={this.toggleAuthMode} />
+                return <SignUp switchAuthModalHandler={this.toggleAuthMode} />
             default:
                 // do nothing
                 return;
