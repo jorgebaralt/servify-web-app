@@ -192,8 +192,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
 		onSignInHandler: (email, password, bRememberMe) => dispatch(authCreator.authSignInInit(email, password, bRememberMe)),
-		onFacebookSignInHandler: (bRememberMe) => dispatch(authCreator.authFacebookSignInInit(bRememberMe)),
-		onGoogleSignInHandler: (bRememberMe) => dispatch(authCreator.authGoogleSignInInit(bRememberMe)),
+		onFacebookSignInHandler: (bRememberMe) => dispatch(authCreator.authFacebook.signInInit(bRememberMe)),
+		onGoogleSignInHandler: (bRememberMe) => dispatch(authCreator.authGoogle.signUpInit(bRememberMe)),
 		resetErrorMessage: () => dispatch(authActions.authResetErrorMessage())
 	};
 }

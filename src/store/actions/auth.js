@@ -67,16 +67,41 @@ export const authCreator = {
             bRememberMe: bRememberMe
         }
     },
-    authFacebookSignInInit: (bRememberMe) => {
-        return {
-            type: actionTypes.AUTH_INIT_FACEBOOK_SIGN_IN,
-            bRememberMe: bRememberMe
-        }
+    authFacebook: {
+        signInInit: (bRememberMe) => {
+            return {
+                type: actionTypes.AUTH_INIT_FACEBOOK_SIGN_IN,
+                bRememberMe: bRememberMe
+            }
+        },
+        signUpInit: (bRememberMe) => {
+            return {
+                type: actionTypes.AUTH_INIT_FACEBOOK_SIGN_UP,
+                bRememberMe: bRememberMe
+            }
+        },
     },
-    authGoogleSignInInit: (bRememberMe) => {
+    authGoogle: {
+        signInInit: (bRememberMe) => {
+            return {
+                type: actionTypes.AUTH_INIT_GOOGLE_SIGN_IN,
+                bRememberMe: bRememberMe
+            }
+        },
+        signUpInit: (bRememberMe) => {
+            return {
+                type: actionTypes.AUTH_INIT_GOOGLE_SIGN_UP,
+                bRememberMe: bRememberMe
+            }
+        },
+    },
+    authSaveUserToDatabaseInit: (user, bIsSignUpProvider, bWantToMerge) => {
         return {
-            type: actionTypes.AUTH_INIT_GOOGLE_SIGN_IN,
-            bRememberMe: bRememberMe
+            type: actionTypes.AUTH_INIT_SAVE_USER_TO_DATABASE,
+            user: user,
+            bIsSignUpProvider : bIsSignUpProvider,
+            bWantToMerge: bWantToMerge
+
         }
     },
     authLogoutInit: () => {

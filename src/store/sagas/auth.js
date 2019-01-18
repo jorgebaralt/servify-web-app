@@ -4,7 +4,7 @@ import { delay } from 'redux-saga';
 // Firebase methods
 import firebase from 'firebase';
 // Actions
-import { authActions } from '../actions';
+import { authActions, authCreator } from '../actions';
 
 export const authSagas = {
     authCheckState: function* () {
@@ -36,6 +36,9 @@ export const authSagas = {
             if (!currentUser.uid || bIsExpired) {
                 yield put(authActions.authLogout()); // If no user or rejected promise, logout & set auth loading state to false.
             } else {
+                // Saving user to the database
+                // TODO remove eventually
+                yield put(authCreator.authSaveUserToDatabaseInit(currentUser, false, true));
                 yield put(authActions.authSuccess(currentUser.uid, currentUser.email, currentUser));
             }
         } catch (error) {
@@ -46,6 +49,8 @@ export const authSagas = {
         try {
             yield firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
             const response = yield firebase.auth().createUserWithEmailAndPassword(action.email, action.password);
+            // Saving user to the database
+            yield put(authCreator.authSaveUserToDatabaseInit(response.user, false, true));
             if (!action.bRememberMe) {
                 /**
                  * If the checkbox is not checked, then create a new date token to
@@ -71,6 +76,8 @@ export const authSagas = {
         try {
             yield firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
             const response = yield firebase.auth().signInWithEmailAndPassword(action.email, action.password);
+            // Saving user to the database
+            yield put(authCreator.authSaveUserToDatabaseInit(response.user, false, true));
             if (!action.bRememberMe) {
                 /**
                  * If the checkbox is not checked, then create a new date token to
@@ -92,59 +99,151 @@ export const authSagas = {
             yield put(authActions.authFail(error.message));
         }
     },
-    authFacebookSignIn: function* (action) {
-        const provider = yield new firebase.auth.FacebookAuthProvider();
-        try {
-            const response = yield firebase.auth().signInWithPopup(provider);
-            // The signed-in user info.
-            const user = yield response.user;
-            if (!action.bRememberMe) {
-                /**
-                 * If the checkbox is not checked, then create a new date token to
-                 * check for expiracy date on start up.
-                 */
-                const expirationDate = yield new Date(new Date().getTime() + oneDayInMilliseconds); 
-                yield localStorage.setItem('expirationDate', expirationDate);
-            } else {
-                /**
-                 * If the checkbox is checked, then set the date token as null to 
-                 * avoid checking for expiracy date on start up.
-                 */
-                yield localStorage.setItem('expirationDate', null);
+    authFacebook: {
+        signUp: function* (action) {
+            const provider = yield new firebase.auth.FacebookAuthProvider();
+            try {
+                const response = yield firebase.auth().signInWithPopup(provider);
+                // The signed-in user info.
+                const user = yield response.user;
+                // Saving user to the database
+                yield put(authCreator.authSaveUserToDatabaseInit(user, "facebook", true));
+                if (!action.bRememberMe) {
+                    /**
+                     * If the checkbox is not checked, then create a new date token to
+                     * check for expiracy date on start up.
+                     */
+                    const expirationDate = yield new Date(new Date().getTime() + oneDayInMilliseconds); 
+                    yield localStorage.setItem('expirationDate', expirationDate);
+                } else {
+                    /**
+                     * If the checkbox is checked, then set the date token as null to 
+                     * avoid checking for expiracy date on start up.
+                     */
+                    yield localStorage.setItem('expirationDate', null);
+                }
+                yield localStorage.setItem('userId', user.uid);
+                yield put(authActions.authSuccess(user.uid, user.email, user));
+                yield put(authActions.authResetRedirectPath());
+            } catch (error) {
+                put(authActions.authFail(error.message));
             }
-            yield localStorage.setItem('userId', user.uid);
-            yield put(authActions.authSuccess(user.uid, user.email, user));
-            yield put(authActions.authResetRedirectPath());
-        } catch (error) {
-            put(authActions.authFail(error.message));
-        }
+        },
+        signIn: function* (action) {
+            const provider = yield new firebase.auth.FacebookAuthProvider();
+            try {
+                const response = yield firebase.auth().signInWithPopup(provider);
+                // The signed-in user info.
+                const user = yield response.user;
+                // Saving user to the database
+                yield put(authCreator.authSaveUserToDatabaseInit(user, false, true));
+                if (!action.bRememberMe) {
+                    /**
+                     * If the checkbox is not checked, then create a new date token to
+                     * check for expiracy date on start up.
+                     */
+                    const expirationDate = yield new Date(new Date().getTime() + oneDayInMilliseconds); 
+                    yield localStorage.setItem('expirationDate', expirationDate);
+                } else {
+                    /**
+                     * If the checkbox is checked, then set the date token as null to 
+                     * avoid checking for expiracy date on start up.
+                     */
+                    yield localStorage.setItem('expirationDate', null);
+                }
+                yield localStorage.setItem('userId', user.uid);
+                yield put(authActions.authSuccess(user.uid, user.email, user));
+                yield put(authActions.authResetRedirectPath());
+            } catch (error) {
+                put(authActions.authFail(error.message));
+            }
+        },
     },
-    authGoogleSignIn: function* (action) {
-        const provider = yield new firebase.auth.GoogleAuthProvider();
-        try {
-            const response = yield firebase.auth().signInWithPopup(provider);
-            // The signed-in user info.
-            const user = yield response.user;
-            if (!action.bRememberMe) {
-                /**
-                 * If the checkbox is not checked, then create a new date token to
-                 * check for expiracy date on start up.
-                 */
-                const expirationDate = yield new Date(new Date().getTime() + oneDayInMilliseconds); 
-                yield localStorage.setItem('expirationDate', expirationDate);
-            } else {
-                /**
-                 * If the checkbox is checked, then set the date token as null to 
-                 * avoid checking for expiracy date on start up.
-                 */
-                yield localStorage.setItem('expirationDate', null);
+    authGoogle: {
+        signUp: function* (action) {
+            const provider = yield new firebase.auth.GoogleAuthProvider();
+            try {
+                const response = yield firebase.auth().signInWithPopup(provider);
+                // The signed-in user info.
+                const user = yield response.user;
+                // Saving user to the database
+                yield put(authCreator.authSaveUserToDatabaseInit(user, "google", true));
+                if (!action.bRememberMe) {
+                    /**
+                     * If the checkbox is not checked, then create a new date token to
+                     * check for expiracy date on start up.
+                     */
+                    const expirationDate = yield new Date(new Date().getTime() + oneDayInMilliseconds); 
+                    yield localStorage.setItem('expirationDate', expirationDate);
+                } else {
+                    /**
+                     * If the checkbox is checked, then set the date token as null to 
+                     * avoid checking for expiracy date on start up.
+                     */
+                    yield localStorage.setItem('expirationDate', null);
+                }
+                yield localStorage.setItem('userId', user.uid);
+                yield put(authActions.authSuccess(user.uid, user.email, user));
+                yield put(authActions.authResetRedirectPath());
+            } catch (error) {
+                put(authActions.authFail(error.message));
             }
-            yield localStorage.setItem('userId', user.uid);
-            yield put(authActions.authSuccess(user.uid, user.email, user));
-            yield put(authActions.authResetRedirectPath());
-        } catch (error) {
-            put(authActions.authFail(error.message));
+        },
+        signIn: function* (action) {
+            const provider = yield new firebase.auth.GoogleAuthProvider();
+            try {
+                const response = yield firebase.auth().signInWithPopup(provider);
+                // The signed-in user info.
+                const user = yield response.user;
+                // Saving user to the database
+                yield put(authCreator.authSaveUserToDatabaseInit(user, false, true));
+                if (!action.bRememberMe) {
+                    /**
+                     * If the checkbox is not checked, then create a new date token to
+                     * check for expiracy date on start up.
+                     */
+                    const expirationDate = yield new Date(new Date().getTime() + oneDayInMilliseconds); 
+                    yield localStorage.setItem('expirationDate', expirationDate);
+                } else {
+                    /**
+                     * If the checkbox is checked, then set the date token as null to 
+                     * avoid checking for expiracy date on start up.
+                     */
+                    yield localStorage.setItem('expirationDate', null);
+                }
+                yield localStorage.setItem('userId', user.uid);
+                yield put(authActions.authSuccess(user.uid, user.email, user));
+                yield put(authActions.authResetRedirectPath());
+            } catch (error) {
+                put(authActions.authFail(error.message));
+            }
+        },
+    },
+    authSaveUserToDatabase: function* (action) {
+        const user = action.user;
+        const bIsSignUpProvider = action.bIsSignUpProvider;
+        const bWantToMerge = action.bWantToMerge;
+        // Firestore Init
+        const firestore = firebase.firestore();
+        const settings = {timestampsInSnapshots: true};
+        firestore.settings(settings);
+        // Creating user reference to the database.
+        const userRef = yield firestore.collection('users').doc(user.email);
+        const userData = yield {
+            displayName: user.displayName,
+            email: user.email,
+            emailVerified: user.emailVerified,
+            photoURL: user.photoURL,
+            uid: user.uid,
+            creationTime: user.metadata.creationTime
         }
+        if (bIsSignUpProvider) {
+            userData['provider'] = bIsSignUpProvider;
+        }
+        // The user data will be merged with any existing data in the firestore.
+        yield userRef.set({
+            ...userData
+        }, { merge: bWantToMerge });
     },
     authLogout: function* () {
         yield call([localStorage, 'removeItem'], 'userId');  
