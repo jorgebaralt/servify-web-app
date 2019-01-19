@@ -90,6 +90,9 @@ const renderNavigationItems = (props) => {
 						null : 
 						<>
 							<div className={classes.Spacing} />
+							<NavigationItem className={props.className} {...props} link="/services">
+								Services
+							</NavigationItem>
 							<NavigationItem className={props.className} {...props} link="/publish/overview" >
 								Publish
 							</NavigationItem>

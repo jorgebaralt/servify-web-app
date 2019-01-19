@@ -121,12 +121,30 @@ const map = (props) => {
                             'circle-stroke-color': '#484848',
                             'circle-stroke-opacity': 1
                         }}>
-                        <Feature
-                            coordinates={props.map.geoData ? props.map.geoData.features[0].center : props.map.initialPosition} />
+                        <Feature coordinates={props.map.geoData.features[0].center} />
                     </Layer>
                     : null
                 )
-                : null}
+                : props.map.initialPosition && props.circle ? 
+                    <Layer
+                        type="circle" 
+                        id="marker" 
+                        paint={{
+                            'circle-color': 'rgba(30,163,204, 0.1)',
+                            'circle-radius': {
+                                stops: [
+                                    [0, 0],
+                                    [20, metersToPixelsAtMaxZoom(props.map.radiusInMiles, props.map.initialPosition[1])]
+                                ],
+                                base: 2
+                            },
+                            'circle-stroke-width': 2,
+                            'circle-stroke-color': '#484848',
+                            'circle-stroke-opacity': 1
+                        }}>
+                        <Feature coordinates={props.map.initialPosition} />
+                    </Layer>
+                    : null }
             <Marker
                 coordinates={props.map.geoData ?
                 (

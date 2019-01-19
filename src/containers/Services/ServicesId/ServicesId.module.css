@@ -4,6 +4,11 @@
     margin-top: 40px;
 }
 
+.Information {
+    width: 100%;
+    padding-right: 24px;
+}
+
 @media (max-width: 744px) {
     .Container {
         flex-direction: column;
@@ -12,6 +17,11 @@
     .Description {
         width: 90% !important;
         margin: 0 auto !important;
+    }
+    .Information {
+        padding: 0;
+        width: 90%;
+        margin: 0 auto;
     }
 }
 

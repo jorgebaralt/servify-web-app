@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component, Suspense } from 'react';
+// import axios from 'axios';
+import axios from '../../../axios-services';
 // redux-sagas
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { servicesCreator } from '../../../store/actions/';
 // Shared
@@ -9,6 +11,7 @@ import isObject from '../../../shared/isObject';
 // CSS
 import classes from './ServicesId.module.css';
 // JSX
+import LoadingPage from '../../../components/UI/LoadingPage/LoadingPage';
 import ReactResizeDetector from 'react-resize-detector';
 import Title from '../../../components/Services/Title/Title';
 import Gallery from '../../../components/Services/Gallery/Gallery';
@@ -23,6 +26,12 @@ import Map, { setMapboxAccessToken, setInitialMapboxPosition, defaultAddress } f
 import Separator from '../../../components/UI/Separator/Separator';
 import SVG from '../../../components/SVG/SVG';
 
+// NotFound lazy import in case a service is not found
+const NotFound = React.lazy(() => import('../../NotFound/NotFound'));
+
+// Default Image URL if the fetched service has no URLs
+const defaultImage = 'https://storage.googleapis.com/servify-716c6.appspot.com/service_images%2F2019-01-12T06%3A37%3A57.360Zdefault-service-image.png?GoogleAccessId=firebase-adminsdk-a3e7c%40servify-716c6.iam.gserviceaccount.com&Expires=95623372800&Signature=VK1PwozcAgxOAYJH6%2FBnDqnSFavcUu0%2FbbWbOgowvx629SQ860EcW4l6YQpE08cu8q1XrsQW0KsLp%2BxAAOoHOomPVmZfGapqZlb821nyjFlN5aMdgTVPbTrWAScfVs3H4%2BJZLOqAZatqPw96blxY%2FIwrbu4dj0q6elQ%2FzRRqG5wLO5fkUvOTG18xF8DfZkTViHxaNiqD%2FPQS69sPRcMnF69%2BQGjC2ZecNbMeatufctbb95%2FL7%2FSJaIgO98HyZ8WJ9ZFxJbl7bqkHV3ptAMP5c8OIfCHeLqfKVtjoW6AmrnXh3LQXCY8GUOTbB09XwzUjggA6TpUuHblEd34p452%2BaA%3D%3D';
+
 class ServicesId extends Component {
     constructor (props) {
         super(props);
@@ -30,24 +39,9 @@ class ServicesId extends Component {
         // Mapbox Geocoding
         setMapboxAccessToken();
         props.servicesInit();
-    }
-
-    state = {
-        imageSizes: {
-            width: null,
-            height: null
-        },
-        address: defaultAddress,
-        map: {
-            initialPosition: null,
-            geoData: null,
-            radiusInMiles: 4, // Initial value
-            maxRadius: 60 // For the input slider
-        },
-        rating: {
-            totalReviews: 3,
-            avg: 5
-        },
+        this.state = {
+            loading: true
+        }
     }
 
     setGalleryDimensions = () => {
@@ -84,58 +78,135 @@ class ServicesId extends Component {
     }
     
     componentDidMount () {
-        axios.get('http://ipinfo.io').then(
-            (response) => this.setInitialPosition(response)
-        ).catch(
-            () => this.setInitialPosition()
-        );
+        const serviceId = this.props.match.params.id;
+        axios.get('/getServices', { params: { id: serviceId } })
+            .then( response => {
+                const data = response.data[0];
+                if (!data) { 
+                    return this.setState({
+                        loading: false,
+                        error: true
+                    });
+                }
+                const setImagesArray = (servifyImages) => {
+                    if (!servifyImages) { return null }
+                    const array = [];
+                    servifyImages.forEach( image => {
+                        array.push(image.url);
+                    });
+                    return array;
+                }
+                const images = setImagesArray(data.imagesInfo);
+                this.setState( () => {
+                    return {
+                        loading: false,
+                        images: images ? images : [defaultImage],
+                        service: {
+                            category: data.category.replace('_', ' '),
+                            title: data.title,
+                            description: data.description,
+                            displayName: data.displayName,
+                            address: data.locationData,
+                            id: data.id,
+                        },
+                        contact: {
+                            phone: data.phone,
+                            email: data.email,
+                        },
+                        ratings: {
+                            price: {
+                                price: data.price,
+                                priceCount: data.priceCount,
+                                priceSum: data.priceSum
+                            },
+                            service: {
+                                rating: data.rating,
+                                ratingCount: data.ratingCount,
+                                ratingSum: data.ratingSum
+                            }
+                        },
+                        locationData: {
+                            city: data.locationData.city,
+                            country: data.locationData.country,
+                            isoCountryCode: data.locationData.isoCountryCode,
+                            name: data.locationData.name,
+                            postalCode: data.locationData.postalCode,
+                            region: data.locationData.region,
+                            street: data.locationData.street
+                        },
+                        address: [
+                            data.locationData.street,
+                            ', ',
+                            data.locationData.name, 
+                            '. ',
+                            data.locationData.city, 
+                            ', ',
+                            data.locationData.region, 
+                            ' ',
+                            data.locationData.postalCode,
+                            ].join(''),
+                        map: {
+                            initialPosition: [data.location._longitude, data.location._latitude],
+                            radiusInMiles: data.miles // Initial value
+                        },
+                        // TODO remove
+                        servicesReviewsParams: data
+                    }
+                })
+            })
+            .catch( () => {
+                this.setState({
+                    loading: false,
+                    error: true
+                });
+            });
     }
 
     render () {
-        return (
+        const service = (
             <>
                 <div className={classes.Container}>
                     <Gallery reference={this.myGallery}>
                         <ReactResizeDetector handleWidth handleHeight onResize={this.setGalleryDimensions} />
                         <PhotosCarousel
                             dimensions={this.state.imageSizes}
-                            images={[
-                                    'https://images.unsplash.com/photo-1531817506236-027915e5b07d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
-                                    'https://images.unsplash.com/photo-1516788875874-c5912cae7b43?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80',
-                                    'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
-                                    'https://images.unsplash.com/photo-1519781542704-957ff19eff00?ixlib=rb-1.2.1&auto=format&fit=crop&w=1146&q=80',
-                                    'https://images.unsplash.com/reserve/oIpwxeeSPy1cnwYpqJ1w_Dufer%20Collateral%20test.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=916&q=80',
-                                ]} />
+                            images={this.state.images} />
                     </Gallery>
-                    <div className={classes.DescriptionContainer}>
+                    <div className={classes.Information}>
                         <div className={classes.Header}>
                             <div className={classes.CategoryContainer}>
-                                <small className={classes.Category}>Home Service</small>
+                                <small className={classes.Category}>{this.state.service ? this.state.service.category : null}</small>
                             </div>
-                            <Title>Service Title</Title>
+                            <Title>{this.state.service ? this.state.service.title : null}</Title>
                         </div>
                         <SocialButtons />
-                        <InfoPoint symbol={<SVG svg='location-pin' />} location='Florida'/>
-                        <InfoPoint symbol={<SVG svg='location-pin' />} website='bonpreufoods.com'/>
-                        <InfoPoint symbol={<SVG svg='chat' />} info='Services offered in English and Spanish'/>
+                        <InfoPoint symbol={<SVG svg='location-pin' />} location={this.state.locationData ? this.state.locationData.region : null}/>
+                        {/* 
+                            <InfoPoint symbol={<SVG svg='location-pin' />} website='bonpreufoods.com'/>
+                            <InfoPoint symbol={<SVG svg='chat' />} info='Services offered in English and Spanish'/> 
+                        */}
                         <Separator />
                         <InfoSection 
-                            title='Service'
+                            title={this.state.service ? this.state.service.title : null}
                             contact={true}
                             header='About the service'>
                             <div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                <p>{this.state.service ? this.state.service.description : null}</p>
                             </div>
                         </InfoSection>
                         <Separator />
-                        <InfoSection
-                            title='Servify'
-                            header='About the provider'>
-                            <div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                            </div>
-                        </InfoSection>
-                        <Separator />
+                        {this.state.provider ?
+                            <>
+                                <InfoSection
+                                    title={this.state.provider.title}
+                                    header='About the provider'>
+                                    <div>
+                                        <p>{this.state.provider.description}</p>
+                                    </div>
+                                </InfoSection>
+                                <Separator />
+                            </>
+                        : null}
                     </div>
                 </div>
                 <div className={classes.MapContainer}>
@@ -143,16 +214,16 @@ class ServicesId extends Component {
                     <div className={classes.Description}>
                         <InfoPoint symbol={<SVG svg='location-pin' />} location={this.state.address}/>
                     </div>
-                    <Map className={classes.MapWrapper} map={this.state.map} />
+                    <Map className={classes.MapWrapper} map={this.state.map} circle />
                 </div>
                 <Separator />
-                <Reviews rating={this.state.rating} />
-                { this.props.services.nearServices ? 
+                {this.state.ratings ? <Reviews ratings={this.state.ratings.service} servicesReviewsParams={this.state.servicesReviewsParams} /> : null}
+                {this.props.services.nearServices ? 
                     <>
                         <Separator />
                         <div className={classes.SimilarServices}>
                             <div className={classes.ServicesWrapper}>
-                                <Title>Similar services near you</Title>
+                                <Title>Other services near you</Title>
                             </div>
                             <div className={classes.CarouselWrapper}>
                                 <div className={classes.CarouselContainer}>
@@ -175,8 +246,15 @@ class ServicesId extends Component {
                             </div>
                         </div>
                     </>
-                    : null}
+                : null }
             </>
+        )
+        return (
+            this.state.loading ?
+                <LoadingPage />
+                : this.state.error ? 
+                    <Suspense fallback={<LoadingPage />}><NotFound /></Suspense>
+                    : service
         );
     }
 }
@@ -193,4 +271,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ServicesId);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ServicesId));

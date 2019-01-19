@@ -66,6 +66,7 @@
 @media (max-width: 520px) {
     .User {
         flex-flow: column;
+        align-items: flex-start;
     }
     .User span:nth-of-type(2) {
         display: none;
@@ -101,11 +102,11 @@
     margin-left: -0.65ch;
 }
 
-.DescriptionContainer {
+.CommentContainer {
     margin-top: 12px;
 }
 
-.Description {
+.Comment {
     margin: 0px;
     word-wrap: break-word;
     font-size: 16px;
