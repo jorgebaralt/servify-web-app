@@ -107,7 +107,7 @@ class App extends Component {
 					<Route exact path="/users/feedback" 
 						render={() => <AuthRedirect setRedirectPath={() => this.setRedirectPath("/users/feedback")} />} />
 					<Route exact path="/users/publications" 
-						render={() => <AuthRedirect setRedirectPath={() => this.setRedirectPath("//users/publications")} />} />
+						render={() => <AuthRedirect setRedirectPath={() => this.setRedirectPath("/users/publications")} />} />
 					<Route exact path="/users/publications/edit/:id" 
 						render={() => <AuthRedirect setRedirectPath={() => this.setRedirectPath("/users/publications/edit/:id")} />} />
 					<Route exact path="/users/edit" 

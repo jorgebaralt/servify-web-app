@@ -19,7 +19,7 @@ const services = (props) => {
                             priceRating={service.priceRating}
                             ratingAvg={service.rating/5}
                             ratingAmount={service.ratingCount}
-                            image={service.image}
+                            image={service.imagesInfo}
                             href={service.id} />
                     </div>
                 );
@@ -39,7 +39,7 @@ const services = (props) => {
                         priceRating={service.priceRating}
                         ratingAvg={service.rating/5}
                         ratingAmount={service.ratingCount}
-                        image={service.image}
+                        image={service.imagesInfo}
                         href={service.link} />
                 </div>
             );

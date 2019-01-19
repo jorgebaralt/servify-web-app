@@ -1,6 +1,8 @@
 import React from 'react';
 // CSS
 import classes from './Service.module.css';
+// Image Data Handler
+import { setImagesArray } from '../../../shared/imagesHandler';
 // JSX
 import { Link } from 'react-router-dom';
 import Rating from '../../../components/UI/Rating/Rating';
@@ -11,13 +13,14 @@ const defaultImgUrl = 'https://storage.googleapis.com/servify-716c6.appspot.com/
 const service = (props) => {
     if (!props.href) { return null; }
     const totalStarsRatingAmount = props.totalAmount ? props.totalAmount : 5;
+    const image = setImagesArray(props.image);
     return (
         // Total rating amount, defaults to 5
         <div className={classes.Service}>
             <Link draggable="false" to={['/services', props.href].join('/')} className={classes.Wrapper} target="_blank">
                 <div className={classes.ThumbnailWrapper}>
                     <div className={classes.ThumbnailContainer}>
-                        <ImageFadeIn draggable="false" className={classes.Thumbnail} src={props.image ? props.image : defaultImgUrl} />
+                        <ImageFadeIn draggable="false" className={classes.Thumbnail} src={image ? image[0] : defaultImgUrl} />
                     </div>
                 </div>
             </Link>
@@ -55,9 +58,10 @@ const service = (props) => {
                         {props.title ? 
                             <span className={classes.RatingsAmount}>
                                 <span className={classes.Amount}>
-                                    {props.ratingAmount}
                                     {/* Dynamic string depending if 1 rating or more */}
-                                    &nbsp;total rating{props.ratingAmount > 0 ? 's' : null}</span> 
+                                    {!props.ratingAmount ?
+                                        'No reviews yet' 
+                                        : <span>{props.ratingAmount} review{props.ratingAmount > 1 ? 's' : null}</span> }</span> 
                             </span>
                         : null}
                     </div>

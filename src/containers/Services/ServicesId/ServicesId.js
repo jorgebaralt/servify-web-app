@@ -8,6 +8,7 @@ import { servicesCreator } from '../../../store/actions/';
 // Shared
 import isString from '../../../shared/isString';
 import isObject from '../../../shared/isObject';
+import { setImagesArray } from '../../../shared/imagesHandler';
 // CSS
 import classes from './ServicesId.module.css';
 // JSX
@@ -82,19 +83,12 @@ class ServicesId extends Component {
         axios.get('/getServices', { params: { id: serviceId } })
             .then( response => {
                 const data = response.data[0];
+                // Error handling in case there's an empty response
                 if (!data) { 
                     return this.setState({
                         loading: false,
                         error: true
                     });
-                }
-                const setImagesArray = (servifyImages) => {
-                    if (!servifyImages) { return null }
-                    const array = [];
-                    servifyImages.forEach( image => {
-                        array.push(image.url);
-                    });
-                    return array;
                 }
                 const images = setImagesArray(data.imagesInfo);
                 this.setState( () => {
@@ -136,13 +130,13 @@ class ServicesId extends Component {
                         },
                         address: [
                             data.locationData.street,
-                            ', ',
+                            data.locationData.street ? ', ' : null,
                             data.locationData.name, 
-                            '. ',
+                            data.locationData.name ? '. ' : null,
                             data.locationData.city, 
-                            ', ',
+                            data.locationData.city ? ', ' : null,
                             data.locationData.region, 
-                            ' ',
+                            data.locationData.region ? ' ' : null,
                             data.locationData.postalCode,
                             ].join(''),
                         map: {

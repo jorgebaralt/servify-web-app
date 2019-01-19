@@ -47,7 +47,7 @@ const services = (props) => {
                                         priceRating='0.05'
                                         ratingAvg={service.rating/5}
                                         ratingAmount={service.ratingCount}
-                                        image={service.image}/>
+                                        image={service.imagesInfo}/>
                                 );
                             })}
                         </Carousel>
@@ -71,7 +71,7 @@ const services = (props) => {
                                 priceRating='0.05'
                                 ratingAvg={service.rating/5}
                                 ratingAmount={service.ratingCount}
-                                image={service.image}/>
+                                image={service.imagesInfo}/>
                         );
                     })}
                 </Carousel>
@@ -97,7 +97,7 @@ const services = (props) => {
                                 priceRating='0.05'
                                 ratingAvg={service.rating/5}
                                 ratingAmount={service.ratingCount}
-                                image={service.image}/>
+                                image={service.imagesInfo}/>
                         );
                     })}
                 </Carousel>

@@ -114,6 +114,7 @@ class Landing extends Component {
                     <div>
                         <Carousel>
                             {this.props.services.nearServices.map( (service, index) => {
+                                console.log(service)
                                 return (
                                     <Service
                                         key={index}
@@ -123,7 +124,7 @@ class Landing extends Component {
                                         priceRating='0.05'
                                         ratingAvg={service.rating/5}
                                         ratingAmount={service.ratingCount}
-                                        image={service.image}/>
+                                        image={service.imagesInfo}/>
                                 );
                             } )}
                         </Carousel>
@@ -148,7 +149,7 @@ class Landing extends Component {
                                         href={service.id}
                                         ratingAvg={service.rating/5}
                                         ratingAmount={service.ratingCount}
-                                        image={service.image}/>
+                                        image={service.imagesInfo}/>
                                 );
                             } )}
                         </Carousel>

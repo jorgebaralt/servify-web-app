@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// Logic
+import axios from '../../../axios-services';
+import { connect } from 'react-redux';
 // CSS
 import classes from './Publications.module.css';
 // JSX
@@ -13,61 +16,53 @@ class Publications extends Component {
     constructor(props) {
         super(props);
         this.state={
-            bHasPublications: true,
-            services: {
-                1: {
-                    header: 'Plumbing',
-                    title: 'A Toilet',
-                    priceRating: '0.66',
-                    ratingAvg: 0.52,
-                    ratingAmount: '1537',
-                    image: 'https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'
-                },
-                2: {
-                    header: 'Plumbing',
-                    title: 'A Toilet',
-                    priceRating: '0.66',
-                    ratingAvg: 0.52,
-                    ratingAmount: '1537',
-                    image: 'https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'
-                },
-                3: {
-                    header: 'Plumbing',
-                    title: 'A Toilet',
-                    priceRating: '0.66',
-                    ratingAvg: 0.52,
-                    ratingAmount: '1537',
-                    image: 'https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'
-                },
-            }
+            loading: true,
+            bHasPublications: null,
+            services: null
         };
     }
 
+    componentDidMount() {
+        axios.get('/getServices', { params: { email: this.props.userDetails.email } })
+            .then( response => {
+                console.log(response);
+            })
+            .catch( () => {
+                this.setState({
+                    loading: false,
+                    error: true
+                });
+            });
+    }
+
     render () {
-        const publications = (
-            <div className={classes.Container}>
-                <div className={classes.Title}>
-                    <h1>Publications</h1> 
-                    <span className={classes.Amount}>({this.state.services ? Object.keys(this.state.services).length : null})</span>
+        let publications = null;
+        if (this.state.services) {
+            publications = (
+                <div className={classes.Container}>
+                    <div className={classes.Title}>
+                        <h1>Publications</h1> 
+                        <span className={classes.Amount}>({this.state.services ? Object.keys(this.state.services).length : null})</span>
+                    </div>
+                    <Carousel>
+                        {Object.values(this.state.services).map( (service, index) => {
+                            return (
+                                <div key={index} className={classes.Service}>
+                                    <Publication
+                                        header={service.header}
+                                        title={service.title}
+                                        href={service.id}
+                                        priceRating={service.priceRating}
+                                        ratingAvg={service.ratingAvg}
+                                        ratingAmount={service.ratingAmount}
+                                        image={service.imagesInfo}/>
+                                </div>
+                            );
+                        })}
+                    </Carousel>
                 </div>
-                <Carousel>
-                    {Object.values(this.state.services).map( (service, index) => {
-                        return (
-                            <div className={classes.Service}>
-                                <Publication
-                                    header={service.header}
-                                    title={service.title}
-                                    href={service.id}
-                                    priceRating={service.priceRating}
-                                    ratingAvg={service.ratingAvg}
-                                    ratingAmount={service.ratingAmount}
-                                    image={service.image}/>
-                            </div>
-                        );
-                    })}
-                </Carousel>
-            </div>
-        );
+            );
+        }
         const noPublications = (
             <div className={classes.Container}>
                 <div className={classes.Title}>
@@ -91,4 +86,10 @@ class Publications extends Component {
     }
 }
 
-export default Publications;
+const mapStateToProps = (state) => {
+	return {
+        userDetails: state.authReducer.userDetails
+	};
+};
+
+export default connect(mapStateToProps)(Publications);
