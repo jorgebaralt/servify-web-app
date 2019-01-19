@@ -4,6 +4,17 @@
     margin-top: 40px;
 }
 
+.Gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(42.2222% - 5.333333333333333px);
+    flex: none;
+    padding-right: 36px;
+    display: block;
+    padding: 0px;
+}
+
 .Information {
     width: 100%;
     padding-right: 24px;

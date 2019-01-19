@@ -27,8 +27,8 @@ class DragList extends PureComponent {
         padding: '2px',
         margin: this.props.direction === 'vertical' ? '10px' : '5px 1px 0',
         width: this.props.direction === 'vertical' ? '100%' : `${100/this.state.items.length}%`,
-        maxWidth: '130px',
-        height: '100px',
+        maxWidth: this.props.dimensions ? this.props.dimensions.width : '130px',
+        height: this.props.dimensions ? this.props.dimensions.height : '100px',
         // change background colour if dragging
         background: isDragging ? 'lightgreen' : 'grey',
         // styles we need to apply on draggables

@@ -7,7 +7,6 @@ import classes from './Layout.module.css';
 import Menu from '../../../components/Users/Menu/Menu';
 
 const layout = (props) => {
-    console.log(props)
     return (
         <div className={classes.Container}>
             <Menu photoURL={props.userDetails.photoURL} />

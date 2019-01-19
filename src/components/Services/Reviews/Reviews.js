@@ -17,11 +17,15 @@ class Reviews extends Component {
         axios.get('./getRatings', { params: this.props.servicesReviewsParams })
             .then( response => {
                 const reviews = response.data;
-                console.log(reviews)
                 if (reviews.length) {
                     this.setState({
                         loading: false,
                         reviews: reviews
+                    });
+                } else {
+                    this.setState({
+                        loading: false,
+                        reviews: null
                     });
                 }
             })
@@ -31,7 +35,6 @@ class Reviews extends Component {
     }
 
     render() {
-        console.log(this.state, this.props)
         const rating = {
             avg: this.props.ratings.rating,
             totalReviews: this.props.ratings.ratingCount

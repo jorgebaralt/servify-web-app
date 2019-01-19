@@ -1,14 +1,27 @@
 import React, { Component, Suspense } from 'react';
+// Shared
 import isString from '../../../../shared/isString';
 import isObject from '../../../../shared/isObject';
+import { setImagesArray } from '../../../../shared/imagesHandler';
+// Axios, Router & Redux
+import axios from '../../../../axios-services';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 // CSS
 import classes from './PublicationsId.module.css';
 // JSX
-import { setMapboxAccessToken, defaultAddress, setInitialMapboxPosition } from '../../../../components/UI/Map/Map';
+import LoadingPage from '../../../../components/UI/LoadingPage/LoadingPage';
+import { setMapboxAccessToken, defaultAddress } from '../../../../components/UI/Map/Map';
 import { toast } from 'react-toastify';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Button from '../../../../components/UI/Button/Button';
 import Edit from './Edit/Edit';
+
+// NotFound lazy import in case a service is not found, or the user does not owns the service
+const NotFound = React.lazy(() => import('../../../NotFound/NotFound'));
+
+// Default Image URL if the fetched service has no URLs
+const defaultImage = 'https://storage.googleapis.com/servify-716c6.appspot.com/service_images%2F2019-01-12T06%3A37%3A57.360Zdefault-service-image.png?GoogleAccessId=firebase-adminsdk-a3e7c%40servify-716c6.iam.gserviceaccount.com&Expires=95623372800&Signature=VK1PwozcAgxOAYJH6%2FBnDqnSFavcUu0%2FbbWbOgowvx629SQ860EcW4l6YQpE08cu8q1XrsQW0KsLp%2BxAAOoHOomPVmZfGapqZlb821nyjFlN5aMdgTVPbTrWAScfVs3H4%2BJZLOqAZatqPw96blxY%2FIwrbu4dj0q6elQ%2FzRRqG5wLO5fkUvOTG18xF8DfZkTViHxaNiqD%2FPQS69sPRcMnF69%2BQGjC2ZecNbMeatufctbb95%2FL7%2FSJaIgO98HyZ8WJ9ZFxJbl7bqkHV3ptAMP5c8OIfCHeLqfKVtjoW6AmrnXh3LQXCY8GUOTbB09XwzUjggA6TpUuHblEd34p452%2BaA%3D%3D';
 
 const PreviewButton = (props) => <Button clicked={props.clicked} type='default'>Preview changes</Button>;
 const SubmitButton = (props) => <Button disabled={props.disabled} clicked={props.clicked} type='default'>Save changes</Button>;
@@ -25,44 +38,24 @@ class PublicationsId extends Component {
         );
     }
     state = {
+        loading: true,
         bIsEditing: true,
-        images: [
-            'https://images.unsplash.com/photo-1531817506236-027915e5b07d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
-            'https://images.unsplash.com/photo-1516788875874-c5912cae7b43?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80',
-            'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
-            'https://images.unsplash.com/photo-1519781542704-957ff19eff00?ixlib=rb-1.2.1&auto=format&fit=crop&w=1146&q=80',
-            'https://images.unsplash.com/reserve/oIpwxeeSPy1cnwYpqJ1w_Dufer%20Collateral%20test.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=916&q=80',
-        ],
-        category: 'Home Service',
-        title: 'Service Title',
-        infoPoints: {
-            state: 'Florida',
-            website: 'bonpreufoods.com',
-            languages: 'Services offered in English and Spanish'
-        },
-        infoSections: {
-            service: {
-                title: 'Service',
-                contact: true,
-                header: 'About the service',
-                info: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard  dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently  with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
-            },
-            provider: {
-                title: 'Servify',
-                header: 'About the provider',
-                info: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard  dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently  with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
-            },
-        },
+        error: false,
+        images: [],
+        category: null,
+        title: null,
+        infoPoints: null,
+        infoSections: null,
         address: defaultAddress,
         map: {
             initialPosition: null,
             geoData: null,
-            radiusInMiles: 4, // Initial value
+            radiusInMiles: null, // Initial value
             maxRadius: 60 // For the input slider
         },
         rating: {
-            totalReviews: 3,
-            avg: 5
+            price: null,
+            service: null
         },
         formIsValid: true
     }
@@ -84,43 +77,28 @@ class PublicationsId extends Component {
             bIsEditing: bool
         });
     }
-
-    setInitialPosition = (position) => {
-        let address;
-        if (isObject(position)) {
-            address = [position.data.city, position.data.postal, position.data.region, position.data.country].join(' ');
-        } else if (isString(position)) { // checks if it's a string
-            address = position;
-        }
-        else {
-            address = defaultAddress;
-        }
-        setInitialMapboxPosition(address, (nextMapState) => {
-            this.setState( (prevState) => {
-                return {
-                    map: {
-                        ...prevState.map,
-                        ...nextMapState
-                    }
-                }
-            })
-        });
-    }
     
     onRenderHandler = () => {
-        if (!this.state.bIsEditing) {
-            const Preview = React.lazy( () => import('./Preview/Preview'));
-            const Component = () => {
-                return (
-                    <Suspense fallback={this.mySpinner}>
-                        <Preview {...this.state} />
-                    </Suspense>
-                )
-            }
-            return <Component />;
+        switch (true) {
+            case this.state.loading:
+                return <LoadingPage />;
+            case !this.state.bIsEditing:
+                const Preview = React.lazy( () => import('./Preview/Preview'));
+                const Component = () => {
+                    return (
+                        <Suspense fallback={this.mySpinner}>
+                            <Preview {...this.state} />
+                        </Suspense>
+                    )
+                }
+                return <Component />;
+            case !this.state.map.initialPosition:
+                return this.mySpinner;
+            case this.state.error:
+                return <NotFound />
+            default:
+                return <Edit updateValidity={this.updateValidity} updateState={this.updateState} {...this.state} />;
         }
-        if (!this.state.map.initialPosition) { return this.mySpinner; }
-        return <Edit updateValidity={this.updateValidity} updateState={this.updateState} {...this.state} />;
     }
 
     updateValidity = (formIsValid) => {
@@ -134,7 +112,103 @@ class PublicationsId extends Component {
     }
 
     componentDidMount () {
-        this.setInitialPosition(this.state.address)
+        const serviceId = this.props.match.params.id;
+        axios.get('/getServices', { params: { id: serviceId } })
+            .then( response => {
+                const data = response.data[0];
+                // Error handling in case there's an empty response
+                if (!data || data.email !== this.props.userEmail) { 
+                    return this.setState({
+                        loading: false,
+                        error: true
+                    });
+                }
+                console.log(data); 
+                const images = setImagesArray(data.imagesInfo);
+                this.setState( () => {
+                    return {
+                        loading: false,
+                        images: images ? images : [defaultImage],
+                        title: data.title,
+                        infoPoints: {
+                            state: data.locationData.region,
+                            website: data.website,
+                            languages: data.languages
+                        },
+                        infoSections: {
+                            service: {
+                                title: data.title,
+                                contact: true,
+                                header: 'About the service',
+                                info: data.description
+                            },
+                            provider: {
+                                title: 'Servify',
+                                header: 'About the provider',
+                                info: data.provider
+                            },
+                        },
+                        service: {
+                            category: data.category.replace('_', ' '),
+                            title: data.title,
+                            description: data.description,
+                            displayName: data.displayName,
+                            address: data.locationData,
+                            id: data.id,
+                        },
+                        contact: {
+                            phone: data.phone,
+                            email: data.email,
+                        },
+                        ratings: {
+                            price: {
+                                price: data.price,
+                                priceCount: data.priceCount,
+                                priceSum: data.priceSum
+                            },
+                            service: {
+                                rating: data.rating,
+                                ratingCount: data.ratingCount,
+                                ratingSum: data.ratingSum
+                            }
+                        },
+                        locationData: {
+                            city: data.locationData.city,
+                            country: data.locationData.country,
+                            isoCountryCode: data.locationData.isoCountryCode,
+                            name: data.locationData.name,
+                            postalCode: data.locationData.postalCode,
+                            region: data.locationData.region,
+                            street: data.locationData.street
+                        },
+                        address: [
+                            data.locationData.street,
+                            data.locationData.street ? ', ' : null,
+                            data.locationData.name, 
+                            data.locationData.name ? '. ' : null,
+                            data.locationData.city, 
+                            data.locationData.city ? ', ' : null,
+                            data.locationData.region, 
+                            data.locationData.region ? ' ' : null,
+                            data.locationData.postalCode,
+                            ].join(''),
+                        map: {
+                            initialPosition: [data.location._longitude, data.location._latitude],
+                            geoData: null,
+                            radiusInMiles: data.miles, // Initial value
+                            maxRadius: 60 // For the input slider
+                        },
+                        // TODO remove
+                        servicesReviewsParams: data
+                    }
+                });
+            })
+            .catch( () => {
+                this.setState({
+                    loading: false,
+                    error: true
+                });
+            });
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -167,13 +241,17 @@ class PublicationsId extends Component {
                     </div>
                 </div>
                 <div className={classes.Container}>
-                    { this.state.map ? 
-                        this.onRenderHandler()
-                        : null}
+                    {this.onRenderHandler()}
                 </div>
             </div>
         );
     }
 }
 
-export default PublicationsId;
+const mapStateToProps = (state) => {
+	return {
+        userEmail: state.authReducer.userEmail
+	};
+};
+
+export default withRouter(connect(mapStateToProps)(PublicationsId));

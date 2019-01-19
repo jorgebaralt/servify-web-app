@@ -1,16 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
 // CSS
 import classes from './Gallery.module.css';
+// JSX
+import ReactResizeDetector from 'react-resize-detector';
 
-const gallery = (props) => {
-    return (
-        <div className={classes.Wrapper}>
-            <div ref={props.reference}
-                className={classes.Container}>
-                {props.children}
+class Gallery extends Component {
+    constructor (props) {
+        super(props);
+        this.myGallery = React.createRef();
+        this.state = {
+            imageSizes: null
+        }
+    }
+
+    setGalleryDimensions = () => {
+        this.setState(() => {
+            return {
+                imageSizes: {
+                    width: this.myGallery.current.offsetWidth,
+                    height: this.myGallery.current.offsetWidth/(4/3)
+                }
+            }
+        });
+    }
+
+    componentDidMount() {
+        this.setGalleryDimensions();
+    }
+
+    render() {
+        const { children } = this.props;
+        // Cloning components to pass dimensions props
+        const childrenWithProps = React.Children.map(children, child =>
+            React.cloneElement(child, { dimensions: this.state.imageSizes })
+        );
+        return (
+            <div className={classes.Wrapper}>
+                <ReactResizeDetector handleWidth handleHeight onResize={this.setGalleryDimensions} />
+                <div ref={this.myGallery}
+                    className={classes.Container}>
+                    {childrenWithProps}
+                </div>
             </div>
-        </div>
-    )
+        );
+    }
 }
 
-export default gallery;
+export default Gallery;

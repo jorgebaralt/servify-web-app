@@ -9,10 +9,20 @@ export const setItems = getItems;
 
 const editImages = (props) => {
     if (!props.items) { return null; } // Pointer protection
+    const imageSizes = {
+        width: props.dimensions ? props.dimensions.width : null,
+        height: props.dimensions ? props.dimensions.height : null,
+    }
+    const sideNavSizes = {
+        width: props.dimensions ? props.dimensions.width/props.items.length*0.9 : null,
+        height: props.dimensions ? props.dimensions.height/props.items.length*0.9 : null,
+    }
     const slides = props.items.map( (item) => {
         return (
             <Slide key={item.id}>
-                {item.item}
+                <div style={imageSizes}>
+                    {item.item}
+                </div>
             </Slide>
         );
     });
@@ -23,7 +33,8 @@ const editImages = (props) => {
         sliderContainerClasses.push(classes.VerticalSliderContainer);
     }
     return (
-        <div className={classes.Wrapper}>
+        <div 
+        className={classes.Wrapper}>
             {props.title ?
                 <div className={classes.Title}>
                     <div>
@@ -34,13 +45,17 @@ const editImages = (props) => {
             }
             <div className={containerClasses.join(' ')}>
                 <div className={sliderContainerClasses.join(' ')}>
-                    <div className={classes.Slider}>
+                    <div 
+                    style={{
+                        height: props.dimensions ? props.dimensions.height : null,
+                    }}
+                    className={classes.Slider}>
                         <Slider>
                             {slides}
                         </Slider>
                     </div>
                 </div>
-                <DragList direction={props.direction} updateItems={props.updateItems} items={props.items} />
+                <DragList dimensions={sideNavSizes} direction={props.direction} updateItems={props.updateItems} items={props.items} />
             </div>
             <div className={classes.Instructions}>
                 You can move the image thumbnails above 

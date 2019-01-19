@@ -1,7 +1,7 @@
 import React, { Component, Suspense } from 'react';
 // import axios from 'axios';
 import axios from '../../../axios-services';
-// redux-sagas
+// react-router-dom, react-redux, redux-sagas
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { servicesCreator } from '../../../store/actions/';
@@ -13,7 +13,6 @@ import { setImagesArray } from '../../../shared/imagesHandler';
 import classes from './ServicesId.module.css';
 // JSX
 import LoadingPage from '../../../components/UI/LoadingPage/LoadingPage';
-import ReactResizeDetector from 'react-resize-detector';
 import Title from '../../../components/Services/Title/Title';
 import Gallery from '../../../components/Services/Gallery/Gallery';
 import Reviews from '../../../components/Services/Reviews/Reviews';
@@ -146,7 +145,7 @@ class ServicesId extends Component {
                         // TODO remove
                         servicesReviewsParams: data
                     }
-                })
+                });
             })
             .catch( () => {
                 this.setState({
@@ -160,12 +159,12 @@ class ServicesId extends Component {
         const service = (
             <>
                 <div className={classes.Container}>
-                    <Gallery reference={this.myGallery}>
-                        <ReactResizeDetector handleWidth handleHeight onResize={this.setGalleryDimensions} />
-                        <PhotosCarousel
-                            dimensions={this.state.imageSizes}
-                            images={this.state.images} />
-                    </Gallery>
+                    <div className={classes.Gallery}>
+                        <Gallery>
+                            <PhotosCarousel
+                                images={this.state.images} />
+                        </Gallery>
+                    </div>
                     <div className={classes.Information}>
                         <div className={classes.Header}>
                             <div className={classes.CategoryContainer}>

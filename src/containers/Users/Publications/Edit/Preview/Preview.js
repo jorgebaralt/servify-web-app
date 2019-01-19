@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 // CSS
 import classes from '../../../../Services/ServicesId/ServicesId.module.css';
 // JSX
-import ReactResizeDetector from 'react-resize-detector';
 import Title from '../../../../../components/Services/Title/Title';
 import Gallery from '../../../../../components/Services/Gallery/Gallery';
 import Reviews from '../../../../../components/Services/Reviews/Reviews';
@@ -15,29 +14,6 @@ import Separator from '../../../../../components/UI/Separator/Separator';
 import SVG from '../../../../../components/SVG/SVG';
 
 class Preview extends Component {
-    constructor (props) {
-        super(props);
-        this.myGallery = React.createRef();
-    }
-
-    state = {
-        imageSizes: {
-            width: null,
-            height: null
-        }
-    }
-
-    setGalleryDimensions = () => {
-        this.setState(() => {
-            return {
-                imageSizes: {
-                    width: this.myGallery.current.offsetWidth,
-                    height: this.myGallery.current.offsetWidth/(4/3)
-                }
-            }
-        });
-    }
-
     componentDidMount() {
         window.scrollTo(0,0);
     }
@@ -46,11 +22,9 @@ class Preview extends Component {
         return (
             <>
                 <div className={classes.Container}>
-                    <Gallery reference={this.myGallery}>
-                        <ReactResizeDetector handleWidth handleHeight onResize={this.setGalleryDimensions} />
+                    <Gallery>
                         <PhotosCarousel
                             fadeTimeout={0}
-                            dimensions={this.state.imageSizes}
                             images={this.props.images} />
                     </Gallery>
                     <div className={classes.Description}>
@@ -112,7 +86,7 @@ class Preview extends Component {
                     <Map className={classes.MapWrapper} map={this.props.map} />
                 </div>
                 <Separator />
-                <Reviews rating={this.props.rating} />
+                <Reviews ratings={this.props.rating} />
             </>
         );
     }

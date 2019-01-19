@@ -34,10 +34,10 @@
     align-items: center;
     width: calc(42.2222% - 5.333333333333333px);
     flex: none;
-    /* padding-right: 24px; */
     padding-right: 36px;
     display: block;
     padding: 0px;
+    max-width: 844px;
 }
 
 .GalleryContainer {

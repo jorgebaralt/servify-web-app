@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // CSS
 import classes from './Publications.module.css';
 // JSX
+import LoadingBounce from '../../../components/UI/LoadingBounce/LoadingBounce';
 import Layout from '../../../hoc/Users/Layout/Layout';
 import Panel from '../../../components/UI/Panel/Panel';
 import ReadyToGrow from '../../../components/Publish/ReadyToGrow/ReadyToGrow';
@@ -17,6 +18,7 @@ class Publications extends Component {
         super(props);
         this.state={
             loading: true,
+            error: false,
             bHasPublications: null,
             services: null
         };
@@ -25,7 +27,18 @@ class Publications extends Component {
     componentDidMount() {
         axios.get('/getServices', { params: { email: this.props.userDetails.email } })
             .then( response => {
-                console.log(response);
+                const data = response.data;
+                if (!data.length) {
+                    return this.setState({
+                        loading: false,
+                        bHasPublications: false,
+                    });
+                }
+                this.setState({
+                    loading: false,
+                    bHasPublications: true,
+                    services: data
+                });
             })
             .catch( () => {
                 this.setState({
@@ -36,49 +49,55 @@ class Publications extends Component {
     }
 
     render () {
-        let publications = null;
-        if (this.state.services) {
-            publications = (
-                <div className={classes.Container}>
-                    <div className={classes.Title}>
-                        <h1>Publications</h1> 
-                        <span className={classes.Amount}>({this.state.services ? Object.keys(this.state.services).length : null})</span>
+        let publications;
+        switch (true) {
+            case this.state.loading: 
+                publications = <LoadingBounce />;
+                break;
+            case this.state.bHasPublications:
+                publications = (
+                    <div className={classes.Container}>
+                        <div className={classes.Title}>
+                            <h1>Publications</h1> 
+                            <span className={classes.Amount}>({this.state.services ? Object.keys(this.state.services).length : null})</span>
+                        </div>
+                        <Carousel>
+                            {Object.values(this.state.services).map( (service, index) => {
+                                return (
+                                    <div key={index} className={classes.Service}>
+                                        <Publication
+                                            header={service.header}
+                                            title={service.title}
+                                            href={service.id}
+                                            priceRating={service.priceRating}
+                                            ratingAvg={service.ratingAvg}
+                                            ratingAmount={service.ratingAmount}
+                                            image={service.imagesInfo}/>
+                                    </div>
+                                );
+                            })}
+                        </Carousel>
                     </div>
-                    <Carousel>
-                        {Object.values(this.state.services).map( (service, index) => {
-                            return (
-                                <div key={index} className={classes.Service}>
-                                    <Publication
-                                        header={service.header}
-                                        title={service.title}
-                                        href={service.id}
-                                        priceRating={service.priceRating}
-                                        ratingAvg={service.ratingAvg}
-                                        ratingAmount={service.ratingAmount}
-                                        image={service.imagesInfo}/>
-                                </div>
-                            );
-                        })}
-                    </Carousel>
-                </div>
-            );
+                );
+                break;
+            case !this.state.bHasPublications: 
+                publications = (
+                    <div className={classes.Container}>
+                        <div className={classes.Title}>
+                            We noticed you haven't published any services yet.<br/>
+                            If you want to publish your services here on <strong>Servify</strong>, click the button below!
+                        </div>
+                        <ReadyToGrow/>
+                    </div>
+                );
+                break;
+            default:
+                // do nothing
         }
-        const noPublications = (
-            <div className={classes.Container}>
-                <div className={classes.Title}>
-                    We noticed you haven't published any services yet.<br/>
-                    If you want to publish your services here on <strong>Servify</strong>, click the button below!
-                </div>
-                <ReadyToGrow/>
-            </div>
-        );
         return (
             <Layout>
                 <Panel header='Your Publications'>
-                    {this.state.bHasPublications ?
-                        publications
-                        : noPublications
-                    }
+                    {publications}
                 </Panel>
                 <Separator />
             </Layout>

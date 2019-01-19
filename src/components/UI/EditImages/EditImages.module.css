@@ -47,13 +47,13 @@
 .VerticalSliderContainer {
     margin: 0px;
     position: sticky;
-    padding: 10px 0px 10px 16px;
+    padding: 7px 14px;
     top: 42px;
 }
 
 @media screen and (orientation:portrait) {
     .SliderContainer {
-        padding: 10px 0 10px 8px;
+        padding: 6px 12px;
     }
 }
 

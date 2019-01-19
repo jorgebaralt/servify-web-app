@@ -114,7 +114,6 @@ class Landing extends Component {
                     <div>
                         <Carousel>
                             {this.props.services.nearServices.map( (service, index) => {
-                                console.log(service)
                                 return (
                                     <Service
                                         key={index}

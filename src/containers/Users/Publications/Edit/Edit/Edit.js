@@ -4,8 +4,8 @@ import { checkValidity } from '../../../../../shared/checkValidity';
 // CSS
 import classes from './Edit.module.css';
 // JSX
-import { ToastContainer } from 'react-toastify';
-import Map, { setInitialMapboxPosition, setAddress, defaultAddress } from '../../../../../components/UI/Map/Map';
+import Gallery from '../../../../../components/Services/Gallery/Gallery';
+import Map, { setAddress } from '../../../../../components/UI/Map/Map';
 import Image from '../../../../../components/UI/Image/Image';
 import Input from '../../../../../components/UI/Input/Input';
 import InputSlider from '../../../../../components/UI/Input/InputSlider/InputSlider';
@@ -15,6 +15,7 @@ import Title from '../../../../../components/Services/Title/Title';
 class Edit extends PureComponent {
     constructor (props) {
         super(props);
+        this.myGallery = React.createRef();
         const images = props.images;
         const listImages = images.map( image => {
             return (
@@ -23,24 +24,6 @@ class Edit extends PureComponent {
         });
         this.state = {
             controls: {
-                title: {
-                    elementType: 'input',
-                    elementConfig: {
-                        type: 'text',
-                        placeholder: 'Service Title',
-                        autoCorrect:"off",
-                        autoCapitalize:"off",
-                        spellCheck:"false"
-                    },
-                    value: props.title,
-                    valueType: 'title',
-                    validation: {
-                        required: true,
-                    },
-                    valid: true,
-                    touched: false,
-                    style: {marginTop:  '50px 0'}
-                },
                 state: {
                     elementType: 'input',
                     elementConfig: {
@@ -52,6 +35,24 @@ class Edit extends PureComponent {
                     },
                     value: props.infoPoints.state,
                     valueType: 'state',
+                    validation: {
+                        required: true,
+                    },
+                    valid: true,
+                    touched: false,
+                    style: {marginTop:  '50px 0'}
+                },
+                title: {
+                    elementType: 'input',
+                    elementConfig: {
+                        type: 'text',
+                        placeholder: 'Service Title',
+                        autoCorrect:"off",
+                        autoCapitalize:"off",
+                        spellCheck:"false"
+                    },
+                    value: props.title,
+                    valueType: 'title',
                     validation: {
                         required: true,
                     },
@@ -189,25 +190,6 @@ class Edit extends PureComponent {
         }
     }
 
-    setInitialPosition = (position) => {
-        let address;
-        if (position) {
-            address = [position.data.city, position.data.postal, position.data.region, position.data.country].join(' ');
-        } else {
-            address = defaultAddress;
-        }
-        setInitialMapboxPosition(address, (nextMapState) => {
-            this.setState( (prevState) => {
-                return {
-                    map: {
-                        ...prevState.map,
-                        ...nextMapState
-                    }
-                }
-            })
-        });
-    }
-
     // Mapbox coordinate update based on input's value field
     debouncedSearch = (address) => {
         clearTimeout(this.myTimer);
@@ -272,20 +254,11 @@ class Edit extends PureComponent {
         const formElementsArray = Object.entries(this.state.controls);
         return (
             <>
-                <ToastContainer
-                    position="top-right"
-                    autoClose={6000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    pauseOnVisibilityChange
-                    draggable
-                    pauseOnHover />
                 <div className={classes.ServiceContainer}>
                     <div className={classes.GalleryWrapper}>
-                        <div ref={this.myGallery} className={classes.GalleryContainer}>
+                        <Gallery>
                             <EditImages direction='horizontal' updateItems={this.updateImages} items={this.state.items} />
-                        </div>
+                        </Gallery>
                     </div>
                     <div className={classes.DescriptionContainer}>
                         <Title>Your Service Information</Title>
@@ -327,7 +300,7 @@ class Edit extends PureComponent {
                         value={this.state.map.radiusInMiles}
                         maxValue={this.state.map.maxRadius} 
                         valueType='miles (approx)' />
-                    <Map height='350px' map={this.state.map} />
+                    <Map circle height='350px' map={this.state.map} />
                 </div>
             </>
         );
