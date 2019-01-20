@@ -77,9 +77,9 @@
 
 .Default {
     color: #484848;
+    border: 1px solid #EAEAEA;
     background: #FFF;
     background-image: none;
-    border-color: #FFF;
 }
 
 .Default:not([disabled]):hover {

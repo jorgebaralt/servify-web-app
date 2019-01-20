@@ -22,11 +22,13 @@ class Preview extends Component {
         return (
             <>
                 <div className={classes.Container}>
-                    <Gallery>
-                        <PhotosCarousel
-                            fadeTimeout={0}
-                            images={this.props.images} />
-                    </Gallery>
+                    <div className={classes.Gallery}>
+                        <Gallery>
+                            <PhotosCarousel
+                                fadeTimeout={0}
+                                images={this.props.images} />
+                        </Gallery>
+                    </div>
                     <div className={classes.Description}>
                         <div className={classes.Header}>
                             <div className={classes.CategoryContainer}>
@@ -83,7 +85,7 @@ class Preview extends Component {
                                         : <span className={classes.Error}>Address can't be empty.</span>} 
                         />
                     </div>
-                    <Map className={classes.MapWrapper} map={this.props.map} />
+                    <Map circle className={classes.MapWrapper} map={this.props.map} />
                 </div>
                 <Separator />
                 <Reviews ratings={this.props.rating} />

@@ -1,3 +1,9 @@
+.Input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .Title {
     display: flex;
     width: 100%;
@@ -5,7 +11,7 @@
 }
 
 .Title div {
-    width: 20%;
+    /* width: 20%; */
     color: #585858;
     text-align: right;
     padding: 0 21px;
@@ -13,11 +19,13 @@
     user-select: none;
 }
 
-.Container {
+.Wrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    max-height: 360px;
+    widows: 100%;
+    min-height: 360px;
+    max-height: 520px;
     overflow: auto;
     padding: 36px 24px 28px;
     border-radius: 4px;
@@ -26,11 +34,11 @@
     margin: 0 0 18px;
 }
 
-.Container:focus-within {
+.Wrapper:focus-within {
     border: 1px solid #1ea3cc;
 }
 
-.Buttons {
+.Container {
     display: flex;
     flex-flow: row;
     align-items: center;

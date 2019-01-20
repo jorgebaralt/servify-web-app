@@ -94,8 +94,6 @@ class PublicationsId extends Component {
                 return <Component />;
             case !this.state.map.initialPosition:
                 return this.mySpinner;
-            case this.state.error:
-                return <NotFound />
             default:
                 return <Edit updateValidity={this.updateValidity} updateState={this.updateState} {...this.state} />;
         }
@@ -107,11 +105,7 @@ class PublicationsId extends Component {
         });
     }
 
-    updateState = (newState) => {
-        this.setState({...newState})
-    }
-
-    componentDidMount () {
+    fetchData = () => {
         const serviceId = this.props.match.params.id;
         axios.get('/getServices', { params: { id: serviceId } })
             .then( response => {
@@ -122,86 +116,87 @@ class PublicationsId extends Component {
                         loading: false,
                         error: true
                     });
-                }
-                console.log(data); 
-                const images = setImagesArray(data.imagesInfo);
-                this.setState( () => {
-                    return {
-                        loading: false,
-                        images: images ? images : [defaultImage],
-                        title: data.title,
-                        infoPoints: {
-                            state: data.locationData.region,
-                            website: data.website,
-                            languages: data.languages
-                        },
-                        infoSections: {
-                            service: {
-                                title: data.title,
-                                contact: true,
-                                header: 'About the service',
-                                info: data.description
-                            },
-                            provider: {
-                                title: 'Servify',
-                                header: 'About the provider',
-                                info: data.provider
-                            },
-                        },
-                        service: {
-                            category: data.category.replace('_', ' '),
+                } else {
+                    const images = setImagesArray(data.imagesInfo);
+                    this.setState( () => {
+                        return {
+                            loading: false,
+                            images: images ? images : [defaultImage],
+                            imagesInfo: data.imagesInfo,
                             title: data.title,
-                            description: data.description,
-                            displayName: data.displayName,
-                            address: data.locationData,
-                            id: data.id,
-                        },
-                        contact: {
-                            phone: data.phone,
-                            email: data.email,
-                        },
-                        ratings: {
-                            price: {
-                                price: data.price,
-                                priceCount: data.priceCount,
-                                priceSum: data.priceSum
+                            infoPoints: {
+                                state: data.locationData.region,
+                                website: data.website,
+                                languages: data.languages
+                            },
+                            infoSections: {
+                                service: {
+                                    title: data.title,
+                                    contact: true,
+                                    header: 'About the service',
+                                    info: data.description
+                                },
+                                provider: {
+                                    title: 'Servify',
+                                    header: 'About the provider',
+                                    info: data.provider
+                                },
                             },
                             service: {
-                                rating: data.rating,
-                                ratingCount: data.ratingCount,
-                                ratingSum: data.ratingSum
-                            }
-                        },
-                        locationData: {
-                            city: data.locationData.city,
-                            country: data.locationData.country,
-                            isoCountryCode: data.locationData.isoCountryCode,
-                            name: data.locationData.name,
-                            postalCode: data.locationData.postalCode,
-                            region: data.locationData.region,
-                            street: data.locationData.street
-                        },
-                        address: [
-                            data.locationData.street,
-                            data.locationData.street ? ', ' : null,
-                            data.locationData.name, 
-                            data.locationData.name ? '. ' : null,
-                            data.locationData.city, 
-                            data.locationData.city ? ', ' : null,
-                            data.locationData.region, 
-                            data.locationData.region ? ' ' : null,
-                            data.locationData.postalCode,
-                            ].join(''),
-                        map: {
-                            initialPosition: [data.location._longitude, data.location._latitude],
-                            geoData: null,
-                            radiusInMiles: data.miles, // Initial value
-                            maxRadius: 60 // For the input slider
-                        },
-                        // TODO remove
-                        servicesReviewsParams: data
-                    }
-                });
+                                category: data.category.replace('_', ' '),
+                                title: data.title,
+                                description: data.description,
+                                displayName: data.displayName,
+                                address: data.locationData,
+                                id: data.id,
+                            },
+                            contact: {
+                                phone: data.phone,
+                                email: data.email,
+                            },
+                            ratings: {
+                                price: {
+                                    price: data.price,
+                                    priceCount: data.priceCount,
+                                    priceSum: data.priceSum
+                                },
+                                service: {
+                                    rating: data.rating,
+                                    ratingCount: data.ratingCount,
+                                    ratingSum: data.ratingSum
+                                }
+                            },
+                            locationData: {
+                                city: data.locationData.city,
+                                country: data.locationData.country,
+                                isoCountryCode: data.locationData.isoCountryCode,
+                                name: data.locationData.name,
+                                postalCode: data.locationData.postalCode,
+                                region: data.locationData.region,
+                                street: data.locationData.street
+                            },
+                            address: [
+                                data.locationData.street,
+                                data.locationData.street ? ', ' : null,
+                                data.locationData.name, 
+                                data.locationData.name ? '. ' : null,
+                                data.locationData.city, 
+                                data.locationData.city ? ', ' : null,
+                                data.locationData.region, 
+                                data.locationData.region ? ' ' : null,
+                                data.locationData.postalCode,
+                                ].join(''),
+                            map: {
+                                initialPosition: [data.location._longitude, data.location._latitude],
+                                geoData: null,
+                                radiusInMiles: data.miles, // Initial value
+                                maxRadius: 60 // For the input slider
+                            },
+                            // TODO remove
+                            servicesReviewsParams: data
+                        }
+                    });
+                }
             })
             .catch( () => {
                 this.setState({
@@ -209,6 +204,14 @@ class PublicationsId extends Component {
                     error: true
                 });
             });
+    }
+
+    updateState = (newState) => {
+        this.setState({...newState});
+    }
+
+    componentDidMount () {
+        this.fetchData();        
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -220,30 +223,37 @@ class PublicationsId extends Component {
         if (!this.state.bIsEditing) {
             tabsClasses.push(classes.Preview);
         }
+        /**
+         * If there is an error then no JSX will be rendered except the NotFound page.
+         * The only ways for there to be an error is for there to be no data fetched
+         * from the backend database or if the service is not owned by the current user.
+         */
         return (
-            <div className={classes.Wrapper}>
-                <div className={classes.Navbar}>
-                    <div className={classes.TabsWrapper}>
-                        <div className={tabsClasses.join(' ')}>
-                            <div className={[classes.Tab, this.state.bIsEditing ? classes.Active : null].join(' ')}>
-                                <button className={classes.Button} onClick={() => this.bIsEditingHandler(true)}>Edit</button>
-                            </div>
-                            <div className={[classes.Tab, !this.state.bIsEditing ? classes.Active : null].join(' ')}>
-                                <button className={classes.Button} onClick={() => this.bIsEditingHandler(false)}>Preview</button>
+            this.state.error ? 
+                <NotFound />
+                : <div className={classes.Wrapper}>
+                    <div className={classes.Navbar}>
+                        <div className={classes.TabsWrapper}>
+                            <div className={tabsClasses.join(' ')}>
+                                <div className={[classes.Tab, this.state.bIsEditing ? classes.Active : null].join(' ')}>
+                                    <button className={classes.Button} onClick={() => this.bIsEditingHandler(true)}>Edit</button>
+                                </div>
+                                <div className={[classes.Tab, !this.state.bIsEditing ? classes.Active : null].join(' ')}>
+                                    <button className={classes.Button} onClick={() => this.bIsEditingHandler(false)}>Preview</button>
+                                </div>
                             </div>
                         </div>
+                        <div className={classes.Submit}>
+                            {this.state.bIsEditing ?
+                                <PreviewButton clicked={this.onPreviewChangesHandler} />
+                                : <SubmitButton disabled={!this.state.formIsValid} clicked={this.onSubmitChangesHandler} />
+                            }
+                        </div>
                     </div>
-                    <div className={classes.Submit}>
-                        {this.state.bIsEditing ?
-                            <PreviewButton clicked={this.onPreviewChangesHandler} />
-                            : <SubmitButton disabled={!this.state.formIsValid} clicked={this.onSubmitChangesHandler} />
-                        }
+                    <div className={classes.Container}>
+                        {this.onRenderHandler()}
                     </div>
                 </div>
-                <div className={classes.Container}>
-                    {this.onRenderHandler()}
-                </div>
-            </div>
         );
     }
 }

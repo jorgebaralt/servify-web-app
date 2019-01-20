@@ -1,17 +1,31 @@
 
 import React, { Component } from 'react';
+// axios
+import axios from '../../../../axios-services';
 // toast
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // CSS
 import classes from './InputImage.module.css';
 // JSX
+import Button from '../../Button/Button';
 import Spinner from '../../LoadingBounce/LoadingBounce';
 import SVG from '../../../SVG/SVG';
-// import Notifications, { toastCreator, toastInit } from '../../Toast/';
+
+const onAuthStateChanged = () => {
+    return new Promise((resolve, reject) => {
+        axios.post((user) => {
+            if (user) {
+                resolve(user);
+            } else {
+                reject(new Error('No user logged in.'));
+            }
+        });
+    });
+}
 
 const Buttons = (props) => {
-    const buttonsClasses = [classes.Buttons, classes.FadeIn];
+    const buttonsClasses = [classes.Container, classes.FadeIn];
     return (
         <div className={buttonsClasses.join(' ')}>
             <div className={classes.Button}>
@@ -63,9 +77,19 @@ class InputImage extends Component {
     }
 
     onChange = (e) => {
+        /**
+         * If the uploadQtyLimit is 0, then the limit will be 0. 
+         * Otherwise, it will be the limit if it exists, or 5 as a default value.
+         */
+        const limit = this.props.uploadQtyLimit === 0 ? this.props.uploadQtyLimit : this.props.uploadQtyLimit | 5;
         // #1 There are too many files!
-        if (e.target.files.length > 5) {
-            const msg = 'Only 5 images can be uploaded at a time';
+        if (e.target.files.length > limit) {
+            let msg;
+            if (limit === 0) {
+                msg = `You can't upload any more images, delete some before uploading.`;
+            } else {
+                msg = `Only ${limit} images can be uploaded at a time`;
+            }
             e.target.files = null;
             return toast.error(msg);
         }
@@ -88,7 +112,7 @@ class InputImage extends Component {
         }
 
         const files = Array.from(e.target.files)
-            .map( (file, index) => {
+            .map( (file) => {
                 return {
                     file: file,
                     public_id: [file.name, file.size].join('_')
@@ -112,6 +136,21 @@ class InputImage extends Component {
         });
     }
 
+    // TESTING only
+    consoleLogData = (formData) => {
+        
+        const data = new FormData()
+        const images = Array.from(this.state.images);
+        images.forEach((image, i) => {
+            formData.append(i, image.file);
+        });
+        this.consoleLogData(formData);
+        // Display the key/value pairs
+        for (let [key, value] of data.entries()) {
+            console.log(key, ':', value);
+        }
+    }
+
     getFormData = () => {
         const images = Array.from(this.state.images);
         const formData = new FormData()
@@ -121,6 +160,27 @@ class InputImage extends Component {
         return formData;
     }
 
+    uploadData = (e) => {
+        e.preventDefault();
+        const images = Array.from(this.state.images);
+        const headers = {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                "Access-Control-Allow-Origin": "*",
+            }
+        };
+        async function uploadFiles () {
+            await Promise.all(images.map(async (image) => {
+                const formData= new FormData()
+                formData.append('image', image.file)
+                const contents = await axios.post('/uploadFile', 
+                    { image: formData },  headers
+                );
+                console.log(contents);
+            }));
+        }
+        uploadFiles();
+    }
 
     componentDidUpdate () {
         this.props.onChange(this.getFormData());
@@ -146,17 +206,33 @@ class InputImage extends Component {
                     setActiveRef={this.setActiveRef} />
             }
         }
-        return (
+        const input = (
             <>
-                <div className={classes.Title}>
-                    <div>Image Upload</div>
-                </div>
-                <div className={classes.Container}>
-                    <div className={classes.Buttons}>
+                {this.props.title ? 
+                    <div className={classes.Title}>
+                        <div>Image Upload</div>
+                    </div>
+                    : null }
+                <div className={classes.Wrapper}>
+                    <div className={classes.Container}>
                         {render()}
                     </div>
                 </div>
+                {this.props.submit ? 
+                    <Button submit disabled={!(this.state.images.length > 0)} blockButton type='success'>Submit</Button>
+                    : null
+                }
             </>
+        );
+        return (
+            this.props.submit ? 
+                <form onSubmit={this.uploadData} style={{width: '100%'}}>
+                    {input}
+                </form>
+                : 
+                <div>
+                    {input}
+                </div>
         );
     }
 }

@@ -102,7 +102,8 @@
     flex: auto;
 }
 
-.MapContainer {
+.MapContainer,
+.InputImageWrapper {
     display: flex;
     position: relative;
     flex-flow: column;
@@ -114,7 +115,21 @@
 }
 
 @media (max-width: 744px) {
-    .MapContainer {
+    .MapContainer,
+    .InputImageWrapper {
         margin: 0px auto 18px;
     }
+}
+
+.InputImageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row;
+}
+
+.InputImageContainer > div {
+    margin: 0 1px;
+    border-radius: 0;
+    flex-basis: 100%;
 }

@@ -4,10 +4,13 @@ import { checkValidity } from '../../../../../shared/checkValidity';
 // CSS
 import classes from './Edit.module.css';
 // JSX
+import Button from '../../../../../components/UI/Button/Button';
 import Gallery from '../../../../../components/Services/Gallery/Gallery';
 import Map, { setAddress } from '../../../../../components/UI/Map/Map';
 import Image from '../../../../../components/UI/Image/Image';
 import Input from '../../../../../components/UI/Input/Input';
+import InputImage from '../../../../../components/UI/Input/InputImage/InputImage';
+import DeleteImage from '../../../../../components/UI/Input/InputImage/DeleteImage/DeleteImage';
 import InputSlider from '../../../../../components/UI/Input/InputSlider/InputSlider';
 import EditImages, { setItems } from '../../../../../components/UI/EditImages/EditImages';
 import Title from '../../../../../components/Services/Title/Title';
@@ -40,7 +43,7 @@ class Edit extends PureComponent {
                     },
                     valid: true,
                     touched: false,
-                    style: {marginTop:  '50px 0'}
+                    style: {marginTop: '46px 0'}
                 },
                 title: {
                     elementType: 'input',
@@ -58,7 +61,7 @@ class Edit extends PureComponent {
                     },
                     valid: true,
                     touched: false,
-                    style: {marginTop:  '50px 0'}
+                    style: {marginTop: '46px 0'}
                 },
                 website: {
                     elementType: 'input',
@@ -73,7 +76,7 @@ class Edit extends PureComponent {
                     valueType: 'website',
                     valid: true,
                     touched: false,
-                    style: {marginTop:  '50px 0'}
+                    style: {marginTop: '46px 0'}
                 },
                 languages: {
                     elementType: 'input',
@@ -88,7 +91,7 @@ class Edit extends PureComponent {
                     valueType: 'language',
                     valid: true,
                     touched: false,
-                    style: {marginTop:  '50px 0'}
+                    style: {marginTop: '46px 0'}
                 },
                 aboutService: {
                     elementType: 'textarea',
@@ -106,7 +109,7 @@ class Edit extends PureComponent {
                     },
                     valid: true,
                     touched: false,
-                    style: {marginTop:  '50px 0'}
+                    style: {marginTop: '46px 0'}
                 },
                 aboutProvider: {
                     elementType: 'textarea',
@@ -124,7 +127,7 @@ class Edit extends PureComponent {
                     },
                     valid: true,
                     touched: false,
-                    style: {marginTop:  '50px 0'}
+                    style: {marginTop: '46px 0'}
                 },
                 address: {
                     elementType: 'input',
@@ -188,6 +191,12 @@ class Edit extends PureComponent {
         if (inputIdentifier === 'address') { 
             this.debouncedSearch(updatedFormElement.value);
         }
+    }
+    
+    inputImageChangeHandler = (files) => {
+        this.setState({
+            imageFiles: files, 
+        });
     }
 
     // Mapbox coordinate update based on input's value field
@@ -281,6 +290,21 @@ class Edit extends PureComponent {
                                 </div>
                             );
                         })}
+                    </div>
+                </div>
+                <div className={classes.InputImageWrapper}>
+                    <Title>Delete Images</Title>
+                    <div className={classes.InputImageContainer}>
+                        <DeleteImage serviceId={this.props.service.id} imagesInfo={this.props.imagesInfo} />
+                    </div>
+                </div>
+                <div className={classes.InputImageWrapper}>
+                    <Title>Image Upload</Title>
+                    <div className={classes.InputImageContainer}>
+                        <InputImage 
+                            submit
+                            uploadQtyLimit={5 - this.props.images.length}
+                            onChange={this.inputImageChangeHandler} />
                     </div>
                 </div>
                 <div className={classes.MapContainer}>

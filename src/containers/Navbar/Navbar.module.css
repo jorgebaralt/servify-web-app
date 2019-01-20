@@ -26,6 +26,18 @@
 	z-index: 10;
 }
 
+.EditPublicationNavbar {
+    position: relative;
+    height: 70px;
+	width: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+    background: rgb(118, 113, 198) !important;
+	box-sizing: border-box;
+	z-index: 10;
+}
+
 .SupportNavbar {
     position: relative;
     height: 70px;

@@ -2,9 +2,11 @@ import React from 'react';
 import geo from 'mapbox-geocoding';
 // CSS
 import classes from './Map.module.css';
-// JSX
+// Toast
 import { toast } from 'react-toastify';
-import ReactMapboxGl, { Layer, Feature, Marker , ZoomControl, ScaleControl, Popup } from "react-mapbox-gl";
+import 'react-toastify/dist/ReactToastify.css';
+// JSX
+import ReactMapboxGl, { Layer, Feature, Marker , ZoomControl, ScaleControl } from "react-mapbox-gl";
 import SVG from '../../SVG/SVG';
 
 const mapboxPKey = "pk.eyJ1Ijoicm9iZXJ0MDMxMCIsImEiOiJjanFpZjNmZnMwZzFqNDJyMGdmaTJwYWtpIn0.bUv0BRK5nRmmYMp61buDUg";

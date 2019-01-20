@@ -188,6 +188,16 @@ class Navbar extends PureComponent {
 					isDrawerTransparent: false
 				}
 				break;
+			case this.props.location.pathname.includes('/users/publications/edit'): // Renders navbar for every address that has /services as root
+				settings = {
+					className: classes.EditPublicationNavbar,
+					navbarType: 'EditPublicationNavbar', // pass navbarType prop to select respective navigation items
+					toggleAuthModal: this.props.toggleAuthModal, // Toggle Auth Modal
+					toggleMobileDrawer: this.toggleMobileDrawer,
+					isNavbarTransparent: false,
+					isDrawerTransparent: false
+				}
+				break;
 			case this.props.location.pathname.includes('/publish/overview'):
 				settings = {
 					className: classes.Navbar,
