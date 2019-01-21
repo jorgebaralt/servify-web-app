@@ -21,7 +21,7 @@ import Edit from './Edit/Edit';
 const NotFound = React.lazy(() => import('../../../NotFound/NotFound'));
 
 // Default Image URL if the fetched service has no URLs
-const defaultImage = 'https://storage.googleapis.com/servify-716c6.appspot.com/service_images%2F2019-01-12T06%3A37%3A57.360Zdefault-service-image.png?GoogleAccessId=firebase-adminsdk-a3e7c%40servify-716c6.iam.gserviceaccount.com&Expires=95623372800&Signature=VK1PwozcAgxOAYJH6%2FBnDqnSFavcUu0%2FbbWbOgowvx629SQ860EcW4l6YQpE08cu8q1XrsQW0KsLp%2BxAAOoHOomPVmZfGapqZlb821nyjFlN5aMdgTVPbTrWAScfVs3H4%2BJZLOqAZatqPw96blxY%2FIwrbu4dj0q6elQ%2FzRRqG5wLO5fkUvOTG18xF8DfZkTViHxaNiqD%2FPQS69sPRcMnF69%2BQGjC2ZecNbMeatufctbb95%2FL7%2FSJaIgO98HyZ8WJ9ZFxJbl7bqkHV3ptAMP5c8OIfCHeLqfKVtjoW6AmrnXh3LQXCY8GUOTbB09XwzUjggA6TpUuHblEd34p452%2BaA%3D%3D';
+const defaultImage = 'https://storage.googleapis.com/servify-716c6.appspot.com/service_images%2F2019-01-20T22%3A51%3A58.066Z_default-service-image.png?GoogleAccessId=firebase-adminsdk-a3e7c%40servify-716c6.iam.gserviceaccount.com&Expires=95623372800&Signature=st0sONUJVHe54MOE0yY902A0gAcBCzSjxch4QbdCXJ0w2LiQgG%2FwZiv9lW6t4lV5zFhpONuNEFPOWIqC%2F1fQgI0qKX4Y1vI6nI14lx%2BYqaR%2Fg0LjIfUPeU5RSm8RJBnWIKSWVhThZT7ewez8XEg2RjIRIVllzdJht%2FRTgwzf4A%2FbsF1SsfaMFkIYH4Ee7vnNmdqOTRTwGqInjLPER9WgalWew7MXxHExGo9%2Fi%2BmIXjAxcC2%2BmTu9Pov%2BBkvfpu37miQTViUTUmE0c3jc17R%2FC816Sdmhg%2F2e8a%2FSUx9k714D5PujzvKldabGnPvwwPTO%2BtCe0yjAsbE5eehLQYEjgw%3D%3D';
 
 const PreviewButton = (props) => <Button clicked={props.clicked} type='default'>Preview changes</Button>;
 const SubmitButton = (props) => <Button disabled={props.disabled} clicked={props.clicked} type='default'>Save changes</Button>;
@@ -77,27 +77,6 @@ class PublicationsId extends Component {
             bIsEditing: bool
         });
     }
-    
-    onRenderHandler = () => {
-        switch (true) {
-            case this.state.loading:
-                return <LoadingPage />;
-            case !this.state.bIsEditing:
-                const Preview = React.lazy( () => import('./Preview/Preview'));
-                const Component = () => {
-                    return (
-                        <Suspense fallback={this.mySpinner}>
-                            <Preview {...this.state} />
-                        </Suspense>
-                    )
-                }
-                return <Component />;
-            case !this.state.map.initialPosition:
-                return this.mySpinner;
-            default:
-                return <Edit updateValidity={this.updateValidity} updateState={this.updateState} {...this.state} />;
-        }
-    }
 
     updateValidity = (formIsValid) => {
         this.setState({
@@ -110,6 +89,7 @@ class PublicationsId extends Component {
         axios.get('/getServices', { params: { id: serviceId } })
             .then( response => {
                 const data = response.data[0];
+                console.log(data)
                 // Error handling in case there's an empty response
                 if (!data || data.email !== this.props.userEmail) { 
                     return this.setState({
@@ -216,6 +196,27 @@ class PublicationsId extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         return nextState !== this.state;
+    }
+    
+    onRenderHandler = () => {
+        switch (true) {
+            case this.state.loading:
+                return <LoadingPage />;
+            case !this.state.bIsEditing:
+                const Preview = React.lazy( () => import('./Preview/Preview'));
+                const Component = () => {
+                    return (
+                        <Suspense fallback={this.mySpinner}>
+                            <Preview {...this.state} />
+                        </Suspense>
+                    )
+                }
+                return <Component />;
+            case !this.state.map.initialPosition:
+                return this.mySpinner;
+            default:
+                return <Edit fetchData={this.fetchData} updateValidity={this.updateValidity} updateState={this.updateState} {...this.state} />;
+        }
     }
 
     render() {

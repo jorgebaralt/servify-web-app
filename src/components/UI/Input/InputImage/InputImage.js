@@ -11,18 +11,7 @@ import classes from './InputImage.module.css';
 import Button from '../../Button/Button';
 import Spinner from '../../LoadingBounce/LoadingBounce';
 import SVG from '../../../SVG/SVG';
-
-const onAuthStateChanged = () => {
-    return new Promise((resolve, reject) => {
-        axios.post((user) => {
-            if (user) {
-                resolve(user);
-            } else {
-                reject(new Error('No user logged in.'));
-            }
-        });
-    });
-}
+import ProgressRing from '../../ProgressRing/ProgressRing';
 
 const Buttons = (props) => {
     const buttonsClasses = [classes.Container, classes.FadeIn];
@@ -46,15 +35,24 @@ const Buttons = (props) => {
 
 const Images = (props) => {
     return (
-        props.images.map((image, i) =>
-            <div key={i} className={[classes.ImageWrapper,classes.FadeIn].join(' ')}>
-                <div onClick={() => props.removeImage(image.public_id)} 
-                    className={classes.Delete}>
-                    <SVG svg='delete' className={[classes.Icon, classes.Delete].join(' ')} size='2x' />
+        props.images.map((image, i) => {
+            props.inputRefs[image.file.name] = React.createRef();
+            return (
+                <div key={i} className={[classes.ImageWrapper,classes.FadeIn].join(' ')}>
+                    <div className={classes.Progress}>
+                        <ProgressRing 
+                            radius={36} 
+                            stroke={6} 
+                            progress={props.progressRings ? props.progressRings[image.file.name] : 0} />
+                    </div>
+                    <div onClick={() => props.removeImage(image.public_id, image.file.name)} 
+                        className={classes.Delete}>
+                        <SVG svg='delete' className={[classes.Icon, classes.Delete].join(' ')} size='2x' />
+                    </div>
+                    <img ref={props.inputRefs[image.file.name]} draggable="false" className={classes.Image} src={URL.createObjectURL(image.file)} alt='' />
                 </div>
-                <img draggable="false" className={classes.Image} src={URL.createObjectURL(image.file)} alt='' />
-            </div>
-        )
+            )
+        })
     );
 }
 
@@ -63,17 +61,30 @@ class InputImage extends Component {
         super(props);
         this.mySingleFile = React.createRef();
         this.myMultiFiles = React.createRef();
+        this.inputRefs = {};
     }
+
     state = {
         uploading: false,
         activeRef: null,
-        images: []
+        progressRings: {},
+        images: [],
+        files: []
+    }
+
+    getFormData = () => {
+        const images = Array.from(this.state.images);
+        const formData = new FormData()
+        images.forEach((image, i) => {
+            formData.append(i, image.file);
+        })
+        return formData;
     }
 
     setActiveRef = (ref) => { // Single file or multi files setter
         this.setState({
             activeRef: ref
-        })
+        });
     }
 
     onChange = (e) => {
@@ -126,63 +137,81 @@ class InputImage extends Component {
         });
     }
 
-    removeImage = (id) => {
+    /**
+     * Removes be images and the upload progress from the images container.
+     */
+    removeImage = (id, progressRef) => {
         const images = this.state.images.filter(image => {
             return image.public_id !== id
         });
-        this.setState({ 
-            uploading: false,
-            images: images
+        this.setState((prevState) => { 
+            return {
+                uploading: false,
+                images: images,
+                progressRings: {
+                    ...prevState.progressRings,
+                    [progressRef]: 0
+                }
+            };
         });
     }
 
-    // TESTING only
-    consoleLogData = (formData) => {
-        
-        const data = new FormData()
-        const images = Array.from(this.state.images);
-        images.forEach((image, i) => {
-            formData.append(i, image.file);
+    /**
+     * Updates and/or sets the upload progress of a respective image.
+     */
+    setUploadProgress = (ref, progress) => {
+        this.setState((prevState) => {
+            return {
+                progressRings: {
+                    ...prevState.progressRings,
+                    [ref]: progress
+                }
+            }
         });
-        this.consoleLogData(formData);
-        // Display the key/value pairs
-        for (let [key, value] of data.entries()) {
-            console.log(key, ':', value);
-        }
     }
 
-    getFormData = () => {
-        const images = Array.from(this.state.images);
-        const formData = new FormData()
-        images.forEach((image, i) => {
-            formData.append(i, image.file);
-        })
-        return formData;
-    }
-
-    uploadData = (e) => {
-        e.preventDefault();
-        const images = Array.from(this.state.images);
+    /**
+     * Uploads all the images simultaneously and waits till every image is uploaded 
+     * or there is a reply from the server. Afterwards, if there is an on upload prop
+     * passed on, execute it.
+     */
+    uploadData = async () => {
         const headers = {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
                 "Access-Control-Allow-Origin": "*",
             }
         };
-        async function uploadFiles () {
-            await Promise.all(images.map(async (image) => {
-                const formData= new FormData()
-                formData.append('image', image.file)
-                const contents = await axios.post('/uploadFile', 
-                    { image: formData },  headers
-                );
-                console.log(contents);
-            }));
-        }
-        uploadFiles();
+        await Promise.all(Object.values(this.state.files).map(async (file) => {
+            const formData= new FormData();
+            formData.append('image', file, file.name);
+            const contents = await axios.post('/uploadFile', 
+                formData,  
+                { onUploadProgress: progressEvent => {
+                    const progress = (progressEvent.loaded / progressEvent.total * 100);
+                    const ref = file.name;
+                    this.setUploadProgress(ref, progress);
+                } ,headers: headers}
+            );
+            if (contents.status === 200) {
+                toast.success(`${file.name} has been uploaded successfully.`);
+            } else {
+                toast.error(`Something went wrong when uploading ${file.name}, you may try again.`);
+            }
+        }));
+        /**
+         * If there is an onUpload prop function, execute it after uploading is done.
+         */
+        if (this.props.onUpload) { await this.props.onUpload() };
     }
 
-    componentDidUpdate () {
+    uploadDataHandler = (e) => {
+        e.preventDefault();
+        this.uploadData();
+    }
+
+    componentDidUpdate() {
+        if (!this.props.onChange) { return; }
         this.props.onChange(this.getFormData());
     }
 
@@ -197,7 +226,10 @@ class InputImage extends Component {
             case uploading:
                 return <Spinner />
             case images.length > 0:
-                return <Images images={images} 
+                return <Images 
+                    inputRefs={this.inputRefs}
+                    progressRings={this.state.progressRings}
+                    images={images} 
                     removeImage={this.removeImage}  />
             default:
                 return <Buttons onChange={this.onChange}
@@ -226,7 +258,7 @@ class InputImage extends Component {
         );
         return (
             this.props.submit ? 
-                <form onSubmit={this.uploadData} style={{width: '100%'}}>
+                <form onSubmit={this.uploadDataHandler} style={{width: '100%'}}>
                     {input}
                 </form>
                 : 

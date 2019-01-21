@@ -159,7 +159,7 @@ class Slider extends Component {
                         totalSlides={this.props.children.length}
                         activeSlide={this.state.activeSlide} 
                         onClick={this.onTranslateHandler} />}
-                {this.props.disableNav || !this.props.children.length ? 
+                {this.props.disableNav || this.props.children.length > 0 ? 
                     null :
                     <SliderNav
                         activeSlide={this.state.activeSlide}

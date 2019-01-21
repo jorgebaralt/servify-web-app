@@ -84,11 +84,23 @@ input[type=file].Input {
 }
 
 .ImageWrapper {
+    position: relative;
     margin: 12px;
+}
+
+.Progress {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .Image {
     user-select: none;
+    min-height: 164px;
+    min-height: 164px;
     max-height: 270px;
     max-width: 270px;
     padding: 10px;

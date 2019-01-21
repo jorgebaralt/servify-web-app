@@ -45,7 +45,7 @@ class InputImage extends Component {
     }
     
     render() {
-        console.log(this.props)
+        if (!this.props.imagesInfo) { return null; } // Protection
         return (
             <div className={classes.Wrapper}>
                 <div className={classes.Container}>

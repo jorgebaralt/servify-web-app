@@ -4,7 +4,6 @@ import { checkValidity } from '../../../../../shared/checkValidity';
 // CSS
 import classes from './Edit.module.css';
 // JSX
-import Button from '../../../../../components/UI/Button/Button';
 import Gallery from '../../../../../components/Services/Gallery/Gallery';
 import Map, { setAddress } from '../../../../../components/UI/Map/Map';
 import Image from '../../../../../components/UI/Image/Image';
@@ -292,18 +291,21 @@ class Edit extends PureComponent {
                         })}
                     </div>
                 </div>
-                <div className={classes.InputImageWrapper}>
-                    <Title>Delete Images</Title>
-                    <div className={classes.InputImageContainer}>
-                        <DeleteImage serviceId={this.props.service.id} imagesInfo={this.props.imagesInfo} />
+                {this.props.imagesInfo ? 
+                    <div className={classes.InputImageWrapper}>
+                        <Title>Delete Images</Title>
+                        <div className={classes.InputImageContainer}>
+                            <DeleteImage serviceId={this.props.service.id} imagesInfo={this.props.imagesInfo} />
+                        </div>
                     </div>
-                </div>
+                    : null}
                 <div className={classes.InputImageWrapper}>
                     <Title>Image Upload</Title>
                     <div className={classes.InputImageContainer}>
                         <InputImage 
                             submit
                             uploadQtyLimit={5 - this.props.images.length}
+                            onUpload={this.props.fetchData}
                             onChange={this.inputImageChangeHandler} />
                     </div>
                 </div>

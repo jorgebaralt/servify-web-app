@@ -50,12 +50,15 @@ const editImages = (props) => {
                         height: props.dimensions ? props.dimensions.height : null,
                     }}
                     className={classes.Slider}>
-                        <Slider>
+                        <Slider disableNav>
                             {slides}
                         </Slider>
                     </div>
                 </div>
-                <DragList dimensions={sideNavSizes} direction={props.direction} updateItems={props.updateItems} items={props.items} />
+                {props.items.length > 1 ? 
+                    <DragList dimensions={sideNavSizes} direction={props.direction} updateItems={props.updateItems} items={props.items} />
+                    : null
+                }
             </div>
             <div className={classes.Instructions}>
                 You can move the image thumbnails above 
