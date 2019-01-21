@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import classes from './PhotosCarousel.module.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+// JSX
 import ImageFadeIn from '../ImageFadeIn/ImageFadeIn';
 
 class Carousel extends Component {

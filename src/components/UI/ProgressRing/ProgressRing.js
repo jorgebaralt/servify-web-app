@@ -34,7 +34,7 @@ class ProgressRing extends Component {
                     className={classes.Ring}
                     height={radius * 2}
                     width={radius * 2} >
-                    <circle className={classes.Circle} cx="50%" cy="50%" r={ this.normalizedRadius } fill="none" stroke="#e6e6e6" stroke-width={ stroke } />
+                    <circle className={classes.Circle} cx="50%" cy="50%" r={ this.normalizedRadius } fill="none" stroke="#e6e6e6" strokeWidth={ stroke } />
                     <circle className={classes.Circle}
                         cx="50%" 
                         cy="50%" 

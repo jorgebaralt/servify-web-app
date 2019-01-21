@@ -3,15 +3,16 @@ import React, { PureComponent } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 // fake data generator
-export const getItems = items =>
-    Array.from( { length: items.length }, (v, k) => k).map(k => ({
+export const getItems = items =>{
+    if (!items) { return null };
+    return Array.from( { length: items.length }, (v, k) => k).map(k => ({
         id: `item-${k}`,
         item: items[k],
         content: (
             items[k]
         ),
     }));
-
+}
 class DragList extends PureComponent {
     constructor(props) {
         super(props);

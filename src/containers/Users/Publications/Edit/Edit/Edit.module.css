@@ -133,3 +133,20 @@
     border-radius: 0;
     flex-basis: 100%;
 }
+
+.Warning {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+
+.Warning strong {
+    margin-right: 1ch;
+}

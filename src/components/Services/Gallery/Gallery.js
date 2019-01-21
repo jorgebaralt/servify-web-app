@@ -29,7 +29,9 @@ class Gallery extends Component {
     }
 
     render() {
+        // TODO CHECK IF CHILDREN IS REACT COMPONENT
         const { children } = this.props;
+        if (!children) { return null; } // Pointer protection
         // Cloning components to pass dimensions props
         const childrenWithProps = React.Children.map(children, child =>
             React.cloneElement(child, { dimensions: this.state.imageSizes })

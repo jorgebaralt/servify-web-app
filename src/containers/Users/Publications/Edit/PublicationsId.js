@@ -1,7 +1,5 @@
 import React, { Component, Suspense } from 'react';
 // Shared
-import isString from '../../../../shared/isString';
-import isObject from '../../../../shared/isObject';
 import { setImagesArray } from '../../../../shared/imagesHandler';
 // Axios, Router & Redux
 import axios from '../../../../axios-services';
@@ -84,99 +82,121 @@ class PublicationsId extends Component {
         });
     }
 
+    handleData = (data) => {
+        if (data) {
+            // Error handling in case there's an empty response
+            if (data.email !== this.props.userEmail) { 
+                return this.setState({
+                    loading: false,
+                    error: true
+                });
+            } else {
+                const images = setImagesArray(data.imagesInfo);
+                this.setState( () => {
+                    return {
+                        loading: false,
+                        images: images ? images : [defaultImage],
+                        imagesInfo: data.imagesInfo,
+                        title: data.title,
+                        infoPoints: {
+                            state: data.locationData.region,
+                            website: data.website,
+                            languages: data.languages
+                        },
+                        infoSections: {
+                            service: {
+                                title: data.title,
+                                contact: true,
+                                header: 'About the service',
+                                info: data.description
+                            },
+                            provider: {
+                                title: 'Servify',
+                                header: 'About the provider',
+                                info: data.provider
+                            },
+                        },
+                        service: {
+                            category: data.category.replace('_', ' '),
+                            title: data.title,
+                            description: data.description,
+                            displayName: data.displayName,
+                            address: data.locationData,
+                            id: data.id,
+                        },
+                        contact: {
+                            phone: data.phone,
+                            email: data.email,
+                        },
+                        ratings: {
+                            price: {
+                                price: data.price,
+                                priceCount: data.priceCount,
+                                priceSum: data.priceSum
+                            },
+                            service: {
+                                rating: data.rating,
+                                ratingCount: data.ratingCount,
+                                ratingSum: data.ratingSum
+                            }
+                        },
+                        locationData: {
+                            city: data.locationData.city,
+                            country: data.locationData.country,
+                            isoCountryCode: data.locationData.isoCountryCode,
+                            name: data.locationData.name,
+                            postalCode: data.locationData.postalCode,
+                            region: data.locationData.region,
+                            street: data.locationData.street
+                        },
+                        address: [
+                            data.locationData.street,
+                            data.locationData.street ? ', ' : null,
+                            data.locationData.name, 
+                            data.locationData.name ? '. ' : null,
+                            data.locationData.city, 
+                            data.locationData.city ? ', ' : null,
+                            data.locationData.region, 
+                            data.locationData.region ? ' ' : null,
+                            data.locationData.postalCode,
+                            ].join(''),
+                        map: {
+                            initialPosition: [data.location._longitude, data.location._latitude],
+                            geoData: null,
+                            radiusInMiles: data.miles, // Initial value
+                            maxRadius: 60 // For the input slider
+                        },
+                        // TODO determine if needed
+                        rawData: data
+                    }
+                });
+            }
+        }
+    }
+
+    updateData = async (updatedService, fn) => {
+        try {
+            const serviceId = await this.props.match.params.id;
+            const response = await axios.post('/updateService', { serviceId: serviceId, updatedService: updatedService });
+            await this.handleData(response.data);
+            console.log('fn', fn)
+            if (fn) {
+                console.log('inside fn if block')
+                await fn();
+            }
+        } catch (error) {
+            this.setState({
+                loading: false,
+                error: true
+            });
+        }
+    }
+
     fetchData = () => {
         const serviceId = this.props.match.params.id;
         axios.get('/getServices', { params: { id: serviceId } })
             .then( response => {
-                const data = response.data[0];
-                console.log(data)
-                // Error handling in case there's an empty response
-                if (!data || data.email !== this.props.userEmail) { 
-                    return this.setState({
-                        loading: false,
-                        error: true
-                    });
-                } else {
-                    const images = setImagesArray(data.imagesInfo);
-                    this.setState( () => {
-                        return {
-                            loading: false,
-                            images: images ? images : [defaultImage],
-                            imagesInfo: data.imagesInfo,
-                            title: data.title,
-                            infoPoints: {
-                                state: data.locationData.region,
-                                website: data.website,
-                                languages: data.languages
-                            },
-                            infoSections: {
-                                service: {
-                                    title: data.title,
-                                    contact: true,
-                                    header: 'About the service',
-                                    info: data.description
-                                },
-                                provider: {
-                                    title: 'Servify',
-                                    header: 'About the provider',
-                                    info: data.provider
-                                },
-                            },
-                            service: {
-                                category: data.category.replace('_', ' '),
-                                title: data.title,
-                                description: data.description,
-                                displayName: data.displayName,
-                                address: data.locationData,
-                                id: data.id,
-                            },
-                            contact: {
-                                phone: data.phone,
-                                email: data.email,
-                            },
-                            ratings: {
-                                price: {
-                                    price: data.price,
-                                    priceCount: data.priceCount,
-                                    priceSum: data.priceSum
-                                },
-                                service: {
-                                    rating: data.rating,
-                                    ratingCount: data.ratingCount,
-                                    ratingSum: data.ratingSum
-                                }
-                            },
-                            locationData: {
-                                city: data.locationData.city,
-                                country: data.locationData.country,
-                                isoCountryCode: data.locationData.isoCountryCode,
-                                name: data.locationData.name,
-                                postalCode: data.locationData.postalCode,
-                                region: data.locationData.region,
-                                street: data.locationData.street
-                            },
-                            address: [
-                                data.locationData.street,
-                                data.locationData.street ? ', ' : null,
-                                data.locationData.name, 
-                                data.locationData.name ? '. ' : null,
-                                data.locationData.city, 
-                                data.locationData.city ? ', ' : null,
-                                data.locationData.region, 
-                                data.locationData.region ? ' ' : null,
-                                data.locationData.postalCode,
-                                ].join(''),
-                            map: {
-                                initialPosition: [data.location._longitude, data.location._latitude],
-                                geoData: null,
-                                radiusInMiles: data.miles, // Initial value
-                                maxRadius: 60 // For the input slider
-                            },
-                            // TODO remove
-                            servicesReviewsParams: data
-                        }
-                    });
-                }
+                this.handleData(response.data[0]);
             })
             .catch( () => {
                 this.setState({
@@ -215,11 +235,16 @@ class PublicationsId extends Component {
             case !this.state.map.initialPosition:
                 return this.mySpinner;
             default:
-                return <Edit fetchData={this.fetchData} updateValidity={this.updateValidity} updateState={this.updateState} {...this.state} />;
+                return <Edit 
+                    updateData={this.updateData} 
+                    updateValidity={this.updateValidity} 
+                    updateState={this.updateState} 
+                    {...this.state} />;
         }
     }
 
     render() {
+        console.log(this.state)
         let tabsClasses = [classes.TabsContainer, classes.Edit];
         if (!this.state.bIsEditing) {
             tabsClasses.push(classes.Preview);

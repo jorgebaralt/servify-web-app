@@ -12,6 +12,8 @@ import Button from '../../Button/Button';
 import Spinner from '../../LoadingBounce/LoadingBounce';
 import SVG from '../../../SVG/SVG';
 import ProgressRing from '../../ProgressRing/ProgressRing';
+import Loading from '../../../UI/LoadingDots/LoadingDots';
+import LoadingDots from '../../../UI/LoadingDots/LoadingDots';
 
 const Buttons = (props) => {
     const buttonsClasses = [classes.Container, classes.FadeIn];
@@ -65,7 +67,7 @@ class InputImage extends Component {
     }
 
     state = {
-        uploading: false,
+        bIsUploading: false,
         activeRef: null,
         progressRings: {},
         images: [],
@@ -176,16 +178,20 @@ class InputImage extends Component {
      * passed on, execute it.
      */
     uploadData = async () => {
-        const headers = {
+        await this.setState({
+            bIsUploading: true
+        });
+        const headers = await {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
                 "Access-Control-Allow-Origin": "*",
             }
         };
+        const imagesInfo = await [];
         await Promise.all(Object.values(this.state.files).map(async (file) => {
             const formData= new FormData();
             formData.append('image', file, file.name);
-            const contents = await axios.post('/uploadFile', 
+            const response = await axios.post('/uploadFile', 
                 formData,  
                 { onUploadProgress: progressEvent => {
                     const progress = (progressEvent.loaded / progressEvent.total * 100);
@@ -193,8 +199,11 @@ class InputImage extends Component {
                     this.setUploadProgress(ref, progress);
                 } ,headers: headers}
             );
-            if (contents.status === 200) {
-                toast.success(`${file.name} has been uploaded successfully.`);
+            if (response.status === 200) {
+                await toast.success(`${file.name} has been uploaded successfully.`);
+                await this.removeImage([file.name, file.size].join('_'), file.name)
+                const imageInfo = response.data;
+                imagesInfo.push(imageInfo);
             } else {
                 toast.error(`Something went wrong when uploading ${file.name}, you may try again.`);
             }
@@ -202,7 +211,10 @@ class InputImage extends Component {
         /**
          * If there is an onUpload prop function, execute it after uploading is done.
          */
-        if (this.props.onUpload) { await this.props.onUpload() };
+        if (this.props.onUpload) { await this.props.onUpload(imagesInfo) };
+        await this.setState({
+            bIsUploading: false
+        });
     }
 
     uploadDataHandler = (e) => {
@@ -238,6 +250,22 @@ class InputImage extends Component {
                     setActiveRef={this.setActiveRef} />
             }
         }
+        let bIsSubmitDisabled = false;
+        /**
+         * Boolean that checks if the submit button should be disabled.
+         * If the input is currently uploading then it should be disabled.
+         * If there are any submitted images then it should be enabled.
+         */
+        switch (true) {
+            case this.state.bIsUploading:
+                bIsSubmitDisabled = true;
+                break;
+            case !(this.state.images.length > 0):
+                bIsSubmitDisabled = true;
+                break;
+            default:
+                // do nothing
+        }
         const input = (
             <>
                 {this.props.title ? 
@@ -251,7 +279,9 @@ class InputImage extends Component {
                     </div>
                 </div>
                 {this.props.submit ? 
-                    <Button submit disabled={!(this.state.images.length > 0)} blockButton type='success'>Submit</Button>
+                    <Button style={{height: '46px'}} submit disabled={bIsSubmitDisabled} blockButton type='success'>
+                        {this.state.bIsUploading ? <LoadingDots /> : 'Submit'}
+                    </Button>
                     : null
                 }
             </>

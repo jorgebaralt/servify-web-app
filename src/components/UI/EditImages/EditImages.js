@@ -34,7 +34,7 @@ const editImages = (props) => {
     }
     return (
         <div 
-        className={classes.Wrapper}>
+            className={classes.Wrapper}>
             {props.title ?
                 <div className={classes.Title}>
                     <div>
