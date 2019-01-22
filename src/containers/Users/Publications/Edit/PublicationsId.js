@@ -40,7 +40,6 @@ class PublicationsId extends Component {
         bIsEditing: true,
         error: false,
         images: [],
-        category: null,
         title: null,
         infoPoints: null,
         infoSections: null,
@@ -66,8 +65,31 @@ class PublicationsId extends Component {
         }
     }
 
-    onSubmitChangesHandler = () => {
-        toast.success('Your changes were submitted successfully.');
+    onSubmitChangesHandler = async () => {
+        const updatedService = await {
+            title: this.state.title,
+            // phone: (754) 215 - 8233,
+            imagesInfo: this.state.imagesInfo,
+            description: this.state.service.info,
+            // zipCode: 33351,
+            miles: this.state.map.radiusInMiles,
+            // email: robertmolina0310@gmail.com,
+            location: {
+                _latitude: this.state.map.initialPosition[1],
+                _longitude: this.state.map.initialPosition[0]
+            },
+            // locationData:
+        }
+        try {
+            const serviceId = await this.props.match.params.id;
+            await axios.put('/service', { serviceId: serviceId, updatedService: updatedService });
+            await toast.success('Your changes were submitted successfully.');
+        } catch (error) {
+            this.setState({
+                loading: false,
+                error: true
+            });
+        }
     }
 
     bIsEditingHandler = (bool) => {
@@ -91,6 +113,7 @@ class PublicationsId extends Component {
                     error: true
                 });
             } else {
+                console.log('on handleData', data);
                 const images = setImagesArray(data.imagesInfo);
                 this.setState( () => {
                     return {
@@ -177,11 +200,12 @@ class PublicationsId extends Component {
     updateData = async (updatedService, fn) => {
         try {
             const serviceId = await this.props.match.params.id;
-            const response = await axios.put('/updateService', { serviceId: serviceId, updatedService: updatedService });
+            const response = await axios.put('/service', { serviceId: serviceId, updatedService: updatedService });
             await this.handleData(response.data);
             if (fn) {
                 await fn();
             }
+            await toast.success('Your changes were submitted successfully.');
         } catch (error) {
             this.setState({
                 loading: false,
@@ -192,9 +216,10 @@ class PublicationsId extends Component {
 
     fetchData = () => {
         const serviceId = this.props.match.params.id;
-        axios.get('/getServices', { params: { id: serviceId } })
+        axios.get('/service', { params: { serviceId: serviceId } })
             .then( response => {
-                this.handleData(response.data[0]);
+                console.log(response.data);
+                this.handleData(response.data);
             })
             .catch( () => {
                 this.setState({
@@ -233,7 +258,8 @@ class PublicationsId extends Component {
             case !this.state.map.initialPosition:
                 return this.mySpinner;
             default:
-                return <Edit 
+                return <Edit
+                    handleData={this.handleData} 
                     updateData={this.updateData} 
                     updateValidity={this.updateValidity} 
                     updateState={this.updateState} 
@@ -242,6 +268,7 @@ class PublicationsId extends Component {
     }
 
     render() {
+        console.log(this.state)
         let tabsClasses = [classes.TabsContainer, classes.Edit];
         if (!this.state.bIsEditing) {
             tabsClasses.push(classes.Preview);
@@ -267,9 +294,10 @@ class PublicationsId extends Component {
                             </div>
                         </div>
                         <div className={classes.Submit}>
+                            {/* <SubmitButton disabled={!this.state.formIsValid} clicked={this.onSubmitChangesHandler} /> */}
                             {this.state.bIsEditing ?
                                 <PreviewButton clicked={this.onPreviewChangesHandler} />
-                                : <SubmitButton disabled={!this.state.formIsValid} clicked={this.onSubmitChangesHandler} />
+                                : <SubmitButton disabled={false} clicked={this.onSubmitChangesHandler} />
                             }
                         </div>
                     </div>

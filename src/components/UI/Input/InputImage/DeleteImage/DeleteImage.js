@@ -6,9 +6,11 @@ import axios from '../../../../../axios-services';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // CSS
-import classes from '../InputImage.module.css';
+import classes from './DeleteImage.module.css';
 // JSX
 import SVG from '../../../../SVG/SVG';
+import Image from '../../../Image/Image';
+import LoadingBounce from '../../../LoadingDots/LoadingDots';
 
 const Images = (props) => {
     return (
@@ -18,7 +20,7 @@ const Images = (props) => {
                     className={classes.Delete}>
                     <SVG svg='delete' className={[classes.Icon, classes.Delete].join(' ')} size='2x' />
                 </div>
-                <img draggable="false" className={classes.Image} src={image.url} alt='' />
+                <Image draggable="false" className={classes.Image} src={image.url} />
             </div>
         )
     );
@@ -26,28 +28,37 @@ const Images = (props) => {
 
 
 class InputImage extends Component {
+    state = {
+        bIsDeleting: false
+    }
+
     removeImage = (fileName) => {
-        axios.delete('/deleteFile', { params: { fileName: fileName, serviceId: this.props.serviceId, imagesInfo: this.props.imagesInfo } })
+        this.setState({
+            bIsDeleting: true
+        });
+        axios.delete('/images_service', { data: { fileName: fileName, serviceId: this.props.serviceId } })
             .then( response => {
-                toast.success(response.message);
+                toast.success('File deleted successfully.');
+                this.setState({
+                    bIsDeleting: false
+                });
+                if (this.props.onDelete) {
+                    this.props.onDelete(response.data);
+                }
             })
             .catch( () => {
                 toast.error('Something went wrong.');
+                this.setState({
+                    bIsDeleting: false
+                });
             });
     }
 
-    componentDidUpdate () {
-        this.props.onChange(this.getFormData());
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextState !== this.state || nextProps.children !== this.props.children;
-    }
-    
     render() {
         if (!this.props.imagesInfo) { return null; } // Protection
         return (
             <div className={classes.Wrapper}>
+                {this.state.bIsDeleting ? <div className={classes.Loader}><LoadingBounce /></div> : null}
                 <div className={classes.Container}>
                     <Images images={this.props.imagesInfo} 
                         removeImage={this.removeImage}  />

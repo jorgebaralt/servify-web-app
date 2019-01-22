@@ -191,7 +191,7 @@ class InputImage extends Component {
         await Promise.all(Object.values(this.state.files).map(async (file) => {
             const formData= new FormData();
             formData.append('image', file, file.name);
-            const response = await axios.post('/uploadFile', 
+            const response = await axios.post('/images_service', 
                 formData,  
                 { onUploadProgress: progressEvent => {
                     const progress = (progressEvent.loaded / progressEvent.total * 100);

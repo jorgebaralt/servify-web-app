@@ -30,7 +30,14 @@ class Preview extends Component {
                     <div className={classes.Gallery}>
                         <Gallery>
                             <PhotosCarousel
-                                images={this.props.images.length > 0 ? setImagesArray(this.props.images) : [defaultImage]} />
+                                // Null pointers handler.
+                                images={
+                                    this.props.imagesInfo ? 
+                                        this.props.images.length > 0 ? 
+                                            setImagesArray(this.props.images) : 
+                                            [defaultImage]
+                                        : [defaultImage]
+                                    } />
                         </Gallery>
                     </div>
                     <div className={classes.Description}>

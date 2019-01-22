@@ -310,24 +310,31 @@ class Edit extends Component {
                         })}
                     </div>
                 </div>
-                {this.props.imagesInfo ? 
-                    <div className={classes.InputImageWrapper}>
-                        <Title>Delete Images</Title>
-                        <div className={classes.InputImageContainer}>
-                            <DeleteImage serviceId={this.props.service.id} imagesInfo={this.props.imagesInfo} />
-                        </div>
-                    </div>
-                    : null}
                 <div className={classes.InputImageWrapper}>
                     <Title>Image Upload</Title>
                     <div className={classes.InputImageContainer}>
                         <InputImage 
                             submit
-                            uploadQtyLimit={5 - this.props.images.length}
+                            // Image upload quantity limit
+                            uploadQtyLimit={
+                                this.props.images ? 
+                                5 - this.props.images.length
+                                : 5 }
                             onUpload={this.onImageUpload}
                             onChange={this.inputImageChangeHandler} />
                     </div>
                 </div>
+                {this.props.imagesInfo ? 
+                    <div className={classes.InputImageWrapper}>
+                        <Title>Delete Images</Title>
+                        <div className={classes.InputImageContainer}>
+                            <DeleteImage 
+                                onDelete={this.props.handleData}
+                                serviceId={this.props.service.id} 
+                                imagesInfo={this.props.imagesInfo} />
+                        </div>
+                    </div>
+                    : null}
                 <div className={classes.MapContainer}>
                     <Title>Your Service Address</Title>
                     <Input 
