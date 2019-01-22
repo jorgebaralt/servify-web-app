@@ -74,9 +74,13 @@ class PublicationsId extends Component {
             // zipCode: 33351,
             miles: this.state.map.radiusInMiles,
             // email: robertmolina0310@gmail.com,
-            location: {
-                _latitude: this.state.map.initialPosition[1],
-                _longitude: this.state.map.initialPosition[0]
+            geolocation: {
+                // Geolocation provides data to a constructor that returns
+                // coordinates to calculate points between services, distante 
+                // to the current location of the user, fetching close services 
+                // and such.
+                latitude: this.state.map.initialPosition[1],
+                longitude: this.state.map.initialPosition[0]
             },
             // locationData:
         }
