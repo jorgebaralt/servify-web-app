@@ -69,7 +69,7 @@ class PublicationsId extends Component {
         const updatedService = await {
             title: this.state.title,
             // phone: (754) 215 - 8233,
-            imagesInfo: this.state.imagesInfo,
+            imagesInfo: this.state.images, // Images is the variable handled back by Edit.js component
             description: this.state.service.info,
             // zipCode: 33351,
             miles: this.state.map.radiusInMiles,
