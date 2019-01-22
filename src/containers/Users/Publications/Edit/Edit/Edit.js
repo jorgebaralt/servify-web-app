@@ -1,25 +1,20 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 // Input validity and isArray
 import { checkValidity } from '../../../../../shared/checkValidity';
-import { setImagesArray } from '../../../../../shared/imagesHandler';
 import isArray from '../../../../../shared/isArray';
 // CSS
 import classes from './Edit.module.css';
 // JSX
 import Gallery from '../../../../../components/Services/Gallery/Gallery';
 import Map, { setAddress } from '../../../../../components/UI/Map/Map';
-import Image from '../../../../../components/UI/Image/Image';
 import Input from '../../../../../components/UI/Input/Input';
 import InputImage from '../../../../../components/UI/Input/InputImage/InputImage';
 import DeleteImage from '../../../../../components/UI/Input/InputImage/DeleteImage/DeleteImage';
 import InputSlider from '../../../../../components/UI/Input/InputSlider/InputSlider';
-import EditImages, { setItems } from '../../../../../components/UI/EditImages/EditImages';
+import EditImages from '../../../../../components/UI/EditImages/EditImages';
 import Title from '../../../../../components/Services/Title/Title';
 
-// Default Image URL if the fetched service has no URLs
-const defaultImage = 'https://storage.googleapis.com/servify-716c6.appspot.com/service_images%2F2019-01-20T22%3A51%3A58.066Z_default-service-image.png?GoogleAccessId=firebase-adminsdk-a3e7c%40servify-716c6.iam.gserviceaccount.com&Expires=95623372800&Signature=st0sONUJVHe54MOE0yY902A0gAcBCzSjxch4QbdCXJ0w2LiQgG%2FwZiv9lW6t4lV5zFhpONuNEFPOWIqC%2F1fQgI0qKX4Y1vI6nI14lx%2BYqaR%2Fg0LjIfUPeU5RSm8RJBnWIKSWVhThZT7ewez8XEg2RjIRIVllzdJht%2FRTgwzf4A%2FbsF1SsfaMFkIYH4Ee7vnNmdqOTRTwGqInjLPER9WgalWew7MXxHExGo9%2Fi%2BmIXjAxcC2%2BmTu9Pov%2BBkvfpu37miQTViUTUmE0c3jc17R%2FC816Sdmhg%2F2e8a%2FSUx9k714D5PujzvKldabGnPvwwPTO%2BtCe0yjAsbE5eehLQYEjgw%3D%3D';
-
-class Edit extends PureComponent {
+class Edit extends Component {
     constructor (props) {
         super(props);
         this.myGallery = React.createRef();
@@ -29,22 +24,6 @@ class Edit extends PureComponent {
     state = null; // Initial state
 
     setData = () => {
-        console.log('inside setData');
-        console.log('inside setData', this.props);
-        console.log('inside setData', this.props.imagesInfo);
-        const images = this.props.imagesInfo ? setImagesArray(this.props.imagesInfo) : [];
-        let listImages;
-        console.log(images)
-        if (images.length) {
-            listImages = images.map( image => {
-                console.log(image)
-                return (
-                    <Image draggable="false" src={image} />
-                );
-            });
-        } else {
-            listImages = [<Image draggable="false" src={defaultImage} />]
-        }
         this.setState(() => {
             return {
                 controls: {
@@ -170,8 +149,7 @@ class Edit extends PureComponent {
                     }
                 },
                 map: this.props.map,
-                images: images,
-                items: setItems(listImages), // draglist images
+                images: this.props.imagesInfo,
                 formIsValid: true,
             }
         });
@@ -182,16 +160,11 @@ class Edit extends PureComponent {
         this.setData();
     }
 
-    updateImages = (items) => {
-        const newImages = [];
-        items.forEach( (item) => {
-            newImages.push(item.content.props.src);
-        })
+    updateImages = (newImages) => {
         this.setState( (prevState) => {
             return {
                 ...prevState,
-                images: newImages,
-                items: items
+                images: newImages
             }
         });
     }
@@ -204,6 +177,7 @@ class Edit extends PureComponent {
             newImages = [...imagesInfo];
         }
         const data = { imagesInfo: newImages };
+        if (!this.props.updateData) { return; } // Pointer protection
         this.props.updateData(data, this.setData);
     }
 
@@ -294,15 +268,12 @@ class Edit extends PureComponent {
     }
 
     render() {
-        console.log(this.state);
         if (!this.state) { return null; } // Protection
         const formElementsArray = Object.entries(this.state.controls);
         return (
             <>
                 <div className={classes.ServiceContainer}>
                     <div className={classes.GalleryWrapper}>
-                        {console.log(this.props.imagesInfo)}
-                        {console.log(this.props.imagesInfo)}
                         <Gallery>
                             {/**
                              * If the imageInfo prop is null, or is an empty array, 
@@ -313,7 +284,7 @@ class Edit extends PureComponent {
                                     <div className={classes.Warning}><strong>Hey!</strong> You haven't uploaded any images yet.</div> 
                                     : <></>
                                 : <div className={classes.Warning}><strong>Hey!</strong> You haven't uploaded any images yet.</div> }
-                            <EditImages direction='horizontal' updateItems={this.updateImages} items={this.state.items} />
+                            <EditImages direction='horizontal' updateImages={this.updateImages} images={this.state.images} />
                         </Gallery>
                     </div>
                     <div className={classes.DescriptionContainer}>

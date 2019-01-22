@@ -1,10 +1,15 @@
-.Carousel {
+.Wrapper,
+.Container {
     position: relative;
+}
+
+.Container {
+    animation: fade-in ease .5s;
 }
 
 .PrevButton {
     position: absolute;
-    top: 42.5%;
+    top: 50%;
     right: 92.5%;
     transform: translateY(-42.5%);
     z-index: 1;
@@ -12,7 +17,7 @@
 
 .NextButton {
     position: absolute;
-    top: 42.5%;
+    top: 50%;
     left: 92.5%;
     transform: translateY(-42.5%);
     z-index: 1;
@@ -97,16 +102,40 @@
     background-color: #EEEEEE;
 }
 
+.SideNavWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+    animation: fade-in ease 1s;
+}
+
+.SideNavContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+}
+
+.SideNavContainer div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content !important;
+}
+
 .Thumbnail {
     width: 100%;
 }
 
 .ThumbnailContainer {
-    padding: 2.5px;
+    padding: 4px 8px;
 }
 
 .Thumbnail img {
     position: relative;
+    max-width: 92px !important;
+    max-height: 69px !important;
     border-radius: 7.5px;
     box-shadow: 1px 1px 8px rgba(0,0,0,0.36), -1px -1px 6px rgba(0,0,0,0.43);
     transition: box-shadoww 0.5s cubic-bezier(.25,.8,.25,1);
@@ -117,4 +146,16 @@
 
 .Thumbnail.active img {
     box-shadow: 1px 1px 10px rgba(30,163,204,1), -1px -1px 10px rgba(30,163,204,1);
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    66% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

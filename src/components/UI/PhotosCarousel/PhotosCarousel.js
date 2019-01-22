@@ -102,74 +102,87 @@ class Carousel extends Component {
             settings = this.props.settings;
         }
         return (
-            <div className={classes.Carousel}>
-                <Slider 
-                    asNavFor={this.state.nav2}
-                    ref={ref => (this.mySlider = ref)} 
-                    {...settings}>
-                    {this.props.images.map( (image, index) => {
-                        return (
-                            <div 
-                                key={['Photo__', index].join(' ')}
-                                className={classes.PhotoContainer}>
-                                <ImageFadeIn
-                                    loading={true}
-                                    bShouldUpdate={false}
-                                    timeout={this.props.fadeTimeout}
-                                    style={{
-                                            width: this.props.dimensions ? this.props.dimensions.width : null,
-                                            height: this.props.dimensions ? this.props.dimensions.height : null,
-                                        }}
-                                    className={classes.Photo}
-                                    src={image}/>
-                            </div> 
-                        );
-                    } )}
-                </Slider>
+            <div className={classes.Wrapper}>
+                <div className={classes.Container}>
+                    <Slider 
+                        asNavFor={this.state.nav2}
+                        ref={ref => (this.mySlider = ref)} 
+                        {...settings}>
+                        {this.props.images.map( (image, index) => {
+                            return (
+                                <div 
+                                    key={['Photo__', index].join(' ')}
+                                    className={classes.PhotoContainer}>
+                                    <ImageFadeIn
+                                        draggable="false"
+                                        loading={true}
+                                        bShouldUpdate={false}
+                                        style={{
+                                                width: this.props.dimensions ? this.props.dimensions.width : null,
+                                                height: this.props.dimensions ? this.props.dimensions.height : null,
+                                            }}
+                                        className={classes.Photo}
+                                        src={image}/>
+                                </div> 
+                            );
+                        } )}
+                    </Slider>
+                    {/* ONLY render buttons and sidenav if there is more than 1 image. */}
+                    { this.props.images.length > 1 ? 
+                        <>
+                            {/* PrevButton */}
+                            <div className={classes.PrevButton}>
+                                <button onClick={this.previous} />
+                            </div>
+                            {/* NextButton */}
+                            <div className={classes.NextButton}>
+                                <button onClick={this.next} />
+                            </div>
+                        </>
+                        : null}
+                </div>
                 {/* ONLY render buttons and sidenav if there is more than 1 image. */}
                 { this.props.images.length > 1 ? 
-                    <>
-                        {/* PrevButton */}
-                        <div className={classes.PrevButton}>
-                            <button onClick={this.previous}>
-                            </button>
-                        </div>
-                        {/* NextButton */}
-                        <div className={classes.NextButton}>
-                            <button onClick={this.next}>
-                            </button>
-                        </div>
-                        <Slider
-                            asNavFor={this.state.nav1}
-                            ref={slider => (this.myBottomSlider = slider)}
-                            slidesToShow={this.props.images.length}
-                            swipeToSlide={true}
-                            focusOnSelect={false} >
-                            {this.props.images.map((image, index) => {
-                                return (
-                                    <div 
-                                        className={
-                                            this.state.activeSlide === index ? 
-                                            [classes.Thumbnail, classes.active].join(' ') :
-                                            classes.Thumbnail
-                                        } 
-                                        key={index}>
+                    <div className={classes.SideNavWrapper}>
+                        <div className={classes.SideNavContainer}>
+                            <Slider
+                                asNavFor={this.state.nav1}
+                                ref={slider => (this.myBottomSlider = slider)}
+                                slidesToShow={this.props.images.length}
+                                swipeToSlide={true}
+                                focusOnSelect={false} >
+                                {this.props.images.map((image, index) => {
+                                    return (
                                         <div 
-                                            className={classes.ThumbnailContainer}>
-                                            <ImageFadeIn
-                                                bShouldUpdate={false}
-                                                style={{
-                                                    width: this.props.dimensions ? this.props.dimensions.width/this.props.images.length*0.9 : null,
-                                                    height: this.props.dimensions ? this.props.dimensions.height/this.props.images.length*0.9 : null,
-                                                }}
-                                                className={classes.Photo}
-                                                src={image} />
+                                            className={
+                                                this.state.activeSlide === index ? 
+                                                [classes.Thumbnail, classes.active].join(' ') :
+                                                classes.Thumbnail
+                                            } 
+                                            key={index}>
+                                            <div 
+                                                className={classes.ThumbnailContainer}>
+                                                <ImageFadeIn
+                                                    draggable="false"
+                                                    bShouldUpdate={false}
+                                                    style={{
+                                                        /**
+                                                        * The width and the height will be equal to the main carousel's width or height, 
+                                                        * multiplied by 0.9 to acomodate for the container's 90% width, minus 12 to acomodate
+                                                        * for the margins.
+                                                        */
+                                                        width: this.props.dimensions ? this.props.dimensions.width/this.props.images.length*0.9 - 12 : null,
+                                                        height: this.props.dimensions ? this.props.dimensions.height/this.props.images.length*0.9 - 12 : null,
+                                                    }}
+                                                    className={classes.Photo}
+                                                    src={image} />
+                                            </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
-                        </Slider>
-                    </>
+                                    );
+                                })}
+                            </Slider>
+                        </div>
+                    </div>
                     : null
                 }
             </div>

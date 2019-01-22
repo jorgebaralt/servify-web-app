@@ -69,6 +69,11 @@
     }
 }
 
+.DraggableItem {
+    max-width: 92px !important;
+    max-height: 69px !important;
+}
+
 .Instructions {
     display: flex;
     flex-flow: row;

@@ -78,12 +78,10 @@ class ServicesId extends Component {
     }
     
     componentDidMount () {
-        console.log('this.state and props', this.props, this.state)
         const serviceId = this.props.match.params.id;
         axios.get('/getServices', { params: { id: serviceId } })
             .then( response => {
                 const data = response.data[0];
-                console.log(data)
                 // Error handling in case there's an empty response
                 if (!data) { 
                     return this.setState({
@@ -92,7 +90,6 @@ class ServicesId extends Component {
                     });
                 }
                 const images = setImagesArray(data.imagesInfo);
-                console.log(images)
                 this.setState( () => {
                     return {
                         loading: false,
@@ -159,7 +156,6 @@ class ServicesId extends Component {
     }
 
     render () {
-        console.log(this.state)
         const service = (
             <>
                 <div className={classes.Container}>

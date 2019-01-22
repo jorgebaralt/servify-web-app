@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// Parsing servify images array
+import { setImagesArray } from '../../../../../shared/imagesHandler';
 // CSS
 import classes from '../../../../Services/ServicesId/ServicesId.module.css';
 // JSX
@@ -28,8 +30,7 @@ class Preview extends Component {
                     <div className={classes.Gallery}>
                         <Gallery>
                             <PhotosCarousel
-                                fadeTimeout={0}
-                                images={this.props.images.length > 0 ? this.props.images : [defaultImage]} />
+                                images={this.props.images.length > 0 ? setImagesArray(this.props.images) : [defaultImage]} />
                         </Gallery>
                     </div>
                     <div className={classes.Description}>

@@ -177,11 +177,9 @@ class PublicationsId extends Component {
     updateData = async (updatedService, fn) => {
         try {
             const serviceId = await this.props.match.params.id;
-            const response = await axios.post('/updateService', { serviceId: serviceId, updatedService: updatedService });
+            const response = await axios.put('/updateService', { serviceId: serviceId, updatedService: updatedService });
             await this.handleData(response.data);
-            console.log('fn', fn)
             if (fn) {
-                console.log('inside fn if block')
                 await fn();
             }
         } catch (error) {
@@ -244,7 +242,6 @@ class PublicationsId extends Component {
     }
 
     render() {
-        console.log(this.state)
         let tabsClasses = [classes.TabsContainer, classes.Edit];
         if (!this.state.bIsEditing) {
             tabsClasses.push(classes.Preview);

@@ -16,8 +16,15 @@
     z-index: 5;
 }
 
+@media (max-width: 744px) {
+    .Submit button {
+        height: 46.5px;
+        font-size: 13px;
+    }
+}
+
 .TabsWrapper {
-    flex: 0 0 50%;
+    flex: 0 0 40%;
     height: 100%;
 }
 

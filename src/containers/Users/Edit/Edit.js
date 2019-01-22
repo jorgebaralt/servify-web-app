@@ -20,7 +20,6 @@ import InputImage from '../../../components/UI/Input/InputImage/InputImage';
 class Edit extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
         // TODO remove placeholder
         const listImages = [];
         if (isArray(props.userDetails.photoURL)) {
@@ -150,7 +149,7 @@ class Edit extends Component {
                         })}
                         {console.log(this.state.images[0].content)}
                         { this.state.images[0].content ? 
-                            <EditImages title direction='vertical' updateItems={this.updateImages} items={this.state.images} />
+                            <EditImages title direction='vertical' updateImages={this.updateImages} images={this.state.images} />
                             : null}
                         <Separator />
                         <InputImage onChange={this.inputImageChangeHandler} onSubmit={this.onSubmitHandler} />
