@@ -147,7 +147,8 @@ class Publish extends Component {
                 <Slider progressBar fadeIn disableNav buttons={buttons}>
                     {/* Category */}
                     <Slide>
-                        <StepOne data={this.state.steps['1'].data} activeStep={activeStep} stepKey={1} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
+                        <StepOne data={this.state.steps['1'].data} 
+                            activeStep={activeStep} stepKey={1} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>
                     {/* Basic Information */}
                     <Slide>
@@ -171,11 +172,17 @@ class Publish extends Component {
                     </Slide>
                     {/* The Map */}
                     <Slide>
-                        <StepSeven data={this.state.steps['6'].data} activeStep={activeStep} stepKey={7} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
+                        <StepSeven 
+                            bIsDelivery={this.state.steps['5'].data.option} 
+                            data={this.state.steps['6'].data} 
+                            activeStep={activeStep} stepKey={7} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>
                     {/* Posting service data happens on step 8 */}
                     <Slide>
-                        <StepEight data={this.state.steps} dataIsValid={this.state.dataIsValid} activeStep={activeStep} stepKey={7} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
+                        <StepEight 
+                            data={this.state.steps} 
+                            dataIsValid={this.state.dataIsValid} 
+                            activeStep={activeStep} stepKey={8} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>
                 </Slider>
             </div>

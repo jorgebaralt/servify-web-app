@@ -1,14 +1,11 @@
 import React, { PureComponent } from 'react';
-import axios from 'axios';
 // Logic
-import isString from '../../../../shared/isString';
-import isObject from '../../../../shared/isObject';
 import { parseLocationData } from '../../../../shared/parseLocationData';
 // CSS
 import classes from '../../Publish.module.css';
 // JSX
 import Separator from '../../../../components/UI/Separator/Separator';
-import Map, { setMapboxAccessToken, setInitialMapboxPosition, setAddress, defaultAddress } from '../../../../components/UI/Map/Map';
+import Map, { setMapboxAccessToken, setAddress } from '../../../../components/UI/Map/Map';
 import Input from '../../../../components/UI/Input/Input';
 import InputSlider from '../../../../components/UI/Input/InputSlider/InputSlider';
 
@@ -102,7 +99,7 @@ class StepFive extends PureComponent {
         this.debouncedSearch(updatedFormElement.value);
     }
 
-    componentDidUpdate = () => {
+    componentDidUpdate = (prevProps) => {
         const data = {};
         for (let key in this.state.controls) {
             data[key] = this.state.controls[key].value;
@@ -120,6 +117,26 @@ class StepFive extends PureComponent {
             formIsValid = false;
         }
         this.props.updateData(this.props.stepKey, data, formIsValid);
+
+        console.log('this.props', this.props);
+        /**
+         * IF the Publish.js container is not on step 7 AND if there is a valid address, 
+         * then IF there is no geodata, OR else if the previous props parsed location 
+         * data is NOT equal to current props location data, then debounce search the 
+         * address to obtain a geoData. 
+         * This is done so that when the user reaches this step, the map will already 
+         * have searched a location. The user will only have to confirm it.
+         */
+        if (this.props.activeStep !== this.props.stepKey) {
+            const address = parseLocationData(this.props.data);
+            if (address) {
+                if (!this.state.map.geoData) {
+                    this.debouncedSearch(parseLocationData(this.props.data));
+                } else if (parseLocationData(prevProps.data) !== parseLocationData(this.props.data)) {
+                    this.debouncedSearch(parseLocationData(this.props.data));
+                }
+            }
+        }
     }
 
     render () {
@@ -161,12 +178,16 @@ class StepFive extends PureComponent {
                                     valueType={input[1].valueType} />
                             );
                         })}
-                        <InputSlider onChange={this.inputSliderHandler} 
-                            header='Distance' 
-                            value={this.state.map.radiusInMiles}
-                            maxValue={this.state.map.maxRadius} 
-                            valueType='miles (approx)' />
-                        <Map height='300px' map={this.state.map} />
+                        {/* If there is no delivery (meaning, only physical store), there is no need for a slider nor circle on Map. */}
+                        {this.props.bIsDelivery ? 
+                            <InputSlider onChange={this.inputSliderHandler} 
+                                header='Distance' 
+                                value={this.state.map.radiusInMiles}
+                                maxValue={this.state.map.maxRadius} 
+                                valueType='miles (approx)' />
+                            : null
+                        }
+                        <Map circle={this.props.bIsDelivery ? true : null} height='300px' map={this.state.map} />
                     </form>
                 </div>
             </div>

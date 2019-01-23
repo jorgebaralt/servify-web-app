@@ -106,7 +106,7 @@ const map = (props) => {
             flyToOptions={flyToSettings}>
             {props.map.geoData ?
                 (
-                props.map.geoData.features.length ?
+                props.map.geoData.features.length && props.circle ?
                     <Layer
                         type="circle" 
                         id="marker" 

@@ -8,8 +8,6 @@ import logo from '../../../../assets/images/servify-logos/yellowborder-nobg.png'
 // JSX
 import Input from '../../../../components/UI/Input/Input';
 import ImageFadeIn from '../../../../components/UI/ImageFadeIn/ImageFadeIn';
-import { perspectiveFromFieldOfView } from 'gl-matrix/src/gl-matrix/mat4';
-
 
 class StepOne extends PureComponent {
     state = {

@@ -152,7 +152,7 @@ const renderNavigationItems = (props) => {
 					</NavLink>
 					<Separator />
 					<NavigationItem {...props} link="/publish/overview" color="white">
-						Publishing a service
+						Publish a service
 					</NavigationItem>
 					<NavigationItem {...props} link="/services" color="white">
 						Services
