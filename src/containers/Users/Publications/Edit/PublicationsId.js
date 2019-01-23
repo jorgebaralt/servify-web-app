@@ -43,6 +43,7 @@ class PublicationsId extends Component {
         title: null,
         infoPoints: null,
         infoSections: null,
+        service: null,
         address: defaultAddress,
         map: {
             initialPosition: null,

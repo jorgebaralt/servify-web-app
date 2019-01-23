@@ -6,6 +6,7 @@ import classes from './Slider.module.css';
 import SlideContainer from './SlideContainer/SlideContainer';
 import SliderButtons from './SliderButtons/SliderButtons';
 import SliderNav from './SliderNav/SliderNav';
+import SliderProgress from './SliderProgress/SliderProgress';
 
 class Slider extends Component {
     constructor(props) {
@@ -165,6 +166,11 @@ class Slider extends Component {
                         activeSlide={this.state.activeSlide}
                         slides={Object.keys(this.props.children)} 
                         onClick={this.onTranslateHandler} />}
+                {!this.props.progressBar ? 
+                    null :
+                    <SliderProgress
+                        totalSlides={this.props.children.length}
+                        activeSlide={this.state.activeSlide} />}
             </div>
         );
     }

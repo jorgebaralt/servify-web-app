@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import axios from 'axios';
+// Logic
 import isString from '../../../../shared/isString';
 import isObject from '../../../../shared/isObject';
+import { parseLocationData } from '../../../../shared/parseLocationData';
 // CSS
 import classes from '../../Publish.module.css';
 // JSX
@@ -24,20 +26,20 @@ class StepFive extends PureComponent {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    autoComplete: 'address',
+                    autoComplete: 'new-password',
                     placeholder: 'Service address',
                     autoCorrect:"off",
                     autoCapitalize:"off",
                     spellCheck:"false"
                 },
-                value: '',
+                value: parseLocationData(this.props.data),
                 valueType: 'address',
                 validation: {
                     required: true,
                 },
                 valid: false,
                 touched: false,
-                style: {marginTop: '22px'}
+                style: {marginTop: '28px'}
             }
         },
         map: {
@@ -47,28 +49,6 @@ class StepFive extends PureComponent {
             maxRadius: 60 // For the input slider
         },
         formIsValid: false
-    }
-
-    setInitialPosition = (position) => {
-        let address;
-        if (isObject(position)) {
-            address = [position.data.city, position.data.postal, position.data.region, position.data.country].join(' ');
-        } else if (isString(position)) { // checks if it's a string
-            address = position;
-        }
-        else {
-            address = defaultAddress;
-        }
-        setInitialMapboxPosition(address, (nextMapState) => {
-            this.setState( (prevState) => {
-                return {
-                    map: {
-                        ...prevState.map,
-                        ...nextMapState
-                    }
-                }
-            })
-        });
     }
 
     // Mapbox coordinate update based on input's value field
@@ -122,14 +102,6 @@ class StepFive extends PureComponent {
         this.debouncedSearch(updatedFormElement.value);
     }
 
-    componentDidMount () {
-        axios.get('https://ipinfo.io').then(
-            (response) => this.setInitialPosition(response)
-        ).catch(
-            this.setInitialPosition()
-        );
-    }
-
     componentDidUpdate = () => {
         const data = {};
         for (let key in this.state.controls) {
@@ -140,7 +112,13 @@ class StepFive extends PureComponent {
             data.coordinates = this.state.map.geoData.features[0];
         }
         data.distance = this.state.map.radiusInMiles;
-        const formIsValid = this.state.formIsValid;
+        // Form is valid only if there is geodata stored.
+        let formIsValid;
+        if (this.state.map.geoData) {
+            formIsValid = true;
+        } else {
+            formIsValid = false;
+        }
         this.props.updateData(this.props.stepKey, data, formIsValid);
     }
 
@@ -149,7 +127,7 @@ class StepFive extends PureComponent {
         return (
             <div style={{backgroundColor: 'lightorange'}} className={classes.Container}>
                 <div className={classes.FormWrapper}>
-                    <div className={classes.Step}><span>S</span>tep 5</div>
+                    <div className={classes.Step}><span>S</span>tep 7: The Map</div>
                     <h2>
                         Finally we need to write down your address. This is to let customers know where you are located.
                         Type your address into the field and set the distance you're able to cover, then wait for the map 
@@ -179,7 +157,7 @@ class StepFive extends PureComponent {
                                     invalid={!input[1].valid}
                                     shouldValidate={input[1].validation}
                                     touched={input[1].touched}
-                                    value={input[1].value} 
+                                    value={input[1].value === '' ? parseLocationData(this.props.data) : input[1].value} 
                                     valueType={input[1].valueType} />
                             );
                         })}

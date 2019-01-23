@@ -170,6 +170,11 @@ class SignUpModal extends PureComponent {
         });
     }
     
+    onSubmitHandler = (event) => {
+        event.preventDefault();
+        this.props.onSignUpHandler(this.state.controls.email.value, this.state.controls.password.value, this.state.bRememberMe);
+    }
+    
     setLoading = () => {
         this.setState({
             loading: false

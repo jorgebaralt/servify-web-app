@@ -46,7 +46,7 @@ class StepFour extends PureComponent {
         return (
             <div className={classes.Container}>
                 <div className={classes.FormWrapper}>
-                    <div className={classes.Step}><span>S</span>tep 4 (Optional)</div>
+                    <div className={classes.Step}><span>S</span>tep 4: Images (Optional)</div>
                     <h2>
                         Provide us some images about your services! You can always update them later,
                         this is also optional and not a necessary step. Click <strong>next</strong> if 

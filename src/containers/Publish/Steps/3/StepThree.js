@@ -4,18 +4,18 @@ import classes from '../../Publish.module.css';
 // Image
 import logo from '../../../../assets/images/servify-logos/yellowborder-nobg.png';
 // JSX
+import Separator from '../../../../components/UI/Separator/Separator';
 import Input from '../../../../components/UI/Input/Input';
 import ImageFadeIn from '../../../../components/UI/ImageFadeIn/ImageFadeIn';
 
-class StepOne extends PureComponent {
+class StepThree extends PureComponent {
     state = {
         controls: {
-            category: {
-                elementType: 'select',
+            providerDescription: {
+                elementType: 'textarea',
                 elementConfig: {
-                    label: 'Choose a category type',
-                    placeholder: 'Select a category',
-                    options: this.props.categoriesDatalist
+                    type: 'text',
+                    placeholder: 'Information about the provider',
                 },
                 value: '',
                 valueType: 'text',
@@ -24,19 +24,34 @@ class StepOne extends PureComponent {
                 },
                 valid: false,
                 touched: false,
+                style: {marginTop: '28px'}
             },
+            serviceDescription: {
+                elementType: 'textarea',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Information about the service',
+                },
+                value: '',
+                valueType: 'text',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                touched: false
+            }
         },
         formIsValid: false,
     }
 
-    inputSelectChangeHandler = (value, inputIdentifier) => {
+    inputChangeHandler = (event, inputIdentifier) => {
         const updatedOrderForm = {
             ...this.state.controls,
         };
         const updatedFormElement = {
             ...updatedOrderForm[inputIdentifier]
         };
-        updatedFormElement.value = value;
+        updatedFormElement.value = event.target.value;
         updatedFormElement.valid = this.props.checkValidity(updatedFormElement.value, updatedFormElement.validation);
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
@@ -53,6 +68,9 @@ class StepOne extends PureComponent {
     componentDidUpdate = () => {
         const data = {};
         for (let key in this.state.controls) {
+            if (!this.state.controls[key].value) { // Pointer protection
+                continue;
+            }
             data[key] = this.state.controls[key].value;
         }
         const formIsValid = this.state.formIsValid;
@@ -62,17 +80,15 @@ class StepOne extends PureComponent {
     render () {
         const formElementsArray = Object.entries(this.state.controls);
         return (
-            <div className={classes.Container}>
+            <div style={{backgroundColor: 'lightorange'}} className={classes.Container}>
                 <div className={classes.FormWrapper}>
                     <div className={classes.FormContainer}>
-                        <h1>
-                            Hello there! We'll need some information before we can publish your service,
-                            just follow these steps and you'll be good to go.
-                        </h1>
-                        <div className={classes.Step}><span>S</span>tep 1</div>
+                        <div className={classes.Step}><span>S</span>tep 3: Details</div>
                         <h2>
-                            What type of service do you provide?
+                            Tell us about you and the service, this information will also be displayed on your 
+                            service page, so make sure the information you provide is accurate and appropriate.
                         </h2>
+                        <Separator />
                         <form style={{userSelect: 'none'}} onSubmit={this.onSubmitHandler}>
                             {formElementsArray.map( (input) => {
                                 return (
@@ -81,7 +97,7 @@ class StepOne extends PureComponent {
                                         key={input[0]} 
                                         elementType={input[1].elementType} 
                                         elementConfig={this.state.controls[input[1].valueType] ? this.state.controls[input[1].valueType].elementConfig : input[1].elementConfig} // Referenced to state to mutate
-                                        changed={(event) => this.inputSelectChangeHandler(event, input[0])}
+                                        changed={(event) => this.inputChangeHandler(event, input[0])}
                                         invalid={!input[1].valid}
                                         shouldValidate={input[1].validation}
                                         touched={input[1].touched}
@@ -102,4 +118,4 @@ class StepOne extends PureComponent {
     }
 }
 
-export default StepOne;
+export default StepThree;

@@ -15,7 +15,7 @@ class StepTwo extends PureComponent {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    autoComplete: 'company name',
+                    autoComplete: 'new-password',
                     placeholder: 'Company name',
                     autoCorrect:"off",
                     autoCapitalize:"off",
@@ -28,14 +28,14 @@ class StepTwo extends PureComponent {
                 },
                 valid: false,
                 touched: false,
-                style: {marginTop: '22px'}
+                style: {marginTop: '28px'}
             },
             
             companyWebsite: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    autoComplete: 'company name',
+                    autoComplete: 'new-password',
                     placeholder: 'Company website (optional)',
                     autoCorrect:"off",
                     autoCapitalize:"off",
@@ -46,14 +46,14 @@ class StepTwo extends PureComponent {
                 validation: {
                     required: false,
                 },
-                valid: false,
+                valid: true,
                 touched: false
             },
             serviceTitle: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    autoComplete: 'service name',
+                    autoComplete: 'new-password',
                     placeholder: 'Service title',
                     autoCorrect:"off",
                     autoCapitalize:"off",
@@ -71,7 +71,7 @@ class StepTwo extends PureComponent {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    autoComplete: 'phone number',
+                    autoComplete: 'new-password',
                     placeholder: 'Contact phone',
                     autoCorrect:"off",
                     autoCapitalize:"off",
@@ -82,25 +82,6 @@ class StepTwo extends PureComponent {
                 validation: {
                     required: true,
                     number: true
-                },
-                valid: false,
-                touched: false
-            },
-            contactEmail: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'text',
-                    autoComplete: 'email',
-                    placeholder: 'Email',
-                    autoCorrect:"off",
-                    autoCapitalize:"off",
-                    spellCheck:"false"
-                },
-                value: '',
-                valueType: 'email',
-                validation: {
-                    required: true,
-                    email: true
                 },
                 valid: false,
                 touched: false
@@ -133,6 +114,9 @@ class StepTwo extends PureComponent {
     componentDidUpdate = () => {
         const data = {};
         for (let key in this.state.controls) {
+            if (!this.state.controls[key].value) { // Pointer protection
+                continue;
+            }
             data[key] = this.state.controls[key].value;
         }
         const formIsValid = this.state.formIsValid;
@@ -145,7 +129,7 @@ class StepTwo extends PureComponent {
             <div style={{backgroundColor: 'lightorange'}} className={classes.Container}>
                 <div className={classes.FormWrapper}>
                     <div className={classes.FormContainer}>
-                        <div className={classes.Step}><span>S</span>tep 2</div>
+                        <div className={classes.Step}><span>S</span>tep 2: Basic Information</div>
                         <h2>
                             We need to know a bit about your service. Let's begin by asking you
                             about the name of your service and the contact information.

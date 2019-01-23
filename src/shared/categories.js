@@ -64,7 +64,6 @@ const categories = [
 				dbReference: 'other',
 			},
 		],
-		icon: icons.homeServices
 	},
 	{
 		id: 1,

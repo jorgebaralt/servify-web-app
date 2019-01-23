@@ -1,0 +1,28 @@
+.Wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: inherit;
+    box-sizing: border-box;
+}
+
+.Container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: #EAEAEA;
+}
+
+.Bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+    background: #FF7043;
+    transition: width ease-out 1s;
+}
