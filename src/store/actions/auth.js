@@ -51,12 +51,13 @@ export const authCreator = {
             type: actionTypes.AUTH_INIT_SAGA
         }
     },
-    authSignUpInit: (email, password, bRememberMe) => {
+    authSignUpInit: (email, password, bRememberMe, displayName) => {
         return {
             type: actionTypes.AUTH_INIT_SIGN_UP,
             email: email,
             password: password,
-            bRememberMe: bRememberMe
+            bRememberMe: bRememberMe,
+            displayName: displayName
         }
     },
     authSignInInit: (email, password, bRememberMe) => {

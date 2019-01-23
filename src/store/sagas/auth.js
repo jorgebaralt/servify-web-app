@@ -49,8 +49,13 @@ export const authSagas = {
         try {
             yield firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
             const response = yield firebase.auth().createUserWithEmailAndPassword(action.email, action.password);
+            // Saving user display name (e.g.: Robert Molina, first name - last name) and defining an editable user object
+            const displayName = action.displayName;
+            yield response.user.updateProfile({ displayName: displayName });
+            const user = yield { ...response.user };
+            user.displayName = displayName;
             // Saving user to the database
-            yield put(authCreator.authSaveUserToDatabaseInit(response.user, false, true));
+            yield put(authCreator.authSaveUserToDatabaseInit(user, false, true));
             if (!action.bRememberMe) {
                 /**
                  * If the checkbox is not checked, then create a new date token to
@@ -228,7 +233,7 @@ export const authSagas = {
         const settings = {timestampsInSnapshots: true};
         firestore.settings(settings);
         // Creating user reference to the database.
-        const userRef = yield firestore.collection('users').doc(user.email);
+        const userRef = yield firestore.collection('users').doc(user.uid);
         const userData = yield {
             displayName: user.displayName,
             email: user.email,

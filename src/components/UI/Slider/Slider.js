@@ -150,6 +150,7 @@ class Slider extends Component {
         if (this.props.fadeIn) {
             wrapperClasses.push(classes.FadeIn);
         }
+        console.log('slider this.props.children', this.props.disableNav || this.props.children.length < 0)
         return (
             <div ref={this.mySlider} className={wrapperClasses.join(' ')} style={this.props.style}>
                 <ReactResizeDetector handleWidth handleHeight onResize={this.setupWidth} />
@@ -160,12 +161,14 @@ class Slider extends Component {
                         totalSlides={this.props.children.length}
                         activeSlide={this.state.activeSlide} 
                         onClick={this.onTranslateHandler} />}
-                {this.props.disableNav || this.props.children.length > 0 ? 
+                {this.props.disableNav || !this.props.children.length ? 
                     null :
-                    <SliderNav
-                        activeSlide={this.state.activeSlide}
-                        slides={Object.keys(this.props.children)} 
-                        onClick={this.onTranslateHandler} />}
+                    this.props.children.length > 0 ?
+                        <SliderNav
+                            activeSlide={this.state.activeSlide}
+                            slides={Object.keys(this.props.children)} 
+                            onClick={this.onTranslateHandler} />
+                        : null}
                 {!this.props.progressBar ? 
                     null :
                     <SliderProgress

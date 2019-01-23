@@ -18,7 +18,6 @@ class UsersId extends Component {
     }
 
     render () {
-        console.log(this.props.userDetails)
         const creationDate = (new Date(Number(this.props.userDetails.metadata.a))).toLocaleDateString();
         return (
             <>

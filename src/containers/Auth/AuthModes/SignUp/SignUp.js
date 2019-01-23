@@ -172,7 +172,8 @@ class SignUpModal extends PureComponent {
     
     onSubmitHandler = (event) => {
         event.preventDefault();
-        this.props.onSignUpHandler(this.state.controls.email.value, this.state.controls.password.value, this.state.bRememberMe);
+        const displayName = [this.state.controls.firstName.value, this.state.controls.lastName.value].join(' ');
+        this.props.onSignUpHandler(this.state.controls.email.value, this.state.controls.password.value, this.state.bRememberMe, displayName);
     }
     
     setLoading = () => {
@@ -256,7 +257,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSignUpHandler: (email, password, bRememberMe) => dispatch(authCreator.authSignUpInit(email, password, bRememberMe)),
+        onSignUpHandler: (email, password, bRememberMe, displayName) => dispatch(authCreator.authSignUpInit(email, password, bRememberMe, displayName)),
 		onFacebookSignInHandler: (bRememberMe) => dispatch(authCreator.authFacebook.signUpInit(bRememberMe)),
 		onGoogleSignInHandler: (bRememberMe) => dispatch(authCreator.authGoogle.signUpInit(bRememberMe)),
 		resetErrorMessage: () => dispatch(authActions.authResetErrorMessage())
