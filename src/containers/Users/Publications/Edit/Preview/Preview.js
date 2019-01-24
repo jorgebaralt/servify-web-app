@@ -6,7 +6,6 @@ import classes from '../../../../Services/ServicesId/ServicesId.module.css';
 // JSX
 import Title from '../../../../../components/Services/Title/Title';
 import Gallery from '../../../../../components/Services/Gallery/Gallery';
-import Reviews from '../../../../../components/Services/Reviews/Reviews';
 import InfoPoint from '../../../../../components/Services/InfoPoint/InfoPoint';
 import InfoSection from '../../../../../components/Services/InfoSection/InfoSection';
 import SocialButtons from '../../../../../components/Services/SocialButtons/SocialButtons';
@@ -98,7 +97,6 @@ class Preview extends Component {
                     <Map circle className={classes.MapWrapper} map={this.props.map} />
                 </div>
                 <Separator />
-                <Reviews ratings={this.props.rating} />
             </>
         );
     }

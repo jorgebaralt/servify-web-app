@@ -8,6 +8,7 @@ import { servicesCreator } from '../../../store/actions/';
 // Shared
 import isString from '../../../shared/isString';
 import isObject from '../../../shared/isObject';
+import { parseLocationData } from '../../../shared/parseLocationData';
 import { setImagesArray } from '../../../shared/imagesHandler';
 // CSS
 import classes from './ServicesId.module.css';
@@ -40,6 +41,13 @@ class ServicesId extends Component {
         setMapboxAccessToken();
         props.servicesInit();
         this.state = {
+            service: {},
+            contact: {},
+            ratings: {},
+            locationData: {},
+            address: null,
+            map: {},
+            servicesReviewsParams: null,
             loading: true
         }
     }
@@ -79,9 +87,9 @@ class ServicesId extends Component {
     
     componentDidMount () {
         const serviceId = this.props.match.params.id;
-        axios.get('/getServices', { params: { id: serviceId } })
+        axios.get('/service', { params: { serviceId: serviceId } })
             .then( response => {
-                const data = response.data[0];
+                const data = response.data;
                 // Error handling in case there's an empty response
                 if (!data) { 
                     return this.setState({
@@ -97,9 +105,12 @@ class ServicesId extends Component {
                         service: {
                             category: data.category.replace('_', ' '),
                             title: data.title,
+                            provider: data.provider,
                             description: data.description,
+                            providerDescription: data.providerDescription,
                             displayName: data.displayName,
                             address: data.locationData,
+                            website: data.website,
                             id: data.id,
                         },
                         contact: {
@@ -119,25 +130,13 @@ class ServicesId extends Component {
                             }
                         },
                         locationData: {
-                            city: data.locationData.city,
-                            country: data.locationData.country,
-                            isoCountryCode: data.locationData.isoCountryCode,
+                            street: data.locationData.street,
                             name: data.locationData.name,
-                            postalCode: data.locationData.postalCode,
+                            city: data.locationData.city,
                             region: data.locationData.region,
-                            street: data.locationData.street
+                            postalCode: data.locationData.postalCode
                         },
-                        address: [
-                            data.locationData.street,
-                            data.locationData.street ? ', ' : null,
-                            data.locationData.name, 
-                            data.locationData.name ? '. ' : null,
-                            data.locationData.city, 
-                            data.locationData.city ? ', ' : null,
-                            data.locationData.region, 
-                            data.locationData.region ? ' ' : null,
-                            data.locationData.postalCode,
-                            ].join(''),
+                        address: parseLocationData(data.locationData),
                         map: {
                             initialPosition: [data.location._longitude, data.location._latitude],
                             radiusInMiles: data.miles // Initial value
@@ -174,8 +173,8 @@ class ServicesId extends Component {
                         </div>
                         <SocialButtons />
                         <InfoPoint symbol={<SVG svg='location-pin' />} location={this.state.locationData ? this.state.locationData.region : null}/>
+                        {this.state.service.website ? <InfoPoint symbol={<SVG svg='location-pin' />} website='bonpreufoods.com'/> : null}
                         {/* 
-                            <InfoPoint symbol={<SVG svg='location-pin' />} website='bonpreufoods.com'/>
                             <InfoPoint symbol={<SVG svg='chat' />} info='Services offered in English and Spanish'/> 
                         */}
                         <Separator />
@@ -188,13 +187,13 @@ class ServicesId extends Component {
                             </div>
                         </InfoSection>
                         <Separator />
-                        {this.state.provider ?
+                        {this.state.service.provider && this.state.service.providerDescription ?
                             <>
                                 <InfoSection
-                                    title={this.state.provider.title}
+                                    title={this.state.service.provider}
                                     header='About the provider'>
                                     <div>
-                                        <p>{this.state.provider.description}</p>
+                                        <p>{this.state.service.providerDescription}</p>
                                     </div>
                                 </InfoSection>
                                 <Separator />
@@ -210,7 +209,7 @@ class ServicesId extends Component {
                     <Map className={classes.MapWrapper} map={this.state.map} circle />
                 </div>
                 <Separator />
-                {this.state.ratings ? <Reviews ratings={this.state.ratings.service} servicesReviewsParams={this.state.servicesReviewsParams} /> : null}
+                {this.state.ratings ? <Reviews ratings={this.state.ratings.service} id={{ serviceId: this.state.service.id}} /> : null}
                 {this.props.services.nearServices ? 
                     <>
                         <Separator />

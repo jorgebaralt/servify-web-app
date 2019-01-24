@@ -273,7 +273,6 @@ class PublicationsId extends Component {
     }
 
     render() {
-        console.log(this.state)
         let tabsClasses = [classes.TabsContainer, classes.Edit];
         if (!this.state.bIsEditing) {
             tabsClasses.push(classes.Preview);

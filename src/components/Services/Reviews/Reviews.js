@@ -14,7 +14,7 @@ class Reviews extends Component {
     }
 
     componentDidMount() {
-        axios.get('./getRatings', { params: this.props.servicesReviewsParams })
+        axios.get('./review', { params: this.props.id })
             .then( response => {
                 const reviews = response.data;
                 if (reviews.length) {

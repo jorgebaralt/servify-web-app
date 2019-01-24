@@ -11,14 +11,14 @@ const defaultImgUrl = 'https://storage.googleapis.com/servify-716c6.appspot.com/
 
 const publication = (props) => {
     if (!props.href) { return null; }
-    const image = setImagesArray(props.image);
+    const image = props.image ? setImagesArray(props.image) : [];
     return (
         // Total rating amount, defaults to 5
         <div className={classes.Service}>
             <div className={classes.Wrapper}>
                 <div className={classes.ThumbnailWrapper}>
                     <div className={classes.ThumbnailContainer}>
-                        <ImageFadeIn draggable="false" className={classes.Thumbnail} src={image ? image[0] : defaultImgUrl} />
+                        <ImageFadeIn draggable="false" className={classes.Thumbnail} src={image.length ? image[0] : defaultImgUrl} />
                     </div>
                 </div>
             </div>
