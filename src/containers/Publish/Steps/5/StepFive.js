@@ -4,23 +4,33 @@ import classes from '../../Publish.module.css';
 // Image
 import logo from '../../../../assets/images/servify-logos/yellowborder-nobg.png';
 // JSX
+import LoadingPage from '../../../../components/UI/LoadingPage/LoadingPage';
 import Input from '../../../../components/UI/Input/Input';
 import ImageFadeIn from '../../../../components/UI/ImageFadeIn/ImageFadeIn';
 
 const datalist = [
     {
-        value: 'false',
+        value: {
+            bool: false,
+            display: 'Physical store only.',
+        },
         displayValue: 'Physical store only.'
     },
     {
-        value: 'true',
+        value: {
+            bool: true,
+            display: 'Physical store and deliveries.',
+        },
         displayValue: 'Physical store and deliveries.'
     },
     {
-        value: 'true',
+        value: {
+            bool: true,
+            display: 'Deliveries only.',
+        },
         displayValue: 'Deliveries only.'
     }
-]
+];
 
 class StepOne extends PureComponent {
     state = {
@@ -52,7 +62,7 @@ class StepOne extends PureComponent {
             ...updatedOrderForm[inputIdentifier]
         };
         updatedFormElement.value = value;
-        updatedFormElement.valid = this.props.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.valid = this.props.checkValidity(updatedFormElement.value.display, updatedFormElement.validation);
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
         let formIsValid = true;
@@ -72,16 +82,21 @@ class StepOne extends PureComponent {
             if (!this.state.controls[key].value) { // Pointer protection
                 continue;
             }
-            data[key] = JSON.parse((this.state.controls[key].value).toLocaleLowerCase());;
+            // data[key] = JSON.parse((this.state.controls[key].value).toLocaleLowerCase());
+            data[key] = this.state.controls[key].value;
         }
         const formIsValid = this.state.formIsValid;
         this.props.updateData(this.props.stepKey, data, formIsValid);
     }
 
     render () {
+        const containerClasses = [classes.Container];
+        if (this.props.activeStep !== this.props.stepKey) {
+            containerClasses.push(classes.Hidden);
+        }
         const formElementsArray = Object.entries(this.state.controls);
         return (
-            <div className={classes.Container}>
+            <div className={containerClasses.join(' ')}>
                 <div className={classes.FormWrapper}>
                     <div className={classes.FormContainer}>
                         <div className={classes.Step}><span>S</span>tep 5: Logistic</div>

@@ -50,6 +50,7 @@ class Modal extends Component {
     }
 
     render() {
+        const noCancel = this.props.alwaysShow;
         return (
             <div className={this.props.show ? classes.BodyOverlay : classes.Null}> 
                 <div className={this.props.show ? classes.ModalWrapper : null}>
@@ -64,15 +65,19 @@ class Modal extends Component {
                                 opacity: this.props.show ? '1' : '0',
                             }}
                             className={classes.Modal}>
-                            <div className={classes.CloseButtonWrapper}>
-                                <button 
-                                    type="button"
-                                    onClick={this.props.toggleModal}
-                                    className={classes.CancelButton} 
-                                    aria-busy="false" >
-                                    <SVG svg='cancel'/>
-                                </button>
-                            </div>
+                            {noCancel ? 
+                                null
+                                : (
+                                    <div className={classes.CloseButtonWrapper}>
+                                        <button 
+                                            type="button"
+                                            onClick={this.props.toggleModal}
+                                            className={classes.CancelButton} 
+                                            aria-busy="false" >
+                                            <SVG svg='cancel'/>
+                                        </button>
+                                    </div>
+                                )}
                             <section>
                                 {this.props.children}
                             </section>

@@ -103,6 +103,7 @@ class Publish extends Component {
     }
 
     onPrevHandler = () => {
+        window.scrollTo(0,0); // Scrolls to the top before sliding
         setTimeout( () => { // Delay to wait for slider transition
             this.setState( (prevState) => {
                 const step = Clamp(prevState.step -1, 1, 9);
@@ -113,10 +114,11 @@ class Publish extends Component {
                     }
                 }
             });
-        }, 100);
+        }, 250);
     }
 
     onNextHandler = () => {
+        window.scrollTo(0,0); // Scrolls to the top before sliding
         setTimeout( () => { // Delay to wait for slider transition
             this.setState( (prevState) => {
                 const step = Clamp(prevState.step + 1, 1, Object.keys(this.state.steps).length + 1);
@@ -124,7 +126,7 @@ class Publish extends Component {
                     step: step
                 }
             });
-        }, 100);
+        }, 250);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -134,8 +136,8 @@ class Publish extends Component {
     render() {
         const activeStep = this.state.step;
         const buttons = {
-            prev: this.state.step > 1 ? <Button  style={{marginLeft: 0}} className={classes.Button} type='primary'>Go back</Button> : <></>,
-            next: this.state.step !== 8 ? <Button disabled={!this.state.steps[activeStep].formIsValid} style={this.state.step > 1 ? null : {marginLeft: 0}} className={classes.Button} type='primary'>Next</Button> : <></>,
+            prev: this.state.step > 1 ? <Button tabIndex='-1' style={{marginLeft: 0}} className={classes.Button} type='primary'>Go back</Button> : <></>,
+            next: this.state.step !== 8 ? <Button tabIndex='-1' disabled={!this.state.steps[activeStep].formIsValid} style={this.state.step > 1 ? null : {marginLeft: 0}} className={classes.Button} type='primary'>Next</Button> : <></>,
             onClick: {
                 prev: this.onPrevHandler,
                 next: this.onNextHandler
@@ -168,7 +170,9 @@ class Publish extends Component {
                     </Slide>
                     {/* Service Address */}
                     <Slide>
-                        <StepSix activeStep={activeStep} stepKey={6} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
+                        <StepSix 
+                            bIsDelivery={this.state.steps['5'].data.option} 
+                            activeStep={activeStep} stepKey={6} updateData={this.updateData} checkValidity={checkValidity} categoriesDatalist={categoriesDatalist} />
                     </Slide>
                     {/* The Map */}
                     <Slide>

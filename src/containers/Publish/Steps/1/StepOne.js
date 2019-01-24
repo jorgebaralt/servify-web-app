@@ -141,7 +141,6 @@ class StepOne extends PureComponent {
     }
 
     componentDidUpdate = () => {
-        // if (this.props.bShouldUpdate) { return; }
         const data = {};
         for (let key in this.state.controls) {
             if (!this.state.controls[key]) { continue; } // Pointer protection
@@ -158,9 +157,13 @@ class StepOne extends PureComponent {
     }
 
     render () {
+        const containerClasses = [classes.Container];
+        if (this.props.activeStep !== this.props.stepKey) {
+            containerClasses.push(classes.Hidden);
+        }
         const formElementsArray = Object.entries(this.state.controls);
         return (
-            <div className={classes.Container}>
+            <div className={containerClasses.join(' ')}>
                 <div className={classes.FormWrapper}>
                     <div className={classes.FormContainer}>
                         <h1>

@@ -4,6 +4,7 @@ import classes from '../../Publish.module.css';
 // Image
 import logo from '../../../../assets/images/servify-logos/yellowborder-nobg.png';
 // JSX
+import LoadingPage from '../../../../components/UI/LoadingPage/LoadingPage';
 import Separator from '../../../../components/UI/Separator/Separator';
 import Input from '../../../../components/UI/Input/Input';
 import ImageFadeIn from '../../../../components/UI/ImageFadeIn/ImageFadeIn';
@@ -124,9 +125,13 @@ class StepTwo extends PureComponent {
     }
 
     render () {
+        const containerClasses = [classes.Container];
+        if (this.props.activeStep !== this.props.stepKey) {
+            containerClasses.push(classes.Hidden);
+        }
         const formElementsArray = Object.entries(this.state.controls);
         return (
-            <div style={{backgroundColor: 'lightorange'}} className={classes.Container}>
+            <div className={containerClasses.join(' ')}>
                 <div className={classes.FormWrapper}>
                     <div className={classes.FormContainer}>
                         <div className={classes.Step}><span>S</span>tep 2: Basic Information</div>

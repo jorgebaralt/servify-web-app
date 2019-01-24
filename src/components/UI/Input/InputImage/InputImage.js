@@ -12,7 +12,6 @@ import Button from '../../Button/Button';
 import Spinner from '../../LoadingBounce/LoadingBounce';
 import SVG from '../../../SVG/SVG';
 import ProgressRing from '../../ProgressRing/ProgressRing';
-import Loading from '../../../UI/LoadingDots/LoadingDots';
 import LoadingDots from '../../../UI/LoadingDots/LoadingDots';
 
 const Buttons = (props) => {
@@ -35,7 +34,7 @@ const Buttons = (props) => {
     );
 }
 
-const Images = (props) => {
+export const Images = (props) => {
     return (
         props.images.map((image, i) => {
             props.inputRefs[image.file.name] = React.createRef();
@@ -53,8 +52,19 @@ const Images = (props) => {
                     </div>
                     <img ref={props.inputRefs[image.file.name]} draggable="false" className={classes.Image} src={URL.createObjectURL(image.file)} alt='' />
                 </div>
-            )
+            );
         })
+    );
+}
+
+export const getImagesFromFiles = (files) => {
+    return Array.from(files)
+        .map( (file) => {
+            return {
+                file: file,
+                public_id: [file.name, file.size].join('_')
+            }
+        }
     );
 }
 
@@ -124,14 +134,7 @@ class InputImage extends Component {
             return errormsg.forEach(err => toast.error(err));
         }
 
-        const files = Array.from(e.target.files)
-            .map( (file) => {
-                return {
-                    file: file,
-                    public_id: [file.name, file.size].join('_')
-                }
-            }
-        );
+        const files = getImagesFromFiles(e.target.files);
 
         this.setState({ 
             images: files,

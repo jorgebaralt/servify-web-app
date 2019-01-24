@@ -4,6 +4,7 @@ import { parseLocationData } from '../../../../shared/parseLocationData';
 // CSS
 import classes from '../../Publish.module.css';
 // JSX
+import LoadingPage from '../../../../components/UI/LoadingPage/LoadingPage';
 import Separator from '../../../../components/UI/Separator/Separator';
 import Map, { setMapboxAccessToken, setAddress } from '../../../../components/UI/Map/Map';
 import Input from '../../../../components/UI/Input/Input';
@@ -118,7 +119,6 @@ class StepFive extends PureComponent {
         }
         this.props.updateData(this.props.stepKey, data, formIsValid);
 
-        console.log('this.props', this.props);
         /**
          * IF the Publish.js container is not on step 7 AND if there is a valid address, 
          * then IF there is no geodata, OR else if the previous props parsed location 
@@ -140,15 +140,22 @@ class StepFive extends PureComponent {
     }
 
     render () {
+        const containerClasses = [classes.Container];
+        if (this.props.activeStep !== this.props.stepKey) {
+            containerClasses.push(classes.Hidden);
+        }
         const formElementsArray = Object.entries(this.state.controls);
         return (
-            <div style={{backgroundColor: 'lightorange'}} className={classes.Container}>
+            <div className={containerClasses.join(' ')}>
                 <div className={classes.FormWrapper}>
                     <div className={classes.Step}><span>S</span>tep 7: The Map</div>
                     <h2>
                         Finally we need to write down your address. This is to let customers know where you are located.
-                        Type your address into the field and set the distance you're able to cover, then wait for the map 
-                        to update.
+                        Type your address into the field 
+                        { this.props.bIsDelivery ? 
+                            ` and set the distance you're able to cover, then wait for the map 
+                            to update.`
+                            : '.' }
                     </h2>
                     <Separator />
                     <form style={{userSelect: 'none'}} onSubmit={this.onSubmitHandler}>

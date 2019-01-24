@@ -43,6 +43,7 @@ const button = (props) => {
     return (
         <button
             style={props.style}
+            tabIndex={props.tabIndex}
             className={buttonClass.join(' ')}
             type={props.submit ? 'submit' : 'button'}
             disabled={props.disabled}

@@ -99,6 +99,8 @@ class Slider extends Component {
         }
     }
 
+    // TODO add fade in functionality to the slides and not to the slider wrapper, then remove from Publish.js
+
     render() {
         let PrevButton;
         let NextButton;
@@ -150,7 +152,6 @@ class Slider extends Component {
         if (this.props.fadeIn) {
             wrapperClasses.push(classes.FadeIn);
         }
-        console.log('slider this.props.children', this.props.disableNav || this.props.children.length < 0)
         return (
             <div ref={this.mySlider} className={wrapperClasses.join(' ')} style={this.props.style}>
                 <ReactResizeDetector handleWidth handleHeight onResize={this.setupWidth} />

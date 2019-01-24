@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 // CSS
 import classes from '../../Publish.module.css';
 // JSX
+import LoadingPage from '../../../../components/UI/LoadingPage/LoadingPage';
 import Separator from '../../../../components/UI/Separator/Separator';
 import InputImage from '../../../../components/UI/Input/InputImage/InputImage';
 
@@ -43,8 +44,12 @@ class StepFour extends PureComponent {
     }
 
     render () {
+        const containerClasses = [classes.Container];
+        if (this.props.activeStep !== this.props.stepKey) {
+            containerClasses.push(classes.Hidden);
+        }
         return (
-            <div className={classes.Container}>
+            <div className={containerClasses.join(' ')}>
                 <div className={classes.FormWrapper}>
                     <div className={classes.Step}><span>S</span>tep 4: Images (Optional)</div>
                     <h2>
