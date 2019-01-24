@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 // CSS
 import classes from '../../Publish.module.css';
 // JSX
-import LoadingPage from '../../../../components/UI/LoadingPage/LoadingPage';
 import Separator from '../../../../components/UI/Separator/Separator';
 import InputImage from '../../../../components/UI/Input/InputImage/InputImage';
 

@@ -80,7 +80,7 @@ class StepOne extends PureComponent {
                         if (this.state.controls.subcategory.value && bCategoryIncludesSubcategory) {
                             formIsValid = true;
                             break;
-                        } else if (!bCategoryIncludesSubcategory) {
+                        } else if (!bCategoryIncludesSubcategory && bCategoryIncludesSubcategory) {
                             formIsValid = false;
                             this.setState((prevState) => {
                                 return {

@@ -4,6 +4,11 @@ import classes from './ProgressRing.module.css';
 // JSX
 import SVG from '../../SVG/SVG';
 
+export const average = arr => {
+    if (!arr) { return 0; } // Protection
+    return arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
+};
+
 class ProgressRing extends Component {
     constructor(props) {
         super(props);

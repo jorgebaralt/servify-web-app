@@ -4,7 +4,6 @@ import classes from '../../Publish.module.css';
 // Image
 import logo from '../../../../assets/images/servify-logos/yellowborder-nobg.png';
 // JSX
-import LoadingPage from '../../../../components/UI/LoadingPage/LoadingPage';
 import Input from '../../../../components/UI/Input/Input';
 import ImageFadeIn from '../../../../components/UI/ImageFadeIn/ImageFadeIn';
 
@@ -32,7 +31,7 @@ const datalist = [
     }
 ];
 
-class StepOne extends PureComponent {
+class StepFive extends PureComponent {
     state = {
         controls: {
             option: {
@@ -136,4 +135,4 @@ class StepOne extends PureComponent {
     }
 }
 
-export default StepOne;
+export default StepFive;

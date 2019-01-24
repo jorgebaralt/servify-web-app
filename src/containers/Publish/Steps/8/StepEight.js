@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
-import axios from 'axios';
-// Parse location data and capitalize strings
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
+import axios from '../../../../axios-services';
+// Parse location data, isArray and capitalize strings
 import { parseLocationData } from '../../../../shared/parseLocationData';
 import capitalize from '../../../../shared/capitalize';
 // CSS
@@ -8,7 +10,7 @@ import classes from '../../Publish.module.css';
 // JSX
 import { toast } from 'react-toastify';
 import LoadingBounce from '../../../../components/UI/LoadingBounce/LoadingBounce';
-import ProgressRing from '../../../../components/UI/ProgressRing/ProgressRing';
+import ProgressRing, { average } from '../../../../components/UI/ProgressRing/ProgressRing';
 import Modal from '../../../../components/UI/Modal/Modal';
 import Separator from '../../../../components/UI/Separator/Separator';
 import Button from '../../../../components/UI/Button/Button';
@@ -16,7 +18,7 @@ import Map from '../../../../components/UI/Map/Map';
 import PreviewInformation from '../../../../components/Publish/PreviewInformation/PreviewInformation';
 import { getImagesFromFiles } from '../../../../components/UI/Input/InputImage/InputImage';
 
-class StepFive extends PureComponent {
+class StepEight extends PureComponent {
     state = {
         data: {
             // Step 1: Category
@@ -49,28 +51,127 @@ class StepFive extends PureComponent {
             physicalLocation: null,
             geolocation: null,
         },
-        uploading: true,
-        uploadingImages: false
+        bIsUploading: false,
+        bIsUploadingImages: false
+    }
+
+    /**
+     * Updates and/or sets the upload progress of a respective image.
+     */
+    setUploadProgress = (ref, progress) => {
+        this.setState((prevState) => {
+            return {
+                progressRings: {
+                    ...prevState.progressRings,
+                    [ref]: progress
+                }
+            }
+        });
+    }
+
+    
+    /**
+     * Uploads all the images simultaneously and waits till every image is uploaded 
+     * or there is a reply from the server. Afterwards, if there is an on upload prop
+     * passed on, execute it.
+     */
+    uploadImages = async (files) => {
+        await this.setState({
+            bIsUploadingImages: true
+        });
+        const headers = await {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                "Access-Control-Allow-Origin": "*",
+            }
+        };
+        const imagesInfo = await [];
+        await Promise.all(Object.values(this.myImages).map(async (image) => {
+            const file = image.file;
+            const formData= new FormData();
+            formData.append('image', file, file.name);
+            const response = await axios.post('/images_service', 
+                formData,  
+                { onUploadProgress: progressEvent => {
+                    const progress = (progressEvent.loaded / progressEvent.total * 100);
+                    const ref = file.name;
+                    this.setUploadProgress(ref, progress);
+                }, headers: headers}
+            );
+            if (response.status === 200) {
+                await toast.success(`${file.name} has been uploaded successfully.`);
+                const imageInfo = response.data;
+                imagesInfo.push(imageInfo);
+            } else {
+                toast.error(`Something went wrong when uploading ${file.name}.`);
+            }
+        }));
+        /**
+         * If there is an onUpload prop function, execute it after uploading is done.
+         */
+        const data = await { imagesInfo: imagesInfo };
+        await this.setState({
+            bIsUploadingImages: false
+        });
+        return data;
     }
 
     // Preview images
-    myPreviewImages = null;
+    myImages = null;
     
     postService = async () => {
         try {
             this.setState({
-                uploading: true
+                bIsUploading: true
             });
-            const serviceData = await this.state.data;
-            await axios.post('/service', { updatedService: serviceData });
-            this.setState({
-                uploading: false
+            const headers = await {
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    "Access-Control-Allow-Origin": "*",
+                }
+            };
+            const serviceData = await { ...this.state.data };
+            // We don't want to upload FormData here yet. Images will be uploaded after service is created.
+            serviceData.imagesInfo = await null;
+            // let response = await axios.post('/service', { ...serviceData }, { headers: headers });
+            let response = await axios({
+                method: 'post',
+                url: '/service',
+                data: serviceData,
+                headers: {
+                    headers,
+                },
             });
+            if (response.status !== 200) { // If the response status is not 200 then return and display error message.
+                this.setState({
+                    bIsUploading: false
+                });
+                return toast.error(response.data.error);
+            } else { // Otherwise, display that the service was created.
+                // If there are images then display a message letting the user know the process is not over,
+                // otherwise display the response message.
+                if (this.state.data.imagesInfo) {
+                    toast.success('Your service was created successfully, your images will begin uploading now.');
+                } else {
+                    toast.success(response.data.message);
+                }
+            }
+            const service = await response.data.service;
+            // If there are images to be uploaded, the updatedService variable will contain 
+            // an object key named imagesInfo containing an array of URLs to the images.
+            if (this.state.data.imagesInfo) {
+                const updatedService = await this.uploadImages(this.state.data.imagesInfo);
+                response = await axios.put('/service', { serviceId: service.id, updatedService: updatedService });
+                await this.props.history.push(['/services', service.id].join('/'));
+            } else {
+                await this.setState({
+                    bIsUploading: false
+                });
+            }
         } catch (error) {
-            console.log(error);
-            toast.error(error);
-            this.setState({
-                uploading: false
+            await toast.error(!error.response.data.error ? 'Something went wrong.' : error.response.data.error);
+            await this.setState({
+                bIsUploading: false
             });
         }
     }
@@ -83,6 +184,7 @@ class StepFive extends PureComponent {
     static getDerivedStateFromProps(props, state) {
         const data = props.data;
         if (!data) { return null; } // Pointer protection
+        const userId = props.userDetails.uid;   
         const derivedStateFromProps = {
             // Step 1: Category
             category: data['1'].data.category,
@@ -120,6 +222,7 @@ class StepFive extends PureComponent {
                 latitude: data['7'].data.coordinates ? data['7'].data.coordinates.center[1] : null,
                 longitude: data['7'].data.coordinates ? data['7'].data.coordinates.center[0] : null
             },
+            uid: userId // From react-redux store.
         }
         return {
             data: derivedStateFromProps,
@@ -153,12 +256,20 @@ class StepFive extends PureComponent {
             for (let pair of imagesInfo.entries()) {
                 data.push(pair[1]);
             }
-            this.myPreviewImages = getImagesFromFiles(data);
+            this.myImages = getImagesFromFiles(data);
         }
         const uploading = (
-            this.state.uploading ? 
+            this.state.bIsUploading || this.state.bIsUploadingImages ? 
             <Modal alwaysShow show={true}>
-                <LoadingBounce />
+                {this.state.bIsUploadingImages ?
+                    <>
+                        <h2>Uploading images...</h2>
+                        <ProgressRing 
+                            radius={36} 
+                            stroke={6} 
+                            progress={this.state.progressRings ? average(Object.values(this.state.progressRings)) : 0} />
+                    </>
+                    : <LoadingBounce />}
             </Modal>
             : null
         );
@@ -180,8 +291,10 @@ class StepFive extends PureComponent {
                     <Separator />
                     {/* Step 1: Category */}
                     <div className={classes.Step}><span>S</span>tep 1: Category</div>
-                    <PreviewInformation title='Category'>{category}</PreviewInformation>
-                    <PreviewInformation title='Subcategory'>{subcategory}</PreviewInformation>
+                    <PreviewInformation title='Category'>
+                        <div style={{textTransform: 'uppercase'}}>{category}</div></PreviewInformation>
+                    <PreviewInformation title='Subcategory'>
+                        <div style={{textTransform: 'uppercase'}}>{subcategory}</div></PreviewInformation>
                     <Separator />
                     {/* Step 2: Basic Information */}
                     <div className={classes.Step}><span>S</span>tep 2: Basic Information</div>
@@ -205,17 +318,17 @@ class StepFive extends PureComponent {
                     <Separator />
                     {/* TODO images */}
                     <PreviewInformation title='Images'>
-                        <div className={classes.ImagesContainer}>
-                            {this.myPreviewImages ?
-                                this.myPreviewImages.map((image, i) => {
-                                    return (
-                                        <div key={i} className={classes.Images}>
-                                            <img draggable="false" src={URL.createObjectURL(image.file)} alt='' />
-                                        </div>
-                                    );
-                                })
-                                : null}
-                        </div>
+                        {this.myImages ?
+                            <div className={classes.ImagesContainer}>
+                                    {this.myImages.map((image, i) => {
+                                        return (
+                                            <div key={i} className={classes.Images}>
+                                                <img draggable="false" src={URL.createObjectURL(image.file)} alt='' />
+                                            </div>
+                                        );
+                                    })}
+                            </div>
+                            : <div>No images uploaded</div>}
                     </PreviewInformation>
                     <Separator />
                     {/* Step 5: Logistic */}
@@ -250,4 +363,10 @@ class StepFive extends PureComponent {
     }
 }
 
-export default StepFive;
+const mapStateToProps = (state) => {
+	return {
+        userDetails: state.authReducer.userDetails
+	};
+};
+
+export default withRouter(connect(mapStateToProps)(StepEight));

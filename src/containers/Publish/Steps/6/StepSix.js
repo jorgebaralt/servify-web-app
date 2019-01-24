@@ -4,12 +4,11 @@ import classes from '../../Publish.module.css';
 // Image
 import logo from '../../../../assets/images/servify-logos/yellowborder-nobg.png';
 // JSX
-import LoadingPage from '../../../../components/UI/LoadingPage/LoadingPage';
 import Separator from '../../../../components/UI/Separator/Separator';
 import Input from '../../../../components/UI/Input/Input';
 import ImageFadeIn from '../../../../components/UI/ImageFadeIn/ImageFadeIn';
 
-class StepTwo extends PureComponent {
+class StepSix extends PureComponent {
     state = {
         controls: {
             street: {
@@ -187,4 +186,4 @@ class StepTwo extends PureComponent {
     }
 }
 
-export default StepTwo;
+export default StepSix;

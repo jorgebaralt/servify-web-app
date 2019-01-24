@@ -4,13 +4,12 @@ import { parseLocationData } from '../../../../shared/parseLocationData';
 // CSS
 import classes from '../../Publish.module.css';
 // JSX
-import LoadingPage from '../../../../components/UI/LoadingPage/LoadingPage';
 import Separator from '../../../../components/UI/Separator/Separator';
 import Map, { setMapboxAccessToken, setAddress } from '../../../../components/UI/Map/Map';
 import Input from '../../../../components/UI/Input/Input';
 import InputSlider from '../../../../components/UI/Input/InputSlider/InputSlider';
 
-class StepFive extends PureComponent {
+class StepSeven extends PureComponent {
     constructor(props) {
         super(props);
         this.myTimer = null;
@@ -202,4 +201,4 @@ class StepFive extends PureComponent {
     }
 }
 
-export default StepFive;
+export default StepSeven;
