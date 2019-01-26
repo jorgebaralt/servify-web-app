@@ -25,8 +25,11 @@
 }
 
 .Hidden {
+    /* display: none; */
     visibility: hidden !important;
+    max-height: calc(100vh - 170px);
     opacity: 0;
+    overflow: hidden;
 }
 
 .ButtonsWrapper {

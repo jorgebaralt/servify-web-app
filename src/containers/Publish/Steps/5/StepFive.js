@@ -11,21 +11,21 @@ const datalist = [
     {
         value: {
             bool: false,
-            display: 'Physical store only.',
+            display: 'physical',
         },
         displayValue: 'Physical store only.'
     },
     {
         value: {
             bool: true,
-            display: 'Physical store and deliveries.',
+            display: 'both',
         },
         displayValue: 'Physical store and deliveries.'
     },
     {
         value: {
             bool: true,
-            display: 'Deliveries only.',
+            display: 'delivery',
         },
         displayValue: 'Deliveries only.'
     }

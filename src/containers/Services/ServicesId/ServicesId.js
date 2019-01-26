@@ -8,7 +8,6 @@ import { servicesCreator } from '../../../store/actions/';
 // Shared
 import isString from '../../../shared/isString';
 import isObject from '../../../shared/isObject';
-import { parseLocationData } from '../../../shared/parseLocationData';
 import { setImagesArray } from '../../../shared/imagesHandler';
 // CSS
 import classes from './ServicesId.module.css';
@@ -97,6 +96,7 @@ class ServicesId extends Component {
                         error: true
                     });
                 }
+                console.log(data)
                 const images = setImagesArray(data.imagesInfo);
                 this.setState( () => {
                     return {
@@ -129,6 +129,8 @@ class ServicesId extends Component {
                                 ratingSum: data.ratingSum
                             }
                         },
+                        bIsDelivery: data.bIsDelivery,
+                        logistic: data.logistic,
                         locationData: {
                             street: data.locationData.street,
                             name: data.locationData.name,
@@ -136,7 +138,7 @@ class ServicesId extends Component {
                             region: data.locationData.region,
                             postalCode: data.locationData.postalCode
                         },
-                        address: parseLocationData(data.locationData),
+                        address: data.physicalLocation,
                         map: {
                             initialPosition: [data.location._longitude, data.location._latitude],
                             radiusInMiles: data.miles // Initial value
@@ -202,11 +204,17 @@ class ServicesId extends Component {
                     </div>
                 </div>
                 <div className={classes.MapContainer}>
-                    <Title>Service Address</Title>
+                <Title>Service Location</Title>
+                    {/* Only render if there is a physical location */}
+                    {this.state.logistic !=='delivery' && this.state.address ? 
+                        <div className={classes.Description}>
+                            <InfoPoint symbol={<SVG svg='location-pin' />} location={this.state.address}/>
+                        </div>
+                        : null}
                     <div className={classes.Description}>
-                        <InfoPoint symbol={<SVG svg='location-pin' />} location={this.state.address}/>
+                        <InfoPoint symbol={<SVG svg='location-pin' />} logistic={this.state.logistic}/>
                     </div>
-                    <Map className={classes.MapWrapper} map={this.state.map} circle />
+                    <Map className={classes.MapWrapper} map={this.state.map} circle={this.state.bIsDelivery ? true : false} />
                 </div>
                 <Separator />
                 {this.state.ratings ? <Reviews ratings={this.state.ratings.service} id={{ serviceId: this.state.service.id}} /> : null}

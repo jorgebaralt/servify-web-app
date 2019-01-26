@@ -43,7 +43,33 @@
 
 .Service {
     flex: auto;
-    margin: 0 5px;
+    margin: 0 auto;
     height: 100%;
     flex-grow: 0;
+}
+
+.Grid {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(20%, 1fr) );
+    grid-auto-rows: 1fr;
+    grid-column-gap: 30px;
+    grid-row-gap: 20px;
+}
+
+@media (max-width: 1080px) {
+    .Grid {
+        grid-template-columns: repeat( auto-fit, minmax(25%, 1fr) );
+    }
+}
+
+@media (max-width: 744px) {
+    .Grid {
+        grid-template-columns: repeat( auto-fit, minmax(33.33%, 1fr) );
+    }
+}
+
+@media (max-width: 360px) {
+    .Grid {
+        grid-template-columns: repeat( auto-fit, minmax(50%, 1fr) );
+    }
 }

@@ -54,7 +54,7 @@ class StepOne extends PureComponent {
         });
     }
 
-    checkIfSubcategory = () => {
+    checkIfValid = () => {
         // If there is no subcategory, the form will be valid if there is a selected category.
         let formIsValid;
         // Otherwise, we check for the respective subcategories.
@@ -72,55 +72,73 @@ class StepOne extends PureComponent {
                             displayValue: category.title,
                         };
                     });
-                    // Check if there is already a selected subcategory. If there is a selected 
-                    // category AND the subcategory does not belongs to the selected category, 
-                    // break the loop and avoid resetting state, the form validity will be true.
+                    /**
+                     * Check if there is already a selected subcategory. If there is a selected 
+                     * category AND the subcategory belongs to the selected category break the 
+                     * loop and avoid resetting the subcategory, the form validity will be true.
+                     * Otherwise, the subcategory will be set as invalid, and the user will need
+                     * to select a new one.
+                    */
                     if (this.state.controls.subcategory) { 
                         const bCategoryIncludesSubcategory = subCategoriesReferences.includes(this.state.controls.subcategory.value);
                         if (this.state.controls.subcategory.value && bCategoryIncludesSubcategory) {
                             formIsValid = true;
                             break;
-                        } else if (!bCategoryIncludesSubcategory && bCategoryIncludesSubcategory) {
+                        } else {
                             formIsValid = false;
+                            this.inputSelectChangeHandler('', 'subcategory');
                             this.setState((prevState) => {
                                 return {
                                     ...prevState,
                                     controls: {
                                         ...prevState.controls,
-                                        subcategory: null
+                                        subcategory: {
+                                            ...prevState.controls.subcategory,
+                                            elementConfig: {
+                                                ...prevState.controls.subcategory.elementConfig,
+                                                options: subcategoriesDatalist
+                                            },
+                                            value: null,
+                                            valid: false,
+                                            touched: true
+                                        }
                                     }
                                 }
                             });
                             break;
                         }
                     }
-                    this.setState((prevState) => {
-                        return {
-                            ...prevState,
-                            controls: {
-                                ...prevState.controls,
-                                subcategory: {
-                                    elementType: 'select',
-                                    elementConfig: {
-                                        label: 'Choose a subcategory',
-                                        placeholder: 'Select a category',
-                                        options: subcategoriesDatalist
+                    // Setting the subcategory if there are none.
+                    else {
+                        this.setState((prevState) => {
+                            return {
+                                ...prevState,
+                                controls: {
+                                    ...prevState.controls,
+                                    subcategory: {
+                                        elementType: 'select',
+                                        elementConfig: {
+                                            label: 'Choose a subcategory',
+                                            placeholder: 'Select a category',
+                                            options: subcategoriesDatalist
+                                        },
+                                        value: '',
+                                        valueType: 'option',
+                                        validation: {
+                                            required: true
+                                        },
+                                        valid: false,
+                                        touched: false,
                                     },
-                                    value: '',
-                                    valueType: 'text',
-                                    validation: {
-                                        required: true
-                                    },
-                                    valid: false,
-                                    touched: false,
-                                },
+                                }
                             }
-                        }
-                    });
-                    // The form is false since there is no subcategory with a value.
-                    formIsValid = false;
+                        });
+                        // The form is false since there is no subcategory with a value.
+                        formIsValid = false;
+                        break;
+                    }
                 } else {
-                    // Being inside the else block means there is no subcategory, the form is valid
+                    // Being inside this else block means there is no subcategory, the form is valid
                     // only if there is a category selected, otherwise false. The state is set without
                     // any subcategory as well.
                     formIsValid = this.state.controls.category.value ? true : false;
@@ -152,7 +170,7 @@ class StepOne extends PureComponent {
         // If current data is equal to the props data, then updating is not needed.
         const bShouldNotUpdate = (JSON.stringify(data) === JSON.stringify(this.props.data));
         if (bShouldNotUpdate) { return; }
-        const formIsValid = this.checkIfSubcategory();
+        const formIsValid = this.checkIfValid();
         this.props.updateData(this.props.stepKey, data, formIsValid);
     }
 

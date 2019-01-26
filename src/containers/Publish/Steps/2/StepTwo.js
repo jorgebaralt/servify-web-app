@@ -11,12 +11,12 @@ import ImageFadeIn from '../../../../components/UI/ImageFadeIn/ImageFadeIn';
 class StepTwo extends PureComponent {
     state = {
         controls: {
-            companyName: {
+            serviceTitle: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
                     autoComplete: 'new-password',
-                    placeholder: 'Company name',
+                    placeholder: 'Name of your service',
                     autoCorrect:"off",
                     autoCapitalize:"off",
                     spellCheck:"false"
@@ -29,6 +29,24 @@ class StepTwo extends PureComponent {
                 valid: false,
                 touched: false,
                 style: {marginTop: '28px'}
+            },
+            companyName: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    autoComplete: 'new-password',
+                    placeholder: 'Company name (optional)',
+                    autoCorrect:"off",
+                    autoCapitalize:"off",
+                    spellCheck:"false"
+                },
+                value: '',
+                valueType: 'text',
+                validation: {
+                    required: false,
+                },
+                valid: true,
+                touched: false,
             },
             
             companyWebsite: {
@@ -49,39 +67,40 @@ class StepTwo extends PureComponent {
                 valid: true,
                 touched: false
             },
-            serviceTitle: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'text',
-                    autoComplete: 'new-password',
-                    placeholder: 'Service title',
-                    autoCorrect:"off",
-                    autoCapitalize:"off",
-                    spellCheck:"false"
-                },
-                value: '',
-                valueType: 'text',
-                validation: {
-                    required: true,
-                },
-                valid: false,
-                touched: false,
-            },
             contactPhone: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
                     autoComplete: 'new-password',
-                    placeholder: 'Contact phone',
+                    placeholder: 'Contact phone (optional)',
                     autoCorrect:"off",
                     autoCapitalize:"off",
                     spellCheck:"false"
                 },
                 value: '',
-                valueType: 'number',
+                valueType: 'phone number',
                 validation: {
-                    required: true,
+                    required: false,
                     number: true
+                },
+                valid: false,
+                touched: false
+            },
+            contactEmail: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    autoComplete: 'new-password',
+                    placeholder: 'Contact email (optional)',
+                    autoCorrect:"off",
+                    autoCapitalize:"off",
+                    spellCheck:"false"
+                },
+                value: '',
+                valueType: 'email',
+                validation: {
+                    required: false,
+                    email: true
                 },
                 valid: false,
                 touched: false

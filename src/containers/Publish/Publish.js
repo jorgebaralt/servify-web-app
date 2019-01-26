@@ -31,22 +31,24 @@ class Publish extends Component {
             1: {
                 data: {
                     category: null
+                    // May have subcategory.
                 },
                 formIsValid: false
             },
             2: {
                 data: {
+                    serviceTitle: null,
                     companyName: null,
                     companyWebsite: null,
-                    serviceTitle: null,
                     contactPhone: null,
+                    contactEmail: null
                 },
                 formIsValid: false
             },
             3: {
                 data: {
-                    providerDescription: null,
-                    serviceDescription: null
+                    serviceDescription: null,
+                    providerDescription: null
                 },
                 formIsValid: false
             },
@@ -58,7 +60,10 @@ class Publish extends Component {
             },
             5: {
                 data: {
-                    bIsDelivery: null,
+                    option: {
+                        bool: null,
+                        display: null
+                    }
                 },
                 formIsValid: false
             },
@@ -126,7 +131,7 @@ class Publish extends Component {
                     step: step
                 }
             });
-        }, 250);
+        }, 50);
     }
 
     shouldComponentUpdate(nextProps, nextState) {

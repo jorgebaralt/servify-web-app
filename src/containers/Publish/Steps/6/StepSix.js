@@ -151,10 +151,16 @@ class StepSix extends PureComponent {
                 <div className={classes.FormWrapper}>
                     <div className={classes.FormContainer}>
                         <div className={classes.Step}><span>S</span>tep 6: Service Address</div>
-                        <h2>
-                            Almost there! Now we need to know the address of your physical store, 
-                            if you also offer deliveries, you'll be asked the range (radius in miles) 
-                            of which you're able to cover those deliveries in the next step.
+                        <h2 style={{lineHeight: '24px'}}>
+                            Almost there! Now we need to know your address. <strong>If you don't have 
+                            a physical store and offer only deliveries</strong>, then enter an address 
+                            where you usually deliver, you'll be asked the range (radius in miles) of 
+                            which you're able to cover those deliveries in the next step (think of the 
+                            address as the center).
+                            <br/><strong>If don't offer deliveries at all but have a physical store</strong>, 
+                            then you'll only need to type your physical store address. And <strong>if you 
+                            offer both</strong>, then we'll need the physical store address and the range 
+                            that you can deliver.
                         </h2>
                         <Separator />
                         <form style={{userSelect: 'none'}} onSubmit={this.onSubmitHandler}>

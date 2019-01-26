@@ -23,6 +23,7 @@ const infoSection = (props) => {
                 <div className={classes.LogoContainer}>
                     <div className={classes.Logo}>
                         <img src={props.src ? props.src : defaultLogo} 
+                        draggable="false"
                         height="72" 
                         width="72" 
                         alt={props.title} 

@@ -6,13 +6,12 @@ class InputSelect extends Component {
     constructor(props) {
         super(props);
         this.myList = React.createRef();
-        this.myInput = React.createRef();
+        const display = this.props.elementConfig.displayValue;
+        this.state = {
+            displayValue: display ? display : '',
+            bIsListOpen: false
+        }
     }
-
-    state = {
-        bIsListOpen: false
-    }
-
     listHandler = (handler) => { 
         const list = this.myList.current; 
         switch (handler) {
@@ -37,8 +36,6 @@ class InputSelect extends Component {
     }
     
     setValue = (option, changed) => {
-        const input = this.myInput.current;
-        input.value = option.displayValue;
         switch (true) {
             case option.value === '':
                 this.props.labelClasses.push(classes.SelectLabelValid);
@@ -51,9 +48,14 @@ class InputSelect extends Component {
         }
         this.listHandler('close'); // After selecting a category, close the list.
         if (document.addEventListener) { document.activeElement.blur(); } // Blurs (removes focus) from the list.
-        changed(option.value); // this.props.changed passed from stateful container to change its state.
+        if (changed) { // Protection
+            changed(option.value); // this.props.changed passed from stateful container to change its state.
+        }
+        this.setState({
+            displayValue: option.displayValue
+        });
     }
-
+    
     render () {
         this.props.inputClasses.push(classes.InputSelect);
         const listClasses = [classes.List];
@@ -70,9 +72,12 @@ class InputSelect extends Component {
                         <input
                             disabled
                             required
+                            onChange={this.handleChange}
                             style={this.props.style}
-                            ref={this.myInput}
-                            value={this.props.displayValue}
+                            // If there is a default display value in the element config then display it initially, 
+                            // otherwise render the value.
+                            value={this.state.displayValue}
+                            // value={this.props.displayValue}
                             placeholder={this.props.elementConfig.placeholder}
                             className={this.props.inputClasses.join(' ')} >
                         </input>

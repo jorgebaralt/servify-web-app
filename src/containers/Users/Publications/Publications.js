@@ -25,7 +25,7 @@ class Publications extends Component {
     }
 
     componentDidMount() {
-        axios.get('/getServices', { params: { email: this.props.userDetails.email } })
+        axios.get('/services', { params: { uid: this.props.userDetails.uid } })
             .then( response => {
                 const data = response.data;
                 if (!data.length) {
@@ -61,7 +61,7 @@ class Publications extends Component {
                             <h1>Publications</h1> 
                             <span className={classes.Amount}>({this.state.services ? Object.keys(this.state.services).length : null})</span>
                         </div>
-                        <Carousel>
+                        <div className={classes.Grid}>
                             {Object.values(this.state.services).map( (service, index) => {
                                 return (
                                     <div key={index} className={classes.Service}>
@@ -76,7 +76,7 @@ class Publications extends Component {
                                     </div>
                                 );
                             })}
-                        </Carousel>
+                        </div>
                     </div>
                 );
                 break;

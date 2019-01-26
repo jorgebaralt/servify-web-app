@@ -11,21 +11,6 @@ import ImageFadeIn from '../../../../components/UI/ImageFadeIn/ImageFadeIn';
 class StepThree extends PureComponent {
     state = {
         controls: {
-            providerDescription: {
-                elementType: 'textarea',
-                elementConfig: {
-                    type: 'text',
-                    placeholder: 'Information about the provider',
-                },
-                value: '',
-                valueType: 'text',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                touched: false,
-                style: {marginTop: '28px'}
-            },
             serviceDescription: {
                 elementType: 'textarea',
                 elementConfig: {
@@ -39,6 +24,21 @@ class StepThree extends PureComponent {
                 },
                 valid: false,
                 touched: false
+            },
+            providerDescription: {
+                elementType: 'textarea',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Information about the provider (optional)',
+                },
+                value: '',
+                valueType: 'text',
+                validation: {
+                    required: false
+                },
+                valid: true,
+                touched: false,
+                style: {marginTop: '28px'}
             }
         },
         formIsValid: false,

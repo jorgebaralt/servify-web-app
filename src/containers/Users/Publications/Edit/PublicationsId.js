@@ -1,9 +1,10 @@
 import React, { Component, Suspense } from 'react';
 // Shared
 import { setImagesArray } from '../../../../shared/imagesHandler';
+import { parseLocationData } from '../../../../shared/parseLocationData';
 // Axios, Router & Redux
 import axios from '../../../../axios-services';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 // CSS
 import classes from './PublicationsId.module.css';
@@ -13,6 +14,7 @@ import { setMapboxAccessToken, defaultAddress } from '../../../../components/UI/
 import { toast } from 'react-toastify';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Button from '../../../../components/UI/Button/Button';
+import Separator from '../../../../components/UI/Separator/Separator';
 import Edit from './Edit/Edit';
 
 // NotFound lazy import in case a service is not found, or the user does not owns the service
@@ -68,13 +70,26 @@ class PublicationsId extends Component {
 
     onSubmitChangesHandler = async () => {
         const updatedService = await {
+            // Basic Information
             title: this.state.title,
-            // phone: (754) 215 - 8233,
-            imagesInfo: this.state.images, // Images is the variable handled back by Edit.js component
-            description: this.state.service.info,
-            // zipCode: 33351,
+            provider: this.state.infoSections.provider.title,
+            website: this.state.infoPoints.website, // (Optional)
+            phone: this.state.contact.phone, // (Optional)
+            contactEmail: this.state.contact.email, // (Optional)
+            // Details
+            description: this.state.infoSections.service.info,
+            providerDescription: this.state.infoSections.provider.info,
+            // Images (Optional)
+            imagesInfo: this.state.images, // Images is the variable handed back by Edit.js component
+            // Logistic
+            bIsDelivery: this.state.bIsDelivery,
+            logistic: this.state.logistic,
+            // Service Address
+            locationData: this.state.locationData,
+            zipCode: this.state.locationData.postalCode,
+            // The Map
             miles: this.state.map.radiusInMiles,
-            // email: robertmolina0310@gmail.com,
+            physicalLocation: this.state.physicalLocation,
             geolocation: {
                 // Geolocation provides data to a constructor that returns
                 // coordinates to calculate points between services, distante 
@@ -82,8 +97,7 @@ class PublicationsId extends Component {
                 // and such.
                 latitude: this.state.map.initialPosition[1],
                 longitude: this.state.map.initialPosition[0]
-            },
-            // locationData:
+            }
         }
         try {
             const serviceId = await this.props.match.params.id;
@@ -112,13 +126,12 @@ class PublicationsId extends Component {
     handleData = (data) => {
         if (data) {
             // Error handling in case there's an empty response
-            if (data.email !== this.props.userEmail) { 
+            if (data.uid !== this.props.userDetails.uid) { 
                 return this.setState({
                     loading: false,
                     error: true
                 });
             } else {
-                console.log('on handleData', data);
                 const images = setImagesArray(data.imagesInfo);
                 this.setState( () => {
                     return {
@@ -139,9 +152,9 @@ class PublicationsId extends Component {
                                 info: data.description
                             },
                             provider: {
-                                title: 'Servify',
+                                title: data.provider,
                                 header: 'About the provider',
-                                info: data.provider
+                                info: data.providerDescription
                             },
                         },
                         service: {
@@ -177,23 +190,16 @@ class PublicationsId extends Component {
                             region: data.locationData.region,
                             street: data.locationData.street
                         },
-                        address: [
-                            data.locationData.street,
-                            data.locationData.street ? ', ' : null,
-                            data.locationData.name, 
-                            data.locationData.name ? '. ' : null,
-                            data.locationData.city, 
-                            data.locationData.city ? ', ' : null,
-                            data.locationData.region, 
-                            data.locationData.region ? ' ' : null,
-                            data.locationData.postalCode,
-                            ].join(''),
+                        bIsDelivery: data.bIsDelivery,
+                        logistic: data.logistic,
+                        physicalLocation: parseLocationData(data.locationData),
                         map: {
                             initialPosition: [data.location._longitude, data.location._latitude],
                             geoData: null,
                             radiusInMiles: data.miles, // Initial value
                             maxRadius: 60 // For the input slider
                         },
+                        serviceId: data.id,
                         // TODO determine if needed
                         rawData: data
                     }
@@ -223,7 +229,6 @@ class PublicationsId extends Component {
         const serviceId = this.props.match.params.id;
         axios.get('/service', { params: { serviceId: serviceId } })
             .then( response => {
-                console.log(response.data);
                 this.handleData(response.data);
             })
             .catch( () => {
@@ -234,6 +239,7 @@ class PublicationsId extends Component {
             });
     }
 
+    // To update state from the Edit.js container
     updateState = (newState) => {
         this.setState({...newState});
     }
@@ -305,6 +311,12 @@ class PublicationsId extends Component {
                             }
                         </div>
                     </div>
+                    <div className={classes.ViewLink}>
+                        <Link style={{width: '100%'}} to={['/services',this.state.serviceId].join('/')}>
+                            <Button blockButton type='default'>Go to service</Button>
+                        </Link>
+                    </div>
+                    <Separator />
                     <div className={classes.Container}>
                         {this.onRenderHandler()}
                     </div>
@@ -315,7 +327,7 @@ class PublicationsId extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-        userEmail: state.authReducer.userEmail
+        userDetails: state.authReducer.userDetails
 	};
 };
 

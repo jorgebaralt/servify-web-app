@@ -29,6 +29,7 @@ class StepEight extends PureComponent {
             provider: null,
             website: null,
             phone: null,
+            email: null,
             // Step 3: Details
             description: null,
             providerDescription: null,
@@ -194,6 +195,7 @@ class StepEight extends PureComponent {
             provider: data['2'].data.companyName,
             website: data['2'].data.companyWebsite,
             phone: data['2'].data.contactPhone,
+            email: data['2'].data.contactEmail,
             // Step 3: Details
             description: data['3'].data.serviceDescription,
             providerDescription: data['3'].data.providerDescription,
@@ -201,7 +203,7 @@ class StepEight extends PureComponent {
             imagesInfo: data['4'].data.imageFiles, // This is FormData, not images
             // Step 5: Logistic
             bIsDelivery: data['5'].data.option ? data['5'].data.option.bool : null,
-            delivery: data['5'].data.option ? data['5'].data.option.display : null,
+            logistic: data['5'].data.option ? data['5'].data.option.display : null,
             // Step 6: Service Address
             locationData: {
                 street: data['6'].data.street,
@@ -213,7 +215,16 @@ class StepEight extends PureComponent {
             zipCode: data['6'].data.postalCode,
             // Step 7: The Map
             miles: data['7'].data.distance,
-            physicalLocation: data['7'].data.address !== '' ? data['7'].data.address : parseLocationData(data['6'].data),
+            physicalLocation: (
+                data['5'].data.option ? 
+                    // If there is a phyisical store
+                    data['5'].data.option.display !== 'delivery' ?
+                        // Then the physical location is the address if exists, or the parsed location.
+                        data['7'].data.address !== '' ? data['7'].data.address : parseLocationData(data['6'].data)
+                        // If no deliveries are offered, then null
+                        : null
+                    : null
+            ),
             geolocation: {
                 // Geolocation provides data to a constructor that returns
                 // coordinates to calculate points between services, distante 
@@ -306,7 +317,8 @@ class StepEight extends PureComponent {
                             target='_blank'
                             rel='noopener noreferrer'>{data.title}</a>
                     </PreviewInformation>
-                    <PreviewInformation title='Phone'>{data.phone}</PreviewInformation>
+                    <PreviewInformation title='Contact Phone'>{data.phone}</PreviewInformation>
+                    <PreviewInformation title='Contact Email'>{data.email}</PreviewInformation>
                     <Separator />
                     {/* Step 3: Details */}
                     <div className={classes.Step}><span>S</span>tep 3: Details</div>

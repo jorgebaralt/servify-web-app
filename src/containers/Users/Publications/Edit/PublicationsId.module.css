@@ -93,6 +93,15 @@
     justify-content: flex-end;
 }
 
+.ViewLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 90%;
+    margin: 16px auto 0;
+}
+
 .Spinner {
     display: flex;
     align-items: center;
