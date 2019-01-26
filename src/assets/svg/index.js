@@ -18,6 +18,8 @@ import Private from './private';
 import SingleImage from './single-image';
 import MultiImage from './multi-image';
 import Delete from './delete';
+import Website from './website';
+import DeliveryTruck from './delivery-truck';
 
 import BlackBorderlessLogo from '../images/servify-logos/blackborder-nobg';
 
@@ -43,5 +45,7 @@ export {
     Private,
     SingleImage,
     MultiImage,
-    Delete
+    Delete,
+    Website,
+    DeliveryTruck
 };

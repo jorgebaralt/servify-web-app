@@ -24,7 +24,6 @@ import Carousel from '../../../components/UI/Carousel/Carousel';
 import PhotosCarousel from '../../../components/UI/PhotosCarousel/PhotosCarousel';
 import Map, { setMapboxAccessToken, setInitialMapboxPosition, defaultAddress } from '../../../components/UI/Map/Map';
 import Separator from '../../../components/UI/Separator/Separator';
-import SVG from '../../../components/SVG/SVG';
 
 // NotFound lazy import in case a service is not found
 const NotFound = React.lazy(() => import('../../NotFound/NotFound'));
@@ -96,7 +95,6 @@ class ServicesId extends Component {
                         error: true
                     });
                 }
-                console.log(data)
                 const images = setImagesArray(data.imagesInfo);
                 this.setState( () => {
                     return {
@@ -174,8 +172,9 @@ class ServicesId extends Component {
                             <Title>{this.state.service ? this.state.service.title : null}</Title>
                         </div>
                         <SocialButtons />
-                        <InfoPoint symbol={<SVG svg='location-pin' />} location={this.state.locationData ? this.state.locationData.region : null}/>
-                        {this.state.service.website ? <InfoPoint symbol={<SVG svg='location-pin' />} website='bonpreufoods.com'/> : null}
+                        <InfoPoint location={this.state.locationData ? this.state.locationData.region : null}/>
+                        <InfoPoint logistic={this.state.logistic}/>
+                        {this.state.service.website ? <InfoPoint website='bonpreufoods.com'/> : null}
                         {/* 
                             <InfoPoint symbol={<SVG svg='chat' />} info='Services offered in English and Spanish'/> 
                         */}
@@ -208,16 +207,16 @@ class ServicesId extends Component {
                     {/* Only render if there is a physical location */}
                     {this.state.logistic !=='delivery' && this.state.address ? 
                         <div className={classes.Description}>
-                            <InfoPoint symbol={<SVG svg='location-pin' />} location={this.state.address}/>
+                            <InfoPoint location={this.state.address}/>
                         </div>
                         : null}
-                    <div className={classes.Description}>
-                        <InfoPoint symbol={<SVG svg='location-pin' />} logistic={this.state.logistic}/>
-                    </div>
                     <Map className={classes.MapWrapper} map={this.state.map} circle={this.state.bIsDelivery ? true : false} />
                 </div>
                 <Separator />
-                {this.state.ratings ? <Reviews ratings={this.state.ratings.service} id={{ serviceId: this.state.service.id}} /> : null}
+                {this.state.ratings ? 
+                    <Reviews bShowForm 
+                        ratings={this.state.ratings.service} 
+                        id={{ serviceId: this.state.service.id}} /> : null}
                 {this.props.services.nearServices ? 
                     <>
                         <Separator />

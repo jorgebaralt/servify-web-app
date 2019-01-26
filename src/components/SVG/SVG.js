@@ -80,6 +80,12 @@ class SVGComponent extends PureComponent {
             case 'delete':
                 svg = <SVG.Delete {...this.props} />;
                 break;
+            case 'delivery-truck':
+                svg = <SVG.DeliveryTruck {...this.props} />;
+                break;
+            case 'website':
+                svg = <SVG.Website {...this.props} />;
+                break;
             case 'underline':
                 svg = <div style={this.props.style}>
                         {this.randomUnderline(Underlines)(this.props)}

@@ -12,13 +12,11 @@ import SocialButtons from '../../../../../components/Services/SocialButtons/Soci
 import PhotosCarousel from '../../../../../components/UI/PhotosCarousel/PhotosCarousel';
 import Map from '../../../../../components/UI/Map/Map';
 import Separator from '../../../../../components/UI/Separator/Separator';
-import SVG from '../../../../../components/SVG/SVG';
 
 // Default Image URL if the fetched service has no URLs
 const defaultImage = 'https://storage.googleapis.com/servify-716c6.appspot.com/service_images%2F2019-01-20T22%3A51%3A58.066Z_default-service-image.png?GoogleAccessId=firebase-adminsdk-a3e7c%40servify-716c6.iam.gserviceaccount.com&Expires=95623372800&Signature=st0sONUJVHe54MOE0yY902A0gAcBCzSjxch4QbdCXJ0w2LiQgG%2FwZiv9lW6t4lV5zFhpONuNEFPOWIqC%2F1fQgI0qKX4Y1vI6nI14lx%2BYqaR%2Fg0LjIfUPeU5RSm8RJBnWIKSWVhThZT7ewez8XEg2RjIRIVllzdJht%2FRTgwzf4A%2FbsF1SsfaMFkIYH4Ee7vnNmdqOTRTwGqInjLPER9WgalWew7MXxHExGo9%2Fi%2BmIXjAxcC2%2BmTu9Pov%2BBkvfpu37miQTViUTUmE0c3jc17R%2FC816Sdmhg%2F2e8a%2FSUx9k714D5PujzvKldabGnPvwwPTO%2BtCe0yjAsbE5eehLQYEjgw%3D%3D';
 
 const preview = (props) => {
-    console.log(props)
     return (
         <>
             <div className={classes.Container}>
@@ -47,14 +45,17 @@ const preview = (props) => {
                         </Title>
                     </div>
                     <SocialButtons />
-                    <InfoPoint symbol={<SVG svg='location-pin' />} 
+                    <InfoPoint 
                         location={
                             props.infoPoints.state ? 
                                 props.infoPoints.state 
                                 : <span className={classes.Error}>State can't be empty.</span>} />
-                    {props.infoPoints.website ? 
-                        <InfoPoint symbol={<SVG svg='location-pin' />} website={props.infoPoints.website}/> 
-                        : null}
+                    <InfoPoint 
+                            logistic={
+                                props.logistic ? 
+                                    props.logistic
+                                    : <span className={classes.Error}>Must specify logistic option.</span>} />
+                    {props.infoPoints.website ? <InfoPoint website={props.infoPoints.website}/> : null}
                     {/* {props.infoPoints.languages ? 
                         <InfoPoint symbol={<SVG svg='chat' />} info={props.infoPoints.languages}/> 
                         : null} */}
@@ -93,19 +94,12 @@ const preview = (props) => {
                 {/* Only render if there is a physical location */}
                 {props.logistic !== 'delivery' ? 
                     <div className={classes.Description}>
-                        <InfoPoint symbol={<SVG svg='location-pin' />} location={
+                        <InfoPoint location={
                             props.physicalLocation ? 
                                     props.physicalLocation 
                                     : <span className={classes.Error}>Address can't be empty.</span>}/>
                     </div>
                     : null}
-                <div className={classes.Description}>
-                    <InfoPoint symbol={<SVG svg='location-pin' />} 
-                            logistic={
-                                props.logistic ? 
-                                    props.logistic
-                                    : <span className={classes.Error}>Must specify logistic option.</span>} />
-                </div>
                 <Map circle={props.bIsDelivery ? true : false} className={classes.MapWrapper} map={props.map} />
             </div>
             <Separator />

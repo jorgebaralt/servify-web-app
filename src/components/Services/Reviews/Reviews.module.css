@@ -1,4 +1,6 @@
 .Wrapper {
+    display: flex;
+    flex-flow: column;
     position: relative;
     width: 90%;
     margin: 18px auto;
@@ -25,4 +27,65 @@
     .Container {
         flex-direction: column !important;
     }
+}
+
+.Button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #686868;
+    text-transform: uppercase;
+    font-size: 16px;
+    line-height: 1;
+    padding: 14px 22px;
+    transition: all .3s;
+    text-decoration: none;
+}
+
+.Form {
+    padding-right: 21px;
+    width: 90%;
+    margin: 19px auto;
+}
+
+.Well {
+    vertical-align: middle;
+    overflow: hidden;
+    border-left: 2px solid #686868;
+    margin: 2px 0;
+    padding-left: 24px;
+    border-radius: 4px;
+    position: relative;
+    height: 500px;
+    max-height: 100%;
+    transition: height ease-out 500ms;
+}
+
+/* .Hidden {
+    height: 0;
+} */
+
+.Close {    
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.Close:after{
+    display: block;
+    content: '';
+    border: 1px solid #484848;
+    border-radius: 50%;
+    background-color: #484848;
+}
+
+.Submit {
+    height: 48px;
+    margin: 12px 0;
 }

@@ -20,6 +20,7 @@ const input = (props) => {
         case('input' || 'text' || 'email' || 'number'):
             inputElement = <input 
                 className={inputClasses.join(' ')} 
+                // style={props.elementConfig.disabled ? { cursor: 'not-allowed' } : null}
                 {...props.elementConfig} 
                 required
                 value={props.value}
@@ -31,6 +32,7 @@ const input = (props) => {
             inputClasses.push(classes.TextAreaElement);
             inputElement = <textarea 
                 className={inputClasses.join(' ')} 
+                // style={props.elementConfig.disabled ? { cursor: 'not-allowed' } : null}
                 {...props.elementConfig} 
                 required
                 value={props.value}

@@ -3,13 +3,15 @@ import React from 'react';
 import { parseLogistic } from '../../../shared/parseLogistic';
 // CSS
 import classes from './InfoPoint.module.css';
+// JSX
+import SVG from '../../SVG/SVG';
 
 const infoPoint = (props) => {
-    console.log('infoPoint props \/')
-    console.log(props)
     let point;
+    let icon;
     switch (true) {
         case props.location ? true : false:
+            icon = <SVG svg='location-pin' />;
             point = (
                 <button type='button' 
                     aria-busy='false'
@@ -23,6 +25,7 @@ const infoPoint = (props) => {
         case props.website ? true : false:
             // Parsing website url
             let url = [];
+            icon = <SVG svg='website' />;
             switch (false) {
                 case props.website.includes('http'):
                     url = ['http://', props.website];
@@ -46,7 +49,7 @@ const infoPoint = (props) => {
             );
             break;
         case props.logistic ? true : false:
-            console.log('info point logistic')
+            icon = <SVG svg='delivery-truck' />;
             point = (
                 <button type='button' 
                     aria-busy='false'
@@ -58,6 +61,7 @@ const infoPoint = (props) => {
             );
             break;
         default:
+            icon = <SVG svg='checkmark-nobg' width={'18px'} height={'18px'} />;
             point = (
                 <div className={classes.InfoContainer}>
                     <span>{props.info}</span>
@@ -68,7 +72,7 @@ const infoPoint = (props) => {
         <div className={classes.Container}>
             <div className={classes.IconWrapper}>
                 <div className={classes.IconContainer}>
-                    <span className={classes.Icon}>{props.symbol}</span>
+                    <span className={classes.Icon}>{icon}</span>
                 </div>
             </div>
             <div className={classes.InfoWrapper}>
