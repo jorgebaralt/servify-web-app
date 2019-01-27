@@ -1,8 +1,8 @@
-.Container {
+.Wrapper {
     margin-right: 6px;
 }
 
-.Button {
+.Toggle {
     cursor: pointer;
     background-color: transparent;
     display: block;
@@ -10,4 +10,22 @@
     border-style: initial;
     border-color: initial;
     border-image: initial;
+}
+
+.Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row;
+}
+
+.Button {
+    margin: 6px 12px;
+    cursor: pointer;
+}
+
+.Header {
+    color: #484848;
+    user-select: none;
+    text-align: center;
 }

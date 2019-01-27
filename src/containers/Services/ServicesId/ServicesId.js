@@ -171,7 +171,7 @@ class ServicesId extends Component {
                             </div>
                             <Title>{this.state.service ? this.state.service.title : null}</Title>
                         </div>
-                        <SocialButtons />
+                        <SocialButtons title={this.state.service ? this.state.service.title : null} />
                         <InfoPoint location={this.state.locationData ? this.state.locationData.region : null}/>
                         <InfoPoint logistic={this.state.logistic}/>
                         {this.state.service.website ? <InfoPoint website='bonpreufoods.com'/> : null}

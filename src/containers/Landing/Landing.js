@@ -12,6 +12,7 @@ import placeholderHeader from '../../assets/images/placeholder-header.jpg'
 import SVG from '../../components/SVG/SVG';
 // JSX
 import { Link } from 'react-router-dom';
+import LoadingBounce from '../../components/UI/LoadingBounce/LoadingBounce';
 import HeaderImage from '../../components/UI/HeaderImage/HeaderImage';
 import Carousel from '../../components/UI/Carousel/Carousel';
 import SearchBox from '../../components/UI/SearchBox/SearchBox';
@@ -131,7 +132,7 @@ class Landing extends Component {
                 </>
             );
         }
-        let topServices = null;
+        let topServices = <LoadingBounce />;
         if (this.props.services.topServices) {
             topServices = (
                 <>

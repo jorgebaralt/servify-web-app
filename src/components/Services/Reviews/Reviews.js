@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactResizeDetector from 'react-resize-detector'
 import axios from '../../../axios-services';
-// Check Validity
+// check inputs validity, auth actions dispatchers, toast
 import { authActions } from '../../../store/actions';
 import { checkValidity } from '../../../shared/checkValidity';
 import { toast } from 'react-toastify';

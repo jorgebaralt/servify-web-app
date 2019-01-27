@@ -24,7 +24,7 @@ const service = (props) => {
                     </div>
                 </div>
             </Link>
-            <Link draggable="false" to={props.href} className={classes.Details} target="_blank">
+            <Link draggable="false" to={['/services', props.href].join('/')} className={classes.Details} target="_blank">
                 <div>
                     <div className={classes.Header}>
                         <span>{props.header}</span>

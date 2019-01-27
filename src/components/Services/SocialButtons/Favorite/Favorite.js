@@ -4,9 +4,9 @@ import classes from './Favorite.module.css';
 // JSX
 import SVG from '../../../SVG/SVG';
 
-const favorite = () => {
+const favorite = (props) => {
     return (
-        <button className={classes.Button}>
+        <button onClick={props.onClick} className={classes.Button}>
             <SVG svg='favorite' />
         </button>
     )
