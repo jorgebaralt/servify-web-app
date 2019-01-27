@@ -1,22 +1,22 @@
 import React from 'react';
 // CSS
-import classes from './Star.module.css';
+import classes from './Currency.module.css';
 // JSX
 import SVG from '../../../../SVG/SVG';
 
 const star = (props) => {
-    const starClasses = [classes.Star];
+    const currencyClasses = [classes.Currency];
     if (props.className) {
-        starClasses.push(props.className);
+        currencyClasses.push(props.className);
     }
     return (
-        <span 
+        <span
             style={props.style}
-            className={starClasses.join(' ')}
+            className={currencyClasses.join(' ')}
             onMouseEnter={props.onMouseEnter}
             onMouseLeave={props.onMouseLeave}
             onClick={props.onClick}>
-            <SVG svg='star' {...props.config} fill={props.fill} />
+            <SVG svg='currency' {...props.config} fill={props.fill} />
         </span>
     );
 }

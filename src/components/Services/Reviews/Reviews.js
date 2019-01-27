@@ -1,27 +1,42 @@
 import React, { Component } from 'react';
+import ReactResizeDetector from 'react-resize-detector'
 import axios from '../../../axios-services';
 // Check Validity
+import { authActions } from '../../../store/actions';
 import { checkValidity } from '../../../shared/checkValidity';
-// Redux
+import { toast } from 'react-toastify';
+// Redux & Router
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 // CSS
 import classes from './Reviews.module.css';
 // JSX
+import Close from './Close/Close';
 import Ratings from './Ratings/Ratings';
 import Review from './Review/Review';
 import Score from './Score/Score';
+import Information from './Information/Information';
 import Button from '../../UI/Button/Button';
 import Input from '../../UI/Input/Input';
 import LoadingBounce from '../../UI/LoadingBounce/LoadingBounce';
+import Tooltip from '../../UI/Tooltip/Tooltip';
+
 
 class Reviews extends Component {
     constructor(props){
         super(props);
         this.myForm = React.createRef();
+        this.hiddenStyle = {height: 0, overflow: 'hidden'};
     }
 
     state = {
         loading: true,
+        /**
+         * Storing the current pathname in case the user is not authenticated and tries to leave a review, 
+         * this will set a redirect path so that after a successful login the user will be redirected to 
+         * this page.
+         */
+        pathname: this.props.location.pathname, 
         reviews: null,
         // Review score
         score: null,
@@ -63,6 +78,7 @@ class Reviews extends Component {
             }
         },
         bIsShown: false,
+        hiddenStyle: {height: 0, overflow: 'hidden'},
         formIsValid: false,
     }
 
@@ -87,27 +103,89 @@ class Reviews extends Component {
         });
     }
 
+    /**
+     * Overflow hidden will be removed after the form has expanded fully.
+     */
+    setOverflow = () => {
+        if (!this.myForm) { return; } // Protection
+        // Execute only if form is shown.
+        if (this.state.bIsShown) {
+            if (this.myForm.current) { // Protection
+                const scrollHeight = this.myForm.current.scrollHeight;
+                const offsetHeight = this.myForm.current.offsetHeight;
+                // If the form is fully opened, remove overflow hidden.
+                if (scrollHeight === offsetHeight) {
+                    this.setState({
+                        hiddenStyle: {
+                            height: this.myForm.current ? this.myForm.current.scrollHeight : 0,
+                            overflow: 'visible'
+                        }
+                    });
+                }
+            }
+        }
+    }
+    
+    setRedirectPath = () => {
+        const path = this.state.pathname;
+		this.props.authSetRedirectPath(path);
+	}
+
     toggleFormHandler = () => {
+        if (!this.myForm) { return; } // If form is not set then don't so anything.
+        /**
+         * If the user is not logged in, store the current pathname and redirect to authenticate.
+         * The user will be redirected back to this page after a successful authentication.
+         */
+        if (!this.props.userDetails) {
+            this.setRedirectPath();
+            this.props.history.push('/authenticate');
+        }
         this.setState(prevState => {
+            let hiddenStyle;
+            // If the the current state is hidden, then next style will be visible.
+            if (!this.state.bIsShown) {
+                hiddenStyle = {
+                    ...this.state.hiddenStyle,
+                    height: this.myForm.current ? this.myForm.current.scrollHeight : 0,
+                }
+            // Otherwise, hide.
+            } else {
+                hiddenStyle = {height: 0, overflow: 'hidden'};
+            }
             return {
-                bIsShown: !prevState.bIsShown
+                bIsShown: !prevState.bIsShown,
+                hiddenStyle: hiddenStyle
             }
         });
     }
 
-    onScoreHandler = (score) => {
+    onRatingHandler = (score) => {
         this.setState({
-            score: score
+            rating: score
+        });
+    }
+
+    onPriceRatingHandler = (score) => {
+        this.setState({
+            priceRating: score
         });
     }
 
     submitReview = (event) => {
         event.preventDefault();
-        const review = {
-            id: this.props.id,
-            rating: this.state.score,
-            price: this.state.priceScore
+        if (this.state.formIsValid) { // Protection against invalid forms.
+            return toast.error('Please, fill in the review fields.');
         }
+        const review = {
+            rating: this.state.rating,
+            price: this.state.priceRating,
+            comment: this.state.controls.review.value,
+            reviewerDisplayName: this.props.userDetails.displayName,
+            reviewerEmail: this.props.userDetails.email,
+            uid: this.props.userDetails.uid,
+            serviceId: this.props.id
+        };
         console.log(review);
     }
 
@@ -133,12 +211,6 @@ class Reviews extends Component {
         const rating = {
             avg: this.props.ratings.rating,
             totalReviews: this.props.ratings.ratingCount
-        }
-        const wellClasses = [classes.Well];
-        let hiddenStyle = {height: 0};
-        if (this.state.bIsShown) {
-            hiddenStyle = {height: this.myForm.current ? this.myForm.current.scrollHeight : 0}
-            wellClasses.push(classes.Hidden);
         }
         return (
             <div className={classes.Wrapper}>
@@ -178,17 +250,32 @@ class Reviews extends Component {
                             {/* Only render the form if there are user details and if 'this.props.bShowForm' is true, otherwise render null. */}
                             {this.props.userDetails && this.props.bShowForm ?
                                 <div className={classes.Form}>
+                                    <ReactResizeDetector handleWidth handleHeight onResize={this.setOverflow} />
                                     <form ref={this.myForm} 
                                         className={classes.Well} 
-                                        style={hiddenStyle} 
+                                        style={this.state.hiddenStyle} 
                                         onSubmit={this.submitReview}>
-                                        <span onClick={this.toggleFormHandler} className={classes.Close} />
+                                        <Close onClick={this.toggleFormHandler} />
                                         <Input 
                                             style={this.state.controls.displayName.style}
                                             elementType={this.state.controls.displayName.elementType} 
                                             elementConfig={this.state.controls[this.state.controls.displayName.valueType] ? this.state.controls[this.state.controls.displayName.valueType].elementConfig : this.state.controls.displayName.elementConfig} // Referenced to state to mutate
                                             value={this.props.userDetails.displayName} />
-                                        <Score onChange={this.onScoreHandler} />
+                                        <div className={classes.Score}>
+                                            <Score onChange={this.onRatingHandler} /><sub><h4>(Rating)</h4></sub>
+                                        </div>
+                                        <div className={classes.Score}>
+                                            <Score priceRating amount={4} onChange={this.onPriceRatingHandler} /><sub><h4>(Price Rating)</h4></sub>
+                                            {/**
+                                            *    Only render tooltip when the form is shown. If not shown it'll return null, thus
+                                            *    resetting the tooltip's state to hidden.
+                                             */}
+                                            {this.state.bIsShown ? 
+                                                <Tooltip className={classes.Tooltip}>
+                                                    <Information />
+                                                </Tooltip>
+                                                : null}
+                                        </div>
                                         <Input 
                                             style={this.state.controls.review.style}
                                             elementType={this.state.controls.review.elementType} 
@@ -216,4 +303,10 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps)(Reviews);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		authSetRedirectPath: (path) => dispatch(authActions.authSetRedirectPath(path))
+	};
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Reviews));

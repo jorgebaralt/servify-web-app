@@ -20,6 +20,11 @@ class SVGComponent extends PureComponent {
         let svg = null;
         // switch statement that picks the respective svg file depending on name
         switch (this.props.svg) {
+            case 'underline':
+                svg = <div style={this.props.style}>
+                        {this.randomUnderline(Underlines)(this.props)}
+                    </div>
+                break;
             case 'right-arrow':
                 svg = <SVG.RightArrow {...this.props} />;
                 break;
@@ -86,10 +91,8 @@ class SVGComponent extends PureComponent {
             case 'website':
                 svg = <SVG.Website {...this.props} />;
                 break;
-            case 'underline':
-                svg = <div style={this.props.style}>
-                        {this.randomUnderline(Underlines)(this.props)}
-                    </div>
+            case 'question-mark':
+                svg = <SVG.QuestionMark {...this.props} />;
                 break;
             // Social Media Icons
             case 'facebook-nobg':
@@ -118,8 +121,7 @@ class SVGComponent extends PureComponent {
                 svg = <Contact.ServicePost />
                 break;
             default:
-                svg = <div>Please specify a <strong>props.svg</strong>, 
-                or make sure you're using the right file name inside the <strong>assets/svg folder</strong>.</div>;
+                svg = <div><strong>?</strong></div>;
         };
         return svg;
     }

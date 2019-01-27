@@ -30,6 +30,10 @@
     left: 5px;
     font-size: 14px;
     color: #484848;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 .InputElement {

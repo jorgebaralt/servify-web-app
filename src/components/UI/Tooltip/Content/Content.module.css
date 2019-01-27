@@ -1,0 +1,50 @@
+.Wrapper {
+    position: absolute;
+    z-index: 10;
+    bottom: 100%;
+    width: 420px;
+    width: 304px;
+    max-width: 90vw;
+    margin-bottom: 20px;
+}
+
+.Container {
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px;
+    padding: 18px;
+    position: relative;
+    display: inline-block;
+    background: #FFF;
+    border: 1px solid rgb(235, 235, 235);
+    border-image: initial;
+}
+
+.Cancel {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
+
+.Cancel svg {
+    width: 10px;
+    height: 10px;
+}
+
+.Content {
+    padding-right: 21px;
+    overflow-wrap: break-word;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.25em;
+    color: #484848;
+    margin: 0px;
+}
+
+.Triangle {
+    position: absolute;
+    width: auto!important;
+    height: auto!important;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -23.5px;
+}

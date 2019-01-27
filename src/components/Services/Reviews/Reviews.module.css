@@ -50,9 +50,9 @@
 
 .Well {
     vertical-align: middle;
-    overflow: hidden;
     border-left: 2px solid #686868;
     margin: 2px 0;
+    margin-top: 16px;
     padding-left: 24px;
     border-radius: 4px;
     position: relative;
@@ -61,31 +61,35 @@
     transition: height ease-out 500ms;
 }
 
-/* .Hidden {
-    height: 0;
-} */
-
-.Close {    
+.Score {
     display: flex;
-    flex-flow: column;
-    justify-content: center;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
 }
 
-.Close:after{
-    display: block;
-    content: '';
-    border: 1px solid #484848;
-    border-radius: 50%;
-    background-color: #484848;
+.Score sub {
+    user-select: none;
+    margin-top: 3px;
+    margin-left: 6px;
+}
+
+.Score h4 {
+    color: #989898;
 }
 
 .Submit {
     height: 48px;
     margin: 12px 0;
+}
+
+.Tooltip {
+    position: absolute;
+    top: 0;
+    left: 106px;
+}
+
+.Tooltip svg {
+    width: 15px;
+    height: 15px;
 }

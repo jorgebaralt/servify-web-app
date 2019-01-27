@@ -236,11 +236,12 @@ export const authSagas = {
         const userRef = yield firestore.collection('users').doc(user.uid);
         const userData = yield {
             displayName: user.displayName,
+            fullName: user.displayName,
             email: user.email,
             emailVerified: user.emailVerified,
             photoURL: user.photoURL,
             uid: user.uid,
-            creationTime: user.metadata.creationTime
+            creationDate: user.metadata.creationTime
         }
         if (bIsSignUpProvider) {
             userData['provider'] = bIsSignUpProvider;

@@ -1,0 +1,8 @@
+<svg 
+	xmlns="http://www.w3.org/2000/svg" 
+	x="0px" 
+	y="0px" 
+	viewBox="0 0 20 20">
+	<path fill="#FFFFFF" d="M0,0 20,0 10,10z"> </path>
+	<path fill="transparent" stroke="#E6E6E6" d="M0,0 10,10 20,0"></path>
+</svg>

@@ -1,0 +1,15 @@
+.Container {
+    margin: 12px auto;
+}
+
+.Header {
+    margin-bottom: 21px;
+}
+
+.Currencies {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: row;
+    margin-bottom: 8px;
+}

@@ -20,7 +20,8 @@ import MultiImage from './multi-image';
 import Delete from './delete';
 import Website from './website';
 import DeliveryTruck from './delivery-truck';
-
+import QuestionMark from './question-mark';
+// TODO make SVG
 import BlackBorderlessLogo from '../images/servify-logos/blackborder-nobg';
 
 // TODO underline randomize colors
@@ -47,5 +48,6 @@ export {
     MultiImage,
     Delete,
     Website,
-    DeliveryTruck
+    DeliveryTruck,
+    QuestionMark
 };
