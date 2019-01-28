@@ -69,3 +69,9 @@
     margin: 0px;
     margin-right: 10px;
 }
+
+.Rating {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}

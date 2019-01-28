@@ -4,24 +4,16 @@ import StarsRating from './StarsRating/StarsRating';
 import PriceRating from './PriceRating/PriceRating';
 
 const rating = (props) => {
-    let rating;
     switch (props.type) {
         case'stars': 
-            rating = <StarsRating {...props} />
-            break;
+            return <StarsRating {...props} />;
         case 'price':
-            rating = <PriceRating
+            return <PriceRating
                 onClick={props.onClick}
-                {...props} />
-            break;
+                {...props} />;
         default:
-            rating = <span>Please specify an appropriate rating type.</span>
+            return <span>Please specify an appropriate rating type.</span>;
     }
-    return (
-        <>
-            {rating}
-        </>
-    );
 }
 
 export default rating;

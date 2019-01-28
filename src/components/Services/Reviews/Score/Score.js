@@ -9,7 +9,8 @@ class Score extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            score: this.props.amount ? this.props.amount : 5, // Score variable for the form element
+            // Score variable for the form element, defaults to 5 if not priceRating, otherwise defaults to amount or 5.
+            score:  this.props.priceRating ? 1 : this.props.amount ? this.props.amount : 5,
             // Fill variable for SVG items, if it's priceRating then it defaults to 1 (the minimum).
             // Otherwise it's the amount passed or defaults to 5.
             fill: this.props.priceRating ? 1 : this.props.amount ? this.props.amount : 5,

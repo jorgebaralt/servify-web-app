@@ -24,31 +24,32 @@ import LoadingBounce from '../../UI/LoadingBounce/LoadingBounce'; // Placeholder
 import LoadingDots from '../../UI/LoadingDots/LoadingDots'; // Submit button
 
 const calculateNewRatings = (oldRatings, review, bIsDelete) => {
-    const ratings = {
-        rating: oldRatings.rating ? oldRatings.rating : 0,
-        ratingSum: oldRatings.ratingSum ? oldRatings.ratingSum : 0,
-        ratingCount: oldRatings.ratingCount ? oldRatings.ratingCount : 0
-    }
+    const ratings = { ...oldRatings };
     // If it's delete then the count decreses by 1. Else it will add 1.
     if (bIsDelete) {
-        ratings.ratingCount = ratings.ratingCount - 1;
+        ratings.priceCount--;
+        ratings.ratingCount--;
     } else {
-        ratings.ratingCount = ratings.ratingCount + 1;
+        ratings.priceCount++;
+        ratings.ratingCount++;
     }
     // If it's a post, then sum. Else it will be a difference between the old sum
     // and the deleted review's rating.
     if (bIsDelete) {
-        ratings.ratingSum = ratings.ratingSum - review.rating;
+        ratings.priceSum -= review.price;
+        ratings.ratingSum -= review.rating;
     } else {
-        ratings.ratingSum = ratings.ratingSum + review.rating;
+        ratings.priceSum += review.price;
+        ratings.ratingSum += review.rating;
     }
+    ratings.price = ( // Average
+        (ratings.priceSum) / (ratings.priceCount)
+    );
     ratings.rating = ( // Average
-        (ratings.ratingSum)
-        / 
-        (ratings.ratingCount)
+        (ratings.ratingSum) / (ratings.ratingCount)
     );
     return ratings;
-}
+};
 
 class Reviews extends Component {
     constructor(props){
@@ -69,7 +70,7 @@ class Reviews extends Component {
          */
         pathname: this.props.location.pathname, 
         reviews: [], // Initialize as empty array to avoid crashes.
-        ratings: { ...this.props.ratings },
+        ratings: this.props.ratings ? { ...this.props.ratings } : null,
         bUserReviewFetched: false, // Means the user review has not been fetched yet, this avoids infinite axios callbacks.
         userReview: null,
         // Review score
@@ -232,7 +233,7 @@ class Reviews extends Component {
                 const newReview = response.data;
                 newReview.timestamp = new Date(); // To mimic the backend's timestamp by firebase.
                 // Reviews will be the state's reviews array or an empty array if no reviews,
-                // then we push te new review to set a new state.
+                // then we push the new review to set a new state.
                 const reviews = this.state.reviews ? [ ...this.state.reviews ] : [];
                 const newRatings = calculateNewRatings(this.state.ratings, newReview);
                 reviews.push(newReview);
@@ -241,10 +242,11 @@ class Reviews extends Component {
                     // Pushing the new userReview and newRatings to display them
                     ratings: newRatings,
                     userReview: newReview,
+                    bUserReviewFetched: true // To avoid fetching data since review is already updated.
                 });
             })
             .catch(() => {
-                toast.error('Something went wrong when trying to post your review.');
+                toast.error('Something went wrong when trying to post your review. Try reloading the page!');
                 this.setState({
                     bIsUploading: false
                 });
@@ -252,11 +254,10 @@ class Reviews extends Component {
     }
 
     deleteReview = (deletedReview) => {
-        console.log(deletedReview)
         // Checking if the reviews have valid id's and the reviewId
         // is equal to the userReview.id
         if ((!deletedReview.id || !this.state.userReview.id) || (deletedReview.id !== this.state.userReview.id)) { 
-            return toast.error('Something went wrong when trying to delete your review.');
+            return toast.error('Something went wrong when trying to delete your review. Try reloading the page!');
         }
         this.setState({
             bIsDeleting: true
@@ -273,7 +274,7 @@ class Reviews extends Component {
                 });
             })
             .catch(() => {
-                toast.error('Something went wrong when trying to delete your review.');
+                toast.error('Something went wrong when trying to delete your review. Try reloading the page!');
                 this.setState({
                     bIsDeleting: false
                 });
@@ -284,7 +285,6 @@ class Reviews extends Component {
         const uid = this.props.userDetails ? this.props.userDetails.uid : null;
         axios.get('/reviews', { params: { serviceId: this.props.serviceId, uid: uid } })
             .then( response => {
-                console.log(response.data)
                 const reviews = response.data;
                 if (reviews.length) {
                     this.setState({
@@ -359,11 +359,6 @@ class Reviews extends Component {
     }
 
     render() {
-        const rating = {
-            avg: this.state.ratings.rating,
-            totalReviews: this.state.ratings.ratingCount
-        }
-        console.log(this.state)
         return (
             <div className={classes.Wrapper}>
                 <div className={classes.Container}>
@@ -371,7 +366,7 @@ class Reviews extends Component {
                         <LoadingBounce />
                         : (this.state.reviews.length || this.state.userReview) ? 
                             <>
-                                <Ratings rating={rating} />
+                                <Ratings ratings={this.state.ratings} />
                                 <div style={{margin: '0 auto'}} className={classes.Wrapper}>
                                     {this.state.userReview ? 
                                         <UserReview
@@ -383,19 +378,11 @@ class Reviews extends Component {
                                     : null}
                                     <>
                                         {this.state.reviews.map( (review, index) => {
-                                            // TODO will be deprecated when reviews are fetched individually
-                                            const displayName = review.reviewerDisplayName;
-                                            const uid = review.uid;
-                                            const creationDate = review.timestamp;
-                                            const rating = review.rating;
-                                            const comment = review.comment;
+                                            // TODO passing some of the props 
+                                            // will be deprecated when reviews are fetched individually
                                             return (
                                                 <Review key={index}
-                                                    displayName={displayName}
-                                                    uid={uid}
-                                                    date={creationDate}
-                                                    rating={rating/5}
-                                                    comment={comment} />
+                                                    review={review} />
                                             );
                                         })}
                                     </>

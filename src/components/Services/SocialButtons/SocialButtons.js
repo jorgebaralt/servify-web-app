@@ -30,7 +30,8 @@ class SocialButtons extends Component {
 	}
 
     favoriteServiceHandler = () => {
-        console.log('ping')
+        // Assuming the request will be successful. This is to improve user friendliness w/ instant response.
+        toast.success('This service has been added to your favorites.');
         /**
          * If the user is not logged in, store the current pathname and redirect to authenticate.
          * The user will be redirected back to this page after a successful authentication.
@@ -39,15 +40,12 @@ class SocialButtons extends Component {
             this.setRedirectPath();
             this.props.history.push('/authenticate');
         }
-        console.log('pananng')
         const serviceId = this.props.match.params.id;
         axios.post('/favorites', { uid: this.props.userDetails.uid, serviceId: serviceId })
-            .then((response) => {
-                console.log(response);
-                toast.success('This service has been added to your favorites.');
+            .then(() => {
+                return;
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
                 toast.error('Something went wrong.')
             });
     }

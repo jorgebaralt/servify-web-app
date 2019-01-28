@@ -1,7 +1,7 @@
 .Price {
-    display: flex;
-    align-items: flex-end;
-    height: 13px;
-    margin-left: 5px;
+    display: inline-flex;
+    vertical-align: middle;
+    line-height: 21px;
+    margin: 0 5px 0 5px;
 }
 

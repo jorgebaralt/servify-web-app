@@ -12,7 +12,7 @@
 
 .HeaderItem {
     display: table-cell;
-    vertical-align: middle;
+    vertical-align: top;
 }
 
 @media (max-width: 520px) {
@@ -97,9 +97,15 @@
 }
 
 .Rating {
+    display: flex;
+    flex-flow: column;
     margin: 0;
-    margin-top: 1ch;
-    margin-left: -0.65ch;
+    margin-top: 2px;
+    margin-left: -0.25ch;
+}
+
+.Rating span {
+    margin: 2px 0;
 }
 
 .CommentContainer {

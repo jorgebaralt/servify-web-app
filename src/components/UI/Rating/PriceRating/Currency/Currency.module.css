@@ -2,6 +2,7 @@
     display: inline-block;
     color: #FF7043;
     font-size: 9px;
-    height: 10px;
-    width: 9px;
+    margin-right: 1px;
+    min-height: 10px;
+    min-width: 9px;
 }

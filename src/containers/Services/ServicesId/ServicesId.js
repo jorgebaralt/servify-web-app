@@ -41,7 +41,10 @@ class ServicesId extends Component {
         this.state = {
             service: {},
             contact: {},
-            ratings: {},
+            ratings: {
+                price: null,
+                service: null
+            },
             locationData: {},
             address: null,
             map: {},
@@ -175,7 +178,7 @@ class ServicesId extends Component {
                         <InfoPoint location={this.state.locationData ? this.state.locationData.region : null}/>
                         <InfoPoint logistic={this.state.logistic}/>
                         {this.state.service.website ? <InfoPoint website='bonpreufoods.com'/> : null}
-                        {/* 
+                        {/* TODO languages
                             <InfoPoint symbol={<SVG svg='chat' />} info='Services offered in English and Spanish'/> 
                         */}
                         <Separator />
@@ -188,6 +191,7 @@ class ServicesId extends Component {
                             </div>
                         </InfoSection>
                         <Separator />
+                        {/* Will only render if the provider has a title AND a description */}
                         {this.state.service.provider && this.state.service.providerDescription ?
                             <>
                                 <InfoSection
@@ -215,7 +219,10 @@ class ServicesId extends Component {
                 <Separator />
                 {this.state.ratings ? 
                     <Reviews bShowForm 
-                        ratings={this.state.ratings.service} 
+                        ratings={{
+                            ...this.state.ratings.service,
+                            ...this.state.ratings.price,
+                        }} 
                         serviceId={this.state.service.id} /> : null}
                 {this.props.services.nearServices ? 
                     <>
@@ -228,6 +235,10 @@ class ServicesId extends Component {
                                 <div className={classes.CarouselContainer}>
                                     <Carousel>
                                         {Object.values(this.props.services.nearServices).map( (service, index) => {
+                                            // Don't map the same service into near services.
+                                            if (service.id === this.props.match.params.id) {
+                                                return null;
+                                            }
                                             return (
                                                 <Service
                                                     key={index}

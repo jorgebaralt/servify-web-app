@@ -7,6 +7,7 @@ import defaultImage from '../../../assets/favicon/android-icon-48x48.png';
 import classes from './UserReview.module.css';
 // JSX
 import { Link } from 'react-router-dom';
+import Separator from '../../../components/UI/Separator/Separator';
 import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
 import Rating from '../../../components/UI/Rating/Rating';
@@ -21,6 +22,7 @@ class UserReview extends Component {
         uid: this.props.userReview.uid,
         date: this.props.userReview.timestamp,
         rating: this.props.userReview.rating/5,
+        priceRating: this.props.userReview.price/4,
         comment: this.props.userReview.comment
     }
 
@@ -51,10 +53,14 @@ class UserReview extends Component {
                     closeModal={this.toggleModal}
                     toggleModal={this.toggleModal}>
                     <div className={classes.Modal}>
+                        <div className={classes.Confirm}>
+                            Confirm
+                        </div>
+                        <Separator />
                         <div className={classes.Prompt}>
                             Are you sure that you want to delete this review?
                         </div>
-                        <Button style={{height: '50px'}} clicked={this.onDeleteReviewHandler} blockButton type='success'>
+                        <Button style={{height: '50px'}} disabled={this.props.bIsDeleting} clicked={this.onDeleteReviewHandler} blockButton type='success'>
                             {/* If deleting, will display animation. */}
                             {this.props.bIsDeleting ? <LoadingDots /> : 'Proceed'}
                         </Button>
@@ -98,6 +104,7 @@ class UserReview extends Component {
                             </div>
                             <div className={classes.Rating}>
                                 <Rating rating={this.state.rating} amount={totalStarsRatingAmount} height={'15px'} width={'15px'} type='stars' />
+                                <Rating rating={this.state.priceRating} amount={4} height={'15px'} width={'15px'} type='price' />
                             </div>
                         </div>
                     </div>
