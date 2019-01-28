@@ -16,19 +16,8 @@ class Tooltip extends Component {
         bIsHidden: true
     }
 
-    // componentDidUpdate() {
-    //     if (!this.state.bIsHidden) {
-    //         console.log('ping');
-    //         // window.addEventListener('click', this.closeTooltip);
-    //     } else {
-    //         // window.removeEventListener('click', this.closeTooltip);
-    //     }
-    // }
-
     componentDidUpdate() {
-        console.log('ref inside componentDidUpdate', this.myContent)
         if (!this.state.bIsHidden) {
-            console.log('document active el inside componentDidUpdate')
             this.myContent.current.focus();
         }
     }
@@ -48,7 +37,6 @@ class Tooltip extends Component {
     }
 
     render() {
-        console.log('ref inside render', this.myContent)
         const tooltipClasses = [classes.Container];
         if (this.props.className) {
             tooltipClasses.push(this.props.className);

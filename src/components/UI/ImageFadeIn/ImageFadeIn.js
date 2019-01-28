@@ -79,14 +79,15 @@ class ImageFadeIn extends Component {
         return this.state.bShouldUpdate;
     }
 
-    render () {
+    
+    myImage = () => {
         let imgClasses = classes.Image;
         // if there is prop className use those instead
         if (this.props.className) {
             imgClasses = this.props.className;
         }
         return (
-            <div className={this.props.className ? null : classes.ImageWrapper}>
+            <>
                 {!this.state.src ? 
                     this.props.loading ? 
                         <div className={classes.Loading}><LoadingBounce /></div> 
@@ -113,8 +114,56 @@ class ImageFadeIn extends Component {
                         className={imgClasses}
                         onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 500))} />
                 }
-            </div>
-            
+            </>
+        )
+    }
+
+    render () {
+        let imgClasses = classes.Image;
+        // if there is prop className use those instead
+        if (this.props.className) {
+            imgClasses = this.props.className;
+        }
+        const Image = () => {
+            return (
+                <>
+                    {!this.state.src ? 
+                        this.props.loading ? 
+                            <div className={classes.Loading}><LoadingBounce /></div> 
+                            : null
+                    : null}
+                    {this.bIsSrcset ? 
+                        // If there is a srcset, otherwise render image without srcset
+                        <img
+                            draggable={this.props.draggable}
+                            ref={this.myImage}
+                            alt=''
+                            sizes="100vw"
+                            src={this.state.src}
+                            srcSet={this.state.srcset}
+                            style={this.props.style}
+                            className={imgClasses}
+                            onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 500))} /> 
+                        : <img
+                            draggable={this.props.draggable}
+                            ref={this.myImage}
+                            alt=''
+                            src={this.state.src}
+                            style={this.props.style}
+                            className={imgClasses}
+                            onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 500))} />
+                    }
+                </>
+            )
+        }
+        return (
+            this.props.noWrapper ? 
+                <Image />
+                : (
+                    <div className={this.props.className ? null : classes.ImageWrapper}>
+                        <Image />
+                    </div>
+                )
         );
     }
 }

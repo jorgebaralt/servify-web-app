@@ -1,20 +1,37 @@
 import React, { Component } from 'react';
-// Redux Saga
+// redux-saga, react-router-dom and axios
+import axios from '../../../../axios-services'
 import  { connect } from 'react-redux';
 // Anon User Image
-import anonUser from '../../../assets/svg/source/user-nobg.svg';
+import anonUser from '../../../../assets/svg/source/user-nobg.svg';
 // CSS
 import classes from './UsersId.module.css';
 // JSX
-import Review from '../../../components/Services/Reviews/Review/Review';
-import Service from '../../../components/Services/Service/Service';
-import ImageFadeIn from '../../../components/UI/ImageFadeIn/ImageFadeIn';
-import Separator from '../../../components/UI/Separator/Separator';
-import { Slider, Slide } from '../../../components/UI/Slider/';
+import Review from '../../../../components/Services/Reviews/Review/Review';
+import Service from '../../../../components/Services/Service/Service';
+import ImageFadeIn from '../../../../components/UI/ImageFadeIn/ImageFadeIn';
+import Separator from '../../../../components/UI/Separator/Separator';
+import { Slider, Slide } from '../../../../components/UI/Slider/';
 
 class UsersId extends Component {
     state = {
-        reviews: 12
+        userDetails: null,
+        reviews: null,
+        favoriteServices: null
+    }
+
+    componentDidMount() {
+        console.log(this.props.userDetails.uid)
+        console.log(this.props)
+        console.log(this.props.match.params.id)
+        axios.get('/favorites', { uid: this.props.userDetails.uid })
+            .then(response => {
+                const favoriteServices = response.data;
+                console.log(response)
+                this.setState({
+                    favoriteServices: favoriteServices
+                });
+            })
     }
 
     render () {
@@ -69,26 +86,21 @@ class UsersId extends Component {
                     {this.props.userDetails.favoriteServices ? 
                         <div className={classes.ServicesWrapper}>
                             <div className={classes.ServicesContainer}>
-                                <div className={classes.Service}>
-                                    <Service
-                                        header='Home Services'
-                                        title='A Random Service'
-                                        priceRating='0.05'
-                                        ratingAvg={0.97}
-                                        ratingAmount='1293'
-                                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'
-                                        href='/services/1' />
-                                </div>
-                                <div className={classes.Service}>
-                                    <Service
-                                        header='Home Services'
-                                        title='A Random Service'
-                                        priceRating='0.05'
-                                        ratingAvg={0.97}
-                                        ratingAmount='1293'
-                                        image='https://a0.muscache.com/im/pictures/18c5d39e-e98d-4d3b-a9d1-9101cd2596ed.jpg?aki_policy=large'
-                                        href='/services/1' />
-                                </div>
+                                {this.props.services.favoriteServices.map( (service, index) => {
+                                    return (
+                                        <div className={classes.Service}>
+                                            <Service
+                                                key={index}
+                                                header={service.category.replace("_", " ")}
+                                                title={service.title}
+                                                priceRating={service.priceRating/4}
+                                                href={service.id}
+                                                ratingAvg={service.rating/5}
+                                                ratingAmount={service.ratingCount}
+                                                image={service.imagesInfo}/>
+                                        </div>
+                                    );
+                                } )}
                             </div>
                         </div>
                         : <span>No favorite services yet.</span>
@@ -99,10 +111,4 @@ class UsersId extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-	return {
-        userDetails: state.authReducer.userDetails,
-	};
-};
-
-export default connect(mapStateToProps)(UsersId);
+export default UsersId;

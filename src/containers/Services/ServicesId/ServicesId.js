@@ -127,7 +127,7 @@ class ServicesId extends Component {
                                 ratingSum: data.ratingSum
                             }
                         },
-                        bIsDelivery: data.bIsDelivery,
+                        bIsDelivery: data.isDelivery,
                         logistic: data.logistic,
                         locationData: {
                             street: data.locationData.street,
@@ -216,7 +216,7 @@ class ServicesId extends Component {
                 {this.state.ratings ? 
                     <Reviews bShowForm 
                         ratings={this.state.ratings.service} 
-                        id={{ serviceId: this.state.service.id}} /> : null}
+                        serviceId={this.state.service.id} /> : null}
                 {this.props.services.nearServices ? 
                     <>
                         <Separator />
@@ -234,7 +234,7 @@ class ServicesId extends Component {
                                                     header={service.category.replace("_", " ")}
                                                     title={service.title}
                                                     href={service.id}
-                                                    priceRating='0.05'
+                                                    priceRating={service.price/4}
                                                     ratingAvg={service.rating/5}
                                                     ratingAmount={service.ratingCount}
                                                     image={service.imagesInfo}/>

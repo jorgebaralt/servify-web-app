@@ -16,11 +16,11 @@ const services = (props) => {
                         <Service
                             header={service.category.replace("_", " ")}
                             title={service.title}
-                            priceRating={service.priceRating}
+                            href={service.id}
+                            priceRating={service.price/4}
                             ratingAvg={service.rating/5}
                             ratingAmount={service.ratingCount}
-                            image={service.imagesInfo}
-                            href={service.id} />
+                            image={service.imagesInfo}/>
                     </div>
                 );
             });

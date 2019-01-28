@@ -36,7 +36,7 @@ class StepEight extends PureComponent {
             // Step 4: Images (Optional)
             imagesInfo: null, // This is FormData, not images
             // Step 5: Logistic
-            bIsDelivery: null,
+            isDelivery: null,
             delivery: null,
             // Step 6: Service Address
             locationData: {

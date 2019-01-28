@@ -10,19 +10,10 @@
     left: 0;
 }
 
-.ProfilePhoto {
+.Photo {
     user-select: none;
     margin-bottom: 18px;
     width: 100%;
-    height: 250px;
-    border: 1px solid #E0E0E0;
-    background-color: #EDEFED;
-}
-
-@media (max-width: 866px) {
-    .ProfilePhoto img {
-        object-fit: fill !important;
-    }
 }
 
 .Nav {

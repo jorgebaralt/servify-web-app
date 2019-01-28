@@ -4,7 +4,7 @@ import defaultImage from '../../../../assets/favicon/android-icon-48x48.png';
 // CSS
 import classes from './Review.module.css';
 // JSX
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Rating from '../../../../components/UI/Rating/Rating';
 
 const review = (props) => {
@@ -15,9 +15,8 @@ const review = (props) => {
                 {/* Image */}
                 <div className={classes.HeaderItem}>
                     <div className={classes.ImageContainer}>
-                        <NavLink 
-                            // TODO add correct route
-                            to={['/users/show/', props.userId].join('')}
+                        <Link 
+                            to={['/users/show/', props.uid].join('')}
                             aria-label={props.user}
                             aria-busy="false">
                             <img 
@@ -27,14 +26,19 @@ const review = (props) => {
                                 width="48" 
                                 alt={props.user} 
                                 title={props.user} />
-                        </NavLink>
+                        </Link>
                     </div>
                 </div>
                 {/* User info */}
                 <div className={classes.HeaderItem}>
                     <div className={classes.UserContainer}>
                         <div className={classes.User}>
-                            <span className={classes.Username}>{props.displayName}</span>
+                            <Link 
+                                to={['/users/show/', props.uid].join('')}
+                                aria-label={props.user}
+                                aria-busy="false">
+                                <span className={classes.Username}>{props.displayName}</span>
+                            </Link>
                             <span style={{margin: '0 1ch 3px'}}>-</span>
                             <span className={classes.Date}>{new Date(String(props.date)).toLocaleDateString()}</span>
                         </div>
@@ -44,7 +48,6 @@ const review = (props) => {
                     </div>
                 </div>
             </div>
-            {/* TODO remove placeholders */}
             <div className={classes.CommentContainer}>
                 <div dir='ltr' className={classes.Comment}>
                     {props.comment}

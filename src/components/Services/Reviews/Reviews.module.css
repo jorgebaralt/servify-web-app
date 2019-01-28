@@ -9,6 +9,7 @@
 .Container {
     display: flex;
     flex-direction: row;
+    margin-top: 19px;
 }
 
 .Rate {
@@ -40,12 +41,13 @@
     padding: 14px 22px;
     transition: all .3s;
     text-decoration: none;
+    margin-bottom: 19px;
 }
 
 .Form {
     padding-right: 21px;
     width: 90%;
-    margin: 19px auto;
+    margin: 0 auto;
 }
 
 .Well {

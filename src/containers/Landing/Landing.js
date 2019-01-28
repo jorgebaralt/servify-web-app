@@ -121,7 +121,7 @@ class Landing extends Component {
                                         header={service.category.replace("_", " ")}
                                         title={service.title}
                                         href={service.id}
-                                        priceRating='0.05'
+                                        priceRating={service.price/4}
                                         ratingAvg={service.rating/5}
                                         ratingAmount={service.ratingCount}
                                         image={service.imagesInfo}/>
@@ -145,7 +145,7 @@ class Landing extends Component {
                                         key={index}
                                         header={service.category.replace("_", " ")}
                                         title={service.title}
-                                        priceRating={service.priceRating/4}
+                                        priceRating={service.price/4}
                                         href={service.id}
                                         ratingAvg={service.rating/5}
                                         ratingAmount={service.ratingCount}

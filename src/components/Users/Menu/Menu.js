@@ -4,16 +4,16 @@ import anonUser from '../../../assets/svg/source/user-nobg.svg';
 // CSS
 import classes from './Menu.module.css';
 // JSX
-import { withRouter, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Panel from '../../UI/Panel/Panel';
-import ImageFadeIn from '../../UI/ImageFadeIn/ImageFadeIn';
+import ProfilePhoto from '../../Users/ProfilePhoto/ProfilePhoto';
 
 const menu = (props) => {
     return (
         <div className={classes.Wrapper}>
             <div className={classes.Container}>
-                <div className={classes.ProfilePhoto}>
-                    <ImageFadeIn draggable={false} src={props.photoURL ? props.photoURL : anonUser} />
+                <div className={classes.Photo}>
+                    <ProfilePhoto src={props.photoURL ? props.photoURL : anonUser} />
                 </div>
                 <Panel bold header='Account Menu'>
                     <ul className={classes.Nav}>
@@ -29,4 +29,4 @@ const menu = (props) => {
     );
 }
 
-export default withRouter(menu);
+export default menu;

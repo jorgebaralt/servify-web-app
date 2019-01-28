@@ -23,7 +23,7 @@ const Edit = React.lazy(() => import('./containers/Users/Edit/Edit'));
 const Feedback = React.lazy(() => import('./containers/Users/Feedback/Feedback'));
 const Publications = React.lazy(() => import('./containers/Users/Publications/Publications'));
 const PublicationsId = React.lazy(() => import('./containers/Users/Publications/Edit/PublicationsId'));
-const UsersId = React.lazy(() => import('./containers/Users/UsersId/UsersId'));
+const Show = React.lazy(() => import('./containers/Users/Show/Show'));
 
 const AuthRedirect = (props) => {
 	props.setRedirectPath();
@@ -85,7 +85,7 @@ class App extends Component {
 					<Route exact path="/users/publications" render={() => <Suspense fallback={<Loading />}><Publications /></Suspense>} />
 					<Route exact path="/users/publications/edit/:id" render={() => <Suspense fallback={<Loading />}><PublicationsId /></Suspense>} />
 					<Route exact path="/users/edit" render={() => <Suspense fallback={<Loading />}><Edit /></Suspense>} />
-					<Route exact path="/users/show" render={() => <Suspense fallback={<Loading />}><UsersId /></Suspense>} />
+					<Route path="/users/show" render={() => <Suspense fallback={<Loading />}><Show /></Suspense>} />
 					{/* 404 Page */}
 					<Route path="*" component={NotFound} />
 				</Switch>

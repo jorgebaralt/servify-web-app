@@ -3,36 +3,20 @@ import React, { Component } from 'react';
 import  { connect } from 'react-redux';
 // Input Validity
 import { checkValidity } from '../../../shared/checkValidity';
-import isArray from '../../../shared/isArray';
 // CSS
 import classes from './Edit.module.css';
 // JSX
 import Layout from '../../../hoc/Users/Layout/Layout';
+import SVG from '../../../components/SVG/SVG';
 import Input from '../../../components/UI/Input/Input';
 import Panel from '../../../components/UI/Panel/Panel';
 import Button from '../../../components/UI/Button/Button';
 import Separator from '../../../components/UI/Separator/Separator';
-import EditImages, { setItems } from '../../../components/UI/EditImages/EditImages';
-import SVG from '../../../components/SVG/SVG';
-import ImageFadeIn from '../../../components/UI/ImageFadeIn/ImageFadeIn';
 import InputImage from '../../../components/UI/Input/InputImage/InputImage';
 
 class Edit extends Component {
     constructor(props) {
         super(props);
-        // TODO remove placeholder
-        const listImages = [];
-        if (isArray(props.userDetails.photoURL)) {
-            props.userDetails.photoURL.forEach( photo => {
-                listImages.push(
-                    <ImageFadeIn draggable='false' src={photo} />
-                );
-            })
-        } else {
-            listImages.push(
-                <ImageFadeIn draggable='false' src={props.userDetails.photoURL} />
-            );
-        }
         this.state={
             controls: {
                 displayName: {
@@ -45,7 +29,7 @@ class Edit extends Component {
                         autoCapitalize:"on",
                         spellCheck:"false"
                     },
-                    value: props.userDetails.displayName ? props.userDetails.displayName : '', // TODO Fetch data from database
+                    value: props.userDetails.displayName ? props.userDetails.displayName : '',
                     valueType: 'display name',
                     validation: {
                         required: false
@@ -55,7 +39,6 @@ class Edit extends Component {
                     style: {margin: 0}
                 },
             },
-            images: setItems(listImages), // current images
             imageFiles: null, // to be uploaded
             formIsValid: true,
         };
@@ -98,7 +81,7 @@ class Edit extends Component {
 
     onSubmitHandler = (event) => {
         event.preventDefault();
-        // axios.post('https://us-central1-servify-716c6.cloudfunctions.net/uploadFile', this.state.imageFiles)
+        // axios.post('/uploadFile', this.state.imageFiles)
         //     .then(
         //         res => {
         //             console.log(res);
@@ -147,10 +130,6 @@ class Edit extends Component {
                                 </div>
                             );
                         })}
-                        {console.log(this.state.images[0].content)}
-                        { this.state.images[0].content ? 
-                            <EditImages title direction='vertical' updateImages={this.updateImages} images={this.state.images} />
-                            : null}
                         <Separator />
                         <InputImage onChange={this.inputImageChangeHandler} onSubmit={this.onSubmitHandler} />
                         <Separator />
