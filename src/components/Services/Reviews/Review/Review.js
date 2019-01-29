@@ -12,7 +12,6 @@ const review = (props) => {
     const displayName = props.review.reviewerDisplayName;
     const creationDate = props.review.timestamp;
     const { uid, rating, price, comment } = props.review;
-    
     const totalStarsRatingAmount = props.totalAmount ? props.totalAmount : 5;
     return (
         <div className={classes.Header}>
@@ -44,8 +43,16 @@ const review = (props) => {
                                 aria-busy="false">
                                 <span className={classes.Username}>{displayName}</span>
                             </Link>
-                            <span style={{margin: '0 1ch 3px'}}>-</span>
+                            <span className={classes.Spacing}>-</span>
                             <span className={classes.Date}>{new Date(String(creationDate)).toLocaleDateString()}</span>
+                            {props.link ? 
+                                <>
+                                <span className={classes.Spacing}>-</span>
+                                <Link to={['/services',props.review.serviceId].join('/')}>
+                                    <span className={classes.Link}>Link to Service</span>
+                                </Link>
+                                </>
+                                : null}
                         </div>
                         <div className={classes.Rating}>
                             <Rating rating={rating/5} amount={totalStarsRatingAmount} height={'15px'} width={'15px'} type='stars' />

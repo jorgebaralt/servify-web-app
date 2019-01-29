@@ -1,112 +1,147 @@
-import React, { Component } from 'react';
-// redux-saga, react-router-dom and axios
+import React, { Component, Suspense } from 'react';
+// axios
 import axios from '../../../../axios-services'
-import  { connect } from 'react-redux';
 // Anon User Image
 import anonUser from '../../../../assets/svg/source/user-nobg.svg';
 // CSS
 import classes from './UsersId.module.css';
 // JSX
-import Review from '../../../../components/Services/Reviews/Review/Review';
-import Service from '../../../../components/Services/Service/Service';
-import ImageFadeIn from '../../../../components/UI/ImageFadeIn/ImageFadeIn';
+import LoadingPage from '../../../../components/UI/LoadingPage/LoadingPage';
+import ProfilePhoto from '../../../../components/Users/ProfilePhoto/ProfilePhoto'
+import FavoriteServices from '../../../../components/Users/Show/FavoriteServices/FavoriteServices';
+import Reviews from '../../../../components/Users/Show/Reviews/Reviews';
 import Separator from '../../../../components/UI/Separator/Separator';
-import { Slider, Slide } from '../../../../components/UI/Slider/';
+
+// NotFound lazy import in case a service is not found
+const NotFound = React.lazy(() => import('../../../NotFound/NotFound'));
 
 class UsersId extends Component {
-    state = {
-        userDetails: null,
+    state = { // Initial state before fetching
+        bIsLoading: true,
+        bIsReviewsLoading: true,
+        bIsFavoritesLoading: true,
+        error: false,
         reviews: null,
         favoriteServices: null
     }
 
-    componentDidMount() {
-        console.log(this.props.userDetails.uid)
-        console.log(this.props)
-        console.log(this.props.match.params.id)
-        axios.get('/favorites', { uid: this.props.userDetails.uid })
-            .then(response => {
-                const favoriteServices = response.data;
-                console.log(response)
-                this.setState({
-                    favoriteServices: favoriteServices
+    getUserReviews = () => {
+        axios.get('/reviews', { params: { uid: this.state.uid } })
+            .then( response => {
+                const reviews = response.data.reviews;
+                console.log('data', reviews);
+                // Error handling in case there's an empty response
+                this.setState( () => {
+                    return {
+                        reviews: reviews,
+                        bIsReviewsLoading: false
+                    }
                 });
             })
+            .catch( () => {
+                this.setState({
+                    reviews: [],
+                    bIsReviewsLoading: false
+                });
+            });
+    }
+
+    getFavoriteServices= () => {
+        axios.get('/favorites', { params: { uid: this.state.uid } })
+            .then(response => {
+                const favoriteServices = response.data;
+                console.log(response);
+                this.setState({
+                    favoriteServices: favoriteServices,
+                    bIsFavoritesLoading: false
+                });
+            })
+            .catch( () => {
+                this.setState({
+                    favoriteServices: [],
+                    bIsFavoritesLoading: false
+                });
+            });
+    }
+
+    componentDidMount() {
+        const uid = this.props.match.params.id;
+        console.log('uid', uid);
+        axios.get('/user', { params: { uid: uid } })
+            .then( response => {
+                const data = response.data;
+                console.log('data', data);
+                // Error handling in case there's an empty response
+                if (!data) { 
+                    return this.setState({
+                        bIsLoading: false,
+                        error: true
+                    });
+                }
+                this.setState( () => {
+                    return {
+                        bIsLoading: false,
+                        ...data
+                    }
+                });
+                this.getFavoriteServices();
+                this.getUserReviews();
+            })
+            .catch( () => {
+                this.setState({
+                    bIsLoading: false,
+                    error: true
+                });
+            });
     }
 
     render () {
-        const creationDate = (new Date(Number(this.props.userDetails.metadata.a))).toLocaleDateString();
-        return (
+        let creationDate;
+        if (this.state.creationDate) {
+            creationDate = (new Date(this.state.creationDate)).toLocaleDateString();
+        }
+        const user = (
             <>
-                <div style={{paddingBottom: 0}} className={classes.Container}>
-                    <div className={classes.ProfileWrapper}>
-                        <div className={classes.ProfileContainer}>
-                            <Slider>
-                                <Slide>
-                                    <div className={classes.ProfilePhoto}>
-                                        <ImageFadeIn draggable={false} src={this.props.userDetails.photoURL ? this.props.userDetails.photoURL : anonUser} />
-                                    </div>
-                                </Slide>
-                            </Slider>
+                <div className={classes.Wrapper}>
+                    <div className={classes.Header}>
+                        {/* Profile */}
+                        <div className={classes.Photo}>
+                            <ProfilePhoto rounded src={this.state.photoURL ? this.state.photoURL : anonUser} />
+                        </div>
+                        <div className={classes.Content}>
+                            {/* Header Title */}
+                            <div className={classes.Title}>
+                                {!this.state.displayName ? 
+                                    <span>Hi!</span>
+                                    : <span>{['Hi, I\'m ', this.state.displayName, '!'].join('')}</span>
+                                }
+                            </div>
+                            {/* Join Date */}
+                            <div className={classes.JoinDate}>
+                                Member since: <span>{creationDate}</span>
+                            </div>
+                            <Separator />
+                            {/* Reviews */}
+                            <Reviews 
+                                loading={this.state.bIsReviewsLoading}
+                                // Reviews props
+                                reviews={this.state.reviews ? this.state.reviews : []} />
                         </div>
                     </div>
-                    <div className={classes.ContentWrapper}>
-                        <div className={classes.Title}>
-                            {!this.props.userDetails.displayName ? 
-                                <span>Hi!</span>
-                                : <span>{['Hi, I\'m ', this.props.userDetails.displayName, '!'].join('')}</span>
-                            }
-                        </div>
-                        <div className={classes.JoinDate}>
-                            Member since: <span>{creationDate}</span>
-                        </div>
-                        <Separator />
-                        <div className={classes.ReviewsContainer}>
-                            <div className={classes.Reviews}>{this.props.userDetails.reviewsCount | 0}</div> 
-                            <span>Reviews</span>
-                        </div>
-                        <Separator />
-                        <h1 className={classes.Title}>Reviews</h1>
-                        {this.props.userDetails.reviews ? 
-                            <div className={classes.ReviewsWrapper}>
-                                <Review />
-                                <Review />
-                                <Review />
-                            </div>
-                            : 
-                            <div className={classes.ReviewsWrapper}>
-                                <span>No reviews yet.</span>
-                            </div>
-                        }
+                    <div className={classes.Container}>
+                        <FavoriteServices 
+                            loading={this.state.bIsFavoritesLoading} 
+                            favoriteServices={this.state.favoriteServices ? this.state.favoriteServices : []} />
                     </div>
-                </div>
-                <div style={{paddingTop: 0, flexFlow: 'column'}} className={classes.Container}>
-                    <Separator />
-                    <h1 className={classes.Title}>Favorite Services</h1>
-                    {this.props.userDetails.favoriteServices ? 
-                        <div className={classes.ServicesWrapper}>
-                            <div className={classes.ServicesContainer}>
-                                {this.props.services.favoriteServices.map( (service, index) => {
-                                    return (
-                                        <div className={classes.Service}>
-                                            <Service
-                                                key={index}
-                                                header={service.category.replace("_", " ")}
-                                                title={service.title}
-                                                priceRating={service.priceRating/4}
-                                                href={service.id}
-                                                ratingAvg={service.rating/5}
-                                                ratingAmount={service.ratingCount}
-                                                image={service.imagesInfo}/>
-                                        </div>
-                                    );
-                                } )}
-                            </div>
-                        </div>
-                        : <span>No favorite services yet.</span>
-                    }
                 </div>
             </>
+        );
+        return (
+            this.state.bIsLoading ?
+                <LoadingPage />
+                : this.state.error ? 
+                    <Suspense fallback={<LoadingPage />}><NotFound /></Suspense>
+                    : user
         );
     }
 }

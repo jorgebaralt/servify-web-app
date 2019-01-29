@@ -1,0 +1,89 @@
+.Title {
+    user-select: none;
+    color: #484848;
+    text-transform: uppercase;
+}
+
+.Container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    margin: 24px 0;
+}
+
+@media (max-width: 744px) {
+    .Container {
+        flex-flow: column;
+        max-width: 240px;
+        margin: 24px auto 12px;
+    }
+    .Contact {
+        margin: 8px 0 12px !important;
+    }
+}
+
+.Button {
+    color: rgb(255, 112, 67);
+    font: inherit;
+    text-decoration: none;
+    appearance: none;
+    background: transparent;
+    border: 0px;
+    cursor: pointer;
+    margin: 0px;
+    padding: 0px;
+    user-select: auto;
+    text-align: center;
+}
+
+.Button:hover {
+    text-decoration: underline;
+    color: var(--color-text-link-hover, rgb(255, 112, 67));
+}
+
+.Content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Content svg {
+    margin: 0 6px;
+    margin-right: 0 12px;
+}
+
+.Contact {
+    cursor: default;
+    display: inline-flex;
+    max-width: 360px;
+    border: 1px solid rgb(255, 112, 67);
+    border-radius: 4px;
+    padding: 12px 6px;
+    margin-right: 24px;
+}
+
+.Input {
+    border:none;
+    background-image:none;
+    background-color:transparent;
+    box-shadow: none;
+    border: 0;
+    width: 100%;
+}
+
+.Email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(255, 112, 67);
+    border-radius: 4px;
+    padding: 12px 18px;
+}
+
+.Email span {
+    margin-top: 1px;
+    margin-left: 1ch;
+    cursor: pointer;
+    color: #484848;
+}

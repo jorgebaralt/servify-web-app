@@ -39,8 +39,10 @@ const service = (props) => {
                             {/* Price rating for easier interpretation */}
                             {props.title ? 
                                 <span className={classes.RatingsAvg}>Price</span>
-                            : null}
-                            <Rating type='price' rating={props.priceRating} />
+                                : null}
+                            {props.ratingAmount ?
+                                <Rating type='price' rating={props.priceRating} />
+                                : null}
                         </span>
                     </div>
                 : null}
@@ -49,10 +51,12 @@ const service = (props) => {
                         {/* Average Rating */}
                         <span role="img" className={classes.RatingsWrapper}>
                             {/* Rating Average times the total amount of stars for easier interpretation */}
-                            {props.title ? 
+                            {props.title && props.ratingAmount ? 
                                 <span className={classes.RatingsAvg}>{(props.ratingAvg*totalStarsRatingAmount).toFixed(2)}</span>
-                            : null}
-                            <Rating type='stars' rating={props.ratingAvg} amount={totalStarsRatingAmount}/>
+                                : null}
+                            {props.ratingAmount ?
+                                <Rating type='stars' rating={props.ratingAvg} amount={totalStarsRatingAmount}/>
+                                : null}
                         </span>
                         {/* Total amount of Ratings */}
                         {props.title ? 

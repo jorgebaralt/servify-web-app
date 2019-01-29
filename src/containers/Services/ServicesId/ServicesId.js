@@ -40,7 +40,7 @@ class ServicesId extends Component {
         props.servicesInit();
         this.state = {
             service: {},
-            contact: {},
+            contact: null,
             ratings: {
                 price: null,
                 service: null
@@ -102,7 +102,7 @@ class ServicesId extends Component {
                 this.setState( () => {
                     return {
                         loading: false,
-                        images: images ? images : [defaultImage],
+                        images: images.length ? images : [defaultImage],
                         service: {
                             category: data.category.replace('_', ' '),
                             title: data.title,
@@ -114,10 +114,11 @@ class ServicesId extends Component {
                             website: data.website,
                             id: data.id,
                         },
-                        contact: {
+                        // Only update if there is a phone/email, else it's null.
+                        contact: data.phone || data.email ? {
                             phone: data.phone,
                             email: data.email,
-                        },
+                        } : null,
                         ratings: {
                             price: {
                                 price: data.price,
@@ -184,7 +185,7 @@ class ServicesId extends Component {
                         <Separator />
                         <InfoSection 
                             title={this.state.service ? this.state.service.title : null}
-                            contact={true}
+                            contact={this.state.contact}
                             header='About the service'>
                             <div>
                                 <p>{this.state.service ? this.state.service.description : null}</p>
@@ -258,7 +259,7 @@ class ServicesId extends Component {
                     </>
                 : null }
             </>
-        )
+        );
         return (
             this.state.loading ?
                 <LoadingPage />

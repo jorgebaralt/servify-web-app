@@ -17,7 +17,6 @@ import { toast } from 'react-toastify';
 class UserReview extends Component {
     state = {
         bIsHidden: true,
-        bIsDeleting: false,
         id: this.props.userReview.id,
         uid: this.props.userReview.uid,
         date: this.props.userReview.timestamp,
@@ -40,12 +39,12 @@ class UserReview extends Component {
         if (!reviewId) {
             toast.error('Something went wrong');
         } else if (this.props.deleteReview) {
-            return this.props.deleteReview(this.props.userReview);
+            return this.props.deleteReview(this.props.userReview, this.toggleModal);
         }
     }
 
     render() {
-        if (!this.props.userDetails) { return null; } // Pointer protection, renders as null if there is no user.
+        if (!this.props.userDetails || !this.props.userReview) { return null; } // Pointer protection, renders as null if there is no user.
         const totalStarsRatingAmount = this.props.totalAmount ? this.props.totalAmount : 5;
         return (
             <div className={classes.Header}>
@@ -71,7 +70,7 @@ class UserReview extends Component {
                     <div className={classes.HeaderItem}>
                         <div className={classes.ImageContainer}>
                             <Link 
-                                to={['/users/show/', this.props.uid].join('')}
+                                to={['/users/show/', this.props.userDetails.uid].join('')}
                                 aria-label={this.props.user}
                                 aria-busy="false">
                                 <img 
@@ -94,13 +93,21 @@ class UserReview extends Component {
                             : null}
                             <div className={classes.User}>
                                 <Link 
-                                    to={['/users/show/', this.props.uid].join('')}
+                                    to={['/users/show/', this.props.userDetails.uid].join('')}
                                     aria-label={this.props.user}
                                     aria-busy="false">
                                     <span className={classes.Username}>{this.props.userDetails.displayName}</span>
                                 </Link>
                                 <span style={{margin: '0 1ch 3px'}}>-</span>
                                 <span className={classes.Date}>{new Date(String(this.state.date)).toLocaleDateString()}</span>
+                                {this.props.link ? 
+                                    <>
+                                    <span className={classes.Spacing}>-</span>
+                                    <Link to={['/services',this.props.userReview.serviceId].join('/')}>
+                                        <span className={classes.Link}>Link to Service</span>
+                                    </Link>
+                                    </>
+                                    : null}
                             </div>
                             <div className={classes.Rating}>
                                 <Rating rating={this.state.rating} amount={totalStarsRatingAmount} height={'15px'} width={'15px'} type='stars' />

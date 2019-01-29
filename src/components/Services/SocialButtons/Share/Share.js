@@ -10,6 +10,7 @@ import {
     WhatsappShareButton,
     RedditShareButton,
     EmailShareButton,
+    TelegramShareButton
 } from 'react-share';
 // Icons
 import {
@@ -19,6 +20,7 @@ import {
     LinkedinIcon,
     RedditIcon,
     EmailIcon,
+    TelegramIcon
 } from 'react-share';
 // JSX
 import SVG from '../../../SVG/SVG';
@@ -51,6 +53,13 @@ const share = (props) => {
                             size={38}
                             round />
                     </TwitterShareButton>
+                    <TelegramShareButton
+                        url={window.location.href}
+                        title={['Servify -',props.title].join(' ')}
+                        separator=":: "
+                        className={classes.Button}>
+                        <TelegramIcon size={38} round />
+                    </TelegramShareButton>
                     <WhatsappShareButton
                         url={window.location.href}
                         title={['Servify -',props.title].join(' ')}

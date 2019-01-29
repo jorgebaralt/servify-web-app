@@ -15,6 +15,7 @@ import Help from './containers/Help/Help';
 import Contact from './containers/Contact/Contact';
 import Services from './containers/Services/Services';
 import ServicesId from './containers/Services/ServicesId/ServicesId';
+import UsersId from './containers/Users/Show/UsersId/UsersId';
 import PublishOverview from './containers/Publish/PublishOverview/PublishOverview';
 import NotFound from './containers/NotFound/NotFound';
 
@@ -58,6 +59,7 @@ class App extends Component {
 					<Route exact path="/publish/overview" component={PublishOverview} />
 					<Route exact path="/services" component={Services} />
 					<Route exact path="/services/:id" component={ServicesId} />
+					<Route exact path="/users/show/:id" component={UsersId} />
 					{/* Auth protected routes */}
 					<Route exact path="/publish" component={Loading} />
 					<Route exact path="/users/feedback" component={Loading} />
@@ -79,13 +81,14 @@ class App extends Component {
 					<Route exact path="/publish/overview" component={PublishOverview} />
 					<Route exact path="/services" component={Services} />
 					<Route exact path="/services/:id" component={ServicesId} />
+					<Route exact path="/users/show/:id" component={UsersId} />
 					{/* Auth protected routes */}
 					<Route exact path="/publish" render={() => <Suspense fallback={<Loading />}><Publish /></Suspense>} />
 					<Route exact path="/users/feedback" render={() => <Suspense fallback={<Loading />}><Feedback /></Suspense>} />
 					<Route exact path="/users/publications" render={() => <Suspense fallback={<Loading />}><Publications /></Suspense>} />
 					<Route exact path="/users/publications/edit/:id" render={() => <Suspense fallback={<Loading />}><PublicationsId /></Suspense>} />
 					<Route exact path="/users/edit" render={() => <Suspense fallback={<Loading />}><Edit /></Suspense>} />
-					<Route path="/users/show" render={() => <Suspense fallback={<Loading />}><Show /></Suspense>} />
+					<Route eaxct path="/users/show" render={() => <Suspense fallback={<Loading />}><Show /></Suspense>} />
 					{/* 404 Page */}
 					<Route path="*" component={NotFound} />
 				</Switch>
@@ -101,6 +104,7 @@ class App extends Component {
 					<Route exact path="/publish/overview" component={PublishOverview} />
 					<Route exact path="/services" component={Services} />
 					<Route exact path="/services/:id" component={ServicesId} />
+					<Route exact path="/users/show/:id" component={UsersId} />
 					{/* Auth protected routes */}
 					<Route exact path="/publish" 
 						render={() => <AuthRedirect setRedirectPath={() => this.setRedirectPath("/publish")} />} />

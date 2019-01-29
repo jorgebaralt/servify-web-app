@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 // CSS
 import classes from './InfoSection.module.css';
 // Logo
+import Loading from '../../UI/LoadingDots/LoadingDots';
 import defaultLogo from '../../../assets/favicon/android-icon-72x72.png'
+
+const Contact = React.lazy(() => import('./Contact/Contact'));
 
 const infoSection = (props) => {
     return (
@@ -32,8 +35,10 @@ const infoSection = (props) => {
                 </div>
                 <div className={classes.Name}>{props.title}</div>
                 {props.contact ? 
-                    <button type="button" className={classes.Contact} aria-busy="false">Contact provider</button> : 
-                    null}
+                    <Suspense fallback={<Loading />}>
+                        <Contact contact={props.contact} />
+                    </Suspense>
+                    : null}
                 
             </div>
         </div>

@@ -1,11 +1,12 @@
 import React from 'react';
 // CSS
-import classes from './Reviews.module.css';
+import classes from '../Reviews/Reviews.module.css';
 // JSX
-import Review from '../../../Services/Reviews/Review/Review';
+import UserReview from '../../UserReview/UserReview';
 import LoadingBounce from '../../../UI/LoadingBounce/LoadingBounce';
+import Separator from '../../../UI/Separator/Separator';
 
-const reviews = (props) => {
+const userReviews = (props) => {
     if (props.loading && !props.reviews.length) {
         return (
             <div className={classes.Wrapper}>
@@ -23,14 +24,17 @@ const reviews = (props) => {
                         <div className={classes.Count}>{props.reviews.length}</div> 
                         <div className={classes.Subtitle}>Review{props.reviews.length === 1 ? null : 's'}</div>
                     </div>
+                    <Separator />
                     {props.reviews.map((review, index) => {
-                            return (
-                                <Review
-                                    link
-                                    key={index}
-                                    review={review} />
-                            )
-                        })}
+                        return (
+                            <UserReview
+                                key={index}
+                                link
+                                bIsDeleting={props.bIsDeleting}
+                                deleteReview={props.deleteReview}
+                                userReview={review} />
+                        )
+                    })}
                 </div>
                 : 
                 <div className={classes.Container}>
@@ -41,4 +45,4 @@ const reviews = (props) => {
     );
 }
 
-export default reviews;
+export default userReviews;

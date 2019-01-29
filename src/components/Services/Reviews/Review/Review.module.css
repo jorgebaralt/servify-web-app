@@ -63,14 +63,19 @@
     justify-content: flex-start;
 }
 
+.Spacing {
+    margin: 0px 1ch 3px;
+}
+
 @media (max-width: 520px) {
     .User {
         flex-flow: column;
         align-items: flex-start;
     }
-    .User span:nth-of-type(2) {
+    .Spacing {
         display: none;
         visibility: hidden;
+        margin: 0;
     }
 }
 
@@ -85,7 +90,8 @@
     color: rgb(72, 72, 72);
 }
 
-.Date {
+.Date,
+.Link {
     display: inline-block;
     overflow-wrap: break-word;
     font-size: 14px;
@@ -94,6 +100,10 @@
     letter-spacing: normal;
     color: rgb(72, 72, 72);
     margin: 0px;
+}
+
+.Link {
+    color: rgb(255, 112, 67) !important;
 }
 
 .Rating {

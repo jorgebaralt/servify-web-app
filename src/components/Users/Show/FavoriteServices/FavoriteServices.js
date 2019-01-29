@@ -24,7 +24,6 @@ const favoriteServices = (props) => {
                 <div className={classes.Wrapper}>
                     <div className={classes.Container}>
                         {props.favoriteServices.map( (service, index) => {
-                            console.log(service)
                             return (
                                 <div key={index} className={classes.Service}>
                                     <Service
@@ -46,4 +45,4 @@ const favoriteServices = (props) => {
     );
 }
 
-export default favoriteServices;
+export default React.memo(favoriteServices);

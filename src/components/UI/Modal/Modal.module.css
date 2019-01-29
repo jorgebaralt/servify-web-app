@@ -61,7 +61,7 @@
     .Modal {
         height: auto;
         top: 10%;
-        width: 450px;
+        max-width: 450px;
     }
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-// redux-saga, react-router-dom and axios
+// toast, redux-saga, react-router-dom and axios
+import { toast } from 'react-toastify';
 import { withRouter } from 'react-router-dom';
 import axios from '../../../../axios-services'
 import  { connect } from 'react-redux';
@@ -10,14 +11,50 @@ import classes from './User.module.css';
 // JSX
 import ProfilePhoto from '../../../../components/Users/ProfilePhoto/ProfilePhoto'
 import FavoriteServices from '../../../../components/Users/Show/FavoriteServices/FavoriteServices'
-import Reviews from '../../../../components/Users/Show/Reviews/Reviews'
+import UserReviews from '../../../../components/Users/Show/UserReviews/UserReviews'
 import Separator from '../../../../components/UI/Separator/Separator';
 
 class User extends Component {
     state = {
         loading: true,
+        bIsDeleting: false,
         reviews: [],
         favoriteServices: [],
+    }
+
+    onDeleteReviewHandler = (deletedReview, callback) => {
+        // Checking if the reviews have valid id's and the reviewId
+        // is equal to the userReview.id
+        if ((!deletedReview.id)) { 
+            return toast.error('Something went wrong when trying to delete your review. Try reloading the page!');
+        }
+        this.setState({
+            bIsDeleting: true
+        });
+        axios.delete('/review', { data: { review: deletedReview } })
+            .then(() => {
+                toast.success('Your review has been deleted successfully.');
+                this.setState(prevState => {
+                    // Filters out deleted review
+                    const newReviews = prevState.reviews.filter(review => {
+                        return review.id !== deletedReview.id
+                    });
+                    // To unmount modal
+                    if (callback) {
+                        callback();
+                    }
+                    return {
+                        bIsDeleting: false,
+                        reviews: newReviews
+                    }
+                });
+            })
+            .catch(() => {
+                toast.error('Something went wrong when trying to delete your review. Try reloading the page!');
+                this.setState({
+                    bIsDeleting: false
+                });
+            });
     }
 
     fetchData = async () => {
@@ -82,7 +119,12 @@ class User extends Component {
                             </div>
                             <Separator />
                             {/* Reviews */}
-                            <Reviews loading={this.state.loading} reviews={this.state.reviews} />
+                            <UserReviews 
+                                loading={this.state.loading}
+                                // Reviews props
+                                deleteReview={this.onDeleteReviewHandler} 
+                                bIsDeleting={this.state.bIsDeleting}
+                                reviews={this.state.reviews} />
                         </div>
                     </div>
                     <div className={classes.Container}>

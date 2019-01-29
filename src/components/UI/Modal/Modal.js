@@ -63,6 +63,7 @@ class Modal extends Component {
                                 visibility: this.props.show ? 'visible' : 'hidden',
                                 transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
                                 opacity: this.props.show ? '1' : '0',
+                                maxWidth: this.props.maxWidth ? [this.props.maxWidth,'px'].join('') : null
                             }}
                             className={classes.Modal}>
                             {noCancel ? 

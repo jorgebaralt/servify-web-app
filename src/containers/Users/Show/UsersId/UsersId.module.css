@@ -1,12 +1,44 @@
+.Wrapper {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    background-color: transparent;
+    padding: 0 24px 18px;
+}
+
+.Header, 
 .Container {
     display: flex;
-    margin: 0 auto;
-    background-color: transparent;
-    padding: 28px 24px 18px;
+    flex-flow: row;
     max-width: 1220px;
+    width: 100%;
+    background-color: transparent;
+    padding: 0 24px 18px;
+}
+
+@media (max-width: 744px) {
+    .Wrapper,
+    .Header {
+        flex-flow: column;
+    }
+}
+
+.Container {
+    flex-flow: column;
+}
+
+.Photo {
+    flex: 0 0 25%;
+    padding: 20px 12px;
 }
 
 @media (max-width: 480px) {
+    .Header {
+        padding: 4px 8px;
+    }
     .Container {
         padding: 4px 8px;
     }
@@ -20,56 +52,16 @@
     margin-bottom: 26px;
 }
 
-.ProfileWrapper {
-    flex: 0 0 25%;
-    padding: 20px 12px;
-    position: relative;
-}
-
-@media (max-width: 480px) {
-    .ProfileWrapper {
-        flex: 0 0 33.3333%;
-        padding: 4px 8px;
-    }
-}
-
-.ProfileContainer {
-    position: sticky;
-    top: 24px;
-    left: 0;
-}
-
-.ProfilePhoto {
-    user-select: none;
-    width: 100%;
-    height: 250px;
-    border: 1px solid #E0E0E0;
-    background-color: #EDEFED;
-}
-
-@media (max-width: 480px) {
-    .ProfileContainer {
-        max-width: 100px;
-        max-height: 100px;
-    }
-    .ProfilePhoto {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-    }
-    .ProfilePhoto img {
-        object-fit: fill;
-    }
-}
-
-.ContentWrapper {
+.Content {
     flex: auto;
+    display: flex;
+    flex-flow: column;
     padding: 20px 12px;
     margin: 0 36px;
 }
 
 @media (max-width: 480px) {
-    .ContentWrapper {
+    .Content {
         margin: 0;
     }
 }
@@ -89,83 +81,4 @@
     font-size: 22px;
     font-weight: bold;
     line-height: 1.1;
-}
-
-.ReviewsWrapper {
-    margin: 0 auto;
-}
-
-.ReviewsContainer {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    margin-top: auto;   
-    font-size: 22px;
-    font-weight: normal;
-}
-
-.ReviewsContainer span {
-    margin: 0 1ch;
-    font-size: 22px;
-    font-weight: 400;
-    color: #484848;
-}
-
-.Reviews {
-    user-select: none;  
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    font-weight: 600;
-    background: linear-gradient(-135deg, #339f85 55%, #23bd99 55%, #23bd99 100%);
-    border-radius: 6px;
-    padding: 4px 8px;
-    min-width: 48px;
-}
-
-.ServicesWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
-
-.ServicesContainer {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 1fr;
-    grid-column-gap: 30px;
-    grid-row-gap: 20px;
-}
-
-@media (max-width: 920px) {
-    .ServicesContainer {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 744px) {
-    .ServicesContainer {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 320px) {
-    .ServicesContainer {
-        grid-template-columns: repeat(1, 1fr);
-    }
-}
-
-.Service {
-    flex: 1 0 22.5%;
-    margin: 0 5px;
-    height: 100%;
-    flex-grow: 0;
-}
-
-@media (max-width: 460px) {
-    .Service {
-        flex: 1 0 46.5%;
-    }
 }

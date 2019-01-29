@@ -1,0 +1,51 @@
+.Container {
+    position: relative;
+    display: inline-block;
+}
+
+.Button {
+    width: 110px;
+}
+
+.Tooltip {
+    visibility: hidden;
+    background-color: rgb(255, 112, 67);
+    width: auto;
+    color: #FFF;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 200%;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 24px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.Tooltip:after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-bottom: 36px;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgb(255, 112, 67) transparent transparent transparent;
+}
+
+.Container:hover .Tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.Text {
+    background-color: #585858;
+    border-radius: 6px;
+    color: #FFF;
+    height: 100%;
+    padding: 12px 9px;
+}

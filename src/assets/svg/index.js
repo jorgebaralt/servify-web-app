@@ -21,6 +21,9 @@ import Delete from './delete';
 import Website from './website';
 import DeliveryTruck from './delivery-truck';
 import QuestionMark from './question-mark';
+import Phone from './phone';
+import Envelope from './envelope';
+import SentEnvelope from './sent-envelope';
 // TODO make SVG
 import BlackBorderlessLogo from '../images/servify-logos/blackborder-nobg';
 
@@ -49,5 +52,8 @@ export {
     Delete,
     Website,
     DeliveryTruck,
-    QuestionMark
+    QuestionMark,
+    Phone,
+    Envelope,
+    SentEnvelope
 };
