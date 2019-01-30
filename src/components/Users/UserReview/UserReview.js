@@ -25,6 +25,12 @@ class UserReview extends Component {
         comment: this.props.userReview.comment
     }
 
+    closeModal = () => {
+        this.setState({
+            bIsHidden: true
+        });
+    }
+
     toggleModal = () => {
         this.setState((prevState) => {
             return {
@@ -49,7 +55,7 @@ class UserReview extends Component {
         return (
             <div className={classes.Header}>
                 <Modal show={!this.state.bIsHidden}
-                    closeModal={this.toggleModal}
+                    closeModal={this.closeModal}
                     toggleModal={this.toggleModal}>
                     <div className={classes.Modal}>
                         <div className={classes.Confirm}>

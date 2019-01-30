@@ -85,8 +85,8 @@ class ServicesId extends Component {
             })
         });
     }
-    
-    componentDidMount () {
+
+    fetchService = () => {
         const serviceId = this.props.match.params.id;
         axios.get('/service', { params: { serviceId: serviceId } })
             .then( response => {
@@ -156,6 +156,33 @@ class ServicesId extends Component {
                     error: true
                 });
             });
+    }
+    
+    componentDidMount () {
+        this.fetchService();
+    }
+
+    // If the route changes to another service page then fetch information again
+    componentDidUpdate(prevProps) {
+        const prevServiceId = prevProps.match.params.id;
+        const currentServiceId = this.props.match.params.id;
+        if (prevServiceId !== currentServiceId) {
+            // Forcing a 'hard' reset on state before using new data.
+            this.setState({
+                service: {},
+                contact: null,
+                ratings: {
+                    price: null,
+                    service: null
+                },
+                locationData: {},
+                address: null,
+                map: {},
+                servicesReviewsParams: null,
+                loading: true
+            });
+            this.fetchService();
+        }
     }
 
     render () {

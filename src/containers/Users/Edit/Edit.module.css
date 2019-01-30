@@ -35,7 +35,6 @@
 .InputTitle {
     color: #585858;
     flex: 0 0 20%;
-    text-align: right;
     padding: 0 21px;
     user-select: none;
 }

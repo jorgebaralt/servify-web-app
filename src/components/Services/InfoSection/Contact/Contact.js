@@ -19,6 +19,12 @@ class Contact extends Component {
         }
     }
 
+    closeModal = () => {
+        this.setState({
+            bIsHidden: true
+        });
+    }
+
     toggleModal = () => {
         this.setState(prevState => {
             return {
@@ -35,7 +41,7 @@ class Contact extends Component {
                 <Modal 
                     maxWidth={500}
                     toggleModal={this.toggleModal}
-                    closeModal={this.toggleModal}
+                    closeModal={this.closeModal}
                     show={!this.state.bIsHidden}>
                     <h1 className={classes.Title}>Contact Information</h1>
                     <Separator />

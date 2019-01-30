@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-// redux-sagas
+// redux-saga
 import { connect } from 'react-redux';
 import { servicesCreator } from '../../store/actions';
 // CSS

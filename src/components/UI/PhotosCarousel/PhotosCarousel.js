@@ -73,10 +73,6 @@ class Carousel extends Component {
             return;
         };
     }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps !== this.props || nextState !== this.state || nextProps.children !== this.props.children;
-    }
     
     render () {
         // Carousel default settings buildup.

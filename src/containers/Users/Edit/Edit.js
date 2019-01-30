@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-// Redux Saga
+// react-redux & axios
 import  { connect } from 'react-redux';
+import axios from '../../../axios-services';
 // Input Validity
 import { checkValidity } from '../../../shared/checkValidity';
+import { setImagesArray } from '../../../shared/imagesHandler';
 // CSS
 import classes from './Edit.module.css';
 // JSX
@@ -13,11 +15,20 @@ import Panel from '../../../components/UI/Panel/Panel';
 import Button from '../../../components/UI/Button/Button';
 import Separator from '../../../components/UI/Separator/Separator';
 import InputImage from '../../../components/UI/Input/InputImage/InputImage';
+import DeleteImage from '../../../components/UI/Input/InputImage/DeleteImage/DeleteImage';
 
 class Edit extends Component {
     constructor(props) {
         super(props);
+        const imagesInfo = [{
+            url: props.userDetails.photoURL,
+            filename: [props.userDetails.uid,'profile_picture'].join('__')
+        }];
+        // const image = [props.userDetails.photoURL];
+        // console.log(image)
+        const images = setImagesArray(imagesInfo);
         this.state={
+            bIsLoading: true,
             controls: {
                 displayName: {
                     title: 'Display Name',
@@ -39,7 +50,8 @@ class Edit extends Component {
                     style: {margin: 0}
                 },
             },
-            imageFiles: null, // to be uploaded
+            imagesInfo: imagesInfo,
+            images: images,
             formIsValid: true,
         };
     }
@@ -65,6 +77,13 @@ class Edit extends Component {
         });
     }
 
+    componentDidMount() {
+        axios.get('/user', { params: {uid: this.props.userDetails.uid }})
+            .then(response => {
+                console.log(response)
+            })
+    }
+
     inputImageChangeHandler = (files) => {
         this.setState({
             imageFiles: files, 
@@ -79,16 +98,20 @@ class Edit extends Component {
         })
     }
 
+    onChange = () => {
+        console.log('ping');
+    }
+
     onSubmitHandler = (event) => {
         event.preventDefault();
-        // axios.post('/uploadFile', this.state.imageFiles)
-        //     .then(
-        //         res => {
-        //             console.log(res);
-        //         }
-        //     ).catch(err => {
-        //         console.log(err);
-        //     });
+        axios.put('/user', { data: { uid: this.props.userDetails.uid, displayName: this.state.controls.displayName.value }})
+            .then(
+                res => {
+                    console.log(res);
+                }
+            ).catch(err => {
+                console.log(err);
+            });
     }
 
     render () {
@@ -131,7 +154,25 @@ class Edit extends Component {
                             );
                         })}
                         <Separator />
-                        <InputImage onChange={this.inputImageChangeHandler} onSubmit={this.onSubmitHandler} />
+                        {!this.props.userDetails.photoURL ? 
+                            <>
+                                <div style={{marginBottom: '12px'}} className={classes.InputTitle}>
+                                    Image Upload
+                                </div>
+                                <InputImage onChange={this.inputImageChangeHandler} onSubmit={this.onSubmitHandler} />
+                            </>
+                            : (
+                                <>
+                                    <div style={{marginBottom: '12px'}} className={classes.InputTitle}>
+                                        Image Delete
+                                    </div>
+                                    <DeleteImage 
+                                        onDelete={this.state.onChange}
+                                        uid={this.props.userDetails.uid} 
+                                        imagesInfo={this.state.imagesInfo} />
+                                </>
+                            )
+                        }
                         <Separator />
                         <Button submit style={{fontSize: '21px'}} disabled={!this.state.formIsValid} type='primary' blockButton={true}>Save</Button>
                     </form>

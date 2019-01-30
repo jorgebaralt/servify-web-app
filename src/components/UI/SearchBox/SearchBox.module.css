@@ -21,14 +21,14 @@
     background: rgba(255,255,255,.95);
     color: #484848;
     border-radius: 4px;
-    padding: 32px;
-    padding-bottom: 62px;
+    padding: 16px 0;
     margin: auto;
     box-shadow: none;
 }
 
 @media (min-width: 960px) {
     .SearchBox {
+        padding: 32px;
         margin: 0;
         margin-right: 20vw;
         width: 400px;
@@ -121,7 +121,7 @@
 }
 
 .Button {
-    margin: -10px 0 20px;
+    margin: -10px 0 0;
 }
 
 @media (max-width: 960px) {

@@ -32,14 +32,14 @@ const share = (props) => {
             <button onClick={props.onClick} className={classes.Toggle}>
                 <SVG svg='share' />
             </button>
-            <Modal closeModal={props.onClick} 
+            <Modal closeModal={props.closeModal} 
                 toggleModal={props.onClick} 
                 show={!props.bIsModalHidden}>
                 <h2 className={classes.Header}>Share on social media:</h2>
                 <div className={classes.Container}>
                     <FacebookShareButton 
                         url={window.location.href}
-                        title={['Servify',props.title].join(' - ')}
+                        quote={['Servify',props.title].join(' - ')}
                         className={classes.Button}>
                         <FacebookIcon
                             size={38}
@@ -47,7 +47,7 @@ const share = (props) => {
                     </FacebookShareButton>
                     <TwitterShareButton
                         url={window.location.href}
-                        title={['Servify -',props.title].join(' ')}
+                        quote={['Servify -',props.title].join(' ')}
                         className={classes.Button}>
                         <TwitterIcon
                             size={38}
@@ -55,14 +55,14 @@ const share = (props) => {
                     </TwitterShareButton>
                     <TelegramShareButton
                         url={window.location.href}
-                        title={['Servify -',props.title].join(' ')}
+                        quote={['Servify -',props.title].join(' ')}
                         separator=":: "
                         className={classes.Button}>
                         <TelegramIcon size={38} round />
                     </TelegramShareButton>
                     <WhatsappShareButton
                         url={window.location.href}
-                        title={['Servify -',props.title].join(' ')}
+                        quote={['Servify -',props.title].join(' ')}
                         separator=":: "
                         className={classes.Button}>
                         <WhatsappIcon size={38} round />
@@ -71,21 +71,21 @@ const share = (props) => {
                 <div className={classes.Container}>
                     <RedditShareButton
                         url={window.location.href}
-                        title={['Servify -',props.title].join(' ')}
+                        quote={['Servify -',props.title].join(' ')}
                         separator=":: "
                         className={classes.Button}>
                         <RedditIcon size={38} round />
                     </RedditShareButton>
                     <LinkedinShareButton
                         url={window.location.href}
-                        title={['Servify -',props.title].join(' ')}
+                        quote={['Servify -',props.title].join(' ')}
                         separator=":: "
                         className={classes.Button}>
                         <LinkedinIcon size={38} round />
                     </LinkedinShareButton>
                     <EmailShareButton
                         url={window.location.href}
-                        title={['Servify -',props.title].join(' ')}
+                        quote={['Servify -',props.title].join(' ')}
                         separator=":: "
                         className={classes.Button}>
                         <EmailIcon size={38} round />

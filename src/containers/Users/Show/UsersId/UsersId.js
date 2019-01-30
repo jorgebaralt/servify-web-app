@@ -29,7 +29,6 @@ class UsersId extends Component {
         axios.get('/reviews', { params: { uid: this.state.uid } })
             .then( response => {
                 const reviews = response.data.reviews;
-                console.log('data', reviews);
                 // Error handling in case there's an empty response
                 this.setState( () => {
                     return {
@@ -50,7 +49,6 @@ class UsersId extends Component {
         axios.get('/favorites', { params: { uid: this.state.uid } })
             .then(response => {
                 const favoriteServices = response.data;
-                console.log(response);
                 this.setState({
                     favoriteServices: favoriteServices,
                     bIsFavoritesLoading: false
@@ -64,13 +62,11 @@ class UsersId extends Component {
             });
     }
 
-    componentDidMount() {
+    fetchUser = () => {
         const uid = this.props.match.params.id;
-        console.log('uid', uid);
         axios.get('/user', { params: { uid: uid } })
             .then( response => {
                 const data = response.data;
-                console.log('data', data);
                 // Error handling in case there's an empty response
                 if (!data) { 
                     return this.setState({
@@ -93,6 +89,28 @@ class UsersId extends Component {
                     error: true
                 });
             });
+    }
+
+    componentDidMount() {
+        this.fetchUser();
+    }
+
+    // If the route changes to another user's page then fetch information again
+    componentDidUpdate(prevProps) {
+        const prevUid = prevProps.match.params.id;
+        const currentUid = this.props.match.params.id;
+        if (prevUid !== currentUid) {
+            // Forcing a 'hard' reset on state before using new data.
+            this.setState({
+                bIsLoading: true,
+                bIsReviewsLoading: true,
+                bIsFavoritesLoading: true,
+                error: false,
+                reviews: null,
+                favoriteServices: null
+            })
+            this.fetchUser();
+        }
     }
 
     render () {

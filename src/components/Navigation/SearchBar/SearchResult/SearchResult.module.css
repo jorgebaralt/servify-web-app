@@ -12,15 +12,15 @@
     background-color: rgba(72,72,72,.15);
 }
 
-.PinWrapper {
+.Icon {
     color: rgb(72, 72, 72);
     display: table-cell;
     padding-right: 12px;
-    padding-top: 4px;
-    vertical-align: top;
+    /* padding-top: 4px; */
+    vertical-align: middle;
 }
 
-.Pin {
+.Icon span {
     font-weight: normal;
 }
 
@@ -30,22 +30,29 @@
     width: 100%;
 }
 
-.ResultService {
+.Result,
+.Service,
+.Location {
     font-weight: 600;
     overflow-wrap: break-word;
-    font-size: 14px;
-    line-height: 18px;
-    letter-spacing: normal;
-    color: rgb(72, 72, 72);
-    margin: 0px;
-}
-
-.ResultLocation {
-    margin: 0px;
-    word-wrap: break-word;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 18px;
     letter-spacing: normal;
     color: #484848;
+    margin: 0px;
+}
+
+.Result {
     font-weight: normal;
+}
+
+.Location {
+    color: #484848;
+    font-weight: normal;
+}
+
+.NullResult {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
 }

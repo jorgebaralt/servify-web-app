@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactResizeDetector from 'react-resize-detector'
-import axios from '../../../axios-services';
+import axios, { CancelToken } from '../../../axios-services';
 // check inputs validity, auth actions dispatchers, toast
 import { authActions } from '../../../store/actions';
 import { checkValidity } from '../../../shared/checkValidity';
@@ -57,7 +57,11 @@ class Reviews extends Component {
         this.myForm = React.createRef();
         this.hiddenStyle = {height: 0, overflow: 'hidden'};
         this.myTimer = null;
+        // To cancel axios requests on componentWillUnmount
+        this.cancelAxios = null;
     }
+
+    _bIsMounted = false;
 
     state = {
         bIsUploading: false,
@@ -150,12 +154,14 @@ class Reviews extends Component {
                 const offsetHeight = this.myForm.current.offsetHeight;
                 // If the form is fully opened, remove overflow hidden.
                 if (scrollHeight === offsetHeight) {
-                    this.setState({
-                        hiddenStyle: {
-                            height: this.myForm.current ? this.myForm.current.scrollHeight : 0,
-                            overflow: 'visible'
-                        }
-                    });
+                    if (this._bIsMounted) {
+                        this.setState({
+                            hiddenStyle: {
+                                height: this.myForm.current ? this.myForm.current.scrollHeight : 0,
+                                overflow: 'visible'
+                            }
+                        });
+                    }
                 }
             }
         }
@@ -176,23 +182,25 @@ class Reviews extends Component {
             this.setRedirectPath();
             this.props.history.push('/authenticate');
         }
-        this.setState(prevState => {
-            let hiddenStyle;
-            // If the the current state is hidden, then next style will be visible.
-            if (!this.state.bIsShown) {
-                hiddenStyle = {
-                    ...this.state.hiddenStyle,
-                    height: this.myForm.current ? this.myForm.current.scrollHeight : 0,
+        if (this._bIsMounted) {
+            this.setState(prevState => {
+                let hiddenStyle;
+                // If the the current state is hidden, then next style will be visible.
+                if (!this.state.bIsShown) {
+                    hiddenStyle = {
+                        ...this.state.hiddenStyle,
+                        height: this.myForm.current ? this.myForm.current.scrollHeight : 0,
+                    }
+                // Otherwise, hide.
+                } else {
+                    hiddenStyle = {height: 0, overflow: 'hidden'};
                 }
-            // Otherwise, hide.
-            } else {
-                hiddenStyle = {height: 0, overflow: 'hidden'};
-            }
-            return {
-                bIsShown: !prevState.bIsShown,
-                hiddenStyle: hiddenStyle
-            }
-        });
+                return {
+                    bIsShown: !prevState.bIsShown,
+                    hiddenStyle: hiddenStyle
+                }
+            });
+        }
     }
 
     onRatingHandler = (score) => {
@@ -282,27 +290,37 @@ class Reviews extends Component {
     }
 
     componentDidMount() {
+        this._bIsMounted = true;
         const uid = this.props.userDetails ? this.props.userDetails.uid : null;
-        axios.get('/reviews', { params: { serviceId: this.props.serviceId, uid: uid } })
+        axios.get('/reviews', 
+            { params: { serviceId: this.props.serviceId, uid: uid } },
+            { cancelToken: new CancelToken((c) => {
+                // An executor function receives a cancel function as a parameter
+                this.cancelAxios = c;
+            }) })
             .then( response => {
                 const reviews = response.data;
-                if (reviews.length) {
-                    this.setState({
-                        bIsLoading: false,
-                        reviews: reviews
-                    });
-                } else {
-                    this.setState({
-                        bIsLoading: false,
-                        reviews: []
-                    });
+                if (this._bIsMounted) {
+                    if (reviews.length) {
+                        this.setState({
+                            bIsLoading: false,
+                            reviews: reviews
+                        });
+                    } else {
+                        this.setState({
+                            bIsLoading: false,
+                            reviews: []
+                        });
+                    }
                 }
             })
             .catch( () => {
-                this.setState({
-                    bIsLoading: false,
-                    error: true
-                });
+                if (this._bIsMounted) {
+                    this.setState({
+                        bIsLoading: false,
+                        error: true
+                    });
+                }
             });
     }
 
@@ -315,7 +333,11 @@ class Reviews extends Component {
                 const uid = this.props.userDetails.uid
                 // Only request if uid is not null (redundant, but why not?).
                 if (uid) {
-                    axios.get('/reviews', { params: { serviceId: this.props.serviceId, uid: uid } })
+                    axios.get('/reviews', { params: { serviceId: this.props.serviceId, uid: uid } },
+                        { cancelToken: new CancelToken((c) => {
+                            // An executor function receives a cancel function as a parameter
+                            this.cancelAxios = c;
+                        }) })
                         .then( response => {
                             const reviews = response.data.reviews;
                             const userReview = response.data.userReview;
@@ -345,17 +367,31 @@ class Reviews extends Component {
         // bUserReviewFetched set back to undefined in case the user logs
         // back in, debouncedFetchUserReviews will trigger again.
         if (!this.props.userDetails && this.state.userReview) {
-            this.setState(() => {
-                const userReviews = this.state.userReview
-                const reviews = this.state.reviews ? [ ...this.state.reviews ] : [];
-                reviews.push(userReviews);
-                return {
-                    reviews: reviews,
-                    userReview: null,
-                    bUserReviewFetched: null
-                }
-            });
+            if (this._bIsMounted) {
+                this.setState(() => {
+                    const userReviews = this.state.userReview
+                    const reviews = this.state.reviews ? [ ...this.state.reviews ] : [];
+                    reviews.push(userReviews);
+                    return {
+                        reviews: reviews,
+                        userReview: null,
+                        bUserReviewFetched: null
+                    }
+                });
+            }
         }
+    }
+
+    componentWillUnmount() {
+        // Prevent this.setState on unmounted component
+        this._bIsMounted = false;
+        // Cancelling setTimeout
+        clearTimeout(this.myTimer);
+        // Cancelling axios requests if any.
+        if (this.cancelAxios) {
+            this.cancelAxios();
+        }
+        this.debouncedFetchUserReviews = null;
     }
 
     render() {

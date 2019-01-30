@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+// redux-saga & react-router-dom
+import { Link, withRouter } from 'react-router-dom';
+import  { connect } from 'react-redux';
+// Parse location data
+import { parseLocationData } from '../../../../shared/parseLocationData';
 // CSS
 import classes from './SearchBar.module.css'
 // JSX
-import SearchResult from './SearchResult/SearchResult';
+import SearchResult, { NullResult } from '../../../Navigation/SearchBar/SearchResult/SearchResult';
+import Separator from '../../../UI/Separator/Separator';
 
 class SearchBar extends Component {
     constructor (props) {
@@ -13,17 +19,74 @@ class SearchBar extends Component {
 
     state = {
         bIsFocused: false,
+        // bIsTouched is here to improve user experience, if true and filteredServices
+        // is an empty array, then it will render a NullResults component to let users 
+        // now there are no matches.
+        bIsTouched: false,
+        filteredServices: [],
         myList: {
             width: null,
             top: null,
             right: null
         },
         searchBar: {
-            inputId: 'SearchBar_Input',
+            inputId: 'Landing_SearchBar_Input',
             description: 'SearchBar_Description',
             listId: 'SearchBar_List',
             value: ''
         }
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        console.log('-------------------------')
+        console.log('inside getDerivedStateFromProps')
+        console.log('-------------------------')
+        console.log('services', props.nearServices)
+        console.log('value', state.searchBar.value)
+        console.log('state', state)
+        const services = props.nearServices;
+        const query = state.searchBar.value;
+        // If there are no services or query is an empty string then return
+        if (!services || !query.length) {
+            return state;
+        }
+        // Search word array declaration. Splits each word into an array element. We will 
+        // be looping through each word and see if the questions have these words
+        const searchWords = query.toLowerCase().split(/\s+/g)
+            .map(string => {
+                return string.trim();
+            });
+            const filteredServices = services.filter(service => {
+                const title = service.title.toLowerCase();
+                const category = service.category.replace('_', ' ').toLowerCase();
+                let bIsMatch;
+                // For loop for every word in the searchWords array
+                for (let i = 0; i < searchWords.length; i++) {
+                    const searchWord = searchWords[i].toLowerCase();
+                    /**
+                     * If the title of the answer of the question include the searched [i] word,
+                     * bIsMatch is true, otherwise if it's not included then bIsMatch is false and
+                     * the loop is broken.
+                     */
+                    if (title.includes(searchWord) || category.includes(searchWord)) {
+                        bIsMatch = true;
+                        continue;
+                    } else {
+                        bIsMatch = false;
+                        break;
+                    }
+                }
+                return bIsMatch;
+            });
+        const newState = {
+            ...state,
+            filteredServices,
+            bIsTouched: true
+        }
+        console.log('-------------------------')
+        console.log('outsside getDerivedStateFromProps')
+        console.log('-------------------------')
+        return newState;
     }
 
     applyFocusWithin () {
@@ -34,14 +97,28 @@ class SearchBar extends Component {
 
     removeFocusWithin () {
         this.setState(() => {
-            return { bIsFocused: false }
+            return { bIsFocused: false, bIsTouched: false }
+        });
+    }
+
+    onLinkMouseDownHandler = (id) => {
+        // Since event is prevented, programmatically go to different route.
+        this.props.history.push(['/services',id].join('/'));
+        this.mySearchBar.current.blur(); // Triggers remove focus within function and blurs the input.
+        // Sets the value back to an empty string.
+        const updatedSearchBar = {
+            ...this.state.searchBar,
+            value: ''
+        };
+        this.setState({
+            searchBar: updatedSearchBar
         });
     }
 
     inputChangeHandler = (event) => {
         event.preventDefault();
         const updatedSearchBar = {
-            ...this.props.searchBar,
+            ...this.state.searchBar,
             value: event.target.value
         };
         this.setState({
@@ -58,10 +135,12 @@ class SearchBar extends Component {
             ListClasses.push(classes.Show);
             RecentSearchesWrapperClasses.push(classes.Show);
         }
+        console.log(this.props)
+        console.log(this.state)
         return (
             <div className={classes.GlobalWrapper}>
                 <div className={classes.SearchBarAnchor}>
-                    <div ref={this.mySearchBar}
+                    <div
                         className={classes.SearchBarWrapper}>
                         <div className={searchBarContainerClasses.join(' ')}>
                             <div className={classes.Bar}>
@@ -70,7 +149,7 @@ class SearchBar extends Component {
                                         // dir means direction of text for languages (ltr = left to right)
                                         dir="ltr">
                                         <div className={classes.WidescreenContainer}>
-                                            <label htmlFor={this.props.searchBar.inputId} className={classes.LabelWrapper}>
+                                            <label htmlFor={this.state.searchBar.inputId} className={classes.LabelWrapper}>
                                                 <span className={classes.SearchBarSpan}>Search</span>
                                                 <div className={classes.QuestionMark}>
                                                     <svg
@@ -87,21 +166,22 @@ class SearchBar extends Component {
                                                         <input
                                                             onFocus={() => this.applyFocusWithin()}
                                                             onBlur={() => this.removeFocusWithin()}
-                                                            onChange={(event) => this.props.inputChangeHandler(event)}
+                                                            onChange={(event) => this.inputChangeHandler(event)}
+                                                            ref={this.mySearchBar}
+                                                            id={this.state.searchBar.inputId} 
                                                             type="text" 
                                                             className={classes.Input}
                                                             role="combobox"
                                                             aria-autocomplete="list" 
-                                                            aria-describedby={this.props.searchBar.description}
-                                                            aria-controls={this.props.searchBar.listId}
+                                                            aria-describedby={this.state.searchBar.description}
+                                                            aria-controls={this.state.searchBar.listId}
                                                             aria-expanded="false" 
                                                             autoComplete="off" 
                                                             autoCorrect="off" 
                                                             spellCheck="false" 
-                                                            id={this.props.searchBar.inputId} 
                                                             name="services_query" 
                                                             placeholder="Search" 
-                                                            value={this.props.searchBar.value}  />
+                                                            value={this.state.searchBar.value}  />
                                                     </div>
                                                 </div>
                                             </label>
@@ -117,7 +197,7 @@ class SearchBar extends Component {
                 </div>
                 {this.state.bIsFocused ? 
                     <ul ref={this.myList}
-                        id={this.props.searchBar.listId}
+                        id={this.state.searchBar.listId}
                         role="listbox" 
                         style={{
                             maxWidth: '100vw',
@@ -133,17 +213,35 @@ class SearchBar extends Component {
                                         <span>Search Results</span>
                                     </small>
                                 </div>
+                                <Separator />
                                 <ul className={classes.SearchResultsWrapper}>
-                                    {/* TODO REMOVE PLACEHOLDERS */}
-                                    <SearchResult 
-                                        service='Servify'
-                                        location='Florida' />
-                                    <SearchResult 
-                                        service='Servify'
-                                        location='Florida' />
-                                    <SearchResult 
-                                        service='Servify'
-                                        location='Florida' />
+                                    {this.state.filteredServices.length ? 
+                                        this.state.filteredServices.map((service) => {
+                                            return (
+                                                <Link 
+                                                    key={service.id}
+                                                    to={['/services',service.id].join('/')}
+                                                    /**
+                                                    * onMouseDown event fires before onBlur event on input. It calls event.preventDefault() to
+                                                    * prevent onBlur from being called, and doesn't prevent the navLink click from happening, 
+                                                    * this guarantees that the NavLink will redirect on click without having to use SetTimeout 
+                                                    * or any other hack.
+                                                        */
+                                                    onMouseDown={event => {
+                                                        event.preventDefault();
+                                                        this.onLinkMouseDownHandler(service.id);
+                                                    }}>
+                                                    <SearchResult 
+                                                        id={service.id}
+                                                        service={service.title}
+                                                        location={parseLocationData(service.locationData)} />
+                                                </Link>
+                                            )
+                                        })
+                                        :  this.state.bIsTouched ? 
+                                            <NullResult />
+                                            : <NullResult text='Try searching for a category or a service.' />
+                                    }
                                 </ul>
                             </li>
                         </div>
@@ -154,4 +252,10 @@ class SearchBar extends Component {
     };
 }
 
-export default SearchBar;
+const mapStateToProps = (state) => {
+	return {
+        nearServices: state.servicesReducer.services.nearServices,
+	};
+};
+
+export default withRouter(connect(mapStateToProps)(SearchBar));

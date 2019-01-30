@@ -16,6 +16,12 @@ class SocialButtons extends Component {
         bIsModalHidden: true
     }
 
+    closeModal = () => {
+        this.setState({
+            bIsModalHidden: true
+        });
+    }
+
     toggleModal = () => {
         this.setState(prevState => {
             return {
@@ -55,7 +61,9 @@ class SocialButtons extends Component {
             <div className={classes.Container}>
                 <Share title={this.props.title} 
                     bIsModalHidden={this.state.bIsModalHidden} 
-                    onClick={this.toggleModal} />
+                    onClick={this.toggleModal} 
+                    closeModal={this.closeModal}
+                    />
                 <Favorite onClick={this.favoriteServiceHandler} />
             </div>
         )

@@ -157,6 +157,35 @@ class Landing extends Component {
                 </>
             );
         }
+        let topServicesByCategories = null;
+        if (this.props.services.byCategories) { 
+            topServicesByCategories = (
+                Object.entries(this.props.services.byCategories).map( (category, index) => {
+                    return (
+                        <div key={index}>
+                            <h1>
+                                Top services from: {category[0]}
+                            </h1>
+                            <Carousel>
+                                {Object.values(category[1]).map( (service, index) => {
+                                    return (
+                                        <Service
+                                            key={[index, service.title].join('_')}
+                                            header={service.category.replace("_", " ")}
+                                            title={service.title}
+                                            href={service.id}
+                                            priceRating={service.price/4}
+                                            ratingAvg={service.rating/5}
+                                            ratingAmount={service.ratingCount}
+                                            image={service.imagesInfo}/>
+                                    );
+                                })}
+                            </Carousel>
+                        </div>
+                    );
+                })
+            );
+        }
         return (
             <>
                 {/* Header */}
@@ -185,6 +214,7 @@ class Landing extends Component {
                     <br />
                     {nearServices}
                     {topServices}
+                    {topServicesByCategories}
                     {/* <br />
                     <div className={classes.Subheader}>
                         <h1>Featured Servify services</h1>

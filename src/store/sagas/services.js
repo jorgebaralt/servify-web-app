@@ -32,7 +32,7 @@ export const servicesSagas = {
                 if (navigator.geolocation) {
                     const getCurrentPosition = () => new Promise(
                         (resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject)
-                    )
+                    );
                     const position = yield call(getCurrentPosition);
                     const currentLocation = { 
                         latitude: Number(position.coords.latitude),

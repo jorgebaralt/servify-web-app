@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-// Input validity and isArray
+// worker functions
 import { checkValidity } from '../../../../../shared/checkValidity';
 import isArray from '../../../../../shared/isArray';
+import { parseLocationData } from '../../../../../shared/parseLocationData';
+import { parseLogistic } from '../../../../../shared/parseLogistic';
+import { setImagesInfo, setImagesArray } from '../../../../../shared/imagesHandler';
 // CSS
 import classes from './Edit.module.css';
 // JSX
@@ -13,8 +16,6 @@ import DeleteImage from '../../../../../components/UI/Input/InputImage/DeleteIma
 import InputSlider from '../../../../../components/UI/Input/InputSlider/InputSlider';
 import EditImages from '../../../../../components/UI/EditImages/EditImages';
 import Title from '../../../../../components/Services/Title/Title';
-import { parseLocationData } from '../../../../../shared/parseLocationData';
-import { parseLogistic } from '../../../../../shared/parseLogistic';
 
 const datalist = [
     {
@@ -332,6 +333,11 @@ class Edit extends Component {
         this.props.updateData(data, this.setData);
     }
 
+    onImageDelete = (data) => {
+        this.props.handleData(data);
+        this.setData();
+    }
+
     inputChangeHandler = (event, inputIdentifier) => {
         const updatedOrderForm = {
             ...this.state.controls
@@ -549,7 +555,7 @@ class Edit extends Component {
                         <Title>Delete Images</Title>
                         <div className={classes.InputImageContainer}>
                             <DeleteImage 
-                                onDelete={this.props.handleData}
+                                onDelete={this.onImageDelete}
                                 serviceId={this.props.service.id} 
                                 imagesInfo={this.props.imagesInfo} />
                         </div>

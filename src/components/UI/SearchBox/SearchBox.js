@@ -12,12 +12,6 @@ import SVG from '../../SVG/SVG';
 
 class Container extends Component {
     state = {
-        searchBar: {
-            inputId: 'SearchBox_SearchBar_Input',
-            description: 'SearchBox_SearchBar_Description',
-            listId: 'SearchBox_SearchBar_List',
-            value: ''
-        },
         controls: {
             category: {
                 elementType: 'select',
@@ -34,17 +28,6 @@ class Container extends Component {
                 touched: false,
             },
         }
-    }
-
-    inputChangeHandler = (event) => {
-        event.preventDefault();
-        const updatedSearchBar = {
-            ...this.state.searchBar,
-            value: event.target.value
-        };
-        this.setState({
-            searchBar: updatedSearchBar
-        });
     }
 
     inputSelectChangeHandler = (value, inputIdentifier) => {
@@ -69,15 +52,15 @@ class Container extends Component {
     }
 
     render () {
-            const formElementsArray = Object.entries(this.state.controls);
-            return (
+        const formElementsArray = Object.entries(this.state.controls);
+        return (
             <>
                 <div className={classes.SearchBox}>
                     <h1>What service are you looking for?</h1>
                     <br />
                     {/* SERVICES */}
                     <small>Services</small>
-                    <SearchBar inputChangeHandler={this.inputChangeHandler} searchBar={this.state.searchBar} />
+                    <SearchBar />
                     <br />
                     {/* CATEGORIES */}
                     <small style={{marginBottom: '-32px'}}>Categories</small>
@@ -97,7 +80,13 @@ class Container extends Component {
                         );
                     })}
                     <br />
-                    <Button className={classes.Button} style={{float: 'right'}} type={'primary'}>Search</Button>
+                    {/* If there is a value selected, the button is valid and pushes the history to the service page. */}
+                    <Link to={{ 
+                            pathname: '/services',
+                            state: { activeCategory: this.state.controls.category.value }
+                        }}>
+                        <Button disabled={!this.state.controls.category.value.length} blockButton className={classes.Button} type={'primary'}>Search Categories</Button>
+                    </Link>
                 </div>
                 <Link style={{textDecoration: 'none'}} to='/publish/overview'>
                     <div className={classes.MakeMoneyContainer}>

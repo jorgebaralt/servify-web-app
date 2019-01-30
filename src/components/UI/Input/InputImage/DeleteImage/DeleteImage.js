@@ -32,26 +32,34 @@ class InputImage extends Component {
         bIsDeleting: false
     }
 
+    axiosHandler = (url, data) => {
+        axios.delete(url, { data: data })
+        .then( response => {
+            if (this.props.onDelete) {
+                this.props.onDelete(response.data);
+            }
+            toast.success('File deleted successfully.');
+            this.setState({
+                bIsDeleting: false
+            });
+        })
+        .catch( () => {
+            toast.error('Something went wrong.');
+            this.setState({
+                bIsDeleting: false
+            });
+        });
+    }
+
     removeImage = (fileName) => {
         this.setState({
             bIsDeleting: true
         });
-        axios.delete('/images_service', { data: { fileName: fileName, serviceId: this.props.serviceId } })
-            .then( response => {
-                toast.success('File deleted successfully.');
-                this.setState({
-                    bIsDeleting: false
-                });
-                if (this.props.onDelete) {
-                    this.props.onDelete(response.data);
-                }
-            })
-            .catch( () => {
-                toast.error('Something went wrong.');
-                this.setState({
-                    bIsDeleting: false
-                });
-            });
+        if (this.props.serviceId) {
+            this.axiosHandler('/images_service', { fileName: fileName, serviceId: this.props.serviceId });
+        } else if (this.props.uid) {
+            this.axiosHandler('/images_profile', { fileName: fileName, uid: this.props.uid });
+        }
     }
 
     render() {
