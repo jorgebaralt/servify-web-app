@@ -64,6 +64,7 @@ const categories = [
 				dbReference: 'other',
 			},
 		],
+		icon: icons.homeServices
 	},
 	{
 		id: 1,
@@ -106,6 +107,7 @@ const categories = [
 				dbReference: 'mechanic',
 			},
 		],
+		icon: icons.autoServices
 	},
 	{
 		id: 2,
@@ -147,6 +149,7 @@ const categories = [
 				dbReference: 'moving',
 			},
 		],
+		icon: icons.handyman
 	},
 	{
 		id: 3,
@@ -166,6 +169,7 @@ const categories = [
 			'children',
 		],
 		color: ['#AD1457', '#C2185B'],
+		icon: icons.babySitting
 	},
 	{
 		id: 4,
@@ -232,6 +236,7 @@ const categories = [
 			'fans',
 		],
 		color: ['#FB8C00', '#FF9800'],
+		icon: icons.electrical
 	},
 	{
 		id: 6,
@@ -254,6 +259,7 @@ const categories = [
 			'paws',
 		],
 		color: ['#F44336', '#EF5350'],
+		icon: icons.petServices
 	},
 	{
 		id: 7,
@@ -262,6 +268,7 @@ const categories = [
 		dbReference: 'food_catering',
 		keyWords: ['food', 'eat', 'catering', 'diet', 'restaurant', 'delivery'],
 		color: ['#0097A7', '#00ACC1'],
+		icon: icons.foodCatering
 	},
 	{
 		id: 8,
@@ -309,6 +316,7 @@ const categories = [
 				dbReference: 'make_up',
 			},
 		],
+		icon: icons.beauty
 	},
 	{
 		id: 9,
@@ -317,10 +325,11 @@ const categories = [
 		dbReference: 'landscape',
 		keyWords: ['landscape', 'grass', 'cut', 'palms', 'tree', 'trees', 'grass'],
 		color: ['#33691E', '#558B2F'],
+		icon: icons.landscaping
 	},
 	{
 		id: 10,
-		title: 'Pest control',
+		title: 'Pest Control',
 		description: 'Pest control',
 		dbReference: 'pest',
 		keyWords: [
@@ -336,6 +345,7 @@ const categories = [
 			'rodent',
 		],
 		color: ['#827717', '#9E9D24'],
+		icon: icons.pestControl
 	},
 	{
 		id: 11,
@@ -353,6 +363,7 @@ const categories = [
 			'classes',
 		],
 		color: ['#795548', '#8D6E63'],
+		icon: icons.tutor
 	},
 	{
 		id: 12,
@@ -361,14 +372,16 @@ const categories = [
 		dbReference: 'health',
 		keyWords: ['health', 'therapy', 'kids', 'adults'],
 		color: ['#D50000', '#E57373'],
+		icon: icons.health
 	},
 	{
 		id: 13,
-		title: 'Real state',
+		title: 'Real Estate',
 		description: 'Get your dream house',
 		dbReference: 'real_state',
 		keyWords: ['house', 'buy', 'realtor', 'broker', 'real', 'state'],
 		color: ['#006064', '#00838F'],
+		icon: icons.realEstate
 	},
 	{
 		id: 14,
@@ -388,6 +401,7 @@ const categories = [
 			'training',
 		],
 		color: ['#0D47A1', '#1565C0'],
+		icon: icons.fit
 	},
 	{
 		id: 16,
@@ -396,6 +410,7 @@ const categories = [
 		dbReference: 'insurance',
 		keyWords: ['insurance', 'health', 'car', 'auto', 'policy', 'claim'],
 		color: ['#7E57C2', '#9575CD'],
+		icon: icons.insurance
 	},
 	{
 		id: 17,
@@ -404,6 +419,7 @@ const categories = [
 		dbReference: 'other',
 		keyWords: ['other'],
 		color: ['#607D8B', '#78909C'],
+		icon: icons.other
 	},
 ];
 

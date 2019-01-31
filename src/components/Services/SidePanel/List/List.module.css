@@ -106,6 +106,10 @@
     padding-inline-start: 0;
 }
 
+.ChildrenListContainer svg {
+    margin-right: 15px !important;
+}
+
 @keyframes FadeIn {
     from {
         opacity: 0;

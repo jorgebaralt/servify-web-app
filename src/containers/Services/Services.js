@@ -16,6 +16,16 @@ class Services extends Component {
         props.onResetCategoriesFilter();
     }
 
+    state = {
+        priceFiter: 1 // Defaults to 100%, showing all services.
+    }
+
+    setPriceFiter = (priceFiter) => {
+        this.setState({
+            priceFiter: priceFiter   
+        });
+    }
+
     render () {
         let activeCategory = null;
         if (this.props.location.state) {
@@ -23,9 +33,9 @@ class Services extends Component {
         }
         return (
             <div className={classes.Wrapper}>
-                <SidePanel activeCategory={activeCategory} />
+                <SidePanel priceFiter={this.state.priceFiter} onPriceFilter={this.setPriceFiter} activeCategory={activeCategory} />
                 {/* Default and Filtered Services */}
-                <ServicesContainer/>
+                <ServicesContainer priceFiter={this.state.priceFiter} />
             </div>
         );
     }

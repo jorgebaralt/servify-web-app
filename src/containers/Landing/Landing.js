@@ -7,12 +7,12 @@ import { servicesCreator } from '../../store/actions';
 // CSS
 import classes from './Landing.module.css';
 // Images
-import placeholderHeader from '../../assets/images/placeholder-header.jpg'
+import headerImage from '../../assets/images/header-image-2.jpg'
 // SVG
 import SVG from '../../components/SVG/SVG';
 // JSX
 import { Link } from 'react-router-dom';
-import LoadingBounce from '../../components/UI/LoadingBounce/LoadingBounce';
+import LoadingPage from '../../components/UI/LoadingPage/LoadingPage';
 import HeaderImage from '../../components/UI/HeaderImage/HeaderImage';
 import Carousel from '../../components/UI/Carousel/Carousel';
 import SearchBox from '../../components/UI/SearchBox/SearchBox';
@@ -86,6 +86,7 @@ class Landing extends Component {
                 </li>
             );
         });
+        // Placeholder Loader
         let topCategories = (
             <CardContainer>
                 <Card title='' />
@@ -132,7 +133,7 @@ class Landing extends Component {
                 </>
             );
         }
-        let topServices = <LoadingBounce />;
+        let topServices = <LoadingPage />;
         if (this.props.services.topServices) {
             topServices = (
                 <>
@@ -191,10 +192,10 @@ class Landing extends Component {
                 {/* Header */}
                 <div className={classes.Header}>
                     <ul className={classes.Background}>
-                        <HeaderImage src={placeholderHeader} />
+                        <HeaderImage src={headerImage} />
                     </ul>
                     <div className={classes.HeaderContent}>
-                        { !this.props.mobile ? <SearchBox.widescreen categoriesDatalist={categoriesDatalist} /> : null }
+                        <SearchBox.widescreen categoriesDatalist={categoriesDatalist} />
                         {/* TODO Get custom logo */}
                         <h1>Servify</h1>
                     </div>
@@ -202,12 +203,8 @@ class Landing extends Component {
                 {/* TODO improve banner */}
                 {/* <Banner /> */}
                 {/* Page Content */}
-                <div className={classes.Container}>
-                    { this.props.isMobile ? 
-                        <>
-                            <SearchBox.mobile categoriesDatalist={categoriesDatalist} />
-                            <br />
-                        </> : null }
+                <div draggable="false" className={classes.Container}>
+                    <SearchBox.mobile categoriesDatalist={categoriesDatalist} />
                     <h1 style={{marginBottom: 20}}>Top Categories</h1>
                     {/* TODO category images */}
                     {topCategories}
@@ -247,7 +244,6 @@ class Landing extends Component {
                         {categoriesList}
                     </ul>
                 </div>
-                
             </>
         );
     }

@@ -24,12 +24,17 @@ const Buttons = (props) => {
                 </label>
                 <input ref={props.mySingleFile} type='file' className={classes.Input} id='Single_Image_Upload' onChange={props.onChange} /> 
             </div>
-            <div className={classes.Button}>
-                <label htmlFor='Multi_Image_Upload'>
-                    <SVG className={classes.Icon} svg='multi-image' color='#6d84b4' size='10x' />
-                </label>
-                <input ref={props.myMultiFiles} type='file' className={classes.Input} id='Multi_Image_Upload' onChange={props.onChange} multiple />
-            </div>
+            {props.bIsSingleImage ? // Props sent by parent component in case only single image upload is desired (profiles).
+                null
+                : (
+                    <div className={classes.Button}>
+                        <label htmlFor='Multi_Image_Upload'>
+                            <SVG className={classes.Icon} svg='multi-image' color='#6d84b4' size='10x' />
+                        </label>
+                        <input ref={props.myMultiFiles} type='file' className={classes.Input} id='Multi_Image_Upload' onChange={props.onChange} multiple />
+                    </div>
+                )
+            }
         </div>
     );
 }
@@ -194,7 +199,8 @@ class InputImage extends Component {
         await Promise.all(Object.values(this.state.files).map(async (file) => {
             const formData= new FormData();
             formData.append('image', file, file.name);
-            const response = await axios.post('/images_service', 
+            const url = this.props.profileUpload ? '/images_profile' : '/images_service'
+            const response = await axios.post(url, 
                 formData,  
                 { onUploadProgress: progressEvent => {
                     const progress = (progressEvent.loaded / progressEvent.total * 100);
@@ -247,7 +253,9 @@ class InputImage extends Component {
                     images={images} 
                     removeImage={this.removeImage}  />
             default:
-                return <Buttons onChange={this.onChange}
+                return <Buttons
+                    bIsSingleImage={this.props.bIsSingleImage} 
+                    onChange={this.onChange}
                     myMultiFiles={this.myMultiFiles}
                     mySingleFile={this.mySingleFile} 
                     setActiveRef={this.setActiveRef} />

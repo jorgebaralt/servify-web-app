@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+// react-redux, axios & toast
+import { connect } from 'react-redux';
+import axios from '../../../axios-services';
+import { toast } from 'react-toastify';
 // Input Validity
 import { checkValidity } from '../../../shared/checkValidity';
 // CSS
@@ -9,12 +13,13 @@ import Input from '../../../components/UI/Input/Input';
 import Panel from '../../../components/UI/Panel/Panel';
 import Button from '../../../components/UI/Button/Button';
 import Separator from '../../../components/UI/Separator/Separator';
-import SVG from '../../../components/SVG/SVG';
+import LoadingDots from '../../../components/UI/LoadingDots/LoadingDots';
 
 class Feedback extends Component {
     constructor(props) {
         super(props);
         this.state={
+            bIsUploading: false,
             controls: {
                 feedbackOne: {
                     elementType: 'textarea',
@@ -54,8 +59,8 @@ class Feedback extends Component {
                     style: {margin: 0}
                 }
             },
-            
-            formIsValid: true,
+            formIsValid: false,
+            bIsSent: false
         };
     }
 
@@ -82,6 +87,28 @@ class Feedback extends Component {
 
     onSubmitHandler = (event) => {
         event.preventDefault();
+        this.setState({
+            bIsUploading: true
+        });
+        axios.post('/feedback', 
+            { 
+                uid: this.props.userDetails.uid,
+                satisfaction: this.state.controls.feedbackOne.value, 
+                improvements: this.state.controls.feedbackTwo.value 
+            })
+            .then(() => {
+                this.setState({
+                    bIsUploading: false,
+                    bIsSent: true
+                });
+                toast.success('Your feedback has been sent succesfully. Thank you for taking the time in reaching out to us.');
+            })
+            .catch(() => {
+                this.setState({
+                    bIsUploading: false
+                });
+                toast.error('Something went wrong when trying to send your feedback.');
+            })
     }
 
     render () {
@@ -119,7 +146,12 @@ class Feedback extends Component {
                                 </div>
                             );
                         })}
-                        <Button style={{fontSize: '21px'}} disabled={!this.state.formIsValid} type='primary' blockButton={true}>Submit</Button>
+                        <Button submit style={{fontSize: '17px', height: '50px'}} 
+                            disabled={!this.state.formIsValid || this.state.bIsUploading || this.state.bIsSent} 
+                            type='success' 
+                            blockButton>
+                            {this.state.bIsUploading ? <LoadingDots /> : 'Submit'}
+                        </Button>
                     </form>
                 </Panel>
             </Layout>
@@ -127,4 +159,10 @@ class Feedback extends Component {
     }
 }
 
-export default Feedback;
+const mapStateToProps = (state) => {
+	return {
+        userDetails: state.authReducer.userDetails,
+	};
+};
+
+export default connect(mapStateToProps)(Feedback);

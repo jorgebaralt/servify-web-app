@@ -38,12 +38,6 @@ class SearchBar extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        console.log('-------------------------')
-        console.log('inside getDerivedStateFromProps')
-        console.log('-------------------------')
-        console.log('services', props.nearServices)
-        console.log('value', state.searchBar.value)
-        console.log('state', state)
         const services = props.nearServices;
         const query = state.searchBar.value;
         // If there are no services or query is an empty string then return
@@ -83,9 +77,6 @@ class SearchBar extends Component {
             filteredServices,
             bIsTouched: true
         }
-        console.log('-------------------------')
-        console.log('outsside getDerivedStateFromProps')
-        console.log('-------------------------')
         return newState;
     }
 
@@ -135,8 +126,6 @@ class SearchBar extends Component {
             ListClasses.push(classes.Show);
             RecentSearchesWrapperClasses.push(classes.Show);
         }
-        console.log(this.props)
-        console.log(this.state)
         return (
             <div className={classes.GlobalWrapper}>
                 <div className={classes.SearchBarAnchor}>

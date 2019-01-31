@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// default image
+import image from '../../../assets/images/learn-more.jpg';
 // CSS
 import classes from './ReadyToGrow.module.css';
 // JSX
@@ -14,12 +16,8 @@ class ReadyToGrow extends Component {
     }
 
     state = {
-        // TODO PLACEHOLDER IMAGES, CHANGE LATER ON
-        src: this.props.src ? this.props.src : 'https://a0.muscache.com/4ea/air/v2/pictures/c3cf0b96-9029-4408-af5a-ce90aca5c3fe.jpg?t=r:w800-h242-sfit,e:fjpg-c75',
-        srcset: this.props.srcset ? this.props.srcset : (`https://a0.muscache.com/4ea/air/v2/pictures/c3cf0b96-9029-4408-af5a-ce90aca5c3fe.jpg?t=r:w800-h242-sfit,e:fjpg-c75 
-            800w,https://a0.muscache.com/4ea/air/v2/pictures/c3cf0b96-9029-4408-af5a-ce90aca5c3fe.jpg?t=r:w1600-h484-sfit,e:fjpg-c75 
-            1600w,https://a0.muscache.com/4ea/air/v2/pictures/c3cf0b96-9029-4408-af5a-ce90aca5c3fe.jpg?t=r:w2400-h726-sfit,e:fjpg-c75 
-            2400w`)
+        src: this.props.src ? this.props.src : image,
+        srcset: this.props.srcset
     }
 
     shouldComponentUpdate () {

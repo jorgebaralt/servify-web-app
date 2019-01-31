@@ -44,7 +44,8 @@ class SidePanel extends Component {
                 category: {
                     elementType: 'select',
                     elementConfig: {
-                        options: sortDatalist
+                        options: sortDatalist,
+                        displayValue: sortDatalist[0].value
                     },
                     value: sortDatalist[0].value,
                     valueType: 'text',
@@ -58,7 +59,7 @@ class SidePanel extends Component {
             }
         },
         prices: {
-            rating: 1, // Default value, 1 means show all
+            rating: this.props.priceFilter, // Default value (1). 1 means show all services.
             list: {
                 bIsClosed: false
             }
@@ -134,15 +135,18 @@ class SidePanel extends Component {
         }
     }
 
-    setRatingFilter = (rating) => {
+    setPriceFilter = (rating) => {
         this.setState( (prevState) => {
             return {
                 prices: {
                     ...prevState.prices,
-                    rating: rating
+                    rating: rating + 0.25 // To add 25% as default, meaning the minimum will be 25%, max. will be 100%.
                 }
             }
         });
+        if (this.props.onPriceFilter) {
+            this.props.onPriceFilter(rating + 0.25);
+        }
     }
 
     componentWillUnmount() {
@@ -205,7 +209,7 @@ class SidePanel extends Component {
                             onClick={() => this.toggleListHandler(listKeys[2])}
                             bIsClosed={this.state.prices.list.bIsClosed}
                             closedChildren={<ClosedRatingContainer rating={this.state.prices.rating} />}>
-                            <RatingContainer rating={this.state.prices.rating} onClick={this.setRatingFilter} />
+                            <RatingContainer rating={this.state.prices.rating} onClick={this.setPriceFilter} />
                         </List>
                     </div>
                 </div>

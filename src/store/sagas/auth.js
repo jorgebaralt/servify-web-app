@@ -245,6 +245,9 @@ export const authSagas = {
         }
         if (bIsSignUpProvider) {
             userData['provider'] = bIsSignUpProvider;
+        } else {
+            // The provider is equal to 'password' if bIsSignUpProvider is false.
+            userData['provider'] = 'password';
         }
         // The user data will be merged with any existing data in the firestore.
         yield userRef.set({

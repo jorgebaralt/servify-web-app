@@ -20,13 +20,10 @@ import DeleteImage from '../../../components/UI/Input/InputImage/DeleteImage/Del
 class Edit extends Component {
     constructor(props) {
         super(props);
-        const imagesInfo = [{
+        const imagesInfo = [{ // For the image delete input
             url: props.userDetails.photoURL,
             filename: [props.userDetails.uid,'profile_picture'].join('__')
         }];
-        // const image = [props.userDetails.photoURL];
-        // console.log(image)
-        const images = setImagesArray(imagesInfo);
         this.state={
             bIsLoading: true,
             controls: {
@@ -51,7 +48,7 @@ class Edit extends Component {
                 },
             },
             imagesInfo: imagesInfo,
-            images: images,
+            images: [],
             formIsValid: true,
         };
     }
@@ -77,28 +74,27 @@ class Edit extends Component {
         });
     }
 
-    componentDidMount() {
-        axios.get('/user', { params: {uid: this.props.userDetails.uid }})
-            .then(response => {
-                console.log(response)
-            })
-    }
-
     inputImageChangeHandler = (files) => {
         this.setState({
-            imageFiles: files, 
+            imageFiles: {
+                value: files
+            },
         });
     }
 
-    updateImages = (images) => {
-        this.setState( () => {
-            return {
-                images: images
-            }
-        })
+    uploadImage = (imagesInfo) => {
+        console.log(imagesInfo);
+        axios.put('/user', { data: { uid: this.props.userDetails.uid, imagesInfo: imagesInfo }})
+            .then(
+                res => {
+                    console.log(res);
+                }
+            ).catch(err => {
+                console.log(err);
+            });
     }
 
-    onChange = () => {
+    onDelete = () => {
         console.log('ping');
     }
 
@@ -112,6 +108,13 @@ class Edit extends Component {
             ).catch(err => {
                 console.log(err);
             });
+    }
+
+    componentDidMount() {
+        axios.get('/user', { params: {uid: this.props.userDetails.uid }})
+            .then(response => {
+                console.log(response)
+            })
     }
 
     render () {
@@ -153,28 +156,23 @@ class Edit extends Component {
                                 </div>
                             );
                         })}
+                        <Button submit 
+                            disabled={!this.state.formIsValid} 
+                            type='success' 
+                            blockButton={true}>Save Profile</Button>
                         <Separator />
-                        {!this.props.userDetails.photoURL ? 
-                            <>
-                                <div style={{marginBottom: '12px'}} className={classes.InputTitle}>
-                                    Image Upload
-                                </div>
-                                <InputImage onChange={this.inputImageChangeHandler} onSubmit={this.onSubmitHandler} />
-                            </>
-                            : (
-                                <>
-                                    <div style={{marginBottom: '12px'}} className={classes.InputTitle}>
-                                        Image Delete
-                                    </div>
-                                    <DeleteImage 
-                                        onDelete={this.state.onChange}
-                                        uid={this.props.userDetails.uid} 
-                                        imagesInfo={this.state.imagesInfo} />
-                                </>
-                            )
-                        }
+                        <div style={{marginBottom: '12px'}} className={classes.InputTitle}>
+                            Change Profile Picture
+                        </div>
+                        <InputImage profileUpload submit bIsSingleImage onUpload={this.uploadImage} onSubmit={this.onSubmitHandler} />
                         <Separator />
-                        <Button submit style={{fontSize: '21px'}} disabled={!this.state.formIsValid} type='primary' blockButton={true}>Save</Button>
+                        <div style={{marginBottom: '24px'}} className={classes.InputTitle}>
+                            Delete Profile Picture
+                        </div>
+                        <DeleteImage 
+                            onDelete={this.state.onDelete}
+                            uid={this.props.userDetails.uid} 
+                            imagesInfo={this.state.imagesInfo} />
                     </form>
                 </Panel>
             </Layout>

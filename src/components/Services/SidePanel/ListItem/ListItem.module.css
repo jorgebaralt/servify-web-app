@@ -54,11 +54,8 @@
     margin-right: 8px;
 }
 
-.ListItemIcon svg {
-    transition: fill 0.2s ease;
-}
-
-.ListIconActive svg {
+.ListIconActive svg,
+.ListIconActive svg * {
     fill: #FFF;
 }
 

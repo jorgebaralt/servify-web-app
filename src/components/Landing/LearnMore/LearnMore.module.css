@@ -1,18 +1,23 @@
 .Wrapper {
     margin-top: 24px;
     position: relative;
-    height: 320px;
+    height: 390px;
     border-radius: 10px;
     overflow: visible;
     box-sizing: border-box;
+    user-select: none;
 }
 
 .BackgroundWrapper {
     position: absolute;
-    height: 320px;
+    height: 390px;
     width: 100%;
     box-sizing: border-box;
     background-color: #4893a8;
+}
+
+.BackgroundWrapper img {
+    object-fit: cover;
 }
 
 .Background {
@@ -32,8 +37,10 @@
     cursor: pointer;
     position: absolute;
     width: 100%;
-    height: calc((100% - 20px) - 0.4em);
+    height: 100%;
     box-sizing: border-box;
+    user-select: none;
+    background-color: rgba(0,0,0,.16);
 }
 
 .BannerContainer {

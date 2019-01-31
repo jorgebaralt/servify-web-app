@@ -64,7 +64,7 @@ export const ClosedRatingContainer = (props) => {
                         fontSize: '16px',
                         fontWeight: '600',
                         height: '13px',
-                        margin: '0 5px 0 10px'
+                        margin: '0 5px'
                     }}>-</span> {/** Separator */}
                 <Rating 
                     rating={props.rating} 

@@ -52,11 +52,12 @@ class Services extends Component {
                     <LoadingBounce /> :   
                     this.props.bIsDefault ? 
                         <DefaultServices
+                            priceFiter={this.props.priceFiter}
                             topCategories={this.props.topCategories}
                             services={this.props.services}
                             city={this.state.location.city} 
                             state={this.state.location.state} /> :
-                        <FilteredServices /> }
+                        <FilteredServices priceFiter={this.props.priceFiter} /> }
                 </div>
             </div>
         )
