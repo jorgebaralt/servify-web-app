@@ -1,10 +1,12 @@
 .Widescreen {
     display: none;
+    user-select: none;
 }
 
 .Mobile {
     display: block;
     width: 100%;
+    user-select: none;
 }
 
 @media (min-width: 960px) {
@@ -139,6 +141,7 @@
     font-weight: 400;
     width: 100%;
     margin-top: 12px;
+    user-select: none;
 }
 
 .MakeMoneyContainer svg,
@@ -163,7 +166,8 @@
     align-items: center;
     width: 100%;
     font-size: 13px;
-    color: rgb(72,72,72)
+    color: rgb(72,72,72);
+    user-select: none;
 }
 
 .MakeMoney span {

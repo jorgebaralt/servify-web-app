@@ -199,9 +199,7 @@ class PublicationsId extends Component {
                             radiusInMiles: data.miles, // Initial value
                             maxRadius: 60 // For the input slider
                         },
-                        serviceId: data.id,
-                        // TODO determine if needed
-                        rawData: data
+                        serviceId: data.id
                     }
                 });
             }

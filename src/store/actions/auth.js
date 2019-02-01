@@ -43,6 +43,13 @@ export const authActions = {
             type: actionTypes.AUTH_RESET_ERROR_MESSAGE,
         }
     },
+    // Users routes.
+    usersUpdateUserDetails: (userDetails) => {
+        return {
+            type: actionTypes.USERS_UPDATE_USER_DETAILS,
+            userDetails: userDetails
+        }
+    },
 }
 
 export const authCreator = {

@@ -48,7 +48,6 @@ class ServicesId extends Component {
             locationData: {},
             address: null,
             map: {},
-            servicesReviewsParams: null,
             loading: true
         }
     }
@@ -145,8 +144,6 @@ class ServicesId extends Component {
                             initialPosition: [data.location._longitude, data.location._latitude],
                             radiusInMiles: data.miles // Initial value
                         },
-                        // TODO remove
-                        servicesReviewsParams: data
                     }
                 });
             })
@@ -178,7 +175,6 @@ class ServicesId extends Component {
                 locationData: {},
                 address: null,
                 map: {},
-                servicesReviewsParams: null,
                 loading: true
             });
             this.fetchService();

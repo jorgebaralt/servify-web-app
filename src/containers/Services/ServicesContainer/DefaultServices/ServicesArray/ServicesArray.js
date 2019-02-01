@@ -4,10 +4,9 @@ import classes from './ServicesArray.module.css';
 // JSX
 import Carousel from '../../../../../components/UI/Carousel/Carousel';
 import Service from '../../../../../components/Services/Service/Service';
-import Featured from '../../../../../components/Services/Featured/Featured';
+// import Featured from '../../../../../components/Services/Featured/Featured';
 
 const services = (props) => {
-    // TODO remove placeholders
     const placeholders = [];
     for (let i = 0; i < 12; i++) {
         placeholders.push(

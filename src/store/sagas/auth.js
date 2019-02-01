@@ -37,7 +37,6 @@ export const authSagas = {
                 yield put(authActions.authLogout()); // If no user or rejected promise, logout & set auth loading state to false.
             } else {
                 // Saving user to the database
-                // TODO remove eventually
                 yield put(authCreator.authSaveUserToDatabaseInit(currentUser, false, true));
                 yield put(authActions.authSuccess(currentUser.uid, currentUser.email, currentUser));
             }

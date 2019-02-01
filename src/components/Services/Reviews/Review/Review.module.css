@@ -106,6 +106,10 @@
     color: rgb(255, 112, 67) !important;
 }
 
+.Link:hover {
+    text-decoration: underline;
+}
+
 .Rating {
     display: flex;
     flex-flow: column;

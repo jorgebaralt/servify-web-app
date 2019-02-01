@@ -6,7 +6,7 @@ const typing = (props) => {
         xmlns="http://www.w3.org/2000/svg" 
         viewBox="0 0 100 100" 
         preserveAspectRatio="xMidYMid" 
-        class={props.class}
+        className={props.className}
         style={props.style}
         width={props.width ? props.width : "80px"} 
         height={props.height ? props.height : "80px"} >

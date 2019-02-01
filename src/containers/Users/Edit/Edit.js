@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 // react-redux & axios
 import  { connect } from 'react-redux';
+import  { toast } from 'react-toastify';
 import axios from '../../../axios-services';
+import { authActions } from '../../../store/actions'
 // Input Validity
 import { checkValidity } from '../../../shared/checkValidity';
-import { setImagesArray } from '../../../shared/imagesHandler';
 // CSS
 import classes from './Edit.module.css';
 // JSX
@@ -13,7 +14,9 @@ import SVG from '../../../components/SVG/SVG';
 import Input from '../../../components/UI/Input/Input';
 import Panel from '../../../components/UI/Panel/Panel';
 import Button from '../../../components/UI/Button/Button';
+import ProfilePhoto from '../../../components/Users/ProfilePhoto/ProfilePhoto';
 import Separator from '../../../components/UI/Separator/Separator';
+import LoadingDots from '../../../components/UI/LoadingDots/LoadingDots';
 import InputImage from '../../../components/UI/Input/InputImage/InputImage';
 import DeleteImage from '../../../components/UI/Input/InputImage/DeleteImage/DeleteImage';
 
@@ -22,10 +25,12 @@ class Edit extends Component {
         super(props);
         const imagesInfo = [{ // For the image delete input
             url: props.userDetails.photoURL,
-            filename: [props.userDetails.uid,'profile_picture'].join('__')
+            filename: props.userDetails.uid
         }];
         this.state={
             bIsLoading: true,
+            bIsUpdatingUser: false,
+            bIsMounted: false,
             controls: {
                 displayName: {
                     title: 'Display Name',
@@ -48,9 +53,29 @@ class Edit extends Component {
                 },
             },
             imagesInfo: imagesInfo,
-            images: [],
+            images: [props.userDetails.photoURL],
             formIsValid: true,
         };
+    }    
+    // To fetch user data
+    componentDidMount() {
+        axios.get('/user', { params: {uid: this.props.userDetails.uid }})
+            .then(response => {
+                const imagesInfo = response.data.imagesInfo;
+                // For the image delete input
+                if (imagesInfo) {
+                    this.setState({
+                        imagesInfo: imagesInfo,
+                        images: [imagesInfo[0].url],
+                        bIsMounted: true
+                    });
+                }
+            })
+            .catch(() => {
+                toast.error(
+                    `Something went wrong, you might not be able to delete or update your 
+                    profile picture Reload the page if you want to try again.`);
+            })
     }
 
     inputChangeHandler = (event, inputIdentifier) => {
@@ -82,51 +107,99 @@ class Edit extends Component {
         });
     }
 
+    updateUserDetails = (newUserDetails) => {
+        const updatedUserDetails = {
+            ...this.props.userDetails,
+            ...newUserDetails
+        };
+        this.props.updateUserDetails(updatedUserDetails);
+    }
+
+    // Updates profile picture.
     uploadImage = (imagesInfo) => {
-        console.log(imagesInfo);
-        axios.put('/user', { data: { uid: this.props.userDetails.uid, imagesInfo: imagesInfo }})
-            .then(
-                res => {
-                    console.log(res);
-                }
-            ).catch(err => {
-                console.log(err);
+        const photoURL = imagesInfo[0].url;
+        axios.put('/user', 
+            {
+                uid: this.props.userDetails.uid, 
+                updatedUser: { imagesInfo: imagesInfo, photoURL: photoURL }
+            })
+            .then(response => {
+                console.log(response);
+                const updatedUserDetails = response.data;
+                this.updateUserDetails(updatedUserDetails);
+                // For the image delete input
+                this.setState({
+                    imagesInfo: updatedUserDetails.imagesInfo,
+                    images: [updatedUserDetails.imagesInfo[0].url],
+                })
+                toast.success('Profile updated successfully.');
+            }).catch(() => {
+                toast.error('Something went wrong while trying to update your profile. You may try again.');
             });
     }
 
+    // To delete profile picture.
     onDelete = () => {
         console.log('ping');
-    }
-
-    onSubmitHandler = (event) => {
-        event.preventDefault();
-        axios.put('/user', { data: { uid: this.props.userDetails.uid, displayName: this.state.controls.displayName.value }})
-            .then(
-                res => {
-                    console.log(res);
-                }
-            ).catch(err => {
-                console.log(err);
+        axios.put('/user', { 
+                uid: this.props.userDetails.uid, 
+                bDeletePhotoURL: true,
+                updatedUser: { imagesInfo: null }
+            })
+            .then(response => {
+                console.log(response);
+                const updatedUserDetails = response.data;
+                this.updateUserDetails(updatedUserDetails);
+                // For the image delete input
+                this.setState({
+                    imagesInfo: updatedUserDetails.imagesInfo,
+                    images: [],
+                })
+                toast.success('Your profile picture has been removed.');
+            }).catch(() => {
+                toast.error('Something went wrong while trying to update your profile. You may try again.');
             });
     }
 
-    componentDidMount() {
-        axios.get('/user', { params: {uid: this.props.userDetails.uid }})
-            .then(response => {
-                console.log(response)
+    // Currently, this only updates displayName.
+    onSubmitHandler = () => {
+        console.log('onSubmitHandler')
+        this.setState({
+            bIsUpdatingUser: true
+        });
+        axios.put('/user', { 
+                uid: this.props.userDetails.uid, 
+                updatedUser: { displayName: this.state.controls.displayName.value } 
             })
+            .then(response => {
+                console.log(response);
+                const updatedUserDetails = response.data;
+                this.updateUserDetails(updatedUserDetails);
+                toast.success('Profile updated successfully.');
+                this.setState({
+                    bIsUpdatingUser: false
+                });
+            })
+            .catch(() => {
+                toast.error('Something went wrong while trying to update your profile. You may try again.');
+                this.setState({
+                    bIsUpdatingUser: false
+                });
+            });
     }
 
     render () {
+        console.log(this.state)
+        const creationDate = (new Date(Number(this.props.userDetails.metadata.a))).toLocaleDateString();
         const formElementsArray = Object.entries(this.state.controls);
         return (
             <Layout>
                 <Panel header='Account Details'>
                     <div className={classes.JoinDate}>
-                        Member since: <span>December 2018</span>
+                        Member since: <span>{creationDate}</span>
                     </div>
                     <Separator />
-                    <form onSubmit={this.onSubmitHandler}>
+                    <div>
                         {formElementsArray.map( (input) => {
                             return (
                                 <div className={classes.InputWrapper} key={input[0]}>
@@ -156,24 +229,47 @@ class Edit extends Component {
                                 </div>
                             );
                         })}
-                        <Button submit 
-                            disabled={!this.state.formIsValid} 
+                        <Button 
+                            clicked={this.onSubmitHandler}
+                            disabled={!this.state.formIsValid || this.state.bIsUpdatingUser} 
                             type='success' 
-                            blockButton={true}>Save Profile</Button>
+                            style={{height: '50px'}}
+                            blockButton={true}>
+                            {this.state.bIsUpdatingUser ? <LoadingDots /> : 'Save Profile'}
+                        </Button>
                         <Separator />
                         <div style={{marginBottom: '12px'}} className={classes.InputTitle}>
-                            Change Profile Picture
+                            Profile Picture
                         </div>
-                        <InputImage profileUpload submit bIsSingleImage onUpload={this.uploadImage} onSubmit={this.onSubmitHandler} />
                         <Separator />
-                        <div style={{marginBottom: '24px'}} className={classes.InputTitle}>
-                            Delete Profile Picture
-                        </div>
-                        <DeleteImage 
-                            onDelete={this.state.onDelete}
-                            uid={this.props.userDetails.uid} 
-                            imagesInfo={this.state.imagesInfo} />
-                    </form>
+                        {/*
+                        * Only render the InputImage and DeleteImage components if
+                        * the user did NOT create an account through the google or facebook API.
+                        */}
+                        {this.props.userDetails.providerData[0].providerId === 'password' ? 
+                            // Only makes sense to render DeleteImage if there is a profile picture already.
+                            this.state.images.length && this.state.bIsMounted ? 
+                                <DeleteImage 
+                                    onDelete={this.onDelete}
+                                    uid={this.props.userDetails.uid} 
+                                    imagesInfo={this.state.imagesInfo} />
+                                : (
+                                    <InputImage 
+                                        profileUpload 
+                                        submit 
+                                        bIsSingleImage 
+                                        onUpload={this.uploadImage} 
+                                        onSubmit={this.onSubmitHandler} />
+                                )
+                            : (
+                                <div className={classes.Image}>
+                                    <ProfilePhoto noWrapper draggable={false} src={this.props.userDetails.photoURL} />
+                                    <span className={classes.Provider}>
+                                        Profile picture associated to your {this.props.userDetails.providerData[0].providerId} account.
+                                    </span>
+                                </div>
+                            )}
+                    </div>
                 </Panel>
             </Layout>
         );
@@ -186,4 +282,10 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps)(Edit);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		updateUserDetails: (userDetails) => dispatch(authActions.usersUpdateUserDetails(userDetails)),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Edit);

@@ -2,9 +2,8 @@ import React from 'react';
 
 const user = (props) => {
     return (
-        <svg viewBox="0 0 53 53"
-            version="1.1" 
-            xmlns="http://www.w3.org/2000/svg"
+        <svg 
+            viewBox="0 0 53 53"
             style={props.style}
             className={props.className}
             width={props.width ? props.width: "34px"}

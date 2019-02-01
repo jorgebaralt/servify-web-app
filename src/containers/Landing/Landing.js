@@ -200,8 +200,6 @@ class Landing extends Component {
                         <h1>Servify</h1>
                     </div>
                 </div>
-                {/* TODO improve banner */}
-                {/* <Banner /> */}
                 {/* Page Content */}
                 <div draggable="false" className={classes.Container}>
                     <SearchBox.mobile categoriesDatalist={categoriesDatalist} />

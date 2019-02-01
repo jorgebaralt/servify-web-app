@@ -99,8 +99,6 @@ class Slider extends Component {
         }
     }
 
-    // TODO add fade in functionality to the slides and not to the slider wrapper, then remove from Publish.js
-
     render() {
         let PrevButton;
         let NextButton;

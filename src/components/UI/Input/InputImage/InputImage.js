@@ -290,7 +290,7 @@ class InputImage extends Component {
                     </div>
                 </div>
                 {this.props.submit ? 
-                    <Button style={{height: '46px'}} submit disabled={bIsSubmitDisabled} blockButton type='success'>
+                    <Button style={{height: '50px'}} submit disabled={bIsSubmitDisabled} blockButton type='success'>
                         {this.state.bIsUploading ? <LoadingDots /> : 'Submit'}
                     </Button>
                     : null

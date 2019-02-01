@@ -25,6 +25,9 @@ const authReducer = (state = initialState, action) => {
             return updateObject(state, {error: null});
         case types.AUTH_SET_REDIRECT_PATH:
             return updateObject(state, {authRedirectPath: action.path});
+        // Users routes.
+        case types.USERS_UPDATE_USER_DETAILS:
+            return updateObject(state, {userDetails: action.userDetails});
         default:
             // do nothing
     }

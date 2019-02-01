@@ -21,14 +21,14 @@ class LearnMore extends Component {
     }
 
     shouldComponentUpdate () {
-        return this.state.src && this.state.srcset;
+        return (this.state.src && this.state.srcset) ? true : false;
     }
 
     render () {
-        const earnMoney = <span key='price'>Earn money</span>;
-        let offer = [earnMoney, ' by hosting your services on Servify!'];
+        const earnMoney = <span key='price'>Gain customers</span>;
+        let offer = [earnMoney, ' by listing your services on Servify!'];
         if (this.props.state && this.props.city) {
-            offer = [earnMoney, ` by hosting your services near ${this.props.city},  ${this.props.state}`];
+            offer = [earnMoney, ` by listing your services near ${this.props.city},  ${this.props.state}`];
         }
         return (
             <div className={classes.Wrapper}>

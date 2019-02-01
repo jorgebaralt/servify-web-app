@@ -24,6 +24,7 @@ import QuestionMark from './question-mark';
 import Phone from './phone';
 import Envelope from './envelope';
 import SentEnvelope from './sent-envelope';
+import Flag from './flag';
 // TODO make SVG
 import BlackBorderlessLogo from '../images/servify-logos/blackborder-nobg';
 
@@ -55,5 +56,6 @@ export {
     QuestionMark,
     Phone,
     Envelope,
-    SentEnvelope
+    SentEnvelope,
+    Flag
 };

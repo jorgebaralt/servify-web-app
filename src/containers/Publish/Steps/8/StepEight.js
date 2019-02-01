@@ -328,7 +328,6 @@ class StepEight extends PureComponent {
                     {/* Step 4: Images (Optional) */}
                     <div className={classes.Step}><span>S</span>tep 4: Images (Optional)</div>
                     <Separator />
-                    {/* TODO images */}
                     <PreviewInformation title='Images'>
                         {this.myImages ?
                             <div className={classes.ImagesContainer}>

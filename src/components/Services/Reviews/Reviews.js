@@ -403,7 +403,7 @@ class Reviews extends Component {
                         : (this.state.reviews.length || this.state.userReview) ? 
                             <>
                                 <Ratings ratings={this.state.ratings} />
-                                <div style={{margin: '0 auto'}} className={classes.Wrapper}>
+                                <div style={{display: 'block', margin: '0 auto'}} className={classes.Wrapper}>
                                     {this.state.userReview ? 
                                         <UserReview
                                             highlight
@@ -414,8 +414,7 @@ class Reviews extends Component {
                                     : null}
                                     <>
                                         {this.state.reviews.map( (review, index) => {
-                                            // TODO passing some of the props 
-                                            // will be deprecated when reviews are fetched individually
+                                            // TODO passing some of the props will be deprecated when reviews are fetched individually
                                             return (
                                                 <Review key={index}
                                                     review={review} />

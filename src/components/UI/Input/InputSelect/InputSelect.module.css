@@ -1,7 +1,6 @@
 .Wrapper {
     position: relative;
     width: 100%;
-    height: 100%;
     cursor: pointer;
 }
 
@@ -16,7 +15,7 @@
     border-radius: 4px;
     background-color: #FFF;
     width: 100%;
-    height: 100%;
+    height: 54px;
     transition: box-shadow 200ms ease-in, border 0.2s ease;
 }
 

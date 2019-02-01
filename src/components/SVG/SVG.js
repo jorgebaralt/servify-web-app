@@ -103,6 +103,9 @@ class SVGComponent extends PureComponent {
             case 'sent-envelope':
                 svg = <SVG.SentEnvelope {...this.props} />;
                 break;
+            case 'flag':
+                svg = <SVG.Flag {...this.props} />;
+                break;
             // Social Media Icons
             case 'facebook-nobg':
                 svg = <SocialMedia.FacebookNoBg {...this.props} />

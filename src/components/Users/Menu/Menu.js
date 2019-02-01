@@ -1,4 +1,6 @@
 import React from 'react';
+// Redux Saga
+import  { connect } from 'react-redux';
 // Anon User Image
 import anonUser from '../../../assets/svg/source/user-nobg.svg';
 // CSS
@@ -9,11 +11,12 @@ import Panel from '../../UI/Panel/Panel';
 import ProfilePhoto from '../../Users/ProfilePhoto/ProfilePhoto';
 
 const menu = (props) => {
+    if (!props.userDetails) { return null; } // Protection
     return (
         <div className={classes.Wrapper}>
             <div className={classes.Container}>
                 <div className={classes.Photo}>
-                    <ProfilePhoto src={props.photoURL ? props.photoURL : anonUser} />
+                    <ProfilePhoto src={props.userDetails.photoURL ? props.userDetails.photoURL : anonUser} />
                 </div>
                 <Panel bold header='Account Menu'>
                     <ul className={classes.Nav}>
@@ -29,4 +32,10 @@ const menu = (props) => {
     );
 }
 
-export default menu;
+const mapStateToProps = (state) => {
+	return {
+        userDetails: state.authReducer.userDetails,
+	};
+};
+
+export default connect(mapStateToProps)(menu);

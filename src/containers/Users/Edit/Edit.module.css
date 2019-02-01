@@ -61,3 +61,27 @@
     width: 18px;
     height: 18px;
 }
+
+.Image {
+    position: relative;
+    max-width: 260px;
+    max-height: 260px;
+    margin: 16px auto;
+}
+
+.Image img {
+    border-radius: 10px !important;
+}
+
+.Provider {
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0,0,0,.4);
+    text-align: center;
+    margin: 0 1px;
+    padding: 6px 16px;
+    color: #FFF;
+    user-select: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}

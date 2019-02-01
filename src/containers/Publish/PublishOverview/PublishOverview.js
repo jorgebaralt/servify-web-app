@@ -143,7 +143,7 @@ class PublishOverview extends Component {
 							<ul className={classes.ListContainer}>
 								<li className={classes.ListItem}>
 									<SVG svg='checkmark-nobg' />
-									<span>Reviews and rating of your service</span>
+									<span>Reviews and customer rating of your service</span>
 								</li>
 								<li className={classes.ListItem}>
 									<SVG svg='checkmark-nobg' />
@@ -155,7 +155,7 @@ class PublishOverview extends Component {
 								</li>
 								<li className={classes.ListItem}>
 									<SVG svg='checkmark-nobg' />
-									<span>Location displayed in a map</span>
+									<span>Location and available area displayed in a map</span>
 								</li>
 								<li className={classes.ListItem}>
 									<SVG svg='checkmark-nobg' />
@@ -167,7 +167,7 @@ class PublishOverview extends Component {
 								</li>
 								<li className={classes.ListItem}>
 									<SVG svg='checkmark-nobg' />
-									<span>Option to add to favorites</span>
+									<span>Option to add to favorites and share your service on social media</span>
 								</li>
 							</ul>
 						</div>

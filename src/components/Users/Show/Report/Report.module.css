@@ -1,0 +1,57 @@
+.Container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Button {
+    display: inline-block;
+    overflow-wrap: break-word;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 20px;
+    letter-spacing: normal;
+    color: #484848;
+    text-align: left;
+    margin: 0px;
+}
+
+.Button div {
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: center;
+    box-sizing: content-box;
+}
+
+.Button span {
+    margin-left: 4px;
+}
+
+.Button div:hover {
+    box-shadow: 0px 1px 0px 0px #484848;
+}
+
+.Title {
+    display: block;
+    text-align: center;
+    user-select: none;
+    text-transform: uppercase;
+    color: #585858;
+    font-size: 18px;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+
+.Prompt,
+.Success {
+    color: #484848;
+    font-size: 18px;
+    font-weight: normal;
+    text-align: center;
+}
+
+.Success {
+    font-size: 16px;
+    margin-bottom: 36px;
+}

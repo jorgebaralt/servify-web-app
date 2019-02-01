@@ -29,7 +29,6 @@ class Gallery extends Component {
     }
 
     render() {
-        // TODO CHECK IF CHILDREN IS REACT COMPONENT
         const { children } = this.props;
         if (!children) { return null; } // Pointer protection
         // Cloning components to pass dimensions props

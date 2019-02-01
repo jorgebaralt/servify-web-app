@@ -4,6 +4,7 @@ import classes from './Reviews.module.css';
 // JSX
 import Review from '../../../Services/Reviews/Review/Review';
 import LoadingBounce from '../../../UI/LoadingBounce/LoadingBounce';
+import Separator from '../../../UI/Separator/Separator';
 
 const reviews = (props) => {
     if (props.loading && !props.reviews.length) {
@@ -23,6 +24,7 @@ const reviews = (props) => {
                         <div className={classes.Count}>{props.reviews.length}</div> 
                         <div className={classes.Subtitle}>Review{props.reviews.length === 1 ? null : 's'}</div>
                     </div>
+                    <Separator />
                     {props.reviews.map((review, index) => {
                             return (
                                 <Review

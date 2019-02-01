@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-// CSS
-import classes from './ImageFadeIn.module.css';
 // fadeIn function for elements
 import fadeIn from '../../../shared/fadeInElement';
+// CSS
+import classes from './ImageFadeIn.module.css';
+// JSX
 import LoadingBounce from '../LoadingBounce/LoadingBounce';
 
 class ImageFadeIn extends Component {
@@ -80,7 +81,7 @@ class ImageFadeIn extends Component {
     }
 
     
-    myImage = () => {
+    Image = () => {
         let imgClasses = classes.Image;
         // if there is prop className use those instead
         if (this.props.className) {
@@ -104,7 +105,7 @@ class ImageFadeIn extends Component {
                         srcSet={this.state.srcset}
                         style={this.props.style}
                         className={imgClasses}
-                        onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 500))} /> 
+                        onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 250))} /> 
                     : <img
                         draggable={this.props.draggable}
                         ref={this.myImage}
@@ -112,56 +113,19 @@ class ImageFadeIn extends Component {
                         src={this.state.src}
                         style={this.props.style}
                         className={imgClasses}
-                        onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 500))} />
+                        onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 250))} />
                 }
             </>
         )
     }
 
     render () {
-        let imgClasses = classes.Image;
-        // if there is prop className use those instead
-        if (this.props.className) {
-            imgClasses = this.props.className;
-        }
-        const Image = () => {
-            return (
-                <>
-                    {!this.state.src ? 
-                        this.props.loading ? 
-                            <div className={classes.Loading}><LoadingBounce /></div> 
-                            : null
-                    : null}
-                    {this.bIsSrcset ? 
-                        // If there is a srcset, otherwise render image without srcset
-                        <img
-                            draggable={this.props.draggable}
-                            ref={this.myImage}
-                            alt=''
-                            sizes="100vw"
-                            src={this.state.src}
-                            srcSet={this.state.srcset}
-                            style={this.props.style}
-                            className={imgClasses}
-                            onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 500))} /> 
-                        : <img
-                            draggable={this.props.draggable}
-                            ref={this.myImage}
-                            alt=''
-                            src={this.state.src}
-                            style={this.props.style}
-                            className={imgClasses}
-                            onLoad={fadeIn(this.myImage.current, (this.props.timeout ? this.props.timeout : 500))} />
-                    }
-                </>
-            )
-        }
         return (
             this.props.noWrapper ? 
-                <Image />
+                <this.Image />
                 : (
                     <div className={this.props.className ? null : classes.ImageWrapper}>
-                        <Image />
+                        <this.Image />
                     </div>
                 )
         );

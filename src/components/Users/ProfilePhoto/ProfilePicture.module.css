@@ -29,6 +29,7 @@
     user-select: none;
     border: 1px solid #E0E0E0;
     background-color: #EDEFED;
+    object-fit: cover;
 }
 
 @media (max-width: 744px) {
@@ -46,6 +47,6 @@
         top: 0;
     }
     .Photo img {
-        object-fit: fill;
+        object-fit: cover;
     }
 }

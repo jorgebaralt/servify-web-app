@@ -92,7 +92,7 @@ class Container extends Component {
                     <div className={classes.MakeMoneyContainer}>
                         <span className={classes.MakeMoney}>
                             <SVG className={classes.Tools} svg="tools" />&nbsp;
-                            <span>Earn money by publishing your services on Servify</span>
+                            <span>Gain customers by listing your services on Servify</span>
                             <SVG className={classes.RightArrow} svg="right-arrow" />
                         </span>
                     </div>

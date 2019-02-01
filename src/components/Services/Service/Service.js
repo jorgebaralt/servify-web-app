@@ -17,14 +17,14 @@ const service = (props) => {
     return (
         // Total rating amount, defaults to 5
         <div className={classes.Service}>
-            <Link draggable="false" to={['/services', props.href].join('/')} className={classes.Wrapper} target="_blank">
+            <Link draggable="false" to={['/services', props.href].join('/')} className={classes.Wrapper}>
                 <div className={classes.ThumbnailWrapper}>
                     <div className={classes.ThumbnailContainer}>
                         <ImageFadeIn draggable="false" className={classes.Thumbnail} src={image.length ? image[0] : defaultImgUrl} />
                     </div>
                 </div>
             </Link>
-            <Link draggable="false" to={['/services', props.href].join('/')} className={classes.Details} target="_blank">
+            <Link draggable="false" to={['/services', props.href].join('/')} className={classes.Details}>
                 <div>
                     <div className={classes.Header}>
                         <span>{props.header}</span>

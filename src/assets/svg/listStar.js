@@ -3,7 +3,6 @@ import React from 'react';
 const listStar = (props) => {
 	return (
 		<svg
-			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 294.843 294.843"
 			width="512"
 			height="512"

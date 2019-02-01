@@ -27,8 +27,6 @@
 .ThumbnailWrapper {
     user-select: none;
     padding-top: 66.6667%;
-    /* TODO Add placeholder image */
-    /* background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAADCAIAAADUVFKvAAAAOUlEQ…gwY19rvrmFAy+P0OPHT6o6OxgXTK21tPHatnUrGwvT5y+fAcmrFId61Xr1AAAAAElFTkSuQmCC); */
     background-size: 100% 100%;
     /* Google Chrome */
     contain: strict;
@@ -112,6 +110,10 @@
 .RatingsWrapper {
     display: flex;
     align-items: center;
+}
+
+.RatingsWrapper svg {
+    width: 9px;
 }
 
 .RatingsAvg {

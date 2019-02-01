@@ -7,10 +7,11 @@ import anonUser from '../../../../assets/svg/source/user-nobg.svg';
 import classes from './UsersId.module.css';
 // JSX
 import LoadingPage from '../../../../components/UI/LoadingPage/LoadingPage';
-import ProfilePhoto from '../../../../components/Users/ProfilePhoto/ProfilePhoto'
+import ProfilePhoto from '../../../../components/Users/ProfilePhoto/ProfilePhoto';
 import FavoriteServices from '../../../../components/Users/Show/FavoriteServices/FavoriteServices';
 import Reviews from '../../../../components/Users/Show/Reviews/Reviews';
 import Separator from '../../../../components/UI/Separator/Separator';
+import Report from '../../../../components/Users/Show/Report/Report';
 
 // NotFound lazy import in case a service is not found
 const NotFound = React.lazy(() => import('../../../NotFound/NotFound'));
@@ -138,6 +139,7 @@ class UsersId extends Component {
                             <div className={classes.JoinDate}>
                                 Member since: <span>{creationDate}</span>
                             </div>
+                            <Report />
                             <Separator />
                             {/* Reviews */}
                             <Reviews 

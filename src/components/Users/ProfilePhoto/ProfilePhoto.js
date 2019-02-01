@@ -2,13 +2,13 @@ import React from 'react';
 // CSS
 import classes from './ProfilePicture.module.css';
 // JSX
-import ImageFadeIn from '../../UI/ImageFadeIn/ImageFadeIn';
+import Image from '../../UI/Image/Image';
 
 const profilePhoto = (props) => {
     return (
         <div className={classes.Wrapper}>
             <div className={classes.Container}>
-                <ImageFadeIn 
+                <Image 
                     style = {props.rounded ? { borderRadius: '50%' } : null }
                     noWrapper 
                     className={classes.Photo} 
