@@ -80,7 +80,6 @@ class Navbar extends PureComponent {
 			top: 0,
 			left: 0,
 			behavior: 'smooth',
-			bShowAuthModal: false
 		});
 	};
 

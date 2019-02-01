@@ -4,7 +4,6 @@ import { checkValidity } from '../../../../../shared/checkValidity';
 import isArray from '../../../../../shared/isArray';
 import { parseLocationData } from '../../../../../shared/parseLocationData';
 import { parseLogistic } from '../../../../../shared/parseLogistic';
-import { setImagesInfo, setImagesArray } from '../../../../../shared/imagesHandler';
 // CSS
 import classes from './Edit.module.css';
 // JSX
@@ -270,7 +269,7 @@ class Edit extends Component {
                             displayValue: parseLogistic(this.props.logistic),
                         },
                         value: {
-                            bool: this.props.bIsDelivery,
+                            bool: this.props.isDelivery,
                             display: this.props.logistic
                         },
                         valueType: 'text',
@@ -462,7 +461,7 @@ class Edit extends Component {
                     info: this.state.controls.aboutProvider.value
                 }
             },
-            bIsDelivery: this.state.controls.option.value.bool,
+            isDelivery: this.state.controls.option.value.bool,
             logistic: this.state.controls.option.value.display,
             locationData: {
                 street: this.state.controls.street.value,
@@ -494,7 +493,7 @@ class Edit extends Component {
             region: this.state.controls.state.value,
             postalCode: this.state.controls.postalCode.value,
         });
-        const bIsDelivery = this.state.controls.option.value.bool;
+        const isDelivery = this.state.controls.option.value.bool;
         return (
             <>
                 <div className={classes.ServiceContainer}>
@@ -586,7 +585,7 @@ class Edit extends Component {
                         value={this.state.controls.address.value === '' ? this.myAddress : this.state.controls.address.value} 
                         valueType={this.state.controls.address.valueType} />
                     {/* Only render the distance slider and circlce if the service offers deliveries. */}
-                    {bIsDelivery ? 
+                    {isDelivery ? 
                         <InputSlider onChange={this.inputSliderHandler} 
                             header='Distance' 
                             value={this.state.map.radiusInMiles}
@@ -594,7 +593,7 @@ class Edit extends Component {
                             valueType='miles (approx)' />
                         : null
                     }
-                    <Map circle={bIsDelivery ? true : false} height='350px' map={this.state.map} />
+                    <Map circle={isDelivery ? true : false} height='350px' map={this.state.map} />
                 </div>
             </>
         );

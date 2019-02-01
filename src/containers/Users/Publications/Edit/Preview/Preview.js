@@ -100,7 +100,7 @@ const preview = (props) => {
                                     : <span className={classes.Error}>Address can't be empty.</span>}/>
                     </div>
                     : null}
-                <Map circle={props.bIsDelivery ? true : false} className={classes.MapWrapper} map={props.map} />
+                <Map circle={props.isDelivery ? true : false} className={classes.MapWrapper} map={props.map} />
             </div>
             <Separator />
         </>

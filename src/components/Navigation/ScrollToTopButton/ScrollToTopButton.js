@@ -1,5 +1,5 @@
 import React from 'react';
-
+// CSS
 import classes from './ScrollToTopButton.module.css';
 
 const scrollToTopButton = (props) => {

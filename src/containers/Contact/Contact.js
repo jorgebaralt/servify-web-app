@@ -139,7 +139,6 @@ class Contact extends Component {
     }
 
 	render () {
-        console.log(this.props.userEmail)
         let ActiveRender = <Reasons reasons={this.state.reasons} toggleIsReasonSelected={this.toggleIsReasonSelected}/>
         switch (true) {
             case this.state.bIsReasonSelected && !this.props.userEmail:

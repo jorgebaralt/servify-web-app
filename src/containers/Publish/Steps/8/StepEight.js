@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import axios from '../../../../axios-services';
-// Parse location data, isArray and capitalize strings
+// workse functions
 import { parseLocationData } from '../../../../shared/parseLocationData';
+import { parseLogistic } from '../../../../shared/parseLogistic';
 import capitalize from '../../../../shared/capitalize';
 // CSS
 import classes from '../../Publish.module.css';
@@ -178,6 +179,7 @@ class StepEight extends PureComponent {
     }
 
     onSubmitHandler = (event) => {
+        window.scrollTo(0,0); // Scrolls to the top upon submitting.
         event.preventDefault();
         this.postService();
     }
@@ -202,7 +204,7 @@ class StepEight extends PureComponent {
             // Step 4: Images (Optional)
             imagesInfo: data['4'].data.imageFiles, // This is FormData, not images
             // Step 5: Logistic
-            bIsDelivery: data['5'].data.option ? data['5'].data.option.bool : null,
+            isDelivery: data['5'].data.option ? data['5'].data.option.bool : null,
             logistic: data['5'].data.option ? data['5'].data.option.display : null,
             // Step 6: Service Address
             locationData: {
@@ -274,7 +276,8 @@ class StepEight extends PureComponent {
             <Modal alwaysShow show={true}>
                 {this.state.bIsUploadingImages ?
                     <>
-                        <h2>Uploading images...</h2>
+                        <h2>Uploading images.</h2>
+                        <LoadingBounce />
                         <ProgressRing 
                             radius={36} 
                             stroke={6} 
@@ -315,7 +318,7 @@ class StepEight extends PureComponent {
                         <a href={data.website} 
                             className={classes.Link}
                             target='_blank'
-                            rel='noopener noreferrer'>{data.title}</a>
+                            rel='noopener noreferrer'>{data.website}</a>
                     </PreviewInformation>
                     <PreviewInformation title='Contact Phone'>{data.phone}</PreviewInformation>
                     <PreviewInformation title='Contact Email'>{data.email}</PreviewInformation>
@@ -344,7 +347,7 @@ class StepEight extends PureComponent {
                     <Separator />
                     {/* Step 5: Logistic */}
                     <div className={classes.Step}><span>S</span>tep 5: Logistic</div>
-                    <PreviewInformation title='Logistic'>{data.delivery}</PreviewInformation>
+                    <PreviewInformation title='Logistic'>{parseLogistic(data.logistic)}</PreviewInformation>
                     <Separator />
                     {/* Step 6: Service Address */}
                     <div className={classes.Step}><span>S</span>tep 6: Service Address</div>
@@ -356,12 +359,12 @@ class StepEight extends PureComponent {
                     <Separator />
                     {/* Step 7: The Map */}
                     <div className={classes.Step}><span>S</span>tep 7: The Map</div>
-                    {data.bIsDelivery ? 
+                    {data.isDelivery ? 
                         <PreviewInformation title='Delivery Cover Distance'>{data.miles} miles</PreviewInformation>
                         : null}
                     <PreviewInformation title='Address'>{data.physicalLocation}</PreviewInformation>
                     {this.props.activeStep === this.props.stepKey ? 
-                        <Map circle={data.bIsDelivery ? true : null} height='300px' map={map} />
+                        <Map circle={data.isDelivery ? true : null} height='300px' map={map} />
                         : null}
                     <form onSubmit={this.onSubmitHandler}>
                         <div style={{margin: '12px 0 21px'}}>

@@ -82,7 +82,7 @@ class PublicationsId extends Component {
             // Images (Optional)
             imagesInfo: this.state.images, // Images is the variable handed back by Edit.js component
             // Logistic
-            isDelivery: this.state.bIsDelivery,
+            isDelivery: this.state.isDelivery,
             logistic: this.state.logistic,
             // Service Address
             locationData: this.state.locationData,
@@ -190,7 +190,7 @@ class PublicationsId extends Component {
                             region: data.locationData.region,
                             street: data.locationData.street
                         },
-                        bIsDelivery: data.isDelivery,
+                        isDelivery: data.isDelivery,
                         logistic: data.logistic,
                         physicalLocation: parseLocationData(data.locationData),
                         map: {
@@ -246,7 +246,7 @@ class PublicationsId extends Component {
         this.fetchData();        
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    shouldComponentUpdate(_, nextState) {
         return nextState !== this.state;
     }
     

@@ -19,9 +19,9 @@ import SearchBox from '../../components/UI/SearchBox/SearchBox';
 import CardContainer from '../../components/Landing/CardContainer/CardContainer';
 import Card from '../../components/Landing/Card/Card';
 import Service from '../../components/Services/Service/Service';
+import LearnMore from '../../components/Landing/LearnMore/LearnMore';
 // import Featured from '../../components/Services/Featured/Featured';
 // import AnchorLink from '../../components/UI/AnchorLink/AnchorLink';
-import LearnMore from '../../components/Landing/LearnMore/LearnMore';
 
 const categoriesDatalist = categories.map( (category) => {
     return {
@@ -102,7 +102,7 @@ class Landing extends Component {
                             <Card 
                                 key={category.title}
                                 title={category.title} 
-                                image='https://a0.muscache.com/im/pictures/da2d8e97-90b7-409f-94ac-5ab0327c289b.jpg?aki_policy=large'/>
+                                image={category.uri}/>
                         );
                     })}
                 </CardContainer>

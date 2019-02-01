@@ -124,7 +124,6 @@ class Edit extends Component {
                 updatedUser: { imagesInfo: imagesInfo, photoURL: photoURL }
             })
             .then(response => {
-                console.log(response);
                 const updatedUserDetails = response.data;
                 this.updateUserDetails(updatedUserDetails);
                 // For the image delete input
@@ -140,14 +139,12 @@ class Edit extends Component {
 
     // To delete profile picture.
     onDelete = () => {
-        console.log('ping');
         axios.put('/user', { 
                 uid: this.props.userDetails.uid, 
-                bDeletePhotoURL: true,
+                deletePhotoURL: true,
                 updatedUser: { imagesInfo: null }
             })
             .then(response => {
-                console.log(response);
                 const updatedUserDetails = response.data;
                 this.updateUserDetails(updatedUserDetails);
                 // For the image delete input
@@ -163,7 +160,6 @@ class Edit extends Component {
 
     // Currently, this only updates displayName.
     onSubmitHandler = () => {
-        console.log('onSubmitHandler')
         this.setState({
             bIsUpdatingUser: true
         });
@@ -172,7 +168,6 @@ class Edit extends Component {
                 updatedUser: { displayName: this.state.controls.displayName.value } 
             })
             .then(response => {
-                console.log(response);
                 const updatedUserDetails = response.data;
                 this.updateUserDetails(updatedUserDetails);
                 toast.success('Profile updated successfully.');
@@ -189,7 +184,6 @@ class Edit extends Component {
     }
 
     render () {
-        console.log(this.state)
         const creationDate = (new Date(Number(this.props.userDetails.metadata.a))).toLocaleDateString();
         const formElementsArray = Object.entries(this.state.controls);
         return (

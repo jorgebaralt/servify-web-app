@@ -201,7 +201,7 @@ class ServicesId extends Component {
                         <SocialButtons title={this.state.service ? this.state.service.title : null} />
                         <InfoPoint location={this.state.locationData ? this.state.locationData.region : null}/>
                         <InfoPoint logistic={this.state.logistic}/>
-                        {this.state.service.website ? <InfoPoint website='bonpreufoods.com'/> : null}
+                        {this.state.service.website ? <InfoPoint website={this.state.service.website} /> : null}
                         {/* TODO languages
                             <InfoPoint symbol={<SVG svg='chat' />} info='Services offered in English and Spanish'/> 
                         */}
@@ -248,38 +248,42 @@ class ServicesId extends Component {
                             ...this.state.ratings.price,
                         }} 
                         serviceId={this.state.service.id} /> : null}
+                {/* Only render if there are services near user */}
                 {this.props.services.nearServices ? 
-                    <>
-                        <Separator />
-                        <div className={classes.SimilarServices}>
-                            <div className={classes.ServicesWrapper}>
-                                <Title>Other services near you</Title>
-                            </div>
-                            <div className={classes.CarouselWrapper}>
-                                <div className={classes.CarouselContainer}>
-                                    <Carousel>
-                                        {Object.values(this.props.services.nearServices).map( (service, index) => {
-                                            // Don't map the same service into near services.
-                                            if (service.id === this.props.match.params.id) {
-                                                return null;
-                                            }
-                                            return (
-                                                <Service
-                                                    key={index}
-                                                    header={service.category.replace("_", " ")}
-                                                    title={service.title}
-                                                    href={service.id}
-                                                    priceRating={service.price/4}
-                                                    ratingAvg={service.rating/5}
-                                                    ratingAmount={service.ratingCount}
-                                                    image={service.imagesInfo}/>
-                                            );
-                                        })}
-                                    </Carousel>
+                    // nearServices.length has to be greater than 1 because it detects this service itself
+                    this.props.services.nearServices.length > 1 ? 
+                        <>
+                            <Separator />
+                            <div className={classes.SimilarServices}>
+                                <div className={classes.ServicesWrapper}>
+                                    <Title>Other services near you</Title>
+                                </div>
+                                <div className={classes.CarouselWrapper}>
+                                    <div className={classes.CarouselContainer}>
+                                        <Carousel>
+                                            {Object.values(this.props.services.nearServices).map( (service, index) => {
+                                                // Don't map the same service into near services.
+                                                if (service.id === this.props.match.params.id) {
+                                                    return null;
+                                                }
+                                                return (
+                                                    <Service
+                                                        key={index}
+                                                        header={service.category.replace("_", " ")}
+                                                        title={service.title}
+                                                        href={service.id}
+                                                        priceRating={service.price/4}
+                                                        ratingAvg={service.rating/5}
+                                                        ratingAmount={service.ratingCount}
+                                                        image={service.imagesInfo}/>
+                                                );
+                                            })}
+                                        </Carousel>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </>
+                        </>
+                    : null
                 : null }
             </>
         );
