@@ -106,6 +106,8 @@ class Slider extends Component {
             PrevButton = this.props.buttons.prev;
             NextButton = this.props.buttons.next;
         }
+        // Protection against crashes
+        if (!this.props.children) { return <SlideContainer style={this.state.style}>{this.props.children}</SlideContainer>; }
         const children = (
             this.props.children.length ? 
                 Object.keys(this.props.children).map( children => {
