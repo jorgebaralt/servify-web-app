@@ -17,7 +17,6 @@
 .NavigationItem a:hover {
     color: black;
     box-shadow: 0px 2px #FF7043;
-    height: 95%;
 }
 
 .NavigationItemWhite a{
