@@ -118,7 +118,7 @@ class Carousel extends Component {
             slidesToShow: this.props.slidesToShow ? this.props.slidesToShow : 4,
             slidesToScroll: 1,
             initialSlide: 0,
-            beforeChange: (current, next) => this.setState({ activeSlide: next }),
+            beforeChange: (_, next) => this.setState({ activeSlide: next }),
             afterChange: current => this.setState({ activeSlide2: current }),
             responsive: this.state.responsive
         };

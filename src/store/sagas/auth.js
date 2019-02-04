@@ -54,7 +54,7 @@ export const authSagas = {
             const user = yield { ...response.user };
             user.displayName = displayName;
             // Saving user to the database
-            yield put(authCreator.authSaveUserToDatabaseInit(user, false, true));
+            yield put(authCreator.authSaveUserToDatabaseInit(user, 'password', true));
             if (!action.bRememberMe) {
                 /**
                  * If the checkbox is not checked, then create a new date token to
@@ -111,7 +111,7 @@ export const authSagas = {
                 // The signed-in user info.
                 const user = yield response.user;
                 // Saving user to the database
-                yield put(authCreator.authSaveUserToDatabaseInit(user, "facebook", true));
+                yield put(authCreator.authSaveUserToDatabaseInit(user, 'facebook.com', true));
                 if (!action.bRememberMe) {
                     /**
                      * If the checkbox is not checked, then create a new date token to
@@ -171,7 +171,7 @@ export const authSagas = {
                 // The signed-in user info.
                 const user = yield response.user;
                 // Saving user to the database
-                yield put(authCreator.authSaveUserToDatabaseInit(user, "google", true));
+                yield put(authCreator.authSaveUserToDatabaseInit(user, 'google.com', true));
                 if (!action.bRememberMe) {
                     /**
                      * If the checkbox is not checked, then create a new date token to
@@ -225,7 +225,7 @@ export const authSagas = {
     },
     authSaveUserToDatabase: function* (action) {
         const user = action.user;
-        const bIsSignUpProvider = action.bIsSignUpProvider;
+        const signUpProvider = action.signUpProvider;
         const bWantToMerge = action.bWantToMerge;
         // Firestore Init
         const firestore = firebase.firestore();
@@ -242,11 +242,8 @@ export const authSagas = {
             uid: user.uid,
             creationDate: user.metadata.creationTime
         }
-        if (bIsSignUpProvider) {
-            userData['provider'] = bIsSignUpProvider;
-        } else {
-            // The provider is equal to 'password' if bIsSignUpProvider is false.
-            userData['provider'] = 'password';
+        if (signUpProvider) {
+            userData['provider'] = signUpProvider;
         }
         // The user data will be merged with any existing data in the firestore.
         yield userRef.set({

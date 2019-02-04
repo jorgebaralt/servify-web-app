@@ -103,11 +103,11 @@ export const authCreator = {
             }
         },
     },
-    authSaveUserToDatabaseInit: (user, bIsSignUpProvider, bWantToMerge) => {
+    authSaveUserToDatabaseInit: (user, signUpProvider, bWantToMerge) => {
         return {
             type: actionTypes.AUTH_INIT_SAVE_USER_TO_DATABASE,
             user: user,
-            bIsSignUpProvider : bIsSignUpProvider,
+            signUpProvider : signUpProvider,
             bWantToMerge: bWantToMerge
 
         }

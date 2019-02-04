@@ -51,7 +51,7 @@ class SignInModal extends PureComponent {
                 valueType: 'password',
                 validation: {
                     required: true,
-                    minLength: 8
+                    minLength: 6
                 },
                 valid: false,
                 touched: false,
