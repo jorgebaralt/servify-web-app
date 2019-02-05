@@ -63,7 +63,10 @@ class Modal extends Component {
                                 visibility: this.props.show ? 'visible' : 'hidden',
                                 transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
                                 opacity: this.props.show ? '1' : '0',
-                                maxWidth: this.props.maxWidth ? [this.props.maxWidth,'px'].join('') : null
+                                maxWidth: this.props.maxWidth ? [this.props.maxWidth,'px'].join('') : null,
+                                // Transparent styling
+                                background: this.props.transparent ? 'none' : null,
+                                border: this.props.transparent ? 0 : null
                             }}
                             className={classes.Modal}>
                             {noCancel ? 
@@ -75,7 +78,7 @@ class Modal extends Component {
                                             onClick={this.props.toggleModal}
                                             className={classes.CancelButton} 
                                             aria-busy="false" >
-                                            <SVG svg='cancel'/>
+                                            <SVG fill={this.props.transparent ? '#FFF' : null} svg='cancel'/>
                                         </button>
                                     </div>
                                 )}

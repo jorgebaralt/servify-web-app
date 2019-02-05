@@ -7,6 +7,12 @@
     position: relative;
 }
 
+.Sticky {
+    position: sticky;
+    height: 100%;
+    top: 96px;
+}
+
 .FadeIn {
     animation: FadeIn ease 250ms;
 }

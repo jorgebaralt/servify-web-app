@@ -5,7 +5,7 @@
     top: 50%;
     transform: translateY(-50%);
     padding: 6px 12px;
-    margin: 0 12px;
+    margin: 0 3px;
     width: 40px;
     height: 40px;
     display: flex;
@@ -62,5 +62,19 @@
     .Next:after {
         width: 15px;
         height: 15px;
+    }
+}
+
+@media (max-width: 960px) { 
+    .Prev,
+    .Next {
+        width: 20px !important;
+        height: 20px !important;
+        padding: 0 !important;
+    }
+    .Prev:after,
+    .Next:after {
+        width: 8.5px;
+        height: 8.5px;
     }
 }
