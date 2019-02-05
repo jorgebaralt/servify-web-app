@@ -68,13 +68,13 @@
 @media (max-width: 960px) { 
     .Prev,
     .Next {
-        width: 20px !important;
-        height: 20px !important;
+        width: 25px !important;
+        height: 25px !important;
         padding: 0 !important;
     }
     .Prev:after,
     .Next:after {
-        width: 8.5px;
-        height: 8.5px;
+        width: 10px;
+        height: 10px;
     }
 }
