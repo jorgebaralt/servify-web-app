@@ -96,6 +96,7 @@
 
 .Photo {
     padding: 2.5px;
+    object-fit: cover;
     border-radius: 10px;
     width: 100%;
     height: auto;
