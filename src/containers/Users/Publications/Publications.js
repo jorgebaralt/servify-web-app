@@ -9,7 +9,6 @@ import LoadingBounce from '../../../components/UI/LoadingBounce/LoadingBounce';
 import Layout from '../../../hoc/Users/Layout/Layout';
 import Panel from '../../../components/UI/Panel/Panel';
 import ReadyToGrow from '../../../components/Publish/ReadyToGrow/ReadyToGrow';
-import Carousel from '../../../components/UI/Carousel/Carousel';
 import Publication from '../../../components/Users/Publications/Publication/Publication';
 import Separator from '../../../components/UI/Separator/Separator';
 

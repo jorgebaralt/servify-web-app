@@ -89,8 +89,9 @@ const map = (props) => {
             return t;
         }
     }
+    const styles = {map: "mapbox://styles/mapbox/streets-v9"};
     let myMap = (
-        <Map style="mapbox://styles/mapbox/streets-v9"
+        <Map style={styles.map}
             center={props.map.geoData ?
                 (
                     props.map.geoData.features.length ?

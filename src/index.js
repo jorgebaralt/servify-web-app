@@ -36,7 +36,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose : null ;
 
-const store = createStore(reducers, composeEnhancers(applyMiddleware(sagaMiddleware)));
+const store = createStore(reducers, composeEnhancers ? composeEnhancers(applyMiddleware(sagaMiddleware)) : applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(sagas.watchMobile);
 sagaMiddleware.run(sagas.watchServices);

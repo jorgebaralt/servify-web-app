@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom';
 
 const card = (props) => {
     return (
-        <Link to='/services'>
+        <Link to={{ 
+            pathname: '/services',
+            state: { activeCategory: props.title } }}>
             <div className={classes.CardWrapper}>
                 <div className={classes.Card}>
                     <div className={classes.CardTable}>
