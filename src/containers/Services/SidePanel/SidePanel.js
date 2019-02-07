@@ -34,7 +34,7 @@ class SidePanel extends Component {
     constructor(props) {
         super(props);
         if (props.activeCategory) {
-            props.onToggleCategoryFilter(props.categories, props.activeCategory);
+            props.onToggleCategoryFilter(props.initialCategories, props.activeCategory);
         }
     }
     
@@ -221,6 +221,7 @@ class SidePanel extends Component {
 
 const mapStateToProps = (state) => {
 	return {
+        initialCategories: state.servicesReducer.initialCategories,
         categories: state.servicesReducer.categories,
         isMobile: state.mobileReducer.isMobile,
         services: state.servicesReducer.services

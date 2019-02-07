@@ -10,9 +10,14 @@ categories.map( (category) => {
     return categoriesObj[category.title] = false; // Parsing special characters from titles to allow only letters
 });
 
+const initialCategories = { ...categoriesObj };
+
+console.log(initialCategories)
+
 const initialState = {
     coordinates: null,
     topCategories: null,
+    initialCategories: initialCategories,
     categories: {
         ...categoriesObj
     },
@@ -36,7 +41,7 @@ const servicesReducer = (state = initialState, action) => {
         case types.SERVICES_SET_TOP_CATEGORIES:
             return updateObject(state, {topCategories: action.topCategories});
         case types.SERVICES_RESET_FILTERED_CATEGORIES:
-            return updateObject(state, {categories: {...categoriesObj}, bIsLoading: false});
+            return updateObject(state, {categories: initialCategories, bIsLoading: false});
         case types.SERVICES_SET_FILTERED_CATEGORIES:
             return updateObject(state, {categories: action.filteredCategories, bIsLoading: true});
         case types.SERVICES_SET_FILTERED_SERVICES:
