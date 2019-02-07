@@ -1,6 +1,5 @@
 // Redux Saga
-import { put, call } from 'redux-saga/effects';
-import { delay } from 'redux-saga';
+import { put, call, delay } from 'redux-saga/effects';
 // Firebase methods
 import firebase from 'firebase';
 // Actions

@@ -1,27 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { connect } from 'react-redux'
 // CSS
 import classes from './NavAuthButtons.module.css';
 // JSX
+import { HeaderContext } from '../../../../hoc/Layout/Header/Header';
 import NavAuthButton from './NavAuthButton/NavAuthButton';
 
 const navAuthButtons = (props) => {
+    const header = useContext(HeaderContext);
+
 	const buttonClass = [classes.Button];
 	//if white respective css
 	if (props.color === 'white') {
 		buttonClass.push(classes.ButtonWhite);
     }
+
     let authButtons = (
         <>
             <NavAuthButton
                 button='Sign in'
                 className={buttonClass.join(' ')} 
-                onClick={props.toggleAuthModal}/>
+                onClick={() => header.toggleAuthModal('sign in')}/>
             <NavAuthButton
                 button='Sign up'
                 className={buttonClass.join(' ')} 
-                onClick={props.toggleAuthModal}/>
+                onClick={header.toggleAuthModal}/>
         </>
     );
+
     if (props.isAuthenticated) { 
         authButtons = (
             <NavAuthButton
@@ -36,4 +42,10 @@ const navAuthButtons = (props) => {
     );
 }
 
-export default navAuthButtons;
+const mapStateToProps = (state) => {
+	return {
+		isAuthenticated: state.authReducer.userId !== null
+	};
+};
+
+export default connect(mapStateToProps)(navAuthButtons);

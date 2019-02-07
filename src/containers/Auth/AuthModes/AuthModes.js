@@ -1,40 +1,48 @@
-import React, { PureComponent } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 // JSX
+import { HeaderContext } from '../../../hoc/Layout/Header/Header';
 import SignUp from './SignUp/SignUp';
 import SignIn from './SignIn/SignIn';
 import Modal from '../../../components/UI/Modal/Modal';
 
-class AuthModal extends PureComponent {
-    switchAuthModeHandler = () => {
-        switch (this.props.authModalType) {
+const authModal = (props) => {
+    const header = useContext(HeaderContext);
+
+    const switchAuthModeHandler = () => {
+        switch (header.authModalType) {
             case 'sign up':
-                return <SignUp switchAuthModalHandler={this.props.switchAuthModalHandler} />
+                return <SignUp switchAuthModalHandler={header.switchAuthModalHandler} />
             case 'sign in':
-                return <SignIn switchAuthModalHandler={this.props.switchAuthModalHandler} />
+                return <SignIn switchAuthModalHandler={header.switchAuthModalHandler} />
             default:
                 // do nothing
                 return;
         }
     }
 
-    componentWillUnmount() {
-        document.body.style.overflow = null;
-    }
+    useEffect(() => {
+        /**
+         * returns in useEffect hooks are known as cleanups. They execute when 
+         * the component hill unmount or just before useEffect is executed AFTER
+         * the first time.
+         */
+        return () => {
+            document.body.style.overflow = null;
+        };
+    }, []);
 
-    render() {
-        if (this.props.isAuthenticated) { return null; }
-        return (
-            !this.props.isAuthenticated ? 
-                <Modal
-                    closeModal={this.props.closeModal}
-                    toggleModal={this.props.toggleModal}
-                    show={this.props.show}>  
-                    {this.switchAuthModeHandler()}
-                </Modal>
-                : null
-        );
-    }
+    if (props.isAuthenticated) { return null; }
+    return (
+        !props.isAuthenticated ? 
+            <Modal
+                closeModal={header.closeAuthModal}
+                toggleModal={header.toggleAuthModal}
+                show={header.bShowAuthModal}>  
+                {switchAuthModeHandler()}
+            </Modal>
+            : null
+    );
 };
 
 const mapStateToProps = (state) => {
@@ -43,4 +51,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps)(AuthModal);
+export default connect(mapStateToProps)(authModal);

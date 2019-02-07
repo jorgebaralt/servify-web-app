@@ -199,7 +199,7 @@ class SignUpModal extends PureComponent {
     render() {
         const formElementsArray = Object.entries(this.state.controls);
         return (
-            <>  
+            <div className={classes.Container}>  
                 <Button clicked={() => this.props.onFacebookSignInHandler(this.state.bRememberMe)} 
                     type='facebook' blockButton={true}>Sign up with Facebook</Button>
                 <Button clicked={() => this.props.onGoogleSignInHandler(this.state.bRememberMe)} 
@@ -244,7 +244,7 @@ class SignUpModal extends PureComponent {
                     text="Already have a Servify account?"
                     switchText='Log in'
                     switchAuthModalHandler={() => this.props.switchAuthModalHandler('sign in')} />
-            </>
+            </div>
         );
     }
 };

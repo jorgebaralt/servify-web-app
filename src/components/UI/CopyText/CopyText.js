@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // CSS
 import classes from './CopyText.module.css';
-import { copy } from 'gl-matrix/src/gl-matrix/mat2d';
 
 class CopyText extends Component {
     constructor(props) {
@@ -17,12 +16,10 @@ class CopyText extends Component {
     copyText = (event) => {
         if (!this.props.copyReference) { return; }
         const copyText = this.props.copyReference.current;
-        console.log(copyText)
         if (!copyText.select) { return; }
         copyText.select();
         // Copying selected text
         document.execCommand('copy');
-        console.log(event.target)
         if (window.getSelection) {
             window.getSelection().removeAllRanges();
         } else {

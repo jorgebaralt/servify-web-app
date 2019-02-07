@@ -140,7 +140,7 @@ class SignInModal extends PureComponent {
     render() {
         const formElementsArray = Object.entries(this.state.controls);
         return (
-            <>  
+            <div className={classes.Container}>  
                 <Button clicked={() => this.props.onFacebookSignInHandler(this.state.bRememberMe)} 
                     type='facebook' blockButton={true}>Sign in with Facebook</Button>
                 <Button clicked={() => this.props.onGoogleSignInHandler(this.state.bRememberMe)} 
@@ -178,7 +178,7 @@ class SignInModal extends PureComponent {
                     text="Don't have an account yet?"
                     switchText='Sign up!'
                     switchAuthModalHandler={() => this.props.switchAuthModalHandler('sign up')} />
-            </>
+            </div>
         );
     }
 };

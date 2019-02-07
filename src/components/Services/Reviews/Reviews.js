@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactResizeDetector from 'react-resize-detector'
 import axios, { CancelToken } from '../../../axios-services';
-// check inputs validity, auth actions dispatchers, toast
+// worker functions
 import { authActions } from '../../../store/actions';
 import { checkValidity } from '../../../shared/checkValidity';
 import { toast } from 'react-toastify';
@@ -12,6 +12,7 @@ import { withRouter } from 'react-router-dom'
 import classes from './Reviews.module.css';
 // JSX
 import Close from './Close/Close';
+import WriteReview from './WriteReview/WriteReview';
 import Ratings from './Ratings/Ratings';
 import Review from './Review/Review';
 import Score from './Score/Score';
@@ -416,7 +417,8 @@ class Reviews extends Component {
                                         {this.state.reviews.map( (review, index) => {
                                             // TODO passing some of the props will be deprecated when reviews are fetched individually
                                             return (
-                                                <Review key={index}
+                                                <Review 
+                                                    key={index}
                                                     review={review} />
                                             );
                                         })}
@@ -431,7 +433,10 @@ class Reviews extends Component {
                     : (
                         // If there are no reviews, then it'll display at the top.
                         <div style={{order: this.state.reviews ? '-1' : null}}>
-                            <Button clicked={this.toggleFormHandler} className={classes.Button} blockButton>Write A Review</Button>
+                            {/* <Button clicked={this.toggleFormHandler} className={classes.Button} blockButton>Write A Review</Button> */}
+                            <WriteReview 
+                                userDetails={this.props.userDetails} 
+                                toggleFormHandler={this.toggleFormHandler} />
                             {/* Only render the form if there are user details and if 'this.props.bShowForm' is true, otherwise render null. */}
                             {this.props.userDetails && this.props.bShowForm ?
                                 <div className={classes.Form}>

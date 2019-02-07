@@ -1,63 +1,53 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 // React Redux
 import { connect } from 'react-redux';
 
 /**
  * Modal functionality and context. The provider and consumer is inside the layout render method
  */
-export const HeaderContext = React.createContext();
-class HeaderProvider extends Component {
-	state ={
-		bShowAuthModal: false,
-		authModalType: null
+export const HeaderContext = React.createContext({
+	switchAuthModalHandler: () => {}, // switches modal without closing
+	toggleAuthModal: () => {}, // switches modal and closes
+	closeAuthModal: () => {}, // closes modal
+	authModalType: null,
+	bShowAuthModal: false
+});
+
+const headerProvider = (props) => {
+	const [bShowAuthModal, setShowAuthModal] = useState(false);
+	const [authModalType, setAuthModalType] = useState(false);
+
+	const switchAuthModalHandler = (type) => {
+		setAuthModalType(type);
 	}
 
-	switchAuthModalHandler = (type) => {
-		this.setState( () => {
-			return { 
-				authModalType: type
-			};
-		});
+	const toggleAuthModal = (type) => {
+		setShowAuthModal(!bShowAuthModal); // Toggles modal.
+		setAuthModalType(type); // Then sets type.
 	}
 
-	toggleAuthModal = (type) => {
-		this.setState( (prevState) => {
-			return { 
-				bShowAuthModal: !prevState.bShowAuthModal,
-				authModalType: type
-			};
-		});
-	}
-
-	closeAuthModal = () => {
-		this.setState( () => {
-			return { 
-				bShowAuthModal: false,
-			};
-		});
+	const closeAuthModal = () => {
+		setShowAuthModal(false); // Closes modal.
     }
-    
 
-    // If logged in, closes the modal
-    componentDidUpdate() {
-        if (this.state.bShowAuthModal && this.props.isAuthenticated) {
-            this.closeAuthModal();
+    // If user logs in, closes the modal.
+	useEffect(() => {
+		if (bShowAuthModal && props.isAuthenticated) {
+            closeAuthModal();
         }
-    }
+    }, [bShowAuthModal, props.isAuthenticated]);
 
-	render () {
-		return (
-			<HeaderContext.Provider value={{
-					switchAuthModalHandler: this.switchAuthModalHandler, // switches modal without closing
-					toggleAuthModal: this.toggleAuthModal, // switches modal and closes
-					closeAuthModal: this.closeAuthModal, // closes modal
-					authModalType: this.state.authModalType,
-					bShowAuthModal: this.state.bShowAuthModal
-				}}>
-				{this.props.children}
-			</HeaderContext.Provider>
-		)
-	}
+	return (
+		<HeaderContext.Provider value={{
+				switchAuthModalHandler: switchAuthModalHandler, // switches modal without closing
+				toggleAuthModal: toggleAuthModal, // switches modals
+				closeAuthModal: closeAuthModal, // closes modal
+				authModalType: authModalType,
+				bShowAuthModal: bShowAuthModal
+			}}>
+			{props.children}
+		</HeaderContext.Provider>
+	);
 }
 
 const mapStateToProps = (state) => {
@@ -66,4 +56,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps)(HeaderProvider);
+export default connect(mapStateToProps)(headerProvider);
