@@ -185,7 +185,7 @@ class Report extends Component {
                             // After the report is complete, different content we be rendered to let the
                             // user know the report was posted successfully.
                             this.state.bHasReported ? 
-                                <>
+                                <div className={classes.Modal}>
                                     <span style={{color: 'rgb(255, 112, 67)'}} className={classes.Title}>Thank You</span>
                                     <Separator />
                                     <div className={classes.Success}>
@@ -197,9 +197,9 @@ class Report extends Component {
                                             Close
                                         </Button>
                                     </div>
-                                </>
+                                </div>
                                 : (
-                                    <>
+                                    <div className={classes.Modal}>
                                         <span className={classes.Title}>Report User</span>
                                         <Separator />
                                         <div className={classes.Prompt}>
@@ -231,7 +231,7 @@ class Report extends Component {
                                                 {this.state.bIsReporting ? <LoadingDots /> : 'Submit Report'}
                                             </Button>
                                         </form>
-                                    </>
+                                    </div>
                                 )
                         // If the user is not logged in.
                         : (
