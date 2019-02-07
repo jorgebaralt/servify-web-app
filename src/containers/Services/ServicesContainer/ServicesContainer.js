@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import categories from '../../../shared/categories';
 // redux-sagas
@@ -16,52 +16,42 @@ categories.map( (category) => {
     return categoriesObj[category.title.replace(/[^a-zA-Z0-9]/g, '')] = false; // Parsing special characters from titles to allow only letters
 });
 
-class Services extends Component {
-    state = {
+const services = (props) => {
+    const [location, setLocation] = useState({
         location: {
             city: null,
             state: null
         }
-    }
+    });
 
-    savePosition = (position) => {
+    const savePosition = (position) => {
         const city = position.data.city;
         const state = position.data.region;
-        this.setState( () => {
-                return {
-                    location: {
-                        city,
-                        state
-                    }
-                }
-            }
-        );
+        setLocation({ city: city, state: state });
     }
 
-    componentDidMount () {
+    useEffect(() => {
         axios.get('http://ipinfo.io').then(
-            (response) => this.savePosition(response)
+            (response) => savePosition(response)
         );
-    }
+    }, []);
 
-    render () {
-        return (
-            <div className={classes.ServicesWrapper}>
-                <div className={classes.ServicesContainer}>
-                { this.props.bIsLoading ? 
-                    <LoadingBounce /> :   
-                    this.props.bIsDefault ? 
-                        <DefaultServices
-                            priceFiter={this.props.priceFiter}
-                            topCategories={this.props.topCategories}
-                            services={this.props.services}
-                            city={this.state.location.city} 
-                            state={this.state.location.state} /> :
-                        <FilteredServices priceFiter={this.props.priceFiter} /> }
-                </div>
+    return (
+        <div className={classes.ServicesWrapper}>
+            <div className={classes.ServicesContainer}>
+            { props.bIsLoading ? 
+                <LoadingBounce /> :   
+                props.bIsDefault ? 
+                    <DefaultServices
+                        priceFiter={props.priceFiter}
+                        topCategories={props.topCategories}
+                        services={props.services}
+                        city={location.city} 
+                        state={location.state} /> :
+                    <FilteredServices priceFiter={props.priceFiter} /> }
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 const mapStateToProps = (state) => {
@@ -73,4 +63,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps)(Services);
+export default connect(mapStateToProps)(services);

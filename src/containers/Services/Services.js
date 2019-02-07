@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 // redux-saga
 import { connect } from 'react-redux';
@@ -9,36 +9,27 @@ import classes from './Services.module.css';
 import ServicesContainer from './ServicesContainer/ServicesContainer';
 import SidePanel from './SidePanel/SidePanel';
 
-class Services extends Component {
-    constructor(props) {
-        super(props);
+const services = (props) => {
+    const [priceFilter, setPriceFiter] = useState(1);
+
+    useEffect(() => {
         props.servicesInit();
         props.onResetCategoriesFilter();
+    }, []);
+
+    let activeCategory = null;
+
+    if (props.location.state) {
+        activeCategory = props.location.state.activeCategory
     }
 
-    state = {
-        priceFiter: 1 // Defaults to 100%, showing all services.
-    }
-
-    setPriceFiter = (priceFiter) => {
-        this.setState({
-            priceFiter: priceFiter   
-        });
-    }
-
-    render () {
-        let activeCategory = null;
-        if (this.props.location.state) {
-            activeCategory = this.props.location.state.activeCategory
-        }
-        return (
-            <div className={classes.Wrapper}>
-                <SidePanel priceFiter={this.state.priceFiter} onPriceFilter={this.setPriceFiter} activeCategory={activeCategory} />
-                {/* Default and Filtered Services */}
-                <ServicesContainer priceFiter={this.state.priceFiter} />
-            </div>
-        );
-    }
+    return (
+        <div className={classes.Wrapper}>
+            <SidePanel priceFiter={priceFilter} onPriceFilter={setPriceFiter} activeCategory={activeCategory} />
+            {/* Default and Filtered Services */}
+            <ServicesContainer priceFiter={priceFilter} />
+        </div>
+    );
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -48,4 +39,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(Services));
+export default withRouter(connect(null, mapDispatchToProps)(services));
