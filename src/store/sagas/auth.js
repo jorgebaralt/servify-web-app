@@ -228,8 +228,6 @@ export const authSagas = {
         const bWantToMerge = action.bWantToMerge;
         // Firestore Init
         const firestore = firebase.firestore();
-        const settings = {timestampsInSnapshots: true};
-        firestore.settings(settings);
         // Creating user reference to the database.
         const userRef = yield firestore.collection('users').doc(user.uid);
         const userData = yield {
