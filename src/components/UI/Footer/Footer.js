@@ -1,4 +1,6 @@
 import React from 'react';
+// Background image
+import bgImage from '../../../assets/images/footer-background.jpg';
 // CSS
 import classes from './Footer.module.css';
 // JSX
@@ -8,15 +10,14 @@ import SVG from '../../SVG/SVG';
 import ImageFadeIn from '../../../components/UI/ImageFadeIn/ImageFadeIn';
 import logo from '../../../assets/images/servify-logos/roundedborders.png';
 
-const footer = (props) => {
-    const bgImage = null;
+const footer = () => {
     return (
         <div className={classes.Footer}>
             <div>
                 <div className={classes.BannerWrapper}>
                     <div 
                         // TODO Add background image to source assets
-                        style={{backgroundImage: `url(${bgImage ? bgImage : 'http://www.bonpreufoods.com/images/image-background.jpg'})`}} 
+                        style={{backgroundImage: `url(${bgImage})`}} 
                         className={classes.BannerBackground} />
                     <div className={classes.BannerContainer}>
                         <div className={classes.SocialMedia}>

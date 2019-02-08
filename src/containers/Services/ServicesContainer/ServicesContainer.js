@@ -31,7 +31,7 @@ const services = (props) => {
     }
 
     useEffect(() => {
-        axios.get('http://ipinfo.io').then(
+        axios.get('https://ipinfo.io').then(
             (response) => savePosition(response)
         );
     }, []);
