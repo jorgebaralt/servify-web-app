@@ -237,7 +237,7 @@ export const authSagas = {
             emailVerified: user.emailVerified,
             photoURL: user.photoURL,
             uid: user.uid,
-            creationDate: user.metadata.creationTime
+            creationDate: firebase.firestore.Timestamp.fromDate(new Date(user.metadata.creationTime))
         }
         if (signUpProvider) {
             userData['provider'] = signUpProvider;
