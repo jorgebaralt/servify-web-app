@@ -12,8 +12,6 @@ categories.map( (category) => {
 
 const initialCategories = { ...categoriesObj };
 
-console.log(initialCategories)
-
 const initialState = {
     coordinates: null,
     topCategories: null,
