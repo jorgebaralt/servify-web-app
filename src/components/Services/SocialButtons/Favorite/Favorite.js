@@ -9,7 +9,7 @@ const favorite = (props) => {
         <button onClick={props.onClick} className={classes.Button}>
             <SVG svg='favorite' />
         </button>
-    )
+    );
 }
 
 export default favorite;

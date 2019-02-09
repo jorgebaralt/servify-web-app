@@ -1,14 +1,12 @@
 import * as actionTypes from './types';
-
+// Worker function
+import { isMobile } from '../../shared/isMobile';
+// Polyfill
 import smoothscroll from 'smoothscroll-polyfill';
 
-const isMobile = () => {
-    let isMobile = false;
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
-        smoothscroll.polyfill();
-        isMobile = true;
-    }
-    return isMobile;
+// Applies smoothscroll polyfill if on a mobile device.
+if (isMobile()) {
+    smoothscroll.polyfill();
 }
 
 export const mobileActions = {
