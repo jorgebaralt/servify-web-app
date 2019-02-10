@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 // CSS
 import classes from './Contact.module.css';
 // JSX
+import Modal from 'react-png-modal';
 import SVG from '../../../SVG/SVG';
-import Modal from '../../../UI/Modal/Modal';
 import Separator from '../../../UI/Separator/Separator';
 import CopyText from '../../../UI/CopyText/CopyText';
 

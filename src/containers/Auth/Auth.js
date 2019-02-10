@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 // react-router-dom
 import { withRouter } from 'react-router-dom';
 // redux-sagas
@@ -6,57 +6,54 @@ import { connect } from 'react-redux';
 // CSS
 import classes from './Auth.module.css';
 // JSX
+import ResetPassword from './AuthModes/ResetPassword/ResetPassword';
 import SignUp from './AuthModes/SignUp/SignUp';
 import SignIn from './AuthModes/SignIn/SignIn';
 
-class Auth extends Component {
-    state = {
-		bIsSignIn: true
+const auth = (props) => {
+    // If the user is already authenticated then redirect to the authRedirect path or to the landing page
+    if (props.isAuthenticated) {
+        props.history.push({
+            pathname: props.authRedirectPath ? props.authRedirectPath : '/' 
+        });
     }
 
-    toggleAuthMode = () => {
-		this.setState( (prevState) => {
-			return { 
-				bIsSignIn: !prevState.bIsSignIn,
-			};
-		});
+    const [authRedirectPath] = useState(props.authRedirectPath);
+    const [authMode, setAuthMode] = useState('sign up');
+
+    const switchAuthMode = (authMode) => {
+        setAuthMode(authMode);
 	}
 
-    switchAuthModeHandler = () => {
-        switch (true) {
-            case this.state.bIsSignIn:
-                return <SignIn switchAuthModalHandler={this.toggleAuthMode} />
-            case !this.state.bIsSignIn:
-                return <SignUp switchAuthModalHandler={this.toggleAuthMode} />
+    const switchAuthModeHandler = () => {
+        switch (authMode) {
+            case 'reset password':
+                return <ResetPassword switchAuthModalHandler={switchAuthMode} />
+            case 'sign in':
+                return <SignIn switchAuthModalHandler={switchAuthMode} />
+            case 'sign up':
+                return <SignUp switchAuthModalHandler={switchAuthMode} />
             default:
                 // do nothing
                 return;
         }
     }
 
-    componentDidUpdate() {
-        if (this.props.isAuthenticated) {
-            this.props.history.push({
-                pathname: this.props.authRedirectPath
+    useEffect(() => {
+        if (props.isAuthenticated) {
+            props.history.push({
+                pathname: authRedirectPath
             });
         }
-    }
+    }, [props.isAuthenticated]);
 
-    componentWillUnmount() {
-        this.props.history.push({
-            pathname: this.props.authRedirectPath
-        });
-    }
-
-    render() {
-        return (
-            <div className={classes.Container}>
-                <div className={classes.Auth}>
-                    {this.switchAuthModeHandler()}
-                </div>
+    return (
+        <div className={classes.Container}>
+            <div className={classes.Auth}>
+                {switchAuthModeHandler()}
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 const mapStateToProps = (state) => {
@@ -66,4 +63,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default withRouter(connect(mapStateToProps)(Auth));
+export default withRouter(connect(mapStateToProps)(auth));

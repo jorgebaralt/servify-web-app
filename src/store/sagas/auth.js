@@ -97,6 +97,11 @@ export const authSagas = {
             }
             yield localStorage.setItem('userId', response.user.uid);
             yield put(authActions.authSuccess(response.user.uid, response.user.email, response.user));
+            // Sending email verification if the user is not verified.
+            if (!response.user.emailVerified) {
+                const currentUser = yield firebase.auth().currentUser
+                yield currentUser.sendEmailVerification();
+            }
             yield put(authActions.authResetRedirectPath());
         } catch (error) {
             yield put(authActions.authFail(error.message));
@@ -127,6 +132,11 @@ export const authSagas = {
                 }
                 yield localStorage.setItem('userId', user.uid);
                 yield put(authActions.authSuccess(user.uid, user.email, user));
+                // Sending email verification if the user is not verified.
+                if (!user.emailVerified) {
+                    const currentUser = yield firebase.auth().currentUser
+                    yield currentUser.sendEmailVerification();
+                }
                 yield put(authActions.authResetRedirectPath());
             } catch (error) {
                 put(authActions.authFail(error.message));
@@ -187,6 +197,11 @@ export const authSagas = {
                 }
                 yield localStorage.setItem('userId', user.uid);
                 yield put(authActions.authSuccess(user.uid, user.email, user));
+                // Sending email verification if the user is not verified.
+                if (!user.emailVerified) {
+                    const currentUser = yield firebase.auth().currentUser
+                    yield currentUser.sendEmailVerification();
+                }
                 yield put(authActions.authResetRedirectPath());
             } catch (error) {
                 put(authActions.authFail(error.message));
@@ -260,6 +275,11 @@ export const authSagas = {
         yield delay(action.expirationTime*1000);
         yield put(authActions.authLogout());
     },
+    resetPassword: function* (action) {
+        const emailAddress = yield action.email;
+        const  auth = yield firebase.auth();
+        yield auth.sendPasswordResetEmail(emailAddress);
+    }
 }
 
 /**

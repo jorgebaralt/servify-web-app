@@ -60,7 +60,7 @@ class Container extends Component {
                     <br />
                     {/* SERVICES */}
                     <small>Services</small>
-                    <SearchBar />
+                    <SearchBar id={this.props.id} />
                     <br />
                     {/* CATEGORIES */}
                     <small style={{marginBottom: '-32px'}}>Categories</small>

@@ -76,6 +76,7 @@ class App extends Component {
 			routes = (
 				<Switch>
 					<Route exact path="/" component={Landing} />
+					<Route exact path="/authenticate" component={Auth} />
 					<Route exact path="/help" component={Help} />
 					<Route exact path="/contact" component={Contact} />
 					<Route exact path="/publish/overview" component={PublishOverview} />

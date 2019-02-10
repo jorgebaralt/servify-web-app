@@ -83,7 +83,7 @@ class StepTwo extends PureComponent {
                     required: false,
                     number: true
                 },
-                valid: false,
+                valid: true,
                 touched: false
             },
             contactEmail: {
@@ -102,7 +102,7 @@ class StepTwo extends PureComponent {
                     required: false,
                     email: true
                 },
-                valid: false,
+                valid: true,
                 touched: false
             }
         },

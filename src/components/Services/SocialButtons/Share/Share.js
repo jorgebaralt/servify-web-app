@@ -23,8 +23,8 @@ import {
     TelegramIcon
 } from 'react-share';
 // JSX
+import Modal from 'react-png-modal';
 import SVG from '../../../SVG/SVG';
-import Modal from '../../../UI/Modal/Modal';
 
 const share = (props) => {
     return (

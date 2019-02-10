@@ -27,14 +27,24 @@
     transform: translateX(-50%);
 }
 
-.Error {
+
+.Error,
+.Success {
     overflow-wrap: break-word;
     text-align: center;
     font-size: 16px;
     font-weight: 600;
     line-height: 1.1em;
-    color: #dc3545;
     margin: 0 0 36px;
+}
+
+.Error {
+    color: #dc3545;
+}
+
+.Success {
+    color: #ff7043;
+    font-weight: normal;
 }
 
 @media (max-width: 520px) {
@@ -45,4 +55,19 @@
 
 .Auth > * {
     width: 100%;
+}
+
+.Header {
+    color: #484848;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+}
+
+.Subheader {
+    color: #484848;
+    margin: 12px 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
 }

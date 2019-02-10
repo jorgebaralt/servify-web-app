@@ -103,6 +103,12 @@ export const authCreator = {
             }
         },
     },
+    authResetPasswordInit: (email) => {
+        return {
+            type: actionTypes.AUTH_INIT_RESET_PASSWORD,
+            email: email
+        }
+    },
     authSaveUserToDatabaseInit: (user, signUpProvider, bWantToMerge) => {
         return {
             type: actionTypes.AUTH_INIT_SAVE_USER_TO_DATABASE,

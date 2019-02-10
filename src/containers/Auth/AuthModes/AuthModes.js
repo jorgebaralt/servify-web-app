@@ -1,16 +1,19 @@
 import React, { useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 // JSX
+import Modal from 'react-png-modal';
 import { HeaderContext } from '../../../hoc/Layout/Header/Header';
+import ResetPassword from './ResetPassword/ResetPassword';
 import SignUp from './SignUp/SignUp';
 import SignIn from './SignIn/SignIn';
-import Modal from '../../../components/UI/Modal/Modal';
 
 const authModal = (props) => {
     const header = useContext(HeaderContext);
 
     const switchAuthModeHandler = () => {
         switch (header.authModalType) {
+            case 'reset password':
+                return <ResetPassword switchAuthModalHandler={header.switchAuthModalHandler} />
             case 'sign up':
                 return <SignUp switchAuthModalHandler={header.switchAuthModalHandler} />
             case 'sign in':

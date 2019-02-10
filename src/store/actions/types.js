@@ -21,6 +21,8 @@ export const AUTH_INIT_SAGA_LOGOUT = 'auth_init_saga_logout';
 export const AUTH_LOGOUT = 'auth_logout';
 export const AUTH_SET_REDIRECT_PATH = 'auth_set_redirect_path';
 export const AUTH_INIT_SAVE_USER_TO_DATABASE = 'auth_init_save_user_to_database';
+export const AUTH_INIT_RESET_PASSWORD = 'auth_init_reset_password';
+export const AUTH_RESET_PASSWORD = 'auth_reset_password';
 
 // USERS
 export const USERS_UPDATE_USER_DETAILS = 'users_update_user_details';

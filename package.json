@@ -11,6 +11,7 @@
     "react-beautiful-dnd": "^10.0.4",
     "react-dom": "^16.8.1",
     "react-mapbox-gl": "^4.2.0",
+    "react-png-modal": "^1.0.19",
     "react-redux": "^6.0.0",
     "react-resize-detector": "^3.4.0",
     "react-router-dom": "^4.3.1",

@@ -3,21 +3,18 @@ import React, { PureComponent } from 'react';
 import classes from '../../Auth.module.css';
 // Redux & Sagas Creator
 import { connect } from 'react-redux'
-import { authCreator, authActions } from '../../../../store/actions/';
+import { authCreator, authActions } from '../../../../store/actions';
 // Input Validity
 import { checkValidity } from '../../../../shared/checkValidity';
 // JSX
-import OrSeparator from '../../../../components/UI/AuthModal/OrSeparator/OrSeparator';
+import SVG from '../../../../components/SVG/SVG';
 import Separator from '../../../../components/UI/AuthModal/Separator/Separator';
-import ForgotPassword from '../../../../components/UI/AuthModal/ForgotPassword/ForgotPassword';
-import UtilContainer from '../../../../components/UI/AuthModal/UtilContainer/UtilContainer';
 import AuthModalSwitch from '../../../../components/UI/AuthModal/AuthModalSwitch/AuthModalSwitch';
 import Button from '../../../../components/UI/Button/Button';
 import Input from '../../../../components/UI/Input/Input';
 import Loading from '../../../../components/UI/LoadingDots/LoadingDots';
 
-class SignIn extends PureComponent {
-
+class ResetPassword extends PureComponent {
     state = {
         controls: {
             email: {
@@ -38,29 +35,11 @@ class SignIn extends PureComponent {
                 },
                 valid: false,
                 touched: false,
-                style: {marginTop: 0}
-            },
-            password: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'password',
-                    autoComplete: 'current-password',
-                    placeholder: 'Password'
-                },
-                value: '',
-                valueType: 'password',
-                validation: {
-                    required: true,
-                    minLength: 6
-                },
-                valid: false,
-                touched: false,
-                style: null
+                style: {marginTop: '22px'}
             },
         },
-        bRememberMe: true,
-        bShowPassword: false,
         formIsValid: false,
+        successMessage: null,
         loading: false
     }
 
@@ -68,6 +47,22 @@ class SignIn extends PureComponent {
         this.setState( (prevState) => {
             return {
                 bRememberMe: !prevState.bRememberMe
+            };
+        })
+    }
+
+    toggleSignUpWithEmail = () => {
+        this.setState( (prevState) => {
+            return {
+                bSignUpWithEmail: !prevState.bSignUpWithEmail
+            };
+        })
+    }
+
+    toggleMarketingPrompt = () => {
+        this.setState( (prevState) => {
+            return {
+                bMarketingPrompt: !prevState.bMarketingPrompt
             };
         })
     }
@@ -93,7 +88,7 @@ class SignIn extends PureComponent {
 
     inputChangeHandler = (event, inputIdentifier) => {
         const updatedOrderForm = {
-            ...this.state.controls
+            ...this.state.controls,
         };
         const updatedFormElement = {
             ...updatedOrderForm[inputIdentifier]
@@ -111,12 +106,15 @@ class SignIn extends PureComponent {
             formIsValid: formIsValid
         });
     }
-
+    
     onSubmitHandler = (event) => {
         event.preventDefault();
-        this.props.onSignInHandler(this.state.controls.email.value, this.state.controls.password.value, this.state.bRememberMe);
+        this.props.onResetPasswordHandler(this.state.controls.email.value);
+        this.setState({
+            successMessage: "If the provided email address matches that account's email address, then you will receive an email with a link to reset your password shortly."
+        });
     }
-
+    
     setLoading = () => {
         this.setState({
             loading: false
@@ -139,13 +137,19 @@ class SignIn extends PureComponent {
 
     render() {
         const formElementsArray = Object.entries(this.state.controls);
+        const button = this.state.successMessage ? 
+            <SVG svg='checkmark-nobg'/> 
+            : (this.state.loading ? <div className={classes.Loading}><Loading /></div> : 'Email me');
+        const buttonStyles = {
+            minHeight: '46px',
+            cursor: this.state.successMessage ? 'default' : null,
+            pointerEvents: this.state.successMessage ? 'none' : null
+        }
         return (
             <div className={classes.Container}>  
-                <Button clicked={() => this.props.onFacebookSignInHandler(this.state.bRememberMe)} 
-                    type='facebook' blockButton={true}>Sign in with Facebook</Button>
-                <Button clicked={() => this.props.onGoogleSignInHandler(this.state.bRememberMe)} 
-                    type='google' blockButton={true}>Sign in with Google</Button>
-                <OrSeparator />
+                <div className={classes.Header}>Reset your password</div>
+                <div className={classes.Subheader}>Don't stress! You may have overlooked your password, however we can help you out. Enter your email down below and we'll send you a comfirmation email to reset your password.</div>
+                <Separator />
                 {this.props.errorMessage ? 
                     <div className={classes.Error}>{this.props.errorMessage}</div> 
                     : null}
@@ -155,7 +159,7 @@ class SignIn extends PureComponent {
                             style={input[1].style}
                             key={input[0]} 
                             elementType={input[1].elementType} 
-                            elementConfig={this.state.controls[input[1].valueType].elementConfig} // Referenced to state to mutate
+                            elementConfig={this.state.controls[input[1].valueType] ? this.state.controls[input[1].valueType].elementConfig : input[1].elementConfig} // Referenced to state to mutate
                             changed={(event) => this.inputChangeHandler(event, input[0])}
                             invalid={!input[1].valid}
                             shouldValidate={input[1].validation}
@@ -163,21 +167,18 @@ class SignIn extends PureComponent {
                             value={input[1].value} 
                             valueType={input[1].valueType} />;
                     })}
-                    <UtilContainer 
-                        toggleShowPassword={this.toggleShowPassword}
-                        bShowPassword={this.state.bShowPassword}
-                        toggleRememberMe={this.toggleRememberMe}
-                        bRememberMe={this.state.bRememberMe} />
-                    <Button style={{minHeight: '46px'}} clicked={this.setLoading} submit disabled={!this.state.formIsValid} type='auth' blockButton={true}>
-                        {this.state.loading ? <div className={classes.Loading}><Loading /></div> : 'Sign in'}
+                    <Button style={buttonStyles} clicked={this.setLoading} submit disabled={!this.state.formIsValid} type='auth' blockButton={true}>
+                        {button}
                     </Button>
-                    <ForgotPassword onClick={() => this.props.switchAuthModalHandler('reset password')} />
                 </form>
+                {this.state.successMessage ? 
+                    <div className={classes.Success}>{this.state.successMessage}</div> 
+                    : null}
                 <Separator />
                 <AuthModalSwitch 
-                    text="Don't have an account yet?"
-                    switchText='Sign up!'
-                    switchAuthModalHandler={() => this.props.switchAuthModalHandler('sign up')} />
+                    text="Already have a Servify account?"
+                    switchText='Log in'
+                    switchAuthModalHandler={() => this.props.switchAuthModalHandler('sign in')} />
             </div>
         );
     }
@@ -191,11 +192,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-		onSignInHandler: (email, password, bRememberMe) => dispatch(authCreator.authSignInInit(email, password, bRememberMe)),
-		onFacebookSignInHandler: (bRememberMe) => dispatch(authCreator.authFacebook.signInInit(bRememberMe)),
-		onGoogleSignInHandler: (bRememberMe) => dispatch(authCreator.authGoogle.signUpInit(bRememberMe)),
+        onResetPasswordHandler: (email) => dispatch(authCreator.authResetPasswordInit(email)),
 		resetErrorMessage: () => dispatch(authActions.authResetErrorMessage())
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword);

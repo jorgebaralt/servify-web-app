@@ -30,7 +30,7 @@ class SearchBar extends Component {
             right: null
         },
         searchBar: {
-            inputId: 'Landing_SearchBar_Input',
+            inputId: [this.props.id, 'Landing_SearchBar_Input'].join('_'),
             description: 'SearchBar_Description',
             listId: 'SearchBar_List',
             value: ''

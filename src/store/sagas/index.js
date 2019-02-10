@@ -31,6 +31,7 @@ export function* watchAuth () {
         takeEvery(actionTypes.AUTH_INIT_GOOGLE_SIGN_IN, authSagas.authGoogle.signIn),
         takeEvery(actionTypes.AUTH_INIT_GOOGLE_SIGN_UP, authSagas.authGoogle.signUp),
         takeEvery(actionTypes.AUTH_INIT_SAGA_LOGOUT, authSagas.authLogout),
-        takeEvery(actionTypes.AUTH_INIT_SAVE_USER_TO_DATABASE, authSagas.authSaveUserToDatabase)
+        takeEvery(actionTypes.AUTH_INIT_SAVE_USER_TO_DATABASE, authSagas.authSaveUserToDatabase),
+        takeEvery(actionTypes.AUTH_INIT_RESET_PASSWORD, authSagas.resetPassword)
     ]);
 }

@@ -17,7 +17,7 @@ import Button from '../../../../components/UI/Button/Button';
 import Input from '../../../../components/UI/Input/Input';
 import Loading from '../../../../components/UI/LoadingDots/LoadingDots';
 
-class SignUpModal extends PureComponent {
+class SignUp extends PureComponent {
 
     state = {
         controls: {
@@ -264,4 +264,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpModal);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
