@@ -10,7 +10,7 @@ import { checkValidity } from '../../../../shared/checkValidity';
 // CSS
 import classes from './Report.module.css';
 // JSX
-import Modal from '../../../UI/Modal/Modal';
+import Modal from 'react-png-modal';
 import Separator from '../../../UI/Separator/Separator';
 import Input from '../../../UI/Input/Input';
 import Button from '../../../UI/Button/Button';

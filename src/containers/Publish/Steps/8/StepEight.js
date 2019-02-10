@@ -9,10 +9,10 @@ import capitalize from '../../../../shared/capitalize';
 // CSS
 import classes from '../../Publish.module.css';
 // JSX
+import Modal from 'react-png-modal';
 import { toast } from 'react-toastify';
 import LoadingBounce from '../../../../components/UI/LoadingBounce/LoadingBounce';
 import ProgressRing, { average } from '../../../../components/UI/ProgressRing/ProgressRing';
-import Modal from '../../../../components/UI/Modal/Modal';
 import Separator from '../../../../components/UI/Separator/Separator';
 import Button from '../../../../components/UI/Button/Button';
 import Map from '../../../../components/UI/Map/Map';

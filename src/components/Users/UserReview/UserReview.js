@@ -6,9 +6,9 @@ import defaultImage from '../../../assets/favicon/android-icon-48x48.png';
 // CSS
 import classes from './UserReview.module.css';
 // JSX
+import Modal from 'react-png-modal';
 import { Link } from 'react-router-dom';
 import Separator from '../../../components/UI/Separator/Separator';
-import Modal from '../../../components/UI/Modal/Modal';
 import Button from '../../../components/UI/Button/Button';
 import Rating from '../../../components/UI/Rating/Rating';
 import LoadingDots from '../../../components/UI/LoadingDots/LoadingDots';
