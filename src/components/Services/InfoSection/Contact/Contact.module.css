@@ -1,3 +1,11 @@
+.Wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    margin: 4px 24px;
+}
+
 .Title {
     user-select: none;
     color: #484848;

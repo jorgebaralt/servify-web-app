@@ -45,9 +45,12 @@ class ServicesId extends Component {
                 price: null,
                 service: null
             },
+            bIsDelivery: null,
+            logistic: null,
             locationData: {},
             address: null,
             map: {},
+            favUsers: null,
             loading: true
         }
     }
@@ -144,6 +147,7 @@ class ServicesId extends Component {
                             initialPosition: [data.location._longitude, data.location._latitude],
                             radiusInMiles: data.miles // Initial value
                         },
+                        favUsers: data.favUsers
                     }
                 });
             })
@@ -172,9 +176,12 @@ class ServicesId extends Component {
                     price: null,
                     service: null
                 },
+                bIsDelivery: null,
+                logistic: null,
                 locationData: {},
                 address: null,
                 map: {},
+                favUsers: null,
                 loading: true
             });
             this.fetchService();
@@ -198,7 +205,7 @@ class ServicesId extends Component {
                             </div>
                             <Title>{this.state.service ? this.state.service.title : null}</Title>
                         </div>
-                        <SocialButtons title={this.state.service ? this.state.service.title : null} />
+                        <SocialButtons favUsers={this.state.favUsers} title={this.state.service ? this.state.service.title : null} />
                         <InfoPoint location={this.state.locationData ? this.state.locationData.region : null}/>
                         <InfoPoint logistic={this.state.logistic}/>
                         {this.state.service.website ? <InfoPoint website={this.state.service.website} /> : null}

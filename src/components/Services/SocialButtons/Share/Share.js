@@ -47,7 +47,7 @@ const share = (props) => {
                     </FacebookShareButton>
                     <TwitterShareButton
                         url={window.location.href}
-                        quote={['Servify -',props.title].join(' ')}
+                        quote={['Servify',props.title].join(' - ')}
                         className={classes.Button}>
                         <TwitterIcon
                             size={38}
@@ -55,14 +55,14 @@ const share = (props) => {
                     </TwitterShareButton>
                     <TelegramShareButton
                         url={window.location.href}
-                        quote={['Servify -',props.title].join(' ')}
+                        quote={['Servify',props.title].join(' - ')}
                         separator=":: "
                         className={classes.Button}>
                         <TelegramIcon size={38} round />
                     </TelegramShareButton>
                     <WhatsappShareButton
                         url={window.location.href}
-                        quote={['Servify -',props.title].join(' ')}
+                        quote={['Servify',props.title].join(' - ')}
                         separator=":: "
                         className={classes.Button}>
                         <WhatsappIcon size={38} round />
@@ -71,21 +71,21 @@ const share = (props) => {
                 <div className={classes.Container}>
                     <RedditShareButton
                         url={window.location.href}
-                        quote={['Servify -',props.title].join(' ')}
+                        quote={['Servify',props.title].join(' - ')}
                         separator=":: "
                         className={classes.Button}>
                         <RedditIcon size={38} round />
                     </RedditShareButton>
                     <LinkedinShareButton
                         url={window.location.href}
-                        quote={['Servify -',props.title].join(' ')}
+                        quote={['Servify',props.title].join(' - ')}
                         separator=":: "
                         className={classes.Button}>
                         <LinkedinIcon size={38} round />
                     </LinkedinShareButton>
                     <EmailShareButton
                         url={window.location.href}
-                        quote={['Servify -',props.title].join(' ')}
+                        quote={['Servify',props.title].join(' - ')}
                         separator=":: "
                         className={classes.Button}>
                         <EmailIcon size={38} round />

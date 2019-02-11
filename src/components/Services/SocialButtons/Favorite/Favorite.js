@@ -7,7 +7,7 @@ import SVG from '../../../SVG/SVG';
 const favorite = (props) => {
     return (
         <button onClick={props.onClick} className={classes.Button}>
-            <SVG svg='favorite' />
+            <SVG className={classes.Favorite} fill={props.fill ? '#D75A4A' : 'transparent'} svg='favorite' />
         </button>
     );
 }

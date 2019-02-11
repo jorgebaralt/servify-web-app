@@ -7,3 +7,8 @@
     border-color: initial;
     border-image: initial;
 }
+
+.Favorite,
+.Favorite * {
+    transition: fill ease 100ms;
+}
