@@ -4,7 +4,7 @@
 }
 
 .Button {
-    width: 110px;
+    width: auto;;
 }
 
 .Tooltip {
@@ -46,6 +46,7 @@
     background-color: #585858;
     border-radius: 6px;
     color: #FFF;
+    width: 140px;
     height: 100%;
     padding: 12px 9px;
 }
