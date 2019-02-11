@@ -128,6 +128,7 @@ class SearchBar extends Component {
             ListClasses.push(classes.Show);
             RecentSearchesWrapperClasses.push(classes.Show);
         }
+        // hashTable that handles filtered service rendering logic
         let hashTable = [];
         return (
             <div>
@@ -267,7 +268,7 @@ class SearchBar extends Component {
 const mapStateToProps = (state) => {
 	return {
         nearServices: state.servicesReducer.services.nearServices,
-        topServices: state.servicesReducer.services.topServices,
+        topServices: state.servicesReducer.services.topServices
 	};
 };
 

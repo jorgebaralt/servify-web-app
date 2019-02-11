@@ -38,7 +38,9 @@ class SearchBar extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        const services = props.nearServices;
+        const { nearServices, topServices } = props;
+        if (!nearServices || !topServices) { return state; }
+        const services = [...nearServices, ...topServices];
         const query = state.searchBar.value;
         // If there are no services or query is an empty string then return
         if (!services || !query.length) {
@@ -126,6 +128,8 @@ class SearchBar extends Component {
             ListClasses.push(classes.Show);
             RecentSearchesWrapperClasses.push(classes.Show);
         }
+        // hashTable that handles filtered service rendering logic
+        let hashTable = [];
         return (
             <div className={classes.GlobalWrapper}>
                 <div className={classes.SearchBarAnchor}>
@@ -206,6 +210,14 @@ class SearchBar extends Component {
                                 <ul className={classes.SearchResultsWrapper}>
                                     {this.state.filteredServices.length ? 
                                         this.state.filteredServices.map((service) => {
+                                            // Hash Table to avoid duplicated services
+                                            if (hashTable.includes(service.id)) {
+                                                return null;
+                                            } else {
+                                                hashTable.push(service.id);
+                                            }
+                                            // Max of 8 services
+                                            if (hashTable.length > 5) { return null; }
                                             return (
                                                 <Link 
                                                     key={service.id}
@@ -244,6 +256,7 @@ class SearchBar extends Component {
 const mapStateToProps = (state) => {
 	return {
         nearServices: state.servicesReducer.services.nearServices,
+        topServices: state.servicesReducer.services.topServices
 	};
 };
 
