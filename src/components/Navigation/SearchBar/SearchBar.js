@@ -38,7 +38,9 @@ class SearchBar extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        const services = props.nearServices;
+        const { nearServices, topServices } = props;
+        if (!nearServices || !topServices) { return state; }
+        const services = [...nearServices, ...topServices];
         const query = state.searchBar.value;
         // If there are no services or query is an empty string then return
         if (!services || !query.length) {
@@ -88,7 +90,7 @@ class SearchBar extends Component {
 
     removeFocusWithin () {
         this.setState(() => {
-            return { bIsFocused: false, bIsTouched: false }
+            return { bIsFocused: false, bIsTouched: false, filteredServices: [] }
         });
     }
 
@@ -126,6 +128,7 @@ class SearchBar extends Component {
             ListClasses.push(classes.Show);
             RecentSearchesWrapperClasses.push(classes.Show);
         }
+        let hashTable = [];
         return (
             <div>
                 <div className={classes.SearchBarAnchor}>
@@ -205,7 +208,15 @@ class SearchBar extends Component {
                                 <Separator />
                                 <ul className={classes.SearchResultsWrapper}>
                                     {this.state.filteredServices.length ? 
-                                        this.state.filteredServices.map((service) => {
+                                        this.state.filteredServices.map((service, index) => {
+                                            // Hash Table to avoid duplicated services
+                                            if (hashTable.includes(service.id)) {
+                                                return null;
+                                            } else {
+                                                hashTable.push(service.id);
+                                            }
+                                            // Max of 8 services
+                                            if (hashTable.length > 8) { return null; }
                                             /**
                                              * In case the user is browsing services in the serviceId route, 
                                              * filter out the loaded service from the filteredServices array.
@@ -220,7 +231,7 @@ class SearchBar extends Component {
                                             }
                                             return (
                                                 <Link 
-                                                    key={service.id}
+                                                    key={index}
                                                     to={['/services',service.id].join('/')}
                                                     /**
                                                     * onMouseDown event fires before onBlur event on input. It calls event.preventDefault() to
@@ -256,6 +267,7 @@ class SearchBar extends Component {
 const mapStateToProps = (state) => {
 	return {
         nearServices: state.servicesReducer.services.nearServices,
+        topServices: state.servicesReducer.services.topServices,
 	};
 };
 
