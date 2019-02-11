@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// worker functions
+// Worker functions
 import { checkValidity } from '../../../../../shared/checkValidity';
 import isArray from '../../../../../shared/isArray';
 import { parseLocationData } from '../../../../../shared/parseLocationData';

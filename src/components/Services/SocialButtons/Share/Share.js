@@ -33,7 +33,6 @@ const share = (props) => {
                 <SVG svg='share' />
             </button>
             <Modal closeModal={props.closeModal} 
-                toggleModal={props.onClick} 
                 show={!props.bIsModalHidden}>
                 <h2 className={classes.Header}>Share on social media:</h2>
                 <div className={classes.Container}>

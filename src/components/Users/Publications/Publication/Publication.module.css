@@ -49,6 +49,7 @@
     position: absolute;
     background-color: rgb(229, 229, 229);
     background-size: cover;
+    object-fit: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     animation-name: FadeIn;

@@ -67,6 +67,7 @@ class Publications extends Component {
                                         <Publication
                                             header={service.header}
                                             title={service.title}
+                                            category={service.category}
                                             href={service.id}
                                             priceRating={service.priceRating}
                                             ratingAvg={service.ratingAvg}

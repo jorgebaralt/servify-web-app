@@ -26,7 +26,6 @@ const contact = (props) => {
         <>
             <Modal 
                 maxWidth={500}
-                toggleModal={toggleModal}
                 closeModal={closeModal}
                 show={!bIsHidden}>
                 <div className={classes.Wrapper}>

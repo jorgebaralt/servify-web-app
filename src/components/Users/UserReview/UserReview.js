@@ -55,8 +55,7 @@ class UserReview extends Component {
         return (
             <div className={classes.Header}>
                 <Modal show={!this.state.bIsHidden}
-                    closeModal={this.closeModal}
-                    toggleModal={this.toggleModal}>
+                    closeModal={this.closeModal}>
                     <div className={classes.Modal}>
                         <div className={classes.Confirm}>
                             Confirm

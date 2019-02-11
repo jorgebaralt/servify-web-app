@@ -170,6 +170,7 @@ class StepEight extends PureComponent {
                     bIsUploading: false
                 });
             }
+            await this.props.history.push(['/services', service.id].join('/'));
         } catch (error) {
             await toast.error(!error.response.data.error ? 'Something went wrong.' : error.response.data.error);
             await this.setState({
@@ -307,8 +308,9 @@ class StepEight extends PureComponent {
                     <div className={classes.Step}><span>S</span>tep 1: Category</div>
                     <PreviewInformation title='Category'>
                         <div style={{textTransform: 'uppercase'}}>{category}</div></PreviewInformation>
+                    {subcategory ? 
                     <PreviewInformation title='Subcategory'>
-                        <div style={{textTransform: 'uppercase'}}>{subcategory}</div></PreviewInformation>
+                        <div style={{textTransform: 'uppercase'}}>{subcategory}</div></PreviewInformation> : null}
                     <Separator />
                     {/* Step 2: Basic Information */}
                     <div className={classes.Step}><span>S</span>tep 2: Basic Information</div>

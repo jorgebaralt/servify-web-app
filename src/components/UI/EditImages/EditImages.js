@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // Images handler
+import defaultImage from '../../../shared/defaultServiceImage';
 import { setImagesArray, setImagesInfo } from '../../../shared/imagesHandler';
 // CSS
 import classes from './EditImages.module.css';
@@ -10,9 +11,6 @@ import { Slider, Slide } from '../Slider';
 import DragList, { setItems as setter } from '../DragList/DragList';
 
 export const setItems = setter;
-
-// Default Image URL if the fetched service has no URLs
-const defaultImage = 'https://storage.googleapis.com/servify-716c6.appspot.com/service_images%2F2019-01-20T22%3A51%3A58.066Z_default-service-image.png?GoogleAccessId=firebase-adminsdk-a3e7c%40servify-716c6.iam.gserviceaccount.com&Expires=95623372800&Signature=st0sONUJVHe54MOE0yY902A0gAcBCzSjxch4QbdCXJ0w2LiQgG%2FwZiv9lW6t4lV5zFhpONuNEFPOWIqC%2F1fQgI0qKX4Y1vI6nI14lx%2BYqaR%2Fg0LjIfUPeU5RSm8RJBnWIKSWVhThZT7ewez8XEg2RjIRIVllzdJht%2FRTgwzf4A%2FbsF1SsfaMFkIYH4Ee7vnNmdqOTRTwGqInjLPER9WgalWew7MXxHExGo9%2Fi%2BmIXjAxcC2%2BmTu9Pov%2BBkvfpu37miQTViUTUmE0c3jc17R%2FC816Sdmhg%2F2e8a%2FSUx9k714D5PujzvKldabGnPvwwPTO%2BtCe0yjAsbE5eehLQYEjgw%3D%3D';
 
 class EditImages extends Component {
 
@@ -27,7 +25,7 @@ class EditImages extends Component {
 
     render() {
         const images = setImagesArray(this.props.images);
-        const src = this.props.defaultImage ? this.props.defaultImage : defaultImage
+        const src = this.props.defaultImage ? this.props.defaultImage : defaultImage()
         let listImages;
         if (images.length > 0) {
             listImages = images.map((image, index) => {

@@ -176,8 +176,7 @@ class Report extends Component {
             <>  
                 <Modal 
                     show={!this.state.bIsModalHidden}
-                    closeModal={this.closeModal}
-                    toggleModal={this.toggleModal}>
+                    closeModal={this.closeModal}>
                     {
                         // We need to know if the user is logged in to be able to submit a report.
                         this.props.userDetails ?

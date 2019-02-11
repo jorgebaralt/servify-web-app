@@ -12,7 +12,7 @@ import headerImage from '../../assets/images/header-image-2.jpg'
 import SVG from '../../components/SVG/SVG';
 // JSX
 import { Link } from 'react-router-dom';
-import LoadingPage from '../../components/UI/LoadingPage/LoadingPage';
+import LoadingBounce from '../../components/UI/LoadingBounce/LoadingBounce';
 import HeaderImage from '../../components/UI/HeaderImage/HeaderImage';
 import Carousel from '../../components/UI/Carousel/Carousel';
 import SearchBox from '../../components/UI/SearchBox/SearchBox';
@@ -110,9 +110,10 @@ class Landing extends Component {
         }
         let nearServices = null;
         if (this.props.services.nearServices) {
+            if (!this.props.services.nearServices.length) { nearServices = null; }
             nearServices = (
                 <>
-                    <h1>New services near {this.state.city && this.state.state ? `${this.state.city},  ${this.state.state}` : 'you'}</h1>
+                    <h1>Services near {this.state.city && this.state.state ? `${this.state.city},  ${this.state.state}` : 'you'}</h1>
                     <div>
                         <Carousel>
                             {this.props.services.nearServices.map( (service, index) => {
@@ -133,8 +134,9 @@ class Landing extends Component {
                 </>
             );
         }
-        let topServices = <LoadingPage />;
+        let topServices = <LoadingBounce />;
         if (this.props.services.topServices) {
+            if (!this.props.services.topServices.length) { topServices = null; }
             topServices = (
                 <>
                     <h1>Top rated services</h1>
@@ -162,6 +164,7 @@ class Landing extends Component {
         if (this.props.services.byCategories) { 
             topServicesByCategories = (
                 Object.entries(this.props.services.byCategories).map( (category, index) => {
+                    if (!category[1].length) { return null; }
                     return (
                         <div key={index}>
                             <h1>
