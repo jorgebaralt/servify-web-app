@@ -80,16 +80,15 @@
 }
 
 .Title {
-    font-weight: 800;
-    font-size: 17px;
+    font-weight: 600;
+    font-size: 16px;
     line-height: 21px;
     max-height: 42px;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    margin-bottom: 4px;
+    width: 95%;
     overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .Links {
@@ -100,7 +99,8 @@
     margin: 8px 0;
 }
 
-.Link {
+.Link,
+.Delete {
     text-decoration: none;
     color: #484848;
     border: 1px solid #989898;
@@ -114,4 +114,15 @@
 .Link:hover {
     border-color: rgb(255, 112, 67);
     color: rgb(255, 112, 67);
+}
+
+.Delete {
+    color: #dc3545;
+    background-color: rgb(255, 255, 255);
+    border-color: #dc3545;
+}
+
+.Delete:hover {
+    color: rgb(255, 255, 255);
+    background-color: #dc3545;
 }

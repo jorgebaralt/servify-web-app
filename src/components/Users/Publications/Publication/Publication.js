@@ -10,7 +10,9 @@ import ImageFadeIn from '../../../UI/ImageFadeIn/ImageFadeIn';
 
 const publication = (props) => {
     if (!props.href) { return null; }
+
     const image = props.image ? setImagesArray(props.image) : [];
+
     return (
         // Total rating amount, defaults to 5
         <div className={classes.Service}>
@@ -37,6 +39,9 @@ const publication = (props) => {
                     <Link draggable="false" to={['/users/publications/edit', props.href].join('/')} className={classes.Link}>
                         Edit
                     </Link>
+                    <button onClick={props.onDelete} draggable="false" className={classes.Delete}>
+                        Delete
+                    </button>
                 </div>
             </div>
         </div>
