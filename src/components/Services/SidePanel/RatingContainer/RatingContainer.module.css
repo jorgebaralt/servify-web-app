@@ -58,18 +58,19 @@
     border: 1px solid rgb(0, 119, 145);
 }
 
+.Rating.RatingActiveTwo span:nth-child(1) svg,
 .Rating.RatingActiveTwo span:nth-child(2) svg {
     border: 1px solid rgb(0, 119, 145);
 }
 
+.Rating.RatingActiveThree span:nth-child(1) svg,
 .Rating.RatingActiveThree span:nth-child(2) svg,
 .Rating.RatingActiveThree span:nth-child(3) svg {
     border: 1px solid rgb(0, 119, 145);
 }
 
-.Rating.RatingActiveFour span:nth-child(2) svg,
-.Rating.RatingActiveFour span:nth-child(3) svg,
-.Rating.RatingActiveFour span:nth-child(4) svg {
+
+.Rating.RatingActiveFour span svg {
     border: 1px solid rgb(0, 119, 145);
 }
 

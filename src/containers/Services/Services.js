@@ -16,6 +16,7 @@ const services = (props) => {
         props.location.state ? props.location.state.activeCategory : null
     );
 
+    // ComponentDidMount
     useEffect(() => {
         props.servicesInit();
         if (activeCategory) {

@@ -8,8 +8,8 @@ import { servicesCreator } from '../../../store/actions';
 // CSS
 import classes from './SidePanel.module.css'
 // JSX
-import Filter from '../../../components/Services/SidePanel/Filter/Filter';
-import Input from '../../../components/UI/Input/Input';
+// import Filter from '../../../components/Services/SidePanel/Filter/Filter';
+// import Input from '../../../components/UI/Input/Input';
 import List from '../../../components/Services/SidePanel/List/List';
 import ListItem from '../../../components/Services/SidePanel/ListItem/ListItem';
 import { ClosedRatingContainer, RatingContainer } from '../../../components/Services/SidePanel/RatingContainer/RatingContainer';
@@ -52,7 +52,7 @@ class SidePanel extends Component {
             }
         },
         prices: {
-            rating: this.props.priceFilter, // Default value (1). 1 means show all services.
+            rating: this.props.priceFilter || 1, // Default value (1). 1 means show all services.
             list: {
                 bIsClosed: false
             }
@@ -172,7 +172,8 @@ class SidePanel extends Component {
                 <div className={WrapperClasses.join(' ')}>
                     <div className={classes.Container}>
                         <MenuToggle onClick={this.toggleSidePanel} />
-                        <Filter title='Sort by'>
+                        {/* TODO Sorting disabled until I figure out an easier way of sorting */}
+                        {/* <Filter title='Sort by'>
                             <div style={{marginTop: '-18px'}}>
                                 {Object.entries(this.state.sortBy.controls).map( (input) => {
                                         return (
@@ -191,7 +192,7 @@ class SidePanel extends Component {
                                     })
                                 }
                             </div>
-                        </Filter>
+                        </Filter> */}
                         <List title='Categories'
                             onClick={() => this.toggleListHandler(listKeys[1])}
                             bIsClosed={this.state.categories.list.bIsClosed}

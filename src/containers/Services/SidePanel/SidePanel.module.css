@@ -13,8 +13,7 @@
 
 .Container {
     width: 100%;
-    padding: 24px;
-    padding-bottom: 96px;
+    padding: 12px 24px 96px;
 }
 
 @media (max-width: 920px) {
