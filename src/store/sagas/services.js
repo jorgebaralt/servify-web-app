@@ -3,10 +3,11 @@ import axios from 'axios';
 import axiosServices from '../../axios-services';
 // Sagas
 import { put, call } from 'redux-saga/effects';
-import { servicesActions, servicesCreator } from '../actions';
-// Arry sorting
+import { servicesActions, servicesCreator, usersActions } from '../actions';
+// Worker functions
 import sort from '../../shared/sortArrayByKey';
 import isArray from '../../shared/isArray';
+import { parseIpInfo } from '../../shared/parseIpInfo';
 
 export const servicesSagas = {
     servicesInit: function* () {
@@ -15,7 +16,9 @@ export const servicesSagas = {
         yield put(servicesActions.setTopCategories(topCategories));
         yield put(servicesCreator.topServicesByCategoriesHandler(topCategories));
         try {
-            let response = yield axios.get('https://ipinfo.io');
+            let response = yield axios.get('https://ipinfo.io?token=746d3b0f51ffff'); // ipinfo token
+            const locationData = yield parseIpInfo(response.data);
+            yield put(usersActions.usersSaveLocation(locationData));
             const coordinates = yield response.data.loc.split(",");
             const currentLocation = yield { 
                 latitude: Number(coordinates[0]),
@@ -29,7 +32,7 @@ export const servicesSagas = {
             yield put(servicesActions.setServices(services));
         } catch (err) {
             if (navigator.geolocation) {
-                if (navigator.geolocation) {
+                try {
                     const getCurrentPosition = () => new Promise(
                         (resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject)
                     );
@@ -45,7 +48,39 @@ export const servicesSagas = {
                     response = yield axiosServices.get('/getNearService', { params: { currentLocation, distance: 500 } });
                     services.topServices =  sort(response.data, 'rating');
                     yield put(servicesActions.setServices(services));
+                    const locationData = yield {
+                        coordinates: { ...currentLocation }
+                    };
+                    yield put(usersActions.usersSaveLocation(locationData));
+                /**
+                 * The block below will fetch ONLY top services in case the user has ad blockers,
+                 * and the navigator.geolocation is unavailable for whatever reason.
+                 */
+                } catch {
+                    // Centered in Orlando, FL
+                    const currentLocation = { 
+                        latitude: 28.538336,
+                        longitude: -81.379234
+                    };
+                    const services = {};
+                    const response = yield axiosServices.get('/getNearService', { params: { currentLocation, distance: 500 } });
+                    services.topServices =  sort(response.data, 'rating');
+                    yield put(servicesActions.setServices(services));
                 }
+            /**
+             * The block below will fetch ONLY top services in case the user has ad blockers,
+             * and the navigator.geolocation is unavailable for whatever reason.
+             */
+            } else {
+                // Centered in Orlando, FL
+                const currentLocation = { 
+                    latitude: 28.538336,
+                    longitude: -81.379234
+                };
+                const services = {};
+                const response = yield axiosServices.get('/getNearService', { params: { currentLocation, distance: 500 } });
+                services.topServices =  sort(response.data, 'rating');
+                yield put(servicesActions.setServices(services));
             }
         }
     },

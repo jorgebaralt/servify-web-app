@@ -39,8 +39,13 @@ class SearchBar extends Component {
 
     static getDerivedStateFromProps(props, state) {
         const { nearServices, topServices } = props;
-        if (!nearServices || !topServices) { return state; }
-        const services = [...nearServices, ...topServices];
+        let services = [];
+        if (nearServices) {
+            services = services.concat([...nearServices]);
+        }
+        if (topServices) {
+            services = services.concat([...topServices]);
+        }
         const query = state.searchBar.value;
         // If there are no services or query is an empty string then return
         if (!services || !query.length) {

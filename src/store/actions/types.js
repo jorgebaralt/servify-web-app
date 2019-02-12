@@ -23,9 +23,10 @@ export const AUTH_SET_REDIRECT_PATH = 'auth_set_redirect_path';
 export const AUTH_INIT_SAVE_USER_TO_DATABASE = 'auth_init_save_user_to_database';
 export const AUTH_INIT_RESET_PASSWORD = 'auth_init_reset_password';
 export const AUTH_RESET_PASSWORD = 'auth_reset_password';
+export const AUTH_UPDATE_USER_DETAILS = 'auth_update_user_details';
 
 // USERS
-export const USERS_UPDATE_USER_DETAILS = 'users_update_user_details';
+export const USERS_SAVE_LOCATION = 'users_save_location';
 
 // SERVICES
 export const SERVICES_INIT = 'services_init';

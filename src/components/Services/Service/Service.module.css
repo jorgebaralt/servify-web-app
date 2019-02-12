@@ -5,6 +5,7 @@
     justify-content: flex-start;
     flex-flow: column;
     width: 100%;
+    min-width: 120px;
     height: 100%;
     padding-top: 8px;
     padding-bottom: 12px;

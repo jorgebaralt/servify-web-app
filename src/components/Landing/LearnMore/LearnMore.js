@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 // default image
 import image from '../../../assets/images/learn-more.jpg';
 // CSS
@@ -8,55 +8,41 @@ import { Link } from 'react-router-dom'
 import Button from '../../UI/Button/Button';
 import ImageFadeIn from '../../UI/ImageFadeIn/ImageFadeIn';
 
-class LearnMore extends Component {
-    constructor (props) {
-        super(props);
-        // Image reference
-        this.bannerBackground = React.createRef();
-    }
+const learnMore = (props) => {
+    const [src] = useState(props.src ? props.src : image);
+    const [srcset] = useState(props.srcset);
 
-    state = {
-        src: this.props.src ? this.props.src : image,
-        srcset: this.props.srcset
+    const earnMoney = <span key='price'>Gain customers</span>;
+    let offer = [earnMoney, ' by listing your services on Servify!'];
+    if (props.state && props.city) {
+        offer = [earnMoney, ` by listing your services near ${props.city},  ${props.state}`];
     }
-
-    shouldComponentUpdate () {
-        return (this.state.src && this.state.srcset) ? true : false;
-    }
-
-    render () {
-        const earnMoney = <span key='price'>Gain customers</span>;
-        let offer = [earnMoney, ' by listing your services on Servify!'];
-        if (this.props.state && this.props.city) {
-            offer = [earnMoney, ` by listing your services near ${this.props.city},  ${this.props.state}`];
-        }
-        return (
-            <div className={classes.Wrapper}>
-                <Link target="_blank" 
-                    rel="noopen noreferrer" 
-                    to="/publish/overview">
-                    <div className={classes.BackgroundWrapper}>
-                        <ImageFadeIn 
-                            src={this.state.src}
-                            srcset={this.state.srcset} />
-                    </div>
-                    <div className={classes.BannerWrapper}>
-                        <div className={classes.BannerContainer}>
-                            <div className={classes.Offer}>
-                                {offer}
-                            </div>
-                            <div className={classes.ButtonWrapper}>
-                                <Button type='default'><span>Learn More</span></Button>
-                            </div>
+    return (
+        <div className={classes.Wrapper}>
+            <Link target="_blank" 
+                rel="noopen noreferrer" 
+                to="/publish/overview">
+                <div className={classes.BackgroundWrapper}>
+                    <ImageFadeIn 
+                        src={src}
+                        srcset={srcset} />
+                </div>
+                <div className={classes.BannerWrapper}>
+                    <div className={classes.BannerContainer}>
+                        <div className={classes.Offer}>
+                            {offer}
+                        </div>
+                        <div className={classes.ButtonWrapper}>
+                            <Button type='default'><span>Learn More</span></Button>
                         </div>
                     </div>
-                    <div className={classes.Tooltip}>
-                        <span>?</span>
-                    </div>
-                </Link>
-            </div>
-        );
-    }
+                </div>
+                <div className={classes.Tooltip}>
+                    <span>?</span>
+                </div>
+            </Link>
+        </div>
+    );
 }
 
-export default LearnMore;
+export default learnMore;

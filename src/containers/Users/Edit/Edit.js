@@ -278,7 +278,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		updateUserDetails: (userDetails) => dispatch(authActions.usersUpdateUserDetails(userDetails)),
+		updateUserDetails: (userDetails) => dispatch(authActions.authUpdateUserDetails(userDetails)),
 	};
 };
 
