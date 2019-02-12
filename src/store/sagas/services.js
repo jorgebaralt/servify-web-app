@@ -90,6 +90,7 @@ export const servicesSagas = {
         for (let i = 0; i < topCategories.length; i++) {
             const dbReference = topCategories[i].dbReference;
             const { data } = yield axiosServices.get('/getServices', { params: { category: dbReference } });
+            // Using title instead of dbReference because the category name will be rendered
             byCategories[topCategories[i].title] = yield sort(data, 'rating');
         }
         yield put(servicesActions.setServices( { byCategories: byCategories } ));
@@ -114,6 +115,9 @@ export const servicesSagas = {
             if (categories[category]) {
                 const dbReference = yield category.toLocaleLowerCase().replace(" ", "_");
                 const response = yield axiosServices.get('/getServices', { params: { category: dbReference } });
+                // Set services 
+                // Using title instead of dbReference because the category name will be rendered
+                yield put(servicesActions.setServicesByCategory({ category: category, services: response.data }));
                 if (response.data.length) {
                     yield filteredServices.push(response.data);
                 }

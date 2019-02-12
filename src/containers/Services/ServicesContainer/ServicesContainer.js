@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios';
+import React from 'react'
 import categories from '../../../shared/categories';
 // redux-sagas
 import { connect } from 'react-redux';
@@ -17,25 +16,6 @@ categories.map( (category) => {
 });
 
 const services = (props) => {
-    const [location, setLocation] = useState({
-        location: {
-            city: null,
-            state: null
-        }
-    });
-
-    const savePosition = (position) => {
-        const city = position.data.city;
-        const state = position.data.region;
-        setLocation({ city: city, state: state });
-    }
-
-    useEffect(() => {
-        axios.get('https://ipinfo.io').then(
-            (response) => savePosition(response)
-        );
-    }, []);
-
     return (
         <div className={classes.ServicesWrapper}>
             <div className={classes.ServicesContainer}>
@@ -46,16 +26,17 @@ const services = (props) => {
                         priceFiter={props.priceFiter}
                         topCategories={props.topCategories}
                         services={props.services}
-                        city={location.city} 
-                        state={location.state} /> :
+                        city={props.locationData.city} 
+                        state={props.locationData.region} /> :
                     <FilteredServices priceFiter={props.priceFiter} /> }
             </div>
         </div>
-    )
+    );
 }
 
 const mapStateToProps = (state) => {
 	return {
+        locationData: state.usersReducer.locationData,
         bIsLoading: state.servicesReducer.bIsLoading,
         bIsDefault: state.servicesReducer.bIsDefault,
         services: state.servicesReducer.services,

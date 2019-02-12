@@ -40,6 +40,7 @@ export const SERVICES_INIT_RESET_FILTERED_CATEGORIES = 'services_init_reset_filt
 export const SERVICES_RESET_FILTERED_CATEGORIES = 'services_reset_filtered_categories';
 export const SERVICES_SET_FILTERED_CATEGORIES = 'services_set_filtered_categories';
 export const SERVICES_SET_FILTERED_SERVICES = 'services_set_filtered_services';
+export const SERVICES_SET_SERVICES_BY_CATEGORIES = 'services_services_by_categories';
 export const SERVICES_SORT_INIT = 'services_sort_init';
 export const SERVICES_SORT = 'services_sort';
 export const SERVICES_SET_BISDEFAULT = 'services_set_bisdefault';

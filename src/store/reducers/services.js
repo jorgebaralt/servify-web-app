@@ -45,7 +45,14 @@ const servicesReducer = (state = initialState, action) => {
         case types.SERVICES_SET_FILTERED_SERVICES:
             services = updateObject(state.services, {...action});
             return updateObject(state, {services: services});
-            case types.SERVICES_SET_BISDEFAULT:
+        case types.SERVICES_SET_SERVICES_BY_CATEGORIES:
+            const byCategories = {
+                ...state.services.byCategories,
+                [action.category]: action.servicesByCategories
+            };
+            services = updateObject(state.services, { byCategories });
+            return updateObject(state, {services: services});
+        case types.SERVICES_SET_BISDEFAULT:
             return updateObject(state, {bIsLoading: false, bIsDefault: action.bIsDefault});
         default:
             // do nothing

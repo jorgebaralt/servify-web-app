@@ -33,6 +33,13 @@ export const servicesActions = {
             coordinates: coordinates
         }
     },
+    setServicesByCategory: (action) => {
+        return {
+            type: actionTypes.SERVICES_SET_SERVICES_BY_CATEGORIES,
+            category: action.category,
+            servicesByCategories: action.services
+        }
+    },
     setFilteredCategories: (filteredCategories) => {
         return {
             type: actionTypes.SERVICES_SET_FILTERED_CATEGORIES,

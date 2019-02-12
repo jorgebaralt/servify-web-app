@@ -55,7 +55,7 @@ class DefaultServices extends Component {
                     {/* Wait until some services are loaded to remove the LoadingPage component */}
                     {Object.values(this.state.services).every(element => element === null) ? 
                         <LoadingPage />
-                        : <Services services={this.state.services} topCategories={this.state.topCategories} />}
+                        : <Services city={this.props.city} state={this.props.state} services={this.state.services} topCategories={this.state.topCategories} />}
                 </Suspense>
             );
         return (
