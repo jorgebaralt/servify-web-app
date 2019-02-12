@@ -95,7 +95,7 @@ class SearchBar extends Component {
 
     removeFocusWithin () {
         this.setState(() => {
-            return { bIsFocused: false, bIsTouched: false }
+            return { bIsFocused: false, bIsTouched: false, filteredServices: [] }
         });
     }
 

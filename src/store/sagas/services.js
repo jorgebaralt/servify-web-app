@@ -16,20 +16,52 @@ export const servicesSagas = {
         yield put(servicesActions.setTopCategories(topCategories));
         yield put(servicesCreator.topServicesByCategoriesHandler(topCategories));
         try {
-            let response = yield axios.get('https://ipinfo.io?token=746d3b0f51ffff'); // ipinfo token
-            const locationData = yield parseIpInfo(response.data);
-            yield put(usersActions.usersSaveLocation(locationData));
-            const coordinates = yield response.data.loc.split(",");
-            const currentLocation = yield { 
-                latitude: Number(coordinates[0]),
-                longitude: Number(coordinates[1])
-            };
-            const services = {};
-            response = yield axiosServices.get('/getNearService', { params: { currentLocation, distance: 30 } });
-            services.nearServices = yield sort(response.data, 'rating');
-            response = yield axiosServices.get('/getNearService', { params: { currentLocation, distance: 500 } });
-            services.topServices = yield sort(response.data, 'rating');
-            yield put(servicesActions.setServices(services));
+            // Expiration date from local storage for ipInfo.io data.
+            let ipInfoExpirationDate = new Date(localStorage.getItem('ipInfoExpirationDate'));
+            const bIsExpired = ipInfoExpirationDate ? (new Date() >= ipInfoExpirationDate) : null;
+            /**
+             * If the token has expired, then set the user as null in local storage,
+             * set the initial state userId as null and logout from Firebase and return.
+             */
+            if (bIsExpired) {
+                let response = yield axios.get(['https://ipinfo.io?token=', ipInfoToken].join('')); // ipinfo token
+                // If the fetch is successful then set a new ipInfo expiration date, avoiding a new fetch for 1 day time.
+                ipInfoExpirationDate = yield new Date(new Date().getTime() + oneDayInMilliseconds); 
+                yield localStorage.setItem('ipInfoExpirationDate', ipInfoExpirationDate);
+                // Storing locationData in the database.
+                const locationData = yield parseIpInfo(response.data);
+                yield put(usersActions.usersSaveLocation(locationData));
+                // Saving locationData inside the user's localStorage.
+                yield localStorage.setItem('locationData', JSON.stringify(locationData));
+                const coordinates = yield response.data.loc.split(",");
+                const currentLocation = yield { 
+                    latitude: Number(coordinates[0]),
+                    longitude: Number(coordinates[1])
+                };
+                const services = {};
+                response = yield axiosServices.get('/getNearService', { params: { currentLocation, distance: 30 } });
+                services.nearServices = yield sort(response.data, 'rating');
+                response = yield axiosServices.get('/getNearService', { params: { currentLocation, distance: 500 } });
+                services.topServices = yield sort(response.data, 'rating');
+                yield put(servicesActions.setServices(services));
+            } else {
+                /**
+                 * If the token has not expired, parse the stored locationData to fetch near services.
+                 */
+                const data = yield JSON.parse(localStorage.getItem('locationData')); // ipinfo token
+                yield put(usersActions.usersSaveLocation(data));
+                const currentLocation = yield { 
+                    latitude: Number(data.coordinates.latitude),
+                    longitude: Number(data.coordinates.longitude)
+                };
+                const services = {};
+                let response = yield axiosServices.get('/getNearService', { params: { currentLocation, distance: 30 } });
+                services.nearServices = yield sort(response.data, 'rating');
+                response = yield axiosServices.get('/getNearService', { params: { currentLocation, distance: 500 } });
+                yield put(servicesActions.setServices(services));
+                services.topServices = yield sort(response.data, 'rating');
+                yield put(servicesActions.setServices(services));
+            }  
         } catch (err) {
             if (navigator.geolocation) {
                 try {
@@ -57,7 +89,8 @@ export const servicesSagas = {
                  * and the navigator.geolocation is unavailable for whatever reason.
                  */
                 } catch {
-                    // Centered in Orlando, FL
+                    // TODO: Figure out a way to handle fetching better in catch block later on.
+                    // Centered in Orlando, FL for the time being
                     const currentLocation = { 
                         latitude: 28.538336,
                         longitude: -81.379234
@@ -132,3 +165,12 @@ export const servicesSagas = {
         yield put(servicesActions.resetCategories());
     }
 }
+
+// ipinfo.io public key token for SSL IP information fetching
+const ipInfoToken = '746d3b0f51ffff';
+
+/**
+* Hours times seconds times milliseconds. 24 hours times 
+* 3600 seconds, times 1000 milliseconds equals 1 day.
+ */
+const oneDayInMilliseconds = 24 * 3600 * 1000;
