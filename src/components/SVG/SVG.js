@@ -106,6 +106,12 @@ class SVGComponent extends PureComponent {
             case 'flag':
                 svg = <SVG.Flag {...this.props} />;
                 break;
+            case 'applestore':
+                svg = <SVG.Applestore {...this.props} />;
+                break;
+            case 'playstore':
+                svg = <SVG.Playstore {...this.props} />;
+                break;
             // Social Media Icons
             case 'facebook-nobg':
                 svg = <SocialMedia.FacebookNoBg {...this.props} />

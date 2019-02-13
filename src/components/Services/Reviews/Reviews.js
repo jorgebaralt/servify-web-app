@@ -461,9 +461,11 @@ class Reviews extends Component {
                                             *    resetting the tooltip's state to hidden.
                                              */}
                                             {this.state.bIsShown ? 
-                                                <Tooltip className={classes.Tooltip}>
-                                                    <Information />
-                                                </Tooltip>
+                                                <div className={classes.Tooltip}>
+                                                    <Tooltip>
+                                                        <Information />
+                                                    </Tooltip>
+                                                </div>
                                                 : null}
                                         </div>
                                         <Input 

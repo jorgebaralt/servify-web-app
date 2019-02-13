@@ -20,7 +20,7 @@
     font-size: 18px;
     line-height: 30px;
     letter-spacing: normal;
-    color: #484848;
+    color: #ff7043;
 }
 
 .InfoContainer {
@@ -43,7 +43,7 @@
     line-height: 26px;
     letter-spacing: normal;
     color: #484848;
-    font-weight: normal;
+    font-weight: normal !important;
 }
 
 .LogoWrapper {

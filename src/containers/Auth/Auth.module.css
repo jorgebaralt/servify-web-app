@@ -15,7 +15,7 @@
     min-height: 100vh;
     border: 1px solid #dce0e0;
     min-height: calc(100vh - 162px);
-    max-width: 440px;
+    max-width: 520px;
     align-items: center;
     justify-content: flex-start;
 }

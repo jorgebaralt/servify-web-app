@@ -114,3 +114,55 @@
     background: rgb(255, 112, 67);
     border-color: transparent;
 }
+
+.Playstore,
+.Applestore {
+    display: table;
+    justify-content: center;
+    align-items: center;    
+    padding-left: 0;
+    color: rgb(255, 255, 255);
+    background: #040707;
+    border-color: transparent;
+}
+
+.Playstore:hover,
+.Applestore:hover {
+    color: #333;
+    background: #FFF;
+    border-color: #333;
+    transition: all ease 200ms;
+}
+
+.Applestore svg path {
+    transition: fill ease 200ms;
+}
+
+.Applestore:hover svg path {
+    fill: #333 !important;
+}
+
+.Appstore {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: left;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.AppLogo {
+    display: table-cell;
+    vertical-align: bottom;
+    padding: 0 12px 0 6px;
+}
+
+.Download {
+    font-size: .75rem;
+    text-transform: uppercase;
+}
+
+.Store {
+    font-size: 1.5rem;
+    font-weight: normal;
+}

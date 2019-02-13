@@ -19,6 +19,7 @@ import CardContainer from '../../components/Landing/CardContainer/CardContainer'
 import Card from '../../components/Landing/Card/Card';
 import Service from '../../components/Services/Service/Service';
 import LearnMore from '../../components/Landing/LearnMore/LearnMore';
+import MobileBanner from '../../components/Landing/MobileBanner/MobileBanner';
 
 const categoriesDatalist = categories.map( (category) => {
     return {
@@ -172,6 +173,10 @@ const landing = (props) => {
                 <br />
                 {nearServices}
                 {topServices}
+                <br />
+                <div className={classes.LearnMore}>
+                    <MobileBanner />
+                </div>
                 {topServicesByCategories}
                 {/* <br />
                 <div className={classes.Subheader}>

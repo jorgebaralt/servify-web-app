@@ -20,7 +20,7 @@ const learnMore = (props) => {
     return (
         <div className={classes.Wrapper}>
             <Link target="_blank" 
-                rel="noopen noreferrer" 
+                rel="noopener noreferrer"
                 to="/publish/overview">
                 <div className={classes.BackgroundWrapper}>
                     <ImageFadeIn 
@@ -36,9 +36,6 @@ const learnMore = (props) => {
                             <Button type='default'><span>Learn More</span></Button>
                         </div>
                     </div>
-                </div>
-                <div className={classes.Tooltip}>
-                    <span>?</span>
                 </div>
             </Link>
         </div>

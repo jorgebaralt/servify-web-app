@@ -25,6 +25,8 @@ import Phone from './phone';
 import Envelope from './envelope';
 import SentEnvelope from './sent-envelope';
 import Flag from './flag';
+import Applestore from './applestore';
+import Playstore from './playstore';
 // TODO make SVG
 import BlackBorderlessLogo from '../images/servify-logos/blackborder-nobg';
 
@@ -57,5 +59,7 @@ export {
     Phone,
     Envelope,
     SentEnvelope,
-    Flag
+    Flag,
+    Applestore,
+    Playstore
 };

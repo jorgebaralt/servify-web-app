@@ -1,0 +1,130 @@
+.Wrapper {
+    margin-top: 24px;
+    position: relative;
+    height: 480px;
+    border-radius: 10px;
+    overflow: visible;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.BackgroundWrapper {
+    /* position: absolute; */
+    height: 480px;
+    /* height: 390px; */
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #1b2d37;
+}
+
+.BackgroundWrapper img {
+    object-fit: cover;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    object-fit: cover;
+    /* object-position: top left; */
+    object-position: top;
+    border: 0;
+    box-sizing: border-box;
+}
+
+.Background {
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    /* position: absolute; */
+    object-fit: cover;
+    object-position: center;
+    border: 0;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.BannerWrapper {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.BannerContainer {
+    display: flex;
+    flex-flow: column;
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    max-width: 744px;
+    height: 87.5%;
+    margin: 12px 12px 0;
+}
+
+@media (min-width: 744px) {
+    .BannerContainer {
+        margin: 24px 24px 0;
+    }
+}
+
+.Offer {
+    font-weight: normal;
+    margin-bottom: 20px;
+    color: rgb(255, 255, 255);
+    width: 100%;
+    font-size: 23px;
+    line-height: 29px;
+    text-transform: uppercase;
+}
+
+.Offer span {
+    font-weight: 800;
+    margin-bottom: auto;
+}
+
+@media (min-width: 940px) {
+    .Offer {
+        font-size: 32px;
+        line-height: 44px;
+    }
+}
+
+@media (min-width: 744px) {
+    .Offer {
+        font-size: 30px;
+        line-height: 36px;
+    }
+}
+
+.ButtonWrapper {
+    margin-top: auto;
+    margin-bottom: 16px;
+}
+
+.TooltipContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    width: calc(20px + 0.4em);
+    height: calc(20px + 0.4em);
+    cursor: pointer;
+    left: 0.4em;
+    bottom: 0.4em;
+}
+
+.SeoTool {
+    position: absolute;
+    display: block;
+    border: 0px;
+    margin: -1px;
+    padding: 0px;
+    height: 1px;
+    width: 1px;
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+}

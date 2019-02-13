@@ -37,13 +37,9 @@ class Tooltip extends Component {
     }
 
     render() {
-        const tooltipClasses = [classes.Container];
-        if (this.props.className) {
-            tooltipClasses.push(this.props.className);
-        }
         return (
             <div ref={this.myTooltip} 
-                className={tooltipClasses.join(' ')}>
+                className={this.props.className ? this.props.className : classes.Container}>
                 <i 
                     /**
                     * onMouseDown event fires before onBlur event on input. It calls event.preventDefault() to
@@ -52,13 +48,14 @@ class Tooltip extends Component {
                     * or any other hack.
                         */
                     onMouseDown={event => event.preventDefault()}
-                    onClick={this.toggleTooltip}>
-                    <SVG svg='question-mark' />
+                    onClick={this.toggleTooltip} >
+                    {this.props.tooltip ? this.props.tooltip : <SVG fill={this.props.tooltipFill} background={this.props.tooltipBg} svg='question-mark' />}
                 </i>
                 {this.state.bIsHidden ?
                     null
                     : (
                         <Content 
+                            className={this.props.containerClassname}
                             reference={this.myContent}
                             onBlur={this.closeTooltip} >
                             {this.props.children}
