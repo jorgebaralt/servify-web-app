@@ -4,10 +4,10 @@ import image from '../../../assets/images/mobile-app-banner-bg.jpg';
 // CSS
 import classes from './MobileBanner.module.css';
 // JSX
+import Tooltip from 'react-png-tooltip';
 import { Link } from 'react-router-dom';
 import Button from '../../UI/Button/Button';
 import ImageFadeIn from '../../UI/ImageFadeIn/ImageFadeIn';
-import Tooltip from '../../UI/Tooltip/Tooltip';
 
 const mobileBanner = () => {
     const [src] = useState(image);
@@ -18,7 +18,6 @@ const mobileBanner = () => {
                 <div className={classes.BackgroundWrapper}>
                     <ImageFadeIn 
                         noWrapper
-                        
                         src={src} />
                 </div>
                 <div className={classes.BannerWrapper}>

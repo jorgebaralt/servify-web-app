@@ -11,6 +11,7 @@ import { withRouter } from 'react-router-dom'
 // CSS
 import classes from './Reviews.module.css';
 // JSX
+import Tooltip from 'react-png-tooltip';
 import Close from './Close/Close';
 import WriteReview from './WriteReview/WriteReview';
 import Ratings from './Ratings/Ratings';
@@ -20,7 +21,6 @@ import Information from './Information/Information';
 import UserReview from '../../Users/UserReview/UserReview';
 import Button from '../../UI/Button/Button';
 import Input from '../../UI/Input/Input';
-import Tooltip from '../../UI/Tooltip/Tooltip';
 import LoadingBounce from '../../UI/LoadingBounce/LoadingBounce'; // Placeholder while loading
 import LoadingDots from '../../UI/LoadingDots/LoadingDots'; // Submit button
 
