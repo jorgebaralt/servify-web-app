@@ -124,6 +124,7 @@
     color: rgb(255, 255, 255);
     background: #040707;
     border-color: transparent;
+    min-width: 200px;
 }
 
 .Playstore:hover,
